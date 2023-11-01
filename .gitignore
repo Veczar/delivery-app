@@ -39,3 +39,4 @@ build/
 
 /.idea/
 /src/test/
+/spy.log
