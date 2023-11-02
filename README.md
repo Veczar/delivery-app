@@ -8,7 +8,7 @@
 https://dbeaver.io/download/
 
 - postgreSQL <br>
-https://www.postgresql.org/download/
+[https://www.postgresql.org/download/](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
 
 - postman <br>
 https://www.postman.com/downloads/
