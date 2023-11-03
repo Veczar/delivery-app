@@ -1,11 +1,11 @@
 package org.company.modules.user.application.web;
 
-
 import lombok.AllArgsConstructor;
 import org.company.modules.user.application.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("api/users")
@@ -15,26 +15,27 @@ public class UserController {
     
     private final UserService userService;
     
-//    @GetMapping("/read")
-//    public List<UserReadDto> getAllUsersRead() {
-//        return userService.getAllUsersRead();
-//    }
+    
+    //    @PostMapping("/read/page")
+    //    public ResponseEntity<Page<UserReadDto>> getUsers(@RequestBody UserCriteria criteria) {
+    //        Page<UserReadDto> users = userService.getUsers(criteria);
+    //        return ResponseEntity.ok(users);
+    //    }
+    
+    //    @PostMapping("/read")
+    //    public List<UserReadDto> getAllUsersRead(@RequestBody UserCriteria userCriteria) {
+    //        return userService.getAllUsersWithCriteria(userCriteria);
+    //    }
     
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }
     
-//    @PostMapping("/read/page")
-//    public ResponseEntity<Page<UserReadDto>> getUsers(@RequestBody UserCriteria criteria) {
-//        Page<UserReadDto> users = userService.getUsers(criteria);
-//        return ResponseEntity.ok(users);
-//    }
-    
-//    @PostMapping("/read")
-//    public List<UserReadDto> getAllUsersRead(@RequestBody UserCriteria userCriteria) {
-//        return userService.getAllUsersWithCriteria(userCriteria);
-//    }
+    @GetMapping("/read")
+    public List<UserReadDto> getAllUsersRead() {
+        return userService.getAllUsersRead();
+    }
     
     @GetMapping("/{id}")
     public UserDto getUser(@PathVariable Long id) {

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class UserAssembler {
     
-    //private AddressMapper addressMapper;
-    
     //map
     public UserDto toDto(User user) {
         UserDto userDto = new UserDto();
@@ -20,9 +18,6 @@ public class UserAssembler {
         userDto.setLastName(user.getLastName());
         userDto.setPassword(user.getPassword());
         userDto.setTelephoneNumber(user.getTelephoneNumber());
-        
-        //userDto.setAddresses(user.getAddresses().stream().map(addressMapper::toDto).collect(Collectors.toList()));
-        
         return userDto;
     }
     
@@ -36,7 +31,5 @@ public class UserAssembler {
         user.setLastName(userDto.getLastName());
         user.setPassword(userDto.getPassword());
         user.setTelephoneNumber(userDto.getTelephoneNumber());
-        
-        //updateUserAdresses(userDto, user);
     }
 }

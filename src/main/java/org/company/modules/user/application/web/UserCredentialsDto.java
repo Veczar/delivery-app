@@ -6,10 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDto {
-    private Long id;
+public class UserCredentialsDto {
     private String firstName;
     private String lastName;
     private String password;
-    private String telephoneNumber;
 }
