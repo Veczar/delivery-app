@@ -15,8 +15,10 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    private String password;
+    private String email;
     private String telephoneNumber;
+    private String login;
+    private String password;
     
 //    @Fetch(FetchMode.SUBSELECT) //to ensure n+1 won't appear
 //    @OneToMany(mappedBy = "user",

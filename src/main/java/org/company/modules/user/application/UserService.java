@@ -67,7 +67,8 @@ public class UserService {
         return userAssembler.toDto(user);
     }
     
-    //fixme naprawic: usuwanie daje 2 zapytania do bazy
+    // statements printed twice is the result of p6spy logging error
+    // hibernate displays it correctly
     @Transactional
     public UserDto removeUser(Long id) {
         User user = userRepository.findById(id).orElse(null);

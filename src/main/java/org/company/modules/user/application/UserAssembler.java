@@ -16,6 +16,8 @@ public class UserAssembler {
         userDto.setId(user.getId());
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
+        userDto.setEmail(user.getEmail());
+        userDto.setLogin(user.getLogin());
         userDto.setPassword(user.getPassword());
         userDto.setTelephoneNumber(user.getTelephoneNumber());
         return userDto;
@@ -29,6 +31,8 @@ public class UserAssembler {
     public void toUser(UserDto userDto, User user) {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setLogin(user.getLogin());
         user.setPassword(userDto.getPassword());
         user.setTelephoneNumber(userDto.getTelephoneNumber());
     }

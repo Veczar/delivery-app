@@ -2,7 +2,7 @@ package org.company.modules.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.company.modules.user.application.web.UserCredentialsDto;
-import org.company.modules.user.application.web.UserReadDto;
+import org.company.modules.user.application.web.UserDto;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -14,17 +14,13 @@ public class AuthController {
     private final AuthService authService;
     
     @PostMapping("/login")
-    public UserReadDto login(@RequestBody UserCredentialsDto credentials) {
-        authService.checkCredentials(
-                credentials.getFirstName(),
-                credentials.getLastName(),
-                credentials.getPassword()
-        );
+    public UserDto login(@RequestBody UserCredentialsDto credentials) {
+        authService.checkCredentials(credentials);
         return authService.getLoggedUser();
     }
     
     @GetMapping
-    public UserReadDto getLoggedUser() {
+    public UserDto getLoggedUser() {
         return authService.getLoggedUser();
     }
     
