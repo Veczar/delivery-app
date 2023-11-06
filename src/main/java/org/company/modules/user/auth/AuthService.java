@@ -1,4 +1,4 @@
-package org.company.modules.auth;
+package org.company.modules.user.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.company.modules.user.application.UserAssembler;
