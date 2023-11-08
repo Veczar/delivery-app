@@ -26,6 +26,7 @@ public class GenericServiceWithReadDto<
         ReadAssembler extends  IReadAssembler<Entity,ReadDto>>
         extends  GenericService<Entity, Dto, Repository, Assembler>
         implements IServiceWithReadDto<Dto, ReadDto>
+        //TODO:Verify if this class is not necessary (if it is used no more than once) if so delete it
 {
     protected final ReadAssembler readAssembler;
     public GenericServiceWithReadDto(Repository repository, Assembler assembler, ReadAssembler readAssembler)
