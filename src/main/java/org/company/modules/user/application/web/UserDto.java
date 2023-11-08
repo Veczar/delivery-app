@@ -2,6 +2,7 @@ package org.company.modules.user.application.web;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.company.modules.role.application.web.RoleDto;
 
 
 @Getter
@@ -14,4 +15,5 @@ public class UserDto {
     private String telephoneNumber;
     private String login;
     private String password;
+    private RoleDto role;
 }

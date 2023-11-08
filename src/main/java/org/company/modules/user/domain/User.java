@@ -3,6 +3,7 @@ package org.company.modules.user.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.company.modules.role.domain.Role;
 
 
 @Getter
@@ -19,11 +20,7 @@ public class User {
     private String telephoneNumber;
     private String login;
     private String password;
-    
-//    @Fetch(FetchMode.SUBSELECT) //to ensure n+1 won't appear
-//    @OneToMany(mappedBy = "user",
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true,
-//            fetch = FetchType.EAGER)
-//    private final List<Address> addresses = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 }

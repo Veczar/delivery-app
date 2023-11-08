@@ -1,6 +1,8 @@
 package org.company.modules.user.application;
 
 import lombok.AllArgsConstructor;
+import org.company.modules.role.application.RoleAssembler;
+import org.company.modules.role.domain.Role;
 import org.company.modules.user.application.web.UserDto;
 import org.company.modules.user.domain.User;
 import org.springframework.stereotype.Component;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class UserAssembler {
+    
+    private final RoleAssembler roleAssembler;
     
     //map
     public UserDto toDto(User user) {
@@ -20,6 +24,8 @@ public class UserAssembler {
         userDto.setLogin(user.getLogin());
         userDto.setPassword(user.getPassword());
         userDto.setTelephoneNumber(user.getTelephoneNumber());
+        userDto.setRole(roleAssembler.toDto(user.getRole()));
+        
         return userDto;
     }
     
@@ -35,5 +41,12 @@ public class UserAssembler {
         user.setLogin(user.getLogin());
         user.setPassword(userDto.getPassword());
         user.setTelephoneNumber(userDto.getTelephoneNumber());
+        updateRole(userDto, user);
+    }
+    
+    private void updateRole(UserDto userDto, User user) {
+        Role role = new Role();
+        roleAssembler.toEntity(userDto.getRole(), role);
+        user.setRole(role);
     }
 }
