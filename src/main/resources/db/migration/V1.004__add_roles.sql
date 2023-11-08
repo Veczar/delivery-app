@@ -12,3 +12,6 @@ INSERT INTO s_role(id, name) VALUES
 
 ALTER TABLE p_user ADD COLUMN role_id INT;
 ALTER TABLE p_user ADD CONSTRAINT FK_Users_Roles FOREIGN KEY (role_id) REFERENCES s_role(id);
+
+UPDATE p_user
+SET role_id = FLOOR(random() * 4) + 1;
