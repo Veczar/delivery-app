@@ -5,12 +5,13 @@ import org.company.modules.role.application.RoleAssembler;
 import org.company.modules.role.domain.Role;
 import org.company.modules.user.application.web.UserDto;
 import org.company.modules.user.domain.User;
+import org.company.shared.aplication.IAssembler;
 import org.springframework.stereotype.Component;
 
 
 @Component
 @AllArgsConstructor
-public class UserAssembler {
+public class UserAssembler implements IAssembler<User, UserDto> {
     
     private final RoleAssembler roleAssembler;
     
@@ -34,7 +35,7 @@ public class UserAssembler {
      * @param user    user to put the Dto's data in
      */
     //update
-    public void toUser(UserDto userDto, User user) {
+    public void toEntity(UserDto userDto, User user) {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
