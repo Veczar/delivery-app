@@ -23,7 +23,7 @@ public class GenericServiceWithReadDto<
         ReadDto,
         Repository extends JpaRepository<Entity, Long>,
         Assembler extends IAssembler<Entity,Dto>,
-        ReadAssembler extends  IReadAssembler<Entity,ReadDto>>
+        ReadAssembler extends  IAssembler<Entity,ReadDto>>
         extends  GenericService<Entity, Dto, Repository, Assembler>
         implements IServiceWithReadDto<Dto, ReadDto>
         //TODO:Verify if this class is not necessary (if it is used no more than once) if so delete it

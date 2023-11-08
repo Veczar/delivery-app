@@ -25,23 +25,23 @@ public class GenericService<
         Assembler extends IAssembler<Entity,Dto>>
         implements IService<Dto>
 {
-protected final Repository repository;
-protected final Assembler assembler;
+        protected final Repository repository;
+        protected final Assembler assembler;
 
-public GenericService(Repository repository, Assembler assembler) {
-        Type t = getClass().getGenericSuperclass();
-        ParameterizedType pt = (ParameterizedType) t;
-        entityType = (Class) pt.getActualTypeArguments()[0];
-        this.repository = repository;
-        this.assembler = assembler;
+        public GenericService(Repository repository, Assembler assembler) {
+                Type t = getClass().getGenericSuperclass();
+                ParameterizedType pt = (ParameterizedType) t;
+                entityType = (Class) pt.getActualTypeArguments()[0];
+                this.repository = repository;
+                this.assembler = assembler;
         }
 
-private final Class<Entity> entityType;
+        private final Class<Entity> entityType;
         public List<Dto> getAllItems() {
                 return repository.findAll()
-                .stream()
-                .map(assembler::toDto)
-                .collect(Collectors.toList());
+                        .stream()
+                        .map(assembler::toDto)
+                        .collect(Collectors.toList());
         }
 
         public Dto getItem(Long id) {
@@ -74,11 +74,7 @@ private final Class<Entity> entityType;
                         repository.save(item);
                         return assembler.toDto(item);
                 }
-                catch (InstantiationException e)
-                {
-                        throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);//TODO: think it over if this HttpStatus is appropriate
-                }
-                catch (IllegalAccessException e)
+                catch (InstantiationException | IllegalAccessException e)
                 {
                         throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);//TODO: think it over if this HttpStatus is appropriate
                 }

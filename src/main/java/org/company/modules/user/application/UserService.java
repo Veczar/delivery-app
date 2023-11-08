@@ -8,6 +8,9 @@ import org.company.shared.aplication.GenericService;
 import org.company.shared.aplication.GenericServiceWithReadDto;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class UserService extends GenericServiceWithReadDto<User, UserDto, UserReadDto, UserRepository, UserAssembler, UserReadAssembler> {
