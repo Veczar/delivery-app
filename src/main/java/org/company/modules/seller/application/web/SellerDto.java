@@ -10,7 +10,7 @@ import org.company.modules.user.application.web.UserDto;
 @Setter
 public class SellerDto {
     private long id;
-    private long account_number;
+    private String account_number;
     private String contact_number;
 
     private UserDto user;

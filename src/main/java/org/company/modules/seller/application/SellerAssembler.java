@@ -1,19 +1,22 @@
 package org.company.modules.seller.application;
 
-
 import lombok.AllArgsConstructor;
 import org.company.modules.seller.application.web.SellerDto;
 import org.company.modules.seller.domain.Seller;
 import org.company.modules.user.application.UserAssembler;
 import org.company.modules.user.domain.User;
+import org.company.modules.user.domain.UserRepository;
 import org.company.shared.aplication.IAssembler;
 import org.springframework.stereotype.Component;
+
+
 
 @Component
 @AllArgsConstructor
 public class SellerAssembler implements IAssembler<Seller, SellerDto> {
     
     private final UserAssembler userAssembler;
+    private final UserRepository userRepository;
 
     @Override
     public SellerDto toDto(Seller seller) {
@@ -34,8 +37,7 @@ public class SellerAssembler implements IAssembler<Seller, SellerDto> {
     }
 
     private void UpdateUser(SellerDto sellerDto, Seller seller) {
-        User user = new User();
-        userAssembler.toEntity(sellerDto.getUser(), user);
+        User user = userRepository.findById(sellerDto.getUser().getId()).orElseThrow(null);
         seller.setUser(user);
     }
 }
