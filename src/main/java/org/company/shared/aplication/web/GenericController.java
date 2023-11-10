@@ -9,7 +9,8 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
-public class GenericController<Dto, Service extends IService<Dto>>{
+public class GenericController<Dto, Service extends IService<Dto>> {
+    
     protected final Service service;
     @GetMapping
     public List<Dto> getAllItems() {

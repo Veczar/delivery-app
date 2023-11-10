@@ -2,8 +2,6 @@ package org.company.shared.aplication;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 
