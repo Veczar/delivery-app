@@ -6,6 +6,7 @@ import org.company.modules.user.domain.User;
 import org.company.modules.user.domain.UserRepository;
 import org.company.shared.aplication.GenericService;
 import org.company.shared.aplication.GenericServiceWithReadDto;
+import org.company.shared.aplication.IServiceWithReadDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class UserService extends GenericServiceWithReadDto<User, UserDto, UserReadDto, UserRepository, UserAssembler, UserReadAssembler> {
+public class UserService extends GenericServiceWithReadDto<User, UserDto, UserReadDto, UserRepository, UserAssembler, UserReadAssembler> implements IServiceWithReadDto<UserDto, UserReadDto> {
     public UserService(UserRepository repository, UserAssembler assembler, UserReadAssembler readAssembler) {
         super(repository, assembler, readAssembler);
     }
