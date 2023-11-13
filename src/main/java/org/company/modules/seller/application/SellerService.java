@@ -13,16 +13,4 @@ public class SellerService extends GenericService<Seller,SellerDto,SellerReposit
         super(repository, assembler);
     }
 
-
-
-   /* private final SellerRepository sellerRepository;
-    private final SellerAssembler sellerAssembler;
-    public SellerDto getSeller(Long id) {
-        Seller seler = sellerRepository.findById(id).orElse(null);
-
-        if (seler == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return sellerAssembler.toDto(seler);
-    }*/
 }

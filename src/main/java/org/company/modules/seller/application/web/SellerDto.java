@@ -1,6 +1,5 @@
 package org.company.modules.seller.application.web;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import org.company.modules.user.application.web.UserDto;
