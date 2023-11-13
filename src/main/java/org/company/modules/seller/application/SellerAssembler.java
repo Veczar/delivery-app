@@ -45,7 +45,7 @@ public class SellerAssembler implements IAssembler<Seller, SellerDto> {
     }
     
     private void UpdateAddress(SellerDto sellerDto, Seller seller) {
-        Address address = addressRepository.findById(sellerDto.getOwner().getId()).orElseThrow(null);
+        Address address = addressRepository.findById(sellerDto.getAddress().getId()).orElseThrow(null);
         seller.setAddress(address);
     }
     
