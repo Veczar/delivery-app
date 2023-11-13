@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class SellerService extends GenericService<Seller,SellerDto,SellerRepository,SellerAssembler> {
+public class SellerService extends GenericService<Seller, SellerDto, SellerRepository, SellerAssembler> {
     public SellerService(SellerRepository repository, SellerAssembler assembler) {
         super(repository, assembler);
     }
-
 }

@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/sellers")
-public class SellerControler extends GenericController<SellerDto, SellerService> {
-    public SellerControler(SellerService sellerService) {
-        super(sellerService);
+public class SellerController extends GenericController<SellerDto, SellerService> {
+    public SellerController(SellerService service) {
+        super(service);
     }
-
 }
