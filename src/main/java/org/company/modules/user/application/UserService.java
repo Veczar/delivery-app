@@ -32,13 +32,4 @@ public class UserService extends GenericServiceWithReadDto<User, UserDto, UserRe
         Page<User> usersPage = userRepository.findAll(specification, pageable);
         return usersPage.map(userReadAssembler::toDto);
     }
-    
-//        public List<UserReadDto> getAllUsersWithCriteria(UserCriteria userCriteria) {
-//            Specification<UserRead> specification = UserSpecification.build(userCriteria);
-//
-//            return userReadRepository.findAll(specification)
-//                    .stream()
-//                    .map(userReadMapper::toDto)
-//                    .collect(Collectors.toList());
-//        }
 }

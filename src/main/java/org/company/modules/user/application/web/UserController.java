@@ -27,9 +27,4 @@ public class UserController extends GenericControllerWithReadDto<UserDto, UserRe
         Page<UserReadDto> users = userService.getUsersPage(criteria);
         return ResponseEntity.ok(users);
     }
-    
-//    @PostMapping("/read")
-//    public List<UserReadDto> getAllUsersRead(@RequestBody UserCriteria userCriteria) {
-//        return userService.getAllUsersWithCriteria(userCriteria);
-//    }
 }
