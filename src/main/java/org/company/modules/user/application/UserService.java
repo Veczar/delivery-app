@@ -19,16 +19,16 @@ public class UserService extends GenericServiceWithReadDto<User, UserDto, UserRe
     private final UserReadAssembler userReadAssembler;
     private final UserRepository userRepository;
     
-    public UserService(UserRepository repository, UserAssembler assembler, UserReadAssembler readAssembler, UserReadAssembler userReadAssembler, UserRepository userRepository) {
+    public UserService(UserRepository repository, UserAssembler assembler, UserReadAssembler readAssembler) {
         super(repository, assembler, readAssembler);
-        this.userReadAssembler = userReadAssembler;
-        this.userRepository = userRepository;
+        this.userReadAssembler = readAssembler;
+        this.userRepository = repository;
     }
     
     public Page<UserReadDto> getUsersPage(UserCriteria userCriteria) {
         Specification<User> specification = UserSpecification.build(userCriteria);
         Pageable pageable = userCriteria.getPageRequestDto().getPageRequest();
-
+        
         Page<User> usersPage = userRepository.findAll(specification, pageable);
         return usersPage.map(userReadAssembler::toDto);
     }
