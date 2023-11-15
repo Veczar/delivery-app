@@ -24,7 +24,6 @@ public class UserSpecification {
                         criteriaBuilder.equal(root.get("lastName"), userCriteria.getLastName()));
             }
             
-            
             return predicate;
         };
     }
