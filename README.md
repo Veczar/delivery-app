@@ -23,4 +23,15 @@ front:
 - angular 16.0.0
 - npm 10.2.3
 
-```ng new webapp --no-standalone --routing```
+commands i used to create webapp:
+- ```npm install -g @angular/cli@16.0.0```
+- ```ng new webapp --no-standalone --routing```
+- ```cd webapp```
+- ```ng add @ng-bootstrap/ng-bootstrap```
+- ```npm install bootstrap-icons```
+  
+using this tutorial: [www.freecodecamp.org](https://www.freecodecamp.org/news/how-to-add-bootstrap-css-framework-to-an-angular-application/)
+
+for using bootstrap your go to website is: <br>
+https://getbootstrap.com/docs/4.0/getting-started/introduction/
+
