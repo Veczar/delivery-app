@@ -20,5 +20,7 @@ https://www.postman.com/downloads/
 
 front:
 - node.js 18.17
-- angular 17.0.0
+- angular 16.0.0
 - npm 10.2.3
+
+```ng new webapp --no-standalone --routing```
