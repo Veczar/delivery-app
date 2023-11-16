@@ -1,15 +1,15 @@
 package org.company.shared.aplication.web;
 
-
 import lombok.AllArgsConstructor;
 import org.company.shared.aplication.IService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 @CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
-public class GenericController<Dto, Service extends IService<Dto>>{
+public class GenericController<Dto, Service extends IService<Dto>> {
+    
     protected final Service service;
     @GetMapping
     public List<Dto> getAllItems() {
