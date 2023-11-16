@@ -22,6 +22,7 @@ front:
 - node.js 18.17
 - angular 16.0.0
 - npm 10.2.3
+- bootstrap 5.2.3 
 
 commands i used to create webapp:
 - ```npm install -g @angular/cli@16.0.0```
@@ -30,7 +31,15 @@ commands i used to create webapp:
 - ```ng add @ng-bootstrap/ng-bootstrap```
 - ```npm install bootstrap-icons```
   
-using this tutorial: [www.freecodecamp.org](https://www.freecodecamp.org/news/how-to-add-bootstrap-css-framework-to-an-angular-application/)
+angular part: <br>
+- https://kinsta.com/knowledgebase/install-angular/#how-to-install-angular-on-windows
+
+<br>
+
+bootstrap:
+- [www.freecodecamp.org](https://www.freecodecamp.org/news/how-to-add-bootstrap-css-framework-to-an-angular-application/)
+- https://www.techiediaries.com/angular-bootstrap/
+- https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap
 
 for using bootstrap your go to website is: <br>
 https://getbootstrap.com/docs/4.0/getting-started/introduction/
