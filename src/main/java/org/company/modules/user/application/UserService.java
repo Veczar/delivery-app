@@ -7,14 +7,16 @@ import org.company.modules.user.domain.UserCriteria;
 import org.company.modules.user.domain.UserRepository;
 import org.company.modules.user.domain.UserSpecification;
 import org.company.shared.aplication.GenericServiceWithReadDto;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.company.shared.aplication.IServiceWithReadDto;
 
 
 @Service
-public class UserService extends GenericServiceWithReadDto<User, UserDto, UserReadDto, UserRepository, UserAssembler, UserReadAssembler> {
+public class UserService extends GenericServiceWithReadDto<User, UserDto, UserReadDto, UserRepository, UserAssembler, UserReadAssembler> implements IServiceWithReadDto<UserDto, UserReadDto> {
     
     private final UserReadAssembler userReadAssembler;
     private final UserRepository userRepository;
