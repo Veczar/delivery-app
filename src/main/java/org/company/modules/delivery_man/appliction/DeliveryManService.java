@@ -7,7 +7,7 @@ import org.company.shared.aplication.GenericService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DeliveryManService extends GenericService<DeliveryMan, DeliveryManDto, DeliveryManRepository,DeliveryManAssembler> {
+public class DeliveryManService extends GenericService<DeliveryMan, DeliveryManDto, DeliveryManRepository, DeliveryManAssembler> {
     public DeliveryManService(DeliveryManRepository repository, DeliveryManAssembler assembler) {
         super(repository, assembler);
     }

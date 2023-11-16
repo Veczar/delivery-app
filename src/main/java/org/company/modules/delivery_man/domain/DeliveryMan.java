@@ -20,6 +20,4 @@ public class DeliveryMan {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-
 }

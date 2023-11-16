@@ -12,6 +12,4 @@ public class DeliveryManDto {
     private int rating;
 
     private UserDto user;
-
-
 }
