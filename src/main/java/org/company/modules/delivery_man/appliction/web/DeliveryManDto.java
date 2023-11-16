@@ -11,5 +11,7 @@ public class DeliveryManDto {
     private String working_area;
     private int rating;
 
-    private UserDto userDto;
+    private UserDto user;
+
+
 }

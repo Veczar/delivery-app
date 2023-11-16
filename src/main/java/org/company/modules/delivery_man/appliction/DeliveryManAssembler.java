@@ -21,7 +21,7 @@ public class DeliveryManAssembler implements IAssembler<DeliveryMan, DeliveryMan
         deliveryManDto.setId(deliveryMan.getId());
         deliveryManDto.setRating(deliveryMan.getRating());
         deliveryManDto.setWorking_area(deliveryMan.getWorking_area());
-        deliveryManDto.setUserDto(userAssembler.toDto(deliveryMan.getUser()));
+        deliveryManDto.setUser(userAssembler.toDto(deliveryMan.getUser()));
 
         return deliveryManDto;
     }
@@ -34,7 +34,7 @@ public class DeliveryManAssembler implements IAssembler<DeliveryMan, DeliveryMan
     }
 
     private void updateUser(DeliveryManDto deliveryManDto,DeliveryMan deliveryMan) {
-        User user = userRepository.findById(deliveryManDto.getUserDto().getId()).orElseThrow(null);
+        User user = userRepository.findById(deliveryManDto.getUser().getId()).orElseThrow(null);
         deliveryMan.setUser(user);
     }
 }
