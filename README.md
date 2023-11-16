@@ -17,6 +17,8 @@ https://www.postman.com/downloads/
 
 - Java JDK 19
 
-(wersje jeszcze do ustalenia):
-- node.js
-- angular
+
+front:
+- node.js 18.17
+- angular 17.0.0
+- npm 10.2.3
