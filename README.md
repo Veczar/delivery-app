@@ -41,6 +41,7 @@ bootstrap:
 - https://www.techiediaries.com/angular-bootstrap/
 - https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap
 
-for using bootstrap your go to website is: <br>
-https://getbootstrap.com/docs/5.3/getting-started/introduction/
+for using bootstrap your go-to website is: <br>
+https://getbootstrap.com/docs/5.2/getting-started/introduction/
 
+icons: https://fonts.google.com/icons
