@@ -81,10 +81,11 @@ margin-right: .75rem;
     }
 }
 
-
-.my-from {
+.middle-search {
     position: absolute;
     left: 50%;
-    width: 400px;
-    margin-left: -200px;
+    width: 300px;
+    margin-left: -150px;
+    max-width: 300px;
+    display: flex;
 }
