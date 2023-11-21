@@ -4,5 +4,5 @@ CREATE TABLE product_category (
 	CONSTRAINT product_category_pkey PRIMARY KEY (product_id, category_id)
 );
 
-ALTER TABLE public.product_category ADD CONSTRAINT fkjvoh3hgnbhv0tegwn6yyqrub2 FOREIGN KEY (product_id) REFERENCES p_product(id);
-ALTER TABLE public.product_category ADD CONSTRAINT fkpjjj4qegp0mvyginauwk6t16h FOREIGN KEY (category_id) REFERENCES p_category(id);
+ALTER TABLE product_category ADD CONSTRAINT product_id FOREIGN KEY (product_id) REFERENCES p_product(id);
+ALTER TABLE product_category ADD CONSTRAINT category_id FOREIGN KEY (category_id) REFERENCES p_category(id);
