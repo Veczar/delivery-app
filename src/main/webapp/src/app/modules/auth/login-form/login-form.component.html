@@ -1,7 +1,9 @@
-<body class="text-center">
+<body class="text-center waves-background">
     <main class="form-signin w-100 m-auto">
+      <button class="btn btn-close exit-btn" [routerLink]="['/']"></button>
+      
       <form>
-        <h1>
+        <h1 class="user">
           <i class="bi bi-person"></i>
         </h1>
         
@@ -23,8 +25,8 @@
         </div> -->
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p>
+        <app-auth-content></app-auth-content>
       </form>
     </main>
 </body>
-
 
