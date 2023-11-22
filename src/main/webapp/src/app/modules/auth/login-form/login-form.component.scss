@@ -7,14 +7,20 @@ body {
 body {
   display: flex;
   align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #f5f5f5;
+  // padding-top: 40px;
+  // padding-bottom: 40px;
+  // background-color: #f5f5f5;
+}
+
+main {
+  background-color: whitesmoke;
+  border-radius: 20px;
+  position: relative;
 }
 
 .form-signin {
-  max-width: 330px;
-  padding: 15px;
+  max-width: 370px;
+  padding: 35px;
 }
 
 .form-signin .form-floating:focus-within {
@@ -31,4 +37,23 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.waves-background {
+  aspect-ratio: 16/9;
+  width: 100%;
+  background-size: cover;
+  // background-size:contain;
+  background-repeat: no-repeat;
+  background-image: url(../../../../assets/layered-waves-haikei.svg);
+}
+
+.exit-btn {
+  position: absolute;
+  right: 6%;
+  top: 6%;
+}
+
+.user {
+  font-size: calc(3.5rem + 1.5vw);
 }

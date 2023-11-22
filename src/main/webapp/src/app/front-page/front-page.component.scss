@@ -89,3 +89,22 @@ margin-right: .75rem;
     max-width: 300px;
     display: flex;
 }
+
+p {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+
+.waves-background {
+    aspect-ratio: 16/9;
+    width: 100%;
+    // background-size: cover;
+    // background-size:contain;
+    background-repeat: no-repeat;
+    background-image: url(../../assets/layered-waves-haikei.svg);
+}
+
+.color {
+    background-color: #C62368 !important;
+}
