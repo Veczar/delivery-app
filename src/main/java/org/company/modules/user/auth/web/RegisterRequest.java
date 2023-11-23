@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.company.modules.role.application.web.RoleDto;
 
 
 @Data
@@ -14,7 +15,8 @@ public class RegisterRequest {
 
     private String firstName;
     private String lastName;
+    private String telephoneNumber;
     private String email;
     private String password;
-    //todo rest of the fields
+    private RoleDto role;
 }

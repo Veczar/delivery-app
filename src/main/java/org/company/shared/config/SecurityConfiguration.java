@@ -11,8 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.company.modules.user.domain.Role.ADMIN;
-
 
 @Configuration
 @EnableWebSecurity
@@ -28,8 +26,13 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
 //                                .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("api/auth/**").permitAll()
-                                .requestMatchers("api/users/**").hasAuthority(ADMIN.name())
+                                authorize.requestMatchers("api/auth/**").permitAll()
+                                .requestMatchers("api/users/**").hasAuthority("ADMIN")
+                                .requestMatchers("api/partners/**").hasAuthority("ADMIN")
+                                .requestMatchers("api/products/**").hasAuthority("ADMIN")
+                                .requestMatchers("api/delivery_mans/**").hasAuthority("ADMIN")
+                                .requestMatchers("api/categories/**").hasAuthority("ADMIN")
+                                .requestMatchers("api/addresses/**").hasAuthority("ADMIN")
 //                                .anyRequest()
 //                                .authenticated()
                 )
@@ -42,20 +45,4 @@ public class SecurityConfiguration {
         
         return http.build();
     }
-    
-    
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.withDefaultPasswordEncoder()
-//                .username("user")
-//                .password("password")
-//                .roles("USER")
-//                .build();
-//        UserDetails admin = User.withDefaultPasswordEncoder()
-//                .username("admin")
-//                .password("password")
-//                .roles("ADMIN", "USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
 }
