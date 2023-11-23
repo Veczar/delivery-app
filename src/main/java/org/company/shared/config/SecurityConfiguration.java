@@ -6,10 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.security.config.Customizer.withDefaults;
+import static org.company.modules.user.domain.Role.ADMIN;
 
 
 @Configuration
@@ -20,48 +22,23 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity
-//                .csrf(csrf -> csrf.disable())
-//                .authorizeHttpRequests((authorizeHttpRequests) ->
-//                        authorizeHttpRequests
-//                                .requestMatchers("/admin/**").hasRole("ADMIN")
-//                                .requestMatchers("/**").hasRole("USER")
-//                )
-//                .formLogin(withDefaults())
-//                //.requestMatchers("")
-////                .permitAll()
-////                .anyRequest()
-////                .authenticated()
-////                .and()
-////                .sessionManagement()
-////                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-////                .and()
-//                .authenticationProvider(authenticationProvider)
-//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-//
-//        return httpSecurity.build();
-//    }
-    
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-//                .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
+                .csrf(AbstractHttpConfigurer::disable)
+//                                .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
                 .authorizeHttpRequests((authorize) ->
-                                    authorize.requestMatchers("api/auth/**").permitAll()
-//                                .requestMatchers("api/admin/**").hasRole("ADMIN")
-                                    .requestMatchers("api/**").hasRole("USER")
+                        authorize.requestMatchers("api/auth/**").permitAll()
+                                .requestMatchers("api/users/**").hasAuthority(ADMIN.name())
+//                                .anyRequest()
+//                                .authenticated()
                 )
-//                .formLogin(withDefaults())
-                
-//                .sessionManagement((session) -> session
-//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                )
+                .sessionManagement((session) -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .httpBasic(withDefaults());
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                //.httpBasic(withDefaults());
         
         return http.build();
     }

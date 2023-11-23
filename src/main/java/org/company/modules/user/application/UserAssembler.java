@@ -26,6 +26,7 @@ public class UserAssembler implements IAssembler<User, UserDto> {
         userDto.setPassword(user.getPassword());
         userDto.setTelephoneNumber(user.getTelephoneNumber());
         userDto.setRole(roleAssembler.toDto(user.getRole()));
+
         
         return userDto;
     }
