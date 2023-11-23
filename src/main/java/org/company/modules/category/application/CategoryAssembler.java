@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 public class CategoryAssembler implements IAssembler<Category, CategoryDto> {
     @Override
     public CategoryDto toDto(Category entity) {
-        ProductAssembler productAssembler = new ProductAssembler();
         CategoryDto dto = new CategoryDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
@@ -20,7 +19,6 @@ public class CategoryAssembler implements IAssembler<Category, CategoryDto> {
 
     @Override
     public void toEntity(CategoryDto dto, Category entity) {
-        entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
     }
