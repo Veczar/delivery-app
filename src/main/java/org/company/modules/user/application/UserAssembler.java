@@ -22,7 +22,7 @@ public class UserAssembler implements IAssembler<User, UserDto> {
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
         userDto.setEmail(user.getEmail());
-        userDto.setLogin(user.getLogin());
+//        userDto.setLogin(user.getLogin());
         userDto.setPassword(user.getPassword());
         userDto.setTelephoneNumber(user.getTelephoneNumber());
         userDto.setRole(roleAssembler.toDto(user.getRole()));
@@ -39,7 +39,7 @@ public class UserAssembler implements IAssembler<User, UserDto> {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
-        user.setLogin(user.getLogin());
+//        user.setLogin(user.getLogin());
         user.setPassword(userDto.getPassword());
         user.setTelephoneNumber(userDto.getTelephoneNumber());
         updateRole(userDto, user);
