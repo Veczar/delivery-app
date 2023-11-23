@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class UserReadAssembler implements IAssembler<User, UserReadDto> {//TODO:change this
+public class UserReadAssembler implements IAssembler<User, UserReadDto> {
     
     //map
     public UserReadDto toDto(User user) {
