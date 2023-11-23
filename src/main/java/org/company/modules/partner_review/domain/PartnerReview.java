@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.company.modules.partner.domain.Partner;
 import org.company.modules.user.domain.User;
-import org.springframework.data.annotation.CreatedDate;
-
 import java.util.Date;
 
 @Getter
