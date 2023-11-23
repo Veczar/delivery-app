@@ -1,4 +1,4 @@
-package org.company.modules.seller.application.web;
+package org.company.modules.partner.application.web;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import org.company.modules.user.application.web.UserDto;
 
 @Getter
 @Setter
-public class SellerDto {
+public class PartnerDto {
     private long id;
     private String name;
     private String account_number;
