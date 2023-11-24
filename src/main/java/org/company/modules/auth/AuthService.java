@@ -12,10 +12,12 @@ import org.company.modules.role.domain.Role;
 import org.company.modules.role.domain.RoleRepository;
 import org.company.modules.user.domain.User;
 import org.company.modules.user.domain.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 
 @Service
@@ -52,7 +54,9 @@ public class AuthService {
     }
     
     public AuthResponseDto registerUser(RegisterUserDto userDto) {
+        checkValidEmail(userDto.getEmail());
         Role role = roleRepository.findById(1L).orElse(null);
+        
         User user = User.builder()
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
@@ -72,7 +76,9 @@ public class AuthService {
     }
     
     public AuthResponseDto registerAdmin(RegisterUserDto userDto) {
+        checkValidEmail(userDto.getEmail());
         Role role = roleRepository.findById(4L).orElse(null);
+        
         User user = User.builder()
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
@@ -92,6 +98,7 @@ public class AuthService {
     }
     
     public AuthResponseDto registerPartner(RegisterPartnerDto partnerDto) {
+        checkValidEmail(partnerDto.getEmail());
         Role role = roleRepository.findById(2L).orElse(null);
         Address address = addressRepository.findById(partnerDto.getAddress().getId()).orElse(null);
         
@@ -128,6 +135,7 @@ public class AuthService {
     }
     
     public AuthResponseDto registerCourier(RegisterDeliveryManDto deliveryManDto) {
+        checkValidEmail(deliveryManDto.getEmail());
         Role role = roleRepository.findById(3L).orElse(null);
         
         // create user
@@ -157,5 +165,12 @@ public class AuthService {
                 .token(jwtToken)
                 .role(role.getName())
                 .build();
+    }
+    
+    private void checkValidEmail(String providedEmail) {
+        User user = userRepository.findByEmail(providedEmail).orElse(null);
+        if (user != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
+        }
     }
 }

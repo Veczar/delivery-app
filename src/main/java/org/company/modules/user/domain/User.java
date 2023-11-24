@@ -29,11 +29,11 @@ public class User implements UserDetails {
     private String telephoneNumber;
     private String email;
     private String password;
-
+    
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
+    
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -70,3 +70,4 @@ public class User implements UserDetails {
         return true;
     }
 }
+
