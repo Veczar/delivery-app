@@ -19,8 +19,9 @@ public class PartnerReview {
     private int grade_in_stars;
     private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    @Column(name = "created_date")
+    @Temporal(TemporalType.DATE)
+    private Date createdDate;
 
     @ManyToOne
     @JoinColumn(name = "reviewer_id")

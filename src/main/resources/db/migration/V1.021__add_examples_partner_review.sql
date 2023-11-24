@@ -1,4 +1,4 @@
-INSERT INTO p_partner_review(grade_in_stars,description,date,reviewer_id,rated_id)
+INSERT INTO p_partner_review(grade_in_stars,description,created_date,reviewer_id,rated_id)
 VALUES
   (4, 'Doskonałe dania, obsługa na najwyższym poziomie.', '2023-01-06', 7, 1),
   (3, 'Nieźle, ale obsługa mogłaby być lepsza.', '2023-01-07', 8, 1),

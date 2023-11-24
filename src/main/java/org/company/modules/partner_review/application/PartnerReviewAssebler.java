@@ -26,7 +26,7 @@ public class PartnerReviewAssebler implements IAssembler<PartnerReview, PartnerR
         partnerReviewDto.setId(partnerReview.getId());
         partnerReviewDto.setGrade_in_stars(partnerReview.getGrade_in_stars());
         partnerReviewDto.setDescription(partnerReview.getDescription());
-        partnerReviewDto.setDate(partnerReview.getDate());
+        partnerReviewDto.setDate(partnerReview.getCreatedDate());
         partnerReviewDto.setReviewer(userAssembler.toDto(partnerReview.getUser()));
         partnerReviewDto.setPartner(partnerAssembler.toDto(partnerReview.getPartner()));
         return partnerReviewDto;
@@ -36,7 +36,7 @@ public class PartnerReviewAssebler implements IAssembler<PartnerReview, PartnerR
     public void toEntity(PartnerReviewDto partnerReviewDto, PartnerReview partnerReview) {
         partnerReview.setGrade_in_stars(partnerReviewDto.getGrade_in_stars());
         partnerReview.setDescription(partnerReviewDto.getDescription());
-        partnerReview.setDate(partnerReviewDto.getDate());
+        partnerReview.setCreatedDate(partnerReviewDto.getDate());
         UpdateReviewer(partnerReviewDto,partnerReview);
         UpdatePartner(partnerReviewDto,partnerReview);
     }
