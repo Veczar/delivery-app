@@ -29,12 +29,12 @@ public class User implements UserDetails {
     private String telephoneNumber;
     private String email;
     private String password;
-    //private String login;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.getName()));
