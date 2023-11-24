@@ -1,22 +1,23 @@
-package org.company.modules.user.auth.web;
+package org.company.modules.auth.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.company.modules.role.application.web.RoleDto;
 
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
-
+public class RegisterDeliveryManDto {
+    
     private String firstName;
     private String lastName;
     private String telephoneNumber;
     private String email;
     private String password;
-    private RoleDto role;
+    
+    // delivery man part
+    private String workingArea;
 }

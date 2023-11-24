@@ -1,4 +1,4 @@
-package org.company.modules.user.auth;
+package org.company.modules.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

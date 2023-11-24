@@ -1,4 +1,4 @@
-package org.company.modules.user.auth.web;
+package org.company.modules.auth.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class AuthRequestDto {
     
     private String email;
     private String password;
