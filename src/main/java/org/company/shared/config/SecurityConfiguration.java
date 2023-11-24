@@ -8,10 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 
 @Configuration
@@ -21,7 +19,6 @@ public class SecurityConfiguration {
     
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
-    //private final LogoutHandler logoutHandler;
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -32,23 +29,17 @@ public class SecurityConfiguration {
                                 authorize.requestMatchers("api/auth/**").permitAll()
                                 .requestMatchers("api/users/**").hasAuthority("ADMIN")
                                 .requestMatchers("api/partners/**").hasAuthority("ADMIN")
-                                .requestMatchers("api/products/**").hasAuthority("ADMIN")
                                 .requestMatchers("api/delivery_mans/**").hasAuthority("ADMIN")
-                                .requestMatchers("api/categories/**").hasAuthority("ADMIN")
                                 .requestMatchers("api/addresses/**").hasAuthority("ADMIN")
-//                                .anyRequest()
-//                                .authenticated()
+                                .requestMatchers("api/products/**").hasAuthority("ADMIN")
+                                .requestMatchers("api/categories/**").hasAuthority("ADMIN")
+                                .requestMatchers("api/partners/reviews/**").hasAuthority("ADMIN")
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-//                .logout(logout ->
-//                        logout.logoutUrl("/api/auth/logout")
-//                                .addLogoutHandler(logoutHandler)
-//                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-//                );
                 //.httpBasic(withDefaults());
         
         return http.build();
