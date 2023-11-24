@@ -1,7 +1,6 @@
 package org.company.modules.partner_review.domain;
 
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
 import lombok.Getter;
 import lombok.Setter;
 import org.company.modules.partner.domain.Partner;
