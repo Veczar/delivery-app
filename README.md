@@ -46,4 +46,10 @@ https://getbootstrap.com/docs/5.2/getting-started/introduction/
 
 icons: https://fonts.google.com/icons
 
-https://app.haikei.app/
+nice backgrounds: https://app.haikei.app/
+
+security docs:
+https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/builders/HttpSecurity.html#httpBasic(org.springframework.security.config.Customizer)
+
+spring security tutorial:
+https://www.youtube.com/watch?v=KxqlJblhzfI
