@@ -8,7 +8,7 @@ import org.company.modules.user.application.web.UserDto;
 @Setter
 public class DeliveryManDto {
     private long id;
-    private String working_area;
+    private String workingArea;
     private int rating;
 
     private UserDto user;
