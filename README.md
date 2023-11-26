@@ -3,6 +3,9 @@
  ```netstat -ano | findstr :8080``` <br>
  ```taskkill /F /PID <pid>``` <br>
 
+albo szybciej: <br>
+```Get-NetTCPConnection -LocalPort 8080 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }```
+
  i usuwacie proces ktory go uzywa <br>
 
 ## co zainstalować: 
