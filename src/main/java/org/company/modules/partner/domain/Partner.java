@@ -3,7 +3,10 @@ package org.company.modules.partner.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.company.modules.address.domain.Address;
+import org.company.modules.category.domain.Category;
 import org.company.modules.user.domain.User;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -28,4 +31,11 @@ public class Partner {
     @OneToOne
     @JoinColumn(name = "owner_id")
     private User owner;
+
+    @ManyToMany
+    @JoinTable(
+            name = "partner_category",
+            joinColumns = @JoinColumn(name = "partner_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
 }
