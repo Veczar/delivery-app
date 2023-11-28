@@ -3,6 +3,7 @@ package org.company.modules.user.application;
 import lombok.AllArgsConstructor;
 import org.company.modules.role.application.RoleAssembler;
 import org.company.modules.role.domain.Role;
+import org.company.modules.role.domain.RoleRepository;
 import org.company.modules.user.application.web.UserDto;
 import org.company.modules.user.domain.User;
 import org.company.shared.aplication.IAssembler;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class UserAssembler implements IAssembler<User, UserDto> {
     
     private final RoleAssembler roleAssembler;
+    private final RoleRepository roleRepository;
     
     //map
     public UserDto toDto(User user) {
@@ -22,8 +24,6 @@ public class UserAssembler implements IAssembler<User, UserDto> {
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
         userDto.setEmail(user.getEmail());
-        userDto.setLogin(user.getLogin());
-        userDto.setPassword(user.getPassword());
         userDto.setTelephoneNumber(user.getTelephoneNumber());
         userDto.setRole(roleAssembler.toDto(user.getRole()));
         
@@ -38,16 +38,13 @@ public class UserAssembler implements IAssembler<User, UserDto> {
     public void toEntity(UserDto userDto, User user) {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
-        user.setEmail(userDto.getEmail());
-        user.setLogin(user.getLogin());
-        user.setPassword(userDto.getPassword());
         user.setTelephoneNumber(userDto.getTelephoneNumber());
+        user.setEmail(userDto.getEmail());
         updateRole(userDto, user);
     }
     
     private void updateRole(UserDto userDto, User user) {
-        Role role = new Role();
-        roleAssembler.toEntity(userDto.getRole(), role);
+        Role role = roleRepository.findById(userDto.getRole().getId()).orElse(null);
         user.setRole(role);
     }
 }

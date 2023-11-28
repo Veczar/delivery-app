@@ -27,8 +27,8 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         PartnerDto partnerDto = new PartnerDto();
         partnerDto.setId(partner.getId());
         partnerDto.setName(partner.getName());
-        partnerDto.setAccount_number(partner.getAccount_number());
-        partnerDto.setContact_number(partner.getContact_number());
+        partnerDto.setAccountNumber(partner.getAccountNumber());
+        partnerDto.setContactNumber(partner.getContactNumber());
         partnerDto.setAddress(addressAssembler.toDto(partner.getAddress()));
         partnerDto.setOwner(userAssembler.toDto(partner.getOwner()));
 
@@ -38,8 +38,8 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
     @Override
     public void toEntity(PartnerDto partnerDto, Partner partner) {
         partner.setName(partnerDto.getName());
-        partner.setAccount_number(partnerDto.getAccount_number());
-        partner.setContact_number(partnerDto.getContact_number());
+        partner.setAccountNumber(partnerDto.getAccountNumber());
+        partner.setContactNumber(partnerDto.getContactNumber());
         UpdateAddress(partnerDto, partner);
         UpdateUser(partnerDto, partner);
     }

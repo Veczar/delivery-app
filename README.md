@@ -3,6 +3,9 @@
  ```netstat -ano | findstr :8080``` <br>
  ```taskkill /F /PID <pid>``` <br>
 
+albo szybciej: <br>
+```Get-NetTCPConnection -LocalPort 8080 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }```
+
  i usuwacie proces ktory go uzywa <br>
 
 ## co zainstalować: 
@@ -45,3 +48,11 @@ for using bootstrap your go-to website is: <br>
 https://getbootstrap.com/docs/5.2/getting-started/introduction/
 
 icons: https://fonts.google.com/icons
+
+nice backgrounds: https://app.haikei.app/
+
+security docs:
+https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/builders/HttpSecurity.html#httpBasic(org.springframework.security.config.Customizer)
+
+spring security tutorial:
+https://www.youtube.com/watch?v=KxqlJblhzfI
