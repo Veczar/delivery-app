@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AxiosService } from '../axios.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -18,22 +17,27 @@ interface User {
 export class AuthContentComponent implements OnInit {
   data: User[] = [];
 
-  constructor(private axiosService: AxiosService, private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
     // this.axiosService.request("GET", "api/users", ()=>{})
     //   .then((response) => this.data = response.data);
-    this.getUsers().subscribe(
-      (response) => this.data = response
-    );
+    // this.getUsers().subscribe(
+    //   (response) => this.data = response
+    // );
   }
 
-  getUsers(): Observable<User[]> {
+  getUsers() {
+    this.getUsers2().subscribe((r)=>{
+      this.data = r;
+    })
+  }
+
+  getUsers2(): Observable<User[]> {
     console.log('GET request');
     return this.http.get<User[]>("http://localhost:8080/api/users");
   }
 
-  
 
 }
