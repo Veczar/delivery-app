@@ -4,5 +4,5 @@ CREATE TABLE partner_category (
 	CONSTRAINT partner_category_pkey PRIMARY KEY (partner_id, category_id)
 );
 
-ALTER TABLE partner_category ADD CONSTRAINT partner_id FOREIGN KEY (partner) REFERENCES p_partner(id);
+ALTER TABLE partner_category ADD CONSTRAINT partner_id FOREIGN KEY (partner_id) REFERENCES p_partner(id);
 ALTER TABLE partner_category ADD CONSTRAINT category_id FOREIGN KEY (category_id) REFERENCES p_category(id);
