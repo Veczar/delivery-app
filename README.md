@@ -56,3 +56,6 @@ https://docs.spring.io/spring-security/site/docs/current/api/org/springframework
 
 spring security tutorial:
 https://www.youtube.com/watch?v=KxqlJblhzfI
+
+forntend auth: 
+https://www.youtube.com/watch?v=PhzxED19FVA
