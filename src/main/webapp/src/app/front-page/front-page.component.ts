@@ -11,6 +11,7 @@ import { UserService } from '../modules/user/user.service';
 })
 export class FrontPageComponent {
 
+
   loggedUser = {
     firstName: '',
     lastName: ''
@@ -36,7 +37,7 @@ export class FrontPageComponent {
     this.modalService.open(modal);
   }
 
-  navigateToAuth() {
+  navigateToAuth(): void {
     this.router.navigate(['/auth']);
   }
 
@@ -44,9 +45,13 @@ export class FrontPageComponent {
     return this.authService.isUserLogged();
   }
 
-  logOut() {
-  this.authService.logOut();
-  this.updateAuthenticationState();
+  logOut():void {
+    this.authService.logOut();
+    this.updateAuthenticationState();
+  }
+
+  getRole(): string {
+    return localStorage.getItem('role') || '';
   }
 
 }

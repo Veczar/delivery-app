@@ -40,11 +40,11 @@
               <button class="btn btn-outline-primary me-2" type="submit">Register</button>
               <button class="btn btn-outline-success" type="submit" (click)="navigateToAuth()">Sign in</button>
             </div>
+            <div *ngIf="isUserLoggedIn()" class="nav-item text-white me-2 badge text-bg-primary">{{getRole() !== 'USER' ? getRole() : ''}}</div>
             <div *ngIf="isUserLoggedIn()">
-              <!-- <div class="nav-item text-white">{{ loggedUser.firstName }} {{ loggedUser.lastName }}</div> -->
               <div class="dropdown-center">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="bi bi-person"></i>  {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+                  <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark dropdown-position">
                   <li><a class="dropdown-item" href="#">Settings</a></li>
