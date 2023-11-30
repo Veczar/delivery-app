@@ -35,8 +35,8 @@ public class SimpleCorsFilter implements Filter {
         // Specify allowed methods
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
         
-        // Set the maximum age for preflight requests
-        response.setHeader("Access-Control-Max-Age", "3600");
+//        // Set the maximum age for preflight requests
+//        response.setHeader("Access-Control-Max-Age", "3600");
         
         // Specify allowed headers, including the ones you need for JWT and others
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me, Authorization");

@@ -41,10 +41,7 @@ public class AuthService {
     // in other words - sign in
     public AuthResponseDto authenticate(AuthRequestDto request) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
         
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow();
@@ -54,6 +51,8 @@ public class AuthService {
                 .token(jwtToken)
                 .role(user.getRole().getName())
                 .expirationDate(isoFormat.format(jwtService.extractExpiration(jwtToken)))
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build();
     }
     
@@ -77,6 +76,8 @@ public class AuthService {
                 .token(jwtToken)
                 .role(role.getName())
                 .expirationDate(isoFormat.format(jwtService.extractExpiration(jwtToken)))
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build();
     }
     
@@ -100,6 +101,8 @@ public class AuthService {
                 .token(jwtToken)
                 .role(role.getName())
                 .expirationDate(jwtService.extractExpiration(jwtToken).toString())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build();
     }
     
@@ -138,6 +141,8 @@ public class AuthService {
                 .token(jwtToken)
                 .role(role.getName())
                 .expirationDate(jwtService.extractExpiration(jwtToken).toString())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build();
     }
     
@@ -172,6 +177,8 @@ public class AuthService {
                 .token(jwtToken)
                 .role(role.getName())
                 .expirationDate(jwtService.extractExpiration(jwtToken).toString())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build();
     }
     

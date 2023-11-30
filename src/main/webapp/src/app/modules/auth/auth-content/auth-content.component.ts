@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
+// this component is jsut for testing
 interface User {
   id: number;
   firstName: string;
@@ -14,18 +15,10 @@ interface User {
   templateUrl: './auth-content.component.html',
   styleUrls: ['./auth-content.component.scss']
 })
-export class AuthContentComponent implements OnInit {
+export class AuthContentComponent {
   data: User[] = [];
 
   constructor(private http: HttpClient) {
-  }
-
-  ngOnInit(): void {
-    // this.axiosService.request("GET", "api/users", ()=>{})
-    //   .then((response) => this.data = response.data);
-    // this.getUsers().subscribe(
-    //   (response) => this.data = response
-    // );
   }
 
   getUsers() {
@@ -38,6 +31,4 @@ export class AuthContentComponent implements OnInit {
     console.log('GET request');
     return this.http.get<User[]>("http://localhost:8080/api/users");
   }
-
-
 }

@@ -8,7 +8,7 @@
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="collapse navbar-collapse " id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -21,17 +21,40 @@
               </li>
             </ul>
             <!-- <form class="middle-search" role="search">
-              <div class="input-group"> -->
-                <!-- ikonka lupy -->
-                <!-- <span class="input-group-text"><span class="material-icons">search</span></span> -->
-                <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
-              <!-- </div> -->
-              <!-- przycisk do szukania -->
-              <!-- <button class="btn btn-outline-secondary" (click)="open(demoModal)">search</button> -->
-            <!-- </form> -->
-            
-            <button class="btn btn-outline-primary me-2" type="submit">Register</button>
-            <button class="btn btn-outline-success" type="submit" (click)="navigateToAuth()">Sign in</button>
+              <div class="input-group"> 
+                <span class="input-group-text"><span class="material-icons">search</span></span>
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              </div>
+              <button class="btn btn-outline-secondary" (click)="open(demoModal)">search</button>
+            </form> -->
+
+            <!-- <div *ngIf="!isUserLoggedIn()">
+              <button class="btn btn-outline-primary me-2" type="submit">Register</button>
+              <button class="btn btn-outline-success" type="submit" (click)="navigateToAuth()">Sign in</button>
+            </div>
+            <div *ngIf="isUserLoggedIn()">
+              <p>Welcome, {{ this.authService.getLoggedUser().firstName }} {{ this.authService.getLoggedUser().lastName }}!</p>
+            </div> -->
+            <!-- auth.component.html -->
+            <div *ngIf="!(isUserLoggedIn())">
+              <button class="btn btn-outline-primary me-2" type="submit">Register</button>
+              <button class="btn btn-outline-success" type="submit" (click)="navigateToAuth()">Sign in</button>
+            </div>
+            <div *ngIf="isUserLoggedIn()">
+              <!-- <div class="nav-item text-white">{{ loggedUser.firstName }} {{ loggedUser.lastName }}</div> -->
+              <div class="dropdown-center">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person"></i>  {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-position">
+                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                  <li><a class="dropdown-item" href="#" (click)="logOut()">Log Out</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- <button class="btn btn-outline-primary me-2" type="submit">Register</button>
+            <button class="btn btn-outline-success" type="submit" (click)="navigateToAuth()">Sign in</button> -->
           </div>
         </div>
       </nav>

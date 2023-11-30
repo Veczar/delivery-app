@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { AuthService } from '../modules/auth/auth.service';
+import { UserService } from '../modules/user/user.service';
 
 @Component({
   selector: 'app-front-page',
@@ -10,7 +11,25 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FrontPageComponent {
 
-  constructor(private modalService: NgbModal, private router: Router) {
+  loggedUser = {
+    firstName: '',
+    lastName: ''
+  }
+
+  constructor(
+    private modalService: NgbModal,
+    private router: Router,
+    public authService: AuthService,
+  ) {
+    this.updateAuthenticationState();
+  }
+
+  private updateAuthenticationState() {
+    const isUserLoggedIn = this.isUserLoggedIn();
+
+    if (isUserLoggedIn) {
+      this.loggedUser = this.authService.getLoggedUser();
+    }
   }
 
   public open(modal: any): void {
@@ -19,6 +38,15 @@ export class FrontPageComponent {
 
   navigateToAuth() {
     this.router.navigate(['/auth']);
+  }
+
+  isUserLoggedIn(): any {
+    return this.authService.isUserLogged();
+  }
+
+  logOut() {
+  this.authService.logOut();
+  this.updateAuthenticationState();
   }
 
 }
