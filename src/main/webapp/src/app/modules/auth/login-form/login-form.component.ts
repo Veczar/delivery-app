@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,12 +18,17 @@ export class LoginFormComponent  {
     password: ''
   };
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient, 
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   onLogin() {
     console.log(this.loginObj)
     this.http.post(`${this.apiUrl}/api/auth/authenticate`, this.loginObj).subscribe((result: any) => {
       this.authService.setLoggedUser(result);
+      this.router.navigate(['']);
     }),
     (error: any) => {
       console.error('Authentication failed:', error);
