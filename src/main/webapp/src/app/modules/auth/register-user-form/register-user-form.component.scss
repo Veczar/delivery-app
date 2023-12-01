@@ -1,0 +1,61 @@
+
+html,
+body {
+  height: 100vh;
+  // height: 100%;
+}
+
+body {
+  display: flex;
+//   align-items: center;
+  // padding-top: 40px;
+  // padding-bottom: 40px;
+  // background-color: #f5f5f5;
+}
+
+main {
+  background-color: whitesmoke;
+  border-radius: 20px;
+  position: relative;
+}
+
+.form-signin {
+  max-width: 500px;
+  padding: 35px;
+  background-attachment: fixed;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+// .form-signin input[type="email"] {
+//   margin-bottom: -1px;
+//   border-bottom-right-radius: 0;
+//   border-bottom-left-radius: 0;
+// }
+
+// .form-signin input[type="password"] {
+//   margin-bottom: 10px;
+//   border-top-left-radius: 0;
+//   border-top-right-radius: 0;
+// }
+
+.waves-background {
+  aspect-ratio: 16/9;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../../../../assets/layered-waves-haikei.svg);
+  background-attachment: fixed;
+}
+
+.exit-btn {
+  position: absolute;
+  right: 6%;
+  top: 6%;
+}
+
+h1 {
+    margin-bottom: 30px;
+}

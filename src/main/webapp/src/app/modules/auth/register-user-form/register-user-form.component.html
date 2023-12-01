@@ -1,0 +1,99 @@
+<body class="waves-background">
+  <main class="form-signin w-100 m-auto">
+
+    <h1 class="h3 fw-normal">Register</h1>
+
+    <form
+    #userForm="ngForm"
+    (ngSubmit)="userForm.form.valid && submitForm()"
+    class="row g-3 needs-validation"
+    novalidate
+  >
+    <div class="col-md-6">
+      <label for="firstName" class="form-label">First name</label>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        [(ngModel)]="user.firstName"
+        #name="ngModel"
+        [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }"
+        required
+      />
+      <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+        <p *ngIf="name.invalid">Name is required</p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="lastName" class="form-label">Last name</label>
+      <input 
+        type="text"
+        name="lastName" 
+        class="form-control" 
+        [(ngModel)]="user.lastName" 
+        #lastName="ngModel"
+        [ngClass]="{ 'is-invalid': userForm.submitted && lastName.invalid }"
+        required
+      />
+      <div class="invalid-feedback" *ngIf="userForm.submitted && lastName.invalid">
+        <p *ngIf="lastName.invalid">Last Name is required</p>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <label for="tel" class="form-label">Telephone number</label>
+      <input
+        type="tel"
+        class="form-control"
+        name="telephone"
+        [(ngModel)]="user.telephoneNumber"
+        #tel="ngModel"
+        [ngClass]="{ 'is-invalid': userForm.submitted && tel.invalid }"
+        required
+      />
+      <div *ngIf="userForm.submitted && tel.invalid" class="invalid-feedback">
+        <div *ngIf="tel.invalid">Email is required</div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        [(ngModel)]="user.email"
+        #email="ngModel"
+        [ngClass]="{ 'is-invalid': userForm.submitted && email.invalid }"
+        email
+        required
+      />
+      <div *ngIf="userForm.submitted && email.invalid" class="invalid-feedback">
+        <div *ngIf="email.invalid">Email is required</div>
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        [(ngModel)]="user.password"
+        #password="ngModel"
+        [ngClass]="{ 'is-invalid': userForm.submitted && password.invalid }"
+        minlength="3"
+        required
+      />
+      <div *ngIf="userForm.submitted && password.invalid" class="invalid-feedback">
+        <div *ngIf="password.invalid">Password is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button class="w-100 btn btn-lg btn-primary">Submit</button>
+    </div>
+  </form>
+  </main>
+</body>

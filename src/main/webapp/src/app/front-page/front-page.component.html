@@ -37,8 +37,8 @@
             </div> -->
             <!-- auth.component.html -->
             <div *ngIf="!(isUserLoggedIn())">
-              <button class="btn btn-outline-primary me-2" type="submit">Register</button>
-              <button class="btn btn-outline-success" type="submit" (click)="navigateToAuth()">Sign in</button>
+              <button class="btn btn-outline-primary me-2" type="submit" [routerLink]="['/register']">Register</button>
+              <button class="btn btn-outline-success" type="submit" [routerLink]="['/auth']">Sign in</button>
             </div>
             <div *ngIf="isUserLoggedIn()" class="nav-item text-white me-2 badge text-bg-primary">{{getRole() !== 'USER' ? getRole() : ''}}</div>
             <div *ngIf="isUserLoggedIn()">
