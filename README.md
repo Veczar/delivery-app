@@ -58,5 +58,5 @@ spring security: <br>
 https://www.youtube.com/watch?v=KxqlJblhzfI <br>
 https://github.com/ali-bouali/spring-boot-3-jwt-security/tree/main
 
-forntend auth: 
+frontend auth: 
 https://www.youtube.com/watch?v=PhzxED19FVA
