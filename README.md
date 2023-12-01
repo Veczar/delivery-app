@@ -54,5 +54,9 @@ nice backgrounds: https://app.haikei.app/
 security docs:
 https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/builders/HttpSecurity.html#httpBasic(org.springframework.security.config.Customizer)
 
-spring security tutorial:
-https://www.youtube.com/watch?v=KxqlJblhzfI
+spring security: <br>
+https://www.youtube.com/watch?v=KxqlJblhzfI <br>
+https://github.com/ali-bouali/spring-boot-3-jwt-security/tree/main
+
+frontend auth: 
+https://www.youtube.com/watch?v=PhzxED19FVA

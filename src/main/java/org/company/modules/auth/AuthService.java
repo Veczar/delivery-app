@@ -19,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.text.SimpleDateFormat;
+
 
 @Service
 @RequiredArgsConstructor
@@ -33,15 +35,13 @@ public class AuthService {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     
     
     // in other words - sign in
     public AuthResponseDto authenticate(AuthRequestDto request) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
         
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow();
@@ -50,6 +50,9 @@ public class AuthService {
         return AuthResponseDto.builder()
                 .token(jwtToken)
                 .role(user.getRole().getName())
+                .expirationDate(isoFormat.format(jwtService.extractExpiration(jwtToken)))
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build();
     }
     
@@ -72,6 +75,9 @@ public class AuthService {
         return AuthResponseDto.builder()
                 .token(jwtToken)
                 .role(role.getName())
+                .expirationDate(isoFormat.format(jwtService.extractExpiration(jwtToken)))
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build();
     }
     
@@ -94,6 +100,9 @@ public class AuthService {
         return AuthResponseDto.builder()
                 .token(jwtToken)
                 .role(role.getName())
+                .expirationDate(jwtService.extractExpiration(jwtToken).toString())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build();
     }
     
@@ -131,6 +140,9 @@ public class AuthService {
         return AuthResponseDto.builder()
                 .token(jwtToken)
                 .role(role.getName())
+                .expirationDate(jwtService.extractExpiration(jwtToken).toString())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build();
     }
     
@@ -164,6 +176,9 @@ public class AuthService {
         return AuthResponseDto.builder()
                 .token(jwtToken)
                 .role(role.getName())
+                .expirationDate(jwtService.extractExpiration(jwtToken).toString())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build();
     }
     
