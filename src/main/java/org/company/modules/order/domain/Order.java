@@ -17,10 +17,10 @@ public class Order {
 @Id
 private Long id;
 @OneToOne
-@JoinColumn(name = "adress_start_id")
+@JoinColumn(name = "address_start_id")
 private Address addressStart;
 @OneToOne
-@JoinColumn(name = "adress_end_id")
+@JoinColumn(name = "address_end_id")
 private Address addressEnd;
 @OneToOne
 @JoinColumn(name = "customer_id")
