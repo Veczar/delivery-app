@@ -27,8 +27,9 @@ public class SimpleCorsFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         
         // Allow all origins during development; adjust as needed for production
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-        
+        //response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        //response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         // Allow credentials (e.g., cookies)
         response.setHeader("Access-Control-Allow-Credentials", "true");
         
@@ -36,7 +37,7 @@ public class SimpleCorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
         
 //        // Set the maximum age for preflight requests
-//        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Max-Age", "3600");
         
         // Specify allowed headers, including the ones you need for JWT and others
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me, Authorization");
