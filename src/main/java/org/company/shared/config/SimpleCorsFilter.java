@@ -27,9 +27,9 @@ public class SimpleCorsFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         
         // Allow all origins during development; adjust as needed for production
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-
+        //response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        //response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         // Allow credentials (e.g., cookies)
         response.setHeader("Access-Control-Allow-Credentials", "true");
         
