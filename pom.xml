@@ -93,4 +93,41 @@
 
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>cz.habarta.typescript-generator</groupId>
+                <artifactId>typescript-generator-maven-plugin</artifactId>
+                <version>2.14.505</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jsonLibrary>jackson2</jsonLibrary>
+                    <classPatterns>
+                        <pattern>org.company.modules.**Dto</pattern>
+                        <pattern>org.company.modules.**Criteria</pattern>
+                    </classPatterns>
+                    <outputFile>src/main/webapp/src/app/shared/model/api-models.ts</outputFile>
+                    <outputFileType>implementationFile</outputFileType>
+                    <outputKind>module</outputKind>
+                    <noFileComment>true</noFileComment>
+                    <mapEnum>asEnum</mapEnum>
+                    <nonConstEnums>true</nonConstEnums>
+                    <optionalProperties>all</optionalProperties>
+                    <sortDeclarations>true</sortDeclarations>
+                    <sortTypeDeclarations>true</sortTypeDeclarations>
+                    <customTypeMappings>
+                        <mapping>java.lang.Class:any</mapping>
+                    </customTypeMappings>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
