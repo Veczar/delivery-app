@@ -8,7 +8,7 @@ import { RegisterUserFormComponent } from './modules/auth/register-user-form/reg
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
   {path: 'auth', component: LoginFormComponent},
-  {path: 'register', component: RegisterUserFormComponent},
+  {path: 'register/user', component: RegisterUserFormComponent},
 ];
 
 @NgModule({

@@ -9,7 +9,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './modules/auth/auth-interceptor.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     
     UserModule,
     AuthModule,

@@ -4,7 +4,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { RouterModule } from '@angular/router';
 import { AuthContentComponent } from './auth-content/auth-content.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterUserFormComponent } from './register-user-form/register-user-form.component';
 
 @NgModule({
@@ -17,7 +17,8 @@ import { RegisterUserFormComponent } from './register-user-form/register-user-fo
     CommonModule,
     RouterModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }
