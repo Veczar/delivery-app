@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { RegisterPartnerDto } from 'src/app/shared/model/api-models';
 
 
 function customNameValidator(control: FormControl) {
@@ -24,16 +25,22 @@ export class RegisterPartnerFormComponent implements OnInit {
 
 
   partnerForm: FormGroup = new FormGroup({
+    //User data
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     telephoneNumber: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
 
+    //Partner data
     name: new FormControl(''),
     accountNumber: new FormControl(''),
     contactNumber: new FormControl(''),
-    address: new FormControl(''),
+    address: new FormGroup({
+      city: new FormControl(''),
+      postalCode: new FormControl(''),
+      street: new FormControl(''),
+    }),
     
   });
   submitted = false;
@@ -69,7 +76,24 @@ export class RegisterPartnerFormComponent implements OnInit {
           Validators.minLength(3),
           Validators.maxLength(20)
         ]
-      ]
+      ],address: this.formBuilder.group({
+        city: ['', [Validators.required, Validators.minLength(2)]],
+        postalCode: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^\d{2}-\d{3}$/) // Format kodu pocztowego XX-XXX
+          ]
+        ],
+        street: ['', [Validators.required, Validators.minLength(2)]],
+      }),
     });
+  }
+  onSubmit(){
+    console.log(this.partnerForm)
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.partnerForm.controls;
   }
 }
