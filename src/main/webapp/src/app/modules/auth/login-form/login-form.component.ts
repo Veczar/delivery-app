@@ -24,7 +24,7 @@ export class LoginFormComponent  {
 
   onLogin() {
     console.log(this.loginObj)
-    this.authService.logIn(this.loginObj).subscribe((result: any) => {
+    this.authService.logIn(this.loginObj).subscribe((result) => {
       this.authService.setLoggedUser(result);
       this.router.navigate(['']);
     }),

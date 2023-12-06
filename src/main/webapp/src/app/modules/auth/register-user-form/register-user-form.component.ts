@@ -1,20 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { RegisterUserDto } from 'src/app/shared/model/api-models';
+import { RegisterResponseDto, RegisterUserDto } from 'src/app/shared/model/api-models';
+import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 
-function customNameValidator(control: FormControl) {
-  // Implement your custom validation logic here
 
-  const forbiddenName = 'admin'; // Example: Forbid the name 'admin'
-
-  if (control.value && control.value.toLowerCase() === forbiddenName) {
-    return { forbiddenName: true }; // Validation failed
-  }
-
-  return null; // Validation passed
-}
 
 @Component({
   selector: 'app-register-user-form',
@@ -22,13 +14,6 @@ function customNameValidator(control: FormControl) {
   styleUrls: ['./register-user-form.component.scss']
 })
 export class RegisterUserFormComponent implements OnInit {
-  // user = {
-  //   firstName: '',
-  //   lastName: '',
-  //   telephoneNumber: '',
-  //   email: '',
-  //   password: ''
-  // };
 
   userForm: FormGroup = new FormGroup({
     firstName: new FormControl(''),
@@ -38,42 +23,58 @@ export class RegisterUserFormComponent implements OnInit {
     password: new FormControl(''),
   });
   submitted = false;
+  wrongEmail: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
-
-  submitForm() {
-    // Your form submission logic goes here
-    console.log('Form submitted:', this.userForm);
-  }
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, customNameValidator, Validators.minLength(2),]],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
+          Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)
+        ]
+      ],
       lastName: [
         '',
         [
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(20)
+          Validators.maxLength(20),
+          Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)
+
         ]
       ],
       telephoneNumber: [
         '',
         [
           Validators.required,
+          Validators.minLength(9),
           Validators.pattern(/^\d{9}$/),
         ]
       ],
-      email: ['', [Validators.required, Validators.email]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.maxLength(30),
+        ]
+      ],
       password: [
         '',
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(20)
+          Validators.maxLength(25)
         ]
       ]
     });
@@ -85,25 +86,40 @@ export class RegisterUserFormComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-    console.log(JSON.stringify(this.userForm.value, null, 2));
+    this.wrongEmail = false;
+    // console.log(JSON.stringify(this.userForm.value, null, 2));
     // console.log(this.userForm)
 
+    // Manually trigger change detection - this solves the validation styling problem
+    Object.keys(this.userForm.controls).forEach(key => {
+      const control = this.userForm.get(key);
+      if (control) {
+        control.setValue(control.value);
+      }
+    });
+
     if (this.userForm.invalid) {
+      console.log('wrong form')
       return;
     }
 
     this.authService.registerUser(this.userForm.value as RegisterUserDto).subscribe(
-      (response) => {
+      (response: RegisterResponseDto) => {
         console.log('response:', response);
+
+        if (response.message == 'success') {
+          console.log('succesfully registered a user');
+          this.router.navigate(['']);
+        }
+        else {
+          this.wrongEmail = true;
+        }
+        // console.log('wrong email?: ', this.wrongEmail)
       },
       (error) => {
-        console.error('Error adding user:', error);
+        console.error('Error while registering a user:', error);
       }
     );
   }
 
-  onReset(): void {
-    this.submitted = false;
-    this.userForm.reset();
-  }
 }
