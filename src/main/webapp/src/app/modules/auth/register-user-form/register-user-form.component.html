@@ -5,10 +5,10 @@
     <h1 class="h3 fw-normal">Register</h1>
 
     <form
-    [formGroup]="userForm"
-    (ngSubmit)="onSubmit()"
-    class="row g-3 needs-validation"
-    novalidate
+      [formGroup]="userForm"
+      (ngSubmit)="onSubmit()"
+      class="row g-3 needs-validation"
+      novalidate
     >
 
     <!-- <div class="col-md-6">
@@ -37,9 +37,9 @@
         formControlName="firstName"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
-        [ngClass]="{ 'is-valid': !f['firstName'].errors }"
+        [ngClass]="{ 'is-valid': submitted && !f['firstName'].errors }"
       />
-      <div class="invalid-feedback" *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+      <div class="invalid-feedback" *ngIf=" f['firstName'].errors" class="invalid-feedback">
         <p *ngIf="f['firstName'].errors">Name is required</p>
       </div> 
     </div>
@@ -68,9 +68,9 @@
         formControlName="lastName"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
-        [ngClass]="{ 'is-valid': !f['lastName'].errors }"
+        [ngClass]="{ 'is-valid': submitted && !f['lastName'].errors }"
       />
-      <div class="invalid-feedback" *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+      <div class="invalid-feedback" *ngIf="f['lastName'].errors" class="invalid-feedback">
         <p *ngIf="f['lastName'].errors">Last Name is required</p>
       </div> 
     </div>
@@ -99,9 +99,9 @@
         formControlName="telephoneNumber"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f['telephoneNumber'].errors }"
-        [ngClass]="{ 'is-valid': !f['telephoneNumber'].errors }"
+        [ngClass]="{ 'is-valid': submitted && !f['telephoneNumber'].errors }"
       />
-      <div class="invalid-feedback" *ngIf="submitted && f['telephoneNumber'].errors" class="invalid-feedback">
+      <div class="invalid-feedback" *ngIf=" f['telephoneNumber'].errors" class="invalid-feedback">
         <p *ngIf="f['telephoneNumber'].errors">Provide valid telephone Number</p>
       </div> 
     </div>
@@ -131,9 +131,9 @@
         formControlName="email"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
-        [ngClass]="{ 'is-valid': !f['email'].errors }"
+        [ngClass]="{ 'is-valid': submitted && !f['email'].errors }"
       />
-      <div class="invalid-feedback" *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+      <div class="invalid-feedback" *ngIf="f['email'].errors" class="invalid-feedback">
         <p *ngIf="f['email'].errors">Provide valid email</p>
       </div> 
     </div>
@@ -163,7 +163,7 @@
         formControlName="password"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
-        [ngClass]="{ 'is-valid': !f['password'].errors }"
+        [ngClass]="{ 'is-valid': submitted && !f['password'].errors }"
       />
       <!-- <div class="invalid-feedback" *ngIf="submitted && f['password'].errors" class="invalid-feedback">
         <p *ngIf="f['password'].errors">Provide </p>

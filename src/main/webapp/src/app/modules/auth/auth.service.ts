@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RegisterUserDto } from 'src/app/shared/model/api-models';
+import { AuthRequestDto, RegisterUserDto } from 'src/app/shared/model/api-models';
 
 
 export interface AuthResponse { // todo move this to another file with all other dto's
@@ -37,6 +37,10 @@ export class AuthService {
 
   isUserLogged(): boolean {
     return localStorage.getItem('authToken') ? true : false;
+  }
+
+  logIn(loginObj: AuthRequestDto) {
+    return this.http.post(`${this.apiUrl}/api/auth/authenticate`, loginObj);
   }
 
   // log in

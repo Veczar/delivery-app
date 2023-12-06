@@ -86,7 +86,7 @@ export class RegisterUserFormComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     console.log(JSON.stringify(this.userForm.value, null, 2));
-    console.log(this.userForm)
+    // console.log(this.userForm)
 
     if (this.userForm.invalid) {
       return;
@@ -106,9 +106,4 @@ export class RegisterUserFormComponent implements OnInit {
     this.submitted = false;
     this.userForm.reset();
   }
-
-  // Access the form control in the template
-  // get name() {
-  //   return this.userForm.get('firstName');
-  // }
 }
