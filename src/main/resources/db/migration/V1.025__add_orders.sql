@@ -1,5 +1,5 @@
 CREATE TABLE p_order (
-	id int8 NOT NULL,
+	id SERIAL NOT NULL,
 	completion_date timestamp(6) NULL,
 	creation_date timestamp(6) NULL,
 	tip float8 NULL,
@@ -7,10 +7,7 @@ CREATE TABLE p_order (
 	address_end_id int8 NULL,
 	address_start_id int8 NULL,
 	customer_id int8 NULL,
-	CONSTRAINT p_order_pkey PRIMARY KEY (id),
-	CONSTRAINT address_start_idx UNIQUE (address_start_id),
-	CONSTRAINT customer_idx UNIQUE (customer_id),
-	CONSTRAINT address_end_idx UNIQUE (address_end_id)
+	CONSTRAINT p_order_pkey PRIMARY KEY (id)
 );
 
 ALTER TABLE p_order ADD CONSTRAINT customer_fid FOREIGN KEY (customer_id) REFERENCES p_user(id);
