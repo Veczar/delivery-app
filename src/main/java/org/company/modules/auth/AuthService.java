@@ -12,12 +12,10 @@ import org.company.modules.role.domain.Role;
 import org.company.modules.role.domain.RoleRepository;
 import org.company.modules.user.domain.User;
 import org.company.modules.user.domain.UserRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.text.SimpleDateFormat;
 
@@ -56,8 +54,11 @@ public class AuthService {
                 .build();
     }
     
-    public AuthResponseDto registerUser(RegisterUserDto userDto) {
-        checkValidEmail(userDto.getEmail());
+    public RegisterResponseDto registerUser(RegisterUserDto userDto) {
+        if (!isEmailAvailable(userDto.getEmail())) {
+            return RegisterResponseDto.builder().message("email not available").build();
+        }
+        
         Role role = roleRepository.findById(1L).orElse(null);
         
         User user = User.builder()
@@ -70,19 +71,14 @@ public class AuthService {
                 .build();
         
         userRepository.save(user);
-        String jwtToken = jwtService.generateToken(user);
         
-        return AuthResponseDto.builder()
-                .token(jwtToken)
-                .role(role.getName())
-                .expirationDate(isoFormat.format(jwtService.extractExpiration(jwtToken)))
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .build();
+        return RegisterResponseDto.builder().message("success").build();
     }
     
-    public AuthResponseDto registerAdmin(RegisterUserDto userDto) {
-        checkValidEmail(userDto.getEmail());
+    public RegisterResponseDto registerAdmin(RegisterUserDto userDto) {
+        if (!isEmailAvailable(userDto.getEmail())) {
+            return RegisterResponseDto.builder().message("email not available").build();
+        }
         Role role = roleRepository.findById(4L).orElse(null);
         
         User user = User.builder()
@@ -95,19 +91,14 @@ public class AuthService {
                 .build();
         
         userRepository.save(user);
-        String jwtToken = jwtService.generateToken(user);
         
-        return AuthResponseDto.builder()
-                .token(jwtToken)
-                .role(role.getName())
-                .expirationDate(jwtService.extractExpiration(jwtToken).toString())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .build();
+        return RegisterResponseDto.builder().message("success").build();
     }
     
-    public AuthResponseDto registerPartner(RegisterPartnerDto partnerDto) {
-        checkValidEmail(partnerDto.getEmail());
+    public RegisterResponseDto registerPartner(RegisterPartnerDto partnerDto) {
+        if (!isEmailAvailable(partnerDto.getEmail())) {
+            return RegisterResponseDto.builder().message("email not available").build();
+        }
         Role role = roleRepository.findById(2L).orElse(null);
         Address address = addressRepository.findById(partnerDto.getAddress().getId()).orElse(null);
         
@@ -123,7 +114,6 @@ public class AuthService {
         
         userRepository.save(user);
         
-        
         // create partner
         Partner partner = Partner.builder()
                 .name(partnerDto.getName())
@@ -135,19 +125,13 @@ public class AuthService {
         
         partnerRepository.save(partner);
         
-        String jwtToken = jwtService.generateToken(user);
-        
-        return AuthResponseDto.builder()
-                .token(jwtToken)
-                .role(role.getName())
-                .expirationDate(jwtService.extractExpiration(jwtToken).toString())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .build();
+        return RegisterResponseDto.builder().message("success").build();
     }
     
-    public AuthResponseDto registerCourier(RegisterDeliveryManDto deliveryManDto) {
-        checkValidEmail(deliveryManDto.getEmail());
+    public RegisterResponseDto registerCourier(RegisterDeliveryManDto deliveryManDto) {
+        if (!isEmailAvailable(deliveryManDto.getEmail())) {
+            return RegisterResponseDto.builder().message("email not available").build();
+        }
         Role role = roleRepository.findById(3L).orElse(null);
         
         // create user
@@ -171,21 +155,16 @@ public class AuthService {
         
         deliveryManRepository.save(deliveryMan);
         
-        String jwtToken = jwtService.generateToken(user);
-        
-        return AuthResponseDto.builder()
-                .token(jwtToken)
-                .role(role.getName())
-                .expirationDate(jwtService.extractExpiration(jwtToken).toString())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .build();
+        return RegisterResponseDto.builder().message("success").build();
     }
     
-    private void checkValidEmail(String providedEmail) {
+    /**
+     * checks if account with this email is already created
+     * @param providedEmail email from registration form
+     * @return true - if email available / no account with this email in database
+     */
+    private boolean isEmailAvailable(String providedEmail) {
         User user = userRepository.findByEmail(providedEmail).orElse(null);
-        if (user != null) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT);
-        }
+        return user == null;
     }
 }

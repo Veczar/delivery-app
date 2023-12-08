@@ -1,13 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-
-export interface AuthResponse { // todo move this to another file with all other dto's
-  token: string;
-  role: string;
-  expirationDate: string;
-  firstName: string;
-  lastName: string;
-}
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthRequestDto, AuthResponseDto, RegisterResponseDto, RegisterUserDto } from 'src/app/shared/model/api-models';
 
 @Injectable({
   providedIn: 'root'
@@ -19,31 +14,34 @@ export class AuthService {
     lastName: ''
   }
 
-  constructor() { }
+  apiUrl: string = 'http://localhost:8080';
 
-  isTokenExpired(): boolean {
-    const expirationDateStr = localStorage.getItem('expirationDate');
+  constructor(
+    private http: HttpClient,
+  ) { }
+  
 
-    if (expirationDateStr) {
-      const expirationDate = new Date(expirationDateStr);
-      return expirationDate <= new Date(); //less than
-    }
-    return true; // Token expiration information not found
+  registerUser(user: RegisterUserDto): Observable<RegisterResponseDto> {
+    return this.http.post(`${this.apiUrl}/api/auth/register/user`, user);
+  }
+
+  logIn(loginObj: AuthRequestDto): Observable<AuthResponseDto> {
+    return this.http.post(`${this.apiUrl}/api/auth/authenticate`, loginObj);
+  }
+
+  setLoggedUser(responseObj: AuthResponseDto): void {
+    localStorage.clear()
+    localStorage.setItem('authToken', responseObj.token || '');
+    localStorage.setItem('role', responseObj.role || '');
+    localStorage.setItem('expirationDate', responseObj.expirationDate || '');
+    localStorage.setItem('firstName', responseObj.firstName || '');
+    localStorage.setItem('lastName', responseObj.lastName || '');
+
+    console.log(responseObj)
   }
 
   isUserLogged(): boolean {
     return localStorage.getItem('authToken') ? true : false;
-  }
-
-  setLoggedUser(responseObj: AuthResponse): void {
-    localStorage.clear()
-    localStorage.setItem('authToken', responseObj.token);
-    localStorage.setItem('role', responseObj.role);
-    localStorage.setItem('expirationDate', responseObj.expirationDate);
-    localStorage.setItem('firstName', responseObj.firstName);
-    localStorage.setItem('lastName', responseObj.lastName);
-
-    console.log(responseObj)
   }
 
   getLoggedUser() {
@@ -55,8 +53,17 @@ export class AuthService {
     return this.loggedUser;
   }
 
-  logOut() {
-    localStorage.clear();
+  isTokenExpired(): boolean {
+    const expirationDateStr = localStorage.getItem('expirationDate');
+
+    if (expirationDateStr) {
+      const expirationDate = new Date(expirationDateStr);
+      return expirationDate <= new Date(); //less than
+    }
+    return true; // Token expiration information not found
   }
 
+  logOut(): void {
+    localStorage.clear();
+  }
 }
