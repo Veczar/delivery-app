@@ -76,7 +76,23 @@ export class RegisterPartnerFormComponent implements OnInit {
           Validators.minLength(3),
           Validators.maxLength(20)
         ]
-      ],address: this.formBuilder.group({
+      ],
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      accountNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d{26}$/) // Format numeru konta XX XXXX XXXX XXXX XXXX XXXX XXXX
+        ]
+      ],
+      contactNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d{9}$/),
+        ]
+      ],
+      address: this.formBuilder.group({
         city: ['', [Validators.required, Validators.minLength(2)]],
         postalCode: [
           '',
@@ -90,10 +106,15 @@ export class RegisterPartnerFormComponent implements OnInit {
     });
   }
   onSubmit(){
+    console.log(JSON.stringify(this.partnerForm.value, null, 2));
     console.log(this.partnerForm)
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.partnerForm.controls;
+  }
+  
+  get addressForm(): FormGroup {
+    return this.partnerForm.get('address') as FormGroup;
   }
 }
