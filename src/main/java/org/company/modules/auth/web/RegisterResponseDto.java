@@ -10,11 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthResponseDto {
-    
-    private String token;
-    private String role;
-    private String expirationDate;
-    private String firstName;
-    private String lastName;
+public class RegisterResponseDto {
+    private String message;
 }

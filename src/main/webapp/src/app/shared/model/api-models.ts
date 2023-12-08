@@ -14,7 +14,6 @@ export interface AuthRequestDto {
 }
 
 export interface AuthResponseDto {
-    error?: string;
     expirationDate?: string;
     firstName?: string;
     lastName?: string;
@@ -123,6 +122,10 @@ export interface RegisterPartnerDto {
     name?: string;
     password?: string;
     telephoneNumber?: string;
+}
+
+export interface RegisterResponseDto {
+    message?: string;
 }
 
 export interface RegisterUserDto {
