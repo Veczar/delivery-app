@@ -36,6 +36,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("api/products/**").hasAuthority("ADMIN")
                                 .requestMatchers("api/categories/**").hasAuthority("ADMIN")
                                 .requestMatchers("api/partners/reviews/**").hasAuthority("ADMIN")
+                                .requestMatchers("api/orders/**").hasAuthority("ADMIN")
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
