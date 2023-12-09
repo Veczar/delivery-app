@@ -2,7 +2,9 @@
   <main class="form-signin w-100 m-auto">
     <button class="btn btn-close exit-btn" [routerLink]="['/']"></button>
 
-    <h1 class="h3 fw-normal text-center">Register</h1>
+    <div class="modal-header pb-4 border-bottom-0 d-flex justify-content-center">
+      <h1 class="fw-bold mb-0 fs-2">Register</h1>
+    </div>
 
     <form
       [formGroup]="userForm"
@@ -96,6 +98,9 @@
     <div class="form-group">
       <button class="w-100 btn btn-lg btn-primary">Submit</button>
     </div>
+
+    <hr class="my-3">
+    <small class="text-muted mt-0 text-center">By clicking Submit, you agree to the terms of use.</small>
 
     <p class="mt-4 mb-2 text-muted text-center">&copy; 2023-2024</p>
     </form>

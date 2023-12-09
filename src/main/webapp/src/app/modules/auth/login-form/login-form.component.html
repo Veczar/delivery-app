@@ -7,19 +7,21 @@
         <i class="bi bi-person"></i>
       </h1>
       
-      <h1 class="h3 mb-3 fw-normal">Sign in</h1>
+      <div class="modal-header pb-4 border-bottom-0 d-flex justify-content-center">
+        <h1 class="fw-bold mb-0 fs-2">Sign in for free</h1>
+      </div>
   
-      <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="loginObj.email" [ngModelOptions]="{standalone: true}">
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control rounded-3" id="floatingInput" [(ngModel)]="loginObj.email" [ngModelOptions]="{standalone: true}">
         <label for="floatingInput">Email address</label>
       </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="" [(ngModel)]="loginObj.password" [ngModelOptions]="{standalone: true}">
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control rounded-3" id="floatingPassword" [(ngModel)]="loginObj.password" [ngModelOptions]="{standalone: true}">
         <label for="floatingPassword">Password</label>
       </div> 
 
-      <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="onLogin()">Sign in</button>
-      
+      <button class="w-100 btn btn-lg btn-primary mb-2" type="submit" (click)="onLogin()">Sign in</button>
+
       <p class="mt-4 mb-2 text-muted">&copy; 2023-2024</p>
     </form>
   </main>
