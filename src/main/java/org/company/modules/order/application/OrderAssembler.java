@@ -38,7 +38,6 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
     order.setTotalPrice(orderDto.getTotalPrice());
     order.setTip(orderDto.getTip());
     order.setCreationDate(orderDto.getCreationDate());
-    order.setId(orderDto.getId());
     order.setCompletionDate(orderDto.getCompletionDate());
     }
     private void updateAddresses(OrderDto orderDto, Order order) {
