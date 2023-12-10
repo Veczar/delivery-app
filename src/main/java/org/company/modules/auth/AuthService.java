@@ -1,9 +1,12 @@
 package org.company.modules.auth;
 
 import lombok.RequiredArgsConstructor;
+import org.company.modules.address.application.AddressAssembler;
 import org.company.modules.address.domain.Address;
 import org.company.modules.address.domain.AddressRepository;
 import org.company.modules.auth.web.*;
+import org.company.modules.category.domain.Category;
+import org.company.modules.category.domain.CategoryRepository;
 import org.company.modules.delivery_man.domain.DeliveryMan;
 import org.company.modules.delivery_man.domain.DeliveryManRepository;
 import org.company.modules.partner.domain.Partner;
@@ -18,6 +21,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Set;
+
 
 
 @Service
@@ -29,6 +34,10 @@ public class AuthService {
     private final DeliveryManRepository deliveryManRepository;
     private final RoleRepository roleRepository;
     private final AddressRepository addressRepository;
+
+    private final AddressAssembler addressAssembler;
+
+    private final CategoryRepository categoryRepository;
     
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
@@ -100,8 +109,16 @@ public class AuthService {
             return RegisterResponseDto.builder().message("email not available").build();
         }
         Role role = roleRepository.findById(2L).orElse(null);
-        Address address = addressRepository.findById(partnerDto.getAddress().getId()).orElse(null);
-        
+
+        Address address = new Address();
+        addressAssembler.toEntity(partnerDto.getAddress(), address);
+        addressRepository.save(address);
+
+        Category category = categoryRepository.findByName(partnerDto.getCategory()).orElse(null);
+
+//       if(address == null) {
+//           return RegisterResponseDto.builder().message("address not available").build();
+//       }
         // create user
         User user = User.builder()
                 .firstName(partnerDto.getFirstName())
@@ -121,6 +138,7 @@ public class AuthService {
                 .contactNumber(partnerDto.getContactNumber())
                 .address(address)
                 .owner(user)
+                .categories(Set.of(category))
                 .build();
         
         partnerRepository.save(partner);

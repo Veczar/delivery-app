@@ -122,6 +122,7 @@ export interface RegisterPartnerDto {
     name?: string;
     password?: string;
     telephoneNumber?: string;
+    category?:string;
 }
 
 export interface RegisterResponseDto {

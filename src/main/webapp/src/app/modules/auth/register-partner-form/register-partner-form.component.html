@@ -108,12 +108,15 @@
           name="email"
           formControlName="email"
           class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
-          [ngClass]="{ 'is-valid': !f['email'].errors }"
+          [ngClass]="{ 'is-invalid': (submitted && f['email'].errors) || wrongEmail}"
+          [ngClass]="{ 'is-valid': submitted && !f['email'].errors }"
         />
         <div class="invalid-feedback" *ngIf="submitted && f['email'].errors" class="invalid-feedback">
           <p *ngIf="f['email'].errors">Provide valid email</p>
         </div> 
+        <div class="invalid-feedback" *ngIf="wrongEmail == true && !f['email'].errors">
+          <p>Email alredy taken</p>
+        </div>
       </div>
   
       
@@ -221,6 +224,22 @@
         </div>
       </div>
 
+
+
+      <div class="form-group col-md-12">
+        <label for="category" class="form-label"> Category</label>
+          <select class="form-select input" aria-label=".form-select-sm example"
+            formControlName="category">
+
+            <option value="Sklep" >Sklep (elektronika,kosmetyki,prezenty)</option>
+            <option value="Restauracja">Restauracja</option>
+            <option value="Kwiaciarnia">Kwiaciarnia</option>
+            <option value="Apteka">Apteka</option>
+            <option value="Sklep Spożywczy">Sklep Spożywczy</option>
+            <option value="Kawiarnia">Kawiarnia</option>
+
+          </select>
+      </div>
 
       <h3 class="h3 fw-normal">Address Information</h3>
 
