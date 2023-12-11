@@ -8,7 +8,7 @@ export const authGuard = () => {
     return true;
   }
   else {
-    router.navigate(['']);
+    router.navigate(['/']);
     return false
   }
 }
