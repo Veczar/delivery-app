@@ -47,6 +47,7 @@ export class RegisterPartnerFormComponent implements OnInit {
   });
   submitted = false;
   wrongEmail: boolean = false;
+  honePrefixes = ['+48', '+355', '+376', '+43', '+375', '+32', /* ... other prefixes ... */];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -89,6 +90,8 @@ export class RegisterPartnerFormComponent implements OnInit {
           Validators.pattern(/^\d{26}$/) // Format numeru konta XX XXXX XXXX XXXX XXXX XXXX XXXX
         ]
       ],
+      numpref: ['', Validators.required],
+      conpref: ['', Validators.required],
       contactNumber: [
         '',
         [
@@ -117,6 +120,8 @@ export class RegisterPartnerFormComponent implements OnInit {
     console.log(JSON.stringify(this.partnerForm.value, null, 2));
     console.log(this.partnerForm)
 
+    
+
     Object.keys(this.partnerForm.controls).forEach(key => {
       const control = this.partnerForm.get(key);
       if (control) {
@@ -129,13 +134,27 @@ export class RegisterPartnerFormComponent implements OnInit {
       return;
     }
 
+    const combinedContactNumber = `${this.partnerForm.value.conpref} ${this.partnerForm.value.contactNumber}`;
+    const combinedTelephoneNumber = `${this.partnerForm.value.numpref} ${this.partnerForm.value.telephoneNumber}`;
+  
+    // Update the form values with combined numbers
+    this.partnerForm.patchValue({
+      contactNumber: combinedContactNumber,
+      telephoneNumber: combinedTelephoneNumber,
+    });
+
+    console.log(JSON.stringify(this.partnerForm.value, null, 2));
+    console.log(this.partnerForm)
+    
+
+
     this.authService.registerParnter(this.partnerForm.value as RegisterPartnerDto).subscribe(
       (response: RegisterResponseDto) => {
         console.log('response:', response);
 
         if (response.message == 'success') {
           console.log('succesfully registered a user');
-          this.router.navigate(['']);
+          //this.router.navigate(['']);
         }
         else {
           this.wrongEmail = true;
