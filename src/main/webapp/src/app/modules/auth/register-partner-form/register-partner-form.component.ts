@@ -110,6 +110,7 @@ export class RegisterPartnerFormComponent implements OnInit {
       }),
     });
   }
+
   onSubmit(){
     this.submitted = true;
     this.wrongEmail = false;

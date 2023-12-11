@@ -50,8 +50,8 @@
       <div class="form-group col-md-12">
         <label for="tel" class="form-label">Telephone number</label>
         <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <select class="form-select" aria-label=".form-select-sm example" >
+          <div class="input-group-prepend ">
+            <select class="form-select " aria-label=".form-select-sm example" >
               <option value="+48" selected>PL +48 </option>
               <option value="+355">AL +355 </option>
               <option value="+376">AD +376 </option>
@@ -85,6 +85,10 @@
               <option value="+52">MX +52 </option>
             </select>
           </div>
+
+          <div class="input-group-spacer"></div>
+          
+          <div class="flex-grow-1">
             <input
               type="tel"
               name="telephone"
@@ -93,6 +97,7 @@
               [ngClass]="{ 'is-invalid': submitted && f['telephoneNumber'].errors }"
               [ngClass]="{ 'is-valid': !f['telephoneNumber'].errors }"
             />
+          </div>
           <div class="invalid-feedback" *ngIf="submitted && f['telephoneNumber'].errors" class="invalid-feedback">
             <p *ngIf="f['telephoneNumber'].errors">Provide valid telephone Number</p>
           </div>
@@ -174,7 +179,7 @@
         <label for="name" class="form-label"> Contact Number</label>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <select class="form-select" aria-label=".form-select-sm example" >
+            <select class="form-select" formControlName="numpref" aria-label=".form-select-sm example"  >
               <option value="+48" selected>PL +48 </option>
               <option value="+355">AL +355 </option>
               <option value="+376">AD +376 </option>
@@ -208,16 +213,22 @@
               <option value="+52">MX +52 </option>
             </select>
           </div>
-          <input 
-            type="text" 
-            class="form-control" 
-            formControlName="contactNumber"
-            aria-label="Username" 
-            aria-describedby="basic-addon1"
-            [ngClass]="{ 'is-invalid': submitted && f['contactNumber'].errors }"
-            [ngClass]="{ 'is-valid': !f['contactNumber'].errors }"
-            />
 
+
+          <div class="input-group-spacer"></div>
+
+
+          <div class="flex-grow-1">
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="contactNumber"
+              aria-label="Username" 
+              aria-describedby="basic-addon1"
+              [ngClass]="{ 'is-invalid': submitted && f['contactNumber'].errors }"
+              [ngClass]="{ 'is-valid': !f['contactNumber'].errors }"
+              />
+          </div>
           <div class="invalid-feedback" *ngIf="submitted && f['contactNumber'].errors" class="invalid-feedback">
             <p *ngIf="f['contactNumber'].errors">Provide valid telephone Number</p>
           </div>
