@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.company.modules.address.domain.Address;
+import org.company.modules.delivery_man.domain.DeliveryMan;
+import org.company.modules.partner.domain.Partner;
 import org.company.modules.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -21,19 +23,26 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "address_start_id")
     private Address addressStart;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "address_end_id")
     private Address addressEnd;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private User customer;
+    @ManyToOne
+    @JoinColumn(name = "partner_id")
+    private Partner partner;
+    @ManyToOne
+    @JoinColumn(name = "delivery_man_id")
+    private DeliveryMan deliveryMan;
     private Double totalPrice;
     private Double tip;
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date completionDate;
+    private Status status;
 }
