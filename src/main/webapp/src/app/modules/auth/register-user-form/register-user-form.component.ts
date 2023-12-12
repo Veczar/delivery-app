@@ -6,8 +6,6 @@ import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 
 
-
-
 @Component({
   selector: 'app-register-user-form',
   templateUrl: './register-user-form.component.html',
@@ -29,7 +27,6 @@ export class RegisterUserFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {

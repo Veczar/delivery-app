@@ -40,7 +40,7 @@ public class JwtService {
                 .setIssuedAt(new Date(System.currentTimeMillis()))
 //                .setExpiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 7)) // week
                 .setExpiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 7)) // day
-//                .setExpiration(new Date(System.currentTimeMillis() + 1000L * 10))
+//                .setExpiration(new Date(System.currentTimeMillis() + 1000L * 10)) // 10s
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

@@ -2,10 +2,10 @@
 /* eslint-disable */
 
 export interface AddressDto {
-    city?: string;
     id?: number;
-    postalCode?: string;
+    city?: string;
     street?: string;
+    postalCode?: string;
 }
 
 export interface AuthRequestDto {
@@ -14,11 +14,11 @@ export interface AuthRequestDto {
 }
 
 export interface AuthResponseDto {
+    token?: string;
     expirationDate?: string;
+    role?: string;
     firstName?: string;
     lastName?: string;
-    role?: string;
-    token?: string;
 }
 
 export interface AutoCloseable {
@@ -33,9 +33,9 @@ export interface BaseStream<T, S> extends AutoCloseable {
 }
 
 export interface CategoryDto {
-    description?: string;
     id?: number;
     name?: string;
+    description?: string;
 }
 
 export interface DeliveryManDto {
@@ -59,69 +59,69 @@ export interface Order extends Serializable {
 
 export interface PageRequestDto {
     page?: number;
-    pageRequest?: Pageable;
     size?: number;
     sortBy?: string;
     sortDirection?: Direction;
+    pageRequest?: Pageable;
 }
 
 export interface Pageable {
-    offset?: number;
+    sort?: Sort;
     pageNumber?: number;
     pageSize?: number;
+    offset?: number;
     paged?: boolean;
-    sort?: Sort;
     unpaged?: boolean;
 }
 
 export interface PartnerDto {
-    accountNumber?: string;
-    address?: AddressDto;
-    categories?: CategoryDto[];
-    contactNumber?: string;
     id?: number;
     name?: string;
+    accountNumber?: string;
+    contactNumber?: string;
     owner?: UserDto;
+    address?: AddressDto;
+    categories?: CategoryDto[];
 }
 
 export interface PartnerReviewDto {
+    id?: number;
     date?: Date;
     description?: string;
     grade_in_stars?: number;
-    id?: number;
     partner?: PartnerDto;
     reviewer?: UserDto;
 }
 
 export interface ProductDto {
-    categories?: CategoryDto[];
-    description?: string;
     id?: number;
     name?: string;
-    onSale?: boolean;
+    description?: string;
     photoPath?: string;
     price?: number;
+    onSale?: boolean;
+    categories?: CategoryDto[];
 }
 
 export interface RegisterDeliveryManDto {
-    email?: string;
     firstName?: string;
     lastName?: string;
-    password?: string;
     telephoneNumber?: string;
+    email?: string;
+    password?: string;
     workingArea?: string;
 }
 
 export interface RegisterPartnerDto {
-    accountNumber?: string;
-    address?: AddressDto;
-    contactNumber?: string;
-    email?: string;
     firstName?: string;
     lastName?: string;
-    name?: string;
-    password?: string;
     telephoneNumber?: string;
+    email?: string;
+    password?: string;
+    name?: string;
+    accountNumber?: string;
+    contactNumber?: string;
+    address?: AddressDto;
 }
 
 export interface RegisterResponseDto {
@@ -129,11 +129,11 @@ export interface RegisterResponseDto {
 }
 
 export interface RegisterUserDto {
-    email?: string;
     firstName?: string;
     lastName?: string;
-    password?: string;
     telephoneNumber?: string;
+    email?: string;
+    password?: string;
 }
 
 export interface RoleDto {
@@ -170,17 +170,17 @@ export interface UserCriteria extends BaseCriteria {
 }
 
 export interface UserDto {
-    email?: string;
-    firstName?: string;
     id?: number;
+    firstName?: string;
     lastName?: string;
-    role?: RoleDto;
     telephoneNumber?: string;
+    email?: string;
+    role?: RoleDto;
 }
 
 export interface UserReadDto {
-    firstName?: string;
     id?: number;
+    firstName?: string;
     lastName?: string;
 }
 
