@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
-public class GenericController<Dto, Service extends IService<Dto>> {
+public class GenericController<Dto, EntityKey, Service extends IService<Dto, EntityKey>> implements  IController{
     
     protected final Service service;
     @GetMapping
@@ -17,22 +16,22 @@ public class GenericController<Dto, Service extends IService<Dto>> {
     }
 
     @GetMapping("/{id}")
-    public Dto getItem(@PathVariable Long id) {
+    public Dto getItem(@PathVariable EntityKey id) {
         return service.getItem(id);
     }
 
     @DeleteMapping("/{id}")
-    public Dto removeItem(@PathVariable Long id) {
+    public Dto removeItem(@PathVariable EntityKey id) {
         return service.removeItem(id);
     }
 
     @PostMapping
-    public Dto createUser(@RequestBody Dto user) {
-        return service.saveItem(user);
+    public Dto createItem(@RequestBody Dto dto) {
+        return service.saveItem(dto);
     }
 
     @PutMapping("/{id}")
-    public Dto updateUser(@PathVariable Long id, @RequestBody Dto user) {
+    public Dto updateItem(@PathVariable EntityKey id, @RequestBody Dto user) {
         return service.updateItem(id, user);
     }
 
