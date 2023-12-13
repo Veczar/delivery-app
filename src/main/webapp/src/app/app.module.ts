@@ -12,6 +12,7 @@ import { AuthInterceptor } from './modules/auth/auth-interceptor.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminDashboardModule } from './modules/admin-dashboard/admin-dashboard.module';
 
 
 
@@ -27,10 +28,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    BrowserAnimationsModule,
     
     UserModule,
     AuthModule,
-    BrowserAnimationsModule,
+    AdminDashboardModule
   ],
   providers: [
     {

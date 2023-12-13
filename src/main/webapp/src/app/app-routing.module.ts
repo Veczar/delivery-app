@@ -4,7 +4,8 @@ import { authGuard } from './modules/auth/auth-guard';
 import { LoginFormComponent } from './modules/auth/login-form/login-form.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { RegisterUserFormComponent } from './modules/auth/register-user-form/register-user-form.component';
-import { AdminDashboardComponent } from './modules/user/admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './modules/admin-dashboard/admin-dashboard/admin-dashboard.component';
+import { UserTableComponent } from './modules/admin-dashboard/admin-dashboard/user-table/user-table.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,11 @@ const routes: Routes = [
   {
     path: 'admin/dashboard', 
     component: AdminDashboardComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    children: [
+      { path: 'users', component: UserTableComponent }, // Example child route
+      // Add more child routes as needed
+    ]
   }
 ];
 
