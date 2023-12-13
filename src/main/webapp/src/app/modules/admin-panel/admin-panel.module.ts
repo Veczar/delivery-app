@@ -7,13 +7,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { UserTableComponent } from './admin-dashboard/user-table/user-table.component';
+import { UserTableComponent } from './user-table/user-table.component';
+import { AdminPanelComponent } from './admin-panel.component';
 
 
 @NgModule({
   declarations: [
+    AdminPanelComponent,
     AdminDashboardComponent,
-    UserTableComponent
+    UserTableComponent,
   ],
   imports: [
     CommonModule,
@@ -25,4 +27,4 @@ import { UserTableComponent } from './admin-dashboard/user-table/user-table.comp
     RouterModule,
   ]
 })
-export class AdminDashboardModule { }
+export class AdminPanelModule { }

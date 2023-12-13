@@ -12,14 +12,14 @@ import { AuthInterceptor } from './modules/auth/auth-interceptor.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdminDashboardModule } from './modules/admin-dashboard/admin-dashboard.module';
+import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FrontPageComponent
+    FrontPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +32,7 @@ import { AdminDashboardModule } from './modules/admin-dashboard/admin-dashboard.
     
     UserModule,
     AuthModule,
-    AdminDashboardModule
+    AdminPanelModule
   ],
   providers: [
     {

@@ -1,5 +1,6 @@
 import { Component  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { retry } from 'rxjs';
 
 
 @Component({
@@ -8,10 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./admin-dashboard.component.scss'],
 })
 export class AdminDashboardComponent  {
-  constructor(private router: Router, private route: ActivatedRoute) {}
 
-  navigateToSameComponent(): void {
-    this.router.navigate([this.route.snapshot.url]);
-  }
+  
+
 }
 //https://v16.material.angular.io/components/table/examples

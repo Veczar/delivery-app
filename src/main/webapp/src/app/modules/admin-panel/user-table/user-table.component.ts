@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-table',
@@ -23,8 +24,11 @@ export class UserTableComponent {
   sort!: MatSort;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private route: ActivatedRoute
   ) {
+    console.log("users?: " + this.route.snapshot.url);
+
     this.getUsers2().subscribe(
       (users: UserDto[]) => {
         this.dataSource = new MatTableDataSource<UserDto>(users);
