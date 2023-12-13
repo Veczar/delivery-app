@@ -1,8 +1,8 @@
 <body class="waves-background">
-    <main class="form-signin w-100 m-auto">
+    <main class="form-signin w-100 m-auto customForm">
       <button class="btn btn-close exit-btn" [routerLink]="['/']"></button>
   
-      <h1 class="h3 fw-normal">Register</h1>
+      <h1 class="h3 fw-normal"><b>Partner Registration</b></h1>
   
       <form
       [formGroup]="partnerForm"
@@ -52,37 +52,7 @@
         <div class="input-group mb-3">
           <div class="input-group-prepend ">
             <select class="form-select " formControlName="numpref" aria-label=".form-select-sm example" >
-              <option value="+48" selected>PL +48 </option>
-              <option value="+355">AL +355 </option>
-              <option value="+376">AD +376 </option>
-              <option value="+43">AT +43 </option>
-              <option value="+375">BY +375 </option>
-              <option value="+32">BE +32 </option>
-              <option value="+387">BA +387 </option>
-              <option value="+359">BG +359</option>
-              <option value="+385">HR +385 </option>
-              <option value="+357">CY +357 </option>
-              <option value="+420">CZ +420 </option>
-              <option value="+45">DK +45 </option>
-              <option value="+372">EE +372 </option>
-              <option value="+358">FI +358 </option>
-              <option value="+33">FR +33 </option>
-              <option value="+49">DE +49 </option>
-              <option value="+30">GR +30 </option>
-              <option value="+36">HU +36 </option>
-              <option value="+354">IS +354 </option>
-              <option value="+353">IE +353 </option>
-              <option value="+39">IT +39 </option>
-              <option value="+383">XK +383 </option>
-              <option value="+371">LV +371 </option>
-              <option value="+423">LI +423 </option>
-              <option value="+370">LT +370 </option>
-              <option value="+352">LU +352 </option>
-              <option value="+356">MT +356 </option>
-              <!-- Ameryka -->
-              <option value="+1">US +1 </option>
-              <option value="+1">CA +1 </option>
-              <option value="+52">MX +52 </option>
+              <option *ngFor="let prefix of phonePrefixes" [value]="prefix">{{prefix}}</option>
             </select>
           </div>
 
@@ -179,38 +149,8 @@
         <label for="name" class="form-label"> Contact Number</label>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <select class="form-select" formControlName="conpref" aria-label=".form-select-sm example"  >
-              <option value="+48" selected>PL +48 </option>
-              <option value="+355">AL +355 </option>
-              <option value="+376">AD +376 </option>
-              <option value="+43">AT +43 </option>
-              <option value="+375">BY +375 </option>
-              <option value="+32">BE +32 </option>
-              <option value="+387">BA +387 </option>
-              <option value="+359">BG +359</option>
-              <option value="+385">HR +385 </option>
-              <option value="+357">CY +357 </option>
-              <option value="+420">CZ +420 </option>
-              <option value="+45">DK +45 </option>
-              <option value="+372">EE +372 </option>
-              <option value="+358">FI +358 </option>
-              <option value="+33">FR +33 </option>
-              <option value="+49">DE +49 </option>
-              <option value="+30">GR +30 </option>
-              <option value="+36">HU +36 </option>
-              <option value="+354">IS +354 </option>
-              <option value="+353">IE +353 </option>
-              <option value="+39">IT +39 </option>
-              <option value="+383">XK +383 </option>
-              <option value="+371">LV +371 </option>
-              <option value="+423">LI +423 </option>
-              <option value="+370">LT +370 </option>
-              <option value="+352">LU +352 </option>
-              <option value="+356">MT +356 </option>
-              <!-- Ameryka -->
-              <option value="+1">US +1 </option>
-              <option value="+1">CA +1 </option>
-              <option value="+52">MX +52 </option>
+            <select class="form-select"  formControlName="conpref" aria-label=".form-select-sm example"  >
+              <option *ngFor="let prefix of phonePrefixes" [value]="prefix">{{prefix}}</option>
             </select>
           </div>
 

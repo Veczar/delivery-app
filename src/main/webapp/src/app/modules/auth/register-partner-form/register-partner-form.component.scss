@@ -1,8 +1,10 @@
 
 html,
 body {
+  display: flex;
   height: 100vh;
   // height: 100%;
+  
 }
 
 body {
@@ -16,7 +18,10 @@ body {
 main {
   background-color: whitesmoke;
   border-radius: 20px;
-  position: relative;
+  padding: 35px;
+  margin-top: 10vh; // Adjust the margin-top as needed
+  margin-bottom: 10vh; // Adjust the margin-bottom as needed
+  
 }
 
 .input-group-spacer {
@@ -27,10 +32,15 @@ main {
   max-width: 450px;
   padding: 35px;
   background-attachment: fixed;
+  // margin-top: 10vh !important;
+  // margin-bottom: 10vh !important;
 }
 
 .form-signin .form-floating:focus-within {
   z-index: 2;
+}
+p{
+  margin-bottom: 0rem;
 }
 
 // .form-signin input[type="email"] {

@@ -47,13 +47,15 @@ export class RegisterPartnerFormComponent implements OnInit {
   });
   submitted = false;
   wrongEmail: boolean = false;
-  honePrefixes = ['+48', '+355', '+376', '+43', '+375', '+32', /* ... other prefixes ... */];
+  phonePrefixes = ['+48 PL','+355 AL','+376 AD','+43 AT','+375 BY','+32 BE','+387 BA','+359 BG','+385 HR','+357 CY', 
+  '+420 CZ','+45 DK','+372 EE','+358 FI','+33 FR','+49 DE','+30 GR','+36 HU','+354 IS','+353 IE','+39 IT','+383 XK', 
+  '+371 LV','+423 LI','+370 LT','+352 LU','+356 MT'];
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {} 
 
   ngOnInit(): void {
     this.partnerForm = this.formBuilder.group({
@@ -90,8 +92,8 @@ export class RegisterPartnerFormComponent implements OnInit {
           Validators.pattern(/^\d{26}$/) // Format numeru konta XX XXXX XXXX XXXX XXXX XXXX XXXX
         ]
       ],
-      numpref: ['', Validators.required],
-      conpref: ['', Validators.required],
+      numpref: ['+48 PL', Validators.required],
+      conpref: ['+48 PL', Validators.required],
       contactNumber: [
         '',
         [
@@ -114,13 +116,19 @@ export class RegisterPartnerFormComponent implements OnInit {
     });
   }
 
+  removeAfterSpace(input: string): string {
+    const indexOfSpace = input.indexOf(' ');
+  
+    if (indexOfSpace !== -1) {
+      return input.substring(0, indexOfSpace);
+    }
+  
+    return input;
+  }
+
   onSubmit(){
     this.submitted = true;
     this.wrongEmail = false;
-    console.log(JSON.stringify(this.partnerForm.value, null, 2));
-    console.log(this.partnerForm)
-
-    
 
     Object.keys(this.partnerForm.controls).forEach(key => {
       const control = this.partnerForm.get(key);
@@ -129,13 +137,8 @@ export class RegisterPartnerFormComponent implements OnInit {
       }
     });
 
-    if (this.partnerForm.invalid) {
-      console.log('wrong form')
-      return;
-    }
-
-    const combinedContactNumber = `${this.partnerForm.value.conpref} ${this.partnerForm.value.contactNumber}`;
-    const combinedTelephoneNumber = `${this.partnerForm.value.numpref} ${this.partnerForm.value.telephoneNumber}`;
+    const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
+    const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
   
     // Update the form values with combined numbers
     this.partnerForm.patchValue({
@@ -146,7 +149,10 @@ export class RegisterPartnerFormComponent implements OnInit {
     console.log(JSON.stringify(this.partnerForm.value, null, 2));
     console.log(this.partnerForm)
     
-
+    if (this.partnerForm.invalid) {
+      console.log('wrong form')
+      return;
+    }
 
     this.authService.registerParnter(this.partnerForm.value as RegisterPartnerDto).subscribe(
       (response: RegisterResponseDto) => {
