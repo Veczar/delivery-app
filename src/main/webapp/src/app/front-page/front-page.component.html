@@ -23,8 +23,8 @@
               <button class="nav-link active" (click)="open(demoModal)">Adblock</button>
             </li>
             <li *ngIf="getRole() === 'ADMIN'">
-              <button class="nav-link active color" [routerLink]="['/admin/dashboard']"><i
-                  class="bi bi-speedometer2"></i> Dashboard</button>
+              <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
+                <i class="bi bi-speedometer2"></i> Dashboard</button>
             </li>
           </ul>
           <!-- <form class="middle-search" role="search">
@@ -42,8 +42,9 @@
             <button class="btn btn-outline-success" type="submit" [routerLink]="['/auth']">Sign in</button>
           </div>
 
-          <div *ngIf="isUserLoggedIn()" class="nav-item text-white me-2 badge text-bg-primary">{{getRole() !== 'USER' ?
-            getRole() : ''}}</div>
+          <div *ngIf="isUserLoggedIn() && getRole() !== 'USER'" class="nav-item text-white me-2 badge text-bg-primary">
+            {{ getRole() }}
+          </div>
           <div *ngIf="isUserLoggedIn()">
             <div class="dropdown-center">
               <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"

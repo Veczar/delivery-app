@@ -1,6 +1,4 @@
 import { Component  } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { retry } from 'rxjs';
 
 
 @Component({
@@ -10,7 +8,4 @@ import { retry } from 'rxjs';
 })
 export class AdminDashboardComponent  {
 
-  
-
 }
-//https://v16.material.angular.io/components/table/examples

@@ -9,6 +9,5 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AdminPanelComponent {
 
   constructor(private router: Router) {
-    this.router.navigate(['admin/dashboard']);
   }
 }

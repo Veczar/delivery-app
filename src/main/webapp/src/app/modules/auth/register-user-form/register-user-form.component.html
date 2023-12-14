@@ -51,7 +51,7 @@
         formControlName="telephoneNumber"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f['telephoneNumber'].errors }"
-        [ngClass]="{ 'is-valid': submitted && !f['telephoneNumber'].errors }"
+        [ngClass]="{ 'is-valid':  !f['telephoneNumber'].errors }"
       />
       <div class="invalid-feedback" *ngIf="submitted && f['telephoneNumber'].errors">
         <p>Provide valid telephone Number</p>
