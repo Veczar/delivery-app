@@ -2,7 +2,9 @@
   <main class="form-signin w-100 m-auto">
     <button class="btn btn-close exit-btn" [routerLink]="['/']"></button>
 
-    <h1 class="h3 fw-normal text-center">Register</h1>
+    <div class="modal-header pb-4 border-bottom-0 d-flex justify-content-center">
+      <h1 class="fw-bold mb-0 fs-2">Register</h1>
+    </div>
 
     <form
       [formGroup]="userForm"
@@ -66,17 +68,13 @@
         [ngClass]="{ 'is-invalid': (submitted && f['email'].errors) || wrongEmail}"
         [ngClass]="{ 'is-valid': submitted && !f['email'].errors }"
       />
-      <div class="invalid-feedback" *ngIf="submitted && f['email'].errors">
+      <div class="invalid-feedback" *ngIf="f['email'].errors">
         <p>Provide valid email</p>
       </div>
       <div class="invalid-feedback" *ngIf="wrongEmail == true && !f['email'].errors">
         <p>Email alredy taken</p>
       </div>
     </div>
-<!-- 
-    <div class="form-group col-md-12" *ngIf="wrongEmail == true" >
-      <p>Email alredy taken</p>
-    </div>  -->
 
     <div class="form-group col-md-12">
       <label for="password" class="form-label">Password</label>
@@ -96,6 +94,9 @@
     <div class="form-group">
       <button class="w-100 btn btn-lg btn-primary">Submit</button>
     </div>
+
+    <hr class="my-3">
+    <small class="text-muted mt-0 text-center">By clicking Submit, you agree to the terms of use.</small>
 
     <p class="mt-4 mb-2 text-muted text-center">&copy; 2023-2024</p>
     </form>

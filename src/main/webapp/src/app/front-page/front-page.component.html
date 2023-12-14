@@ -1,168 +1,261 @@
-
 <body>
-    <header data-bs-theme="dark">
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Glovo Eats</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse " id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Contact</a>
-              </li>
-              <li class="nav-item">
-                <button class="nav-link active" (click)="open(demoModal)">Adblock</button>
-              </li>
-            </ul>
-            <!-- <form class="middle-search" role="search">
-              <div class="input-group"> 
+  <header data-bs-theme="dark">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container-fluid">
+
+        <a class="navbar-brand" [routerLink]="['/']">Glovo Eats</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navbarCollapse">
+
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" [routerLink]="['/']" (click)="getUsers()">Contact</a>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link active" (click)="open(demoModal)">Adblock</button>
+            </li>
+            <li *ngIf="getRole() === 'ADMIN'">
+              <button class="nav-link active color" [routerLink]="['/admin/dashboard']"><i
+                  class="bi bi-speedometer2"></i> Dashboard</button>
+            </li>
+          </ul>
+          <!-- <form class="middle-search" role="search">
+              <div class="input-group">
                 <span class="input-group-text"><span class="material-icons">search</span></span>
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               </div>
               <button class="btn btn-outline-secondary" (click)="open(demoModal)">search</button>
             </form> -->
 
-            <!-- <div *ngIf="!isUserLoggedIn()">
-              <button class="btn btn-outline-primary me-2" type="submit">Register</button>
-              <button class="btn btn-outline-success" type="submit" (click)="navigateToAuth()">Sign in</button>
-            </div>
-            <div *ngIf="isUserLoggedIn()">
-              <p>Welcome, {{ this.authService.getLoggedUser().firstName }} {{ this.authService.getLoggedUser().lastName }}!</p>
-            </div> -->
-            <!-- auth.component.html -->
-            <div *ngIf="!(isUserLoggedIn())">
-              <button class="btn btn-outline-primary me-2" type="submit" [routerLink]="['/register/user']">Register</button>
-              <button class="btn btn-outline-success" type="submit" [routerLink]="['/auth']">Sign in</button>
-            </div>
-            
-            <div *ngIf="isUserLoggedIn()" class="nav-item text-white me-2 badge text-bg-primary">{{getRole() !== 'USER' ? getRole() : ''}}</div>
-            <div *ngIf="isUserLoggedIn()">
-              <div class="dropdown-center">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark dropdown-position">
-                  <li><a class="dropdown-item" href="#">Settings</a></li>
-                  <li><a class="dropdown-item" href="#" (click)="logOut()">Log Out</a></li>
-                </ul>
-              </div>
-            </div>
+          <!-- auth.component.html -->
+          <div *ngIf="!(isUserLoggedIn())">
+            <button class="btn btn-outline-primary me-2" type="submit"
+              [routerLink]="['/register/user']">Register</button>
+            <button class="btn btn-outline-success" type="submit" [routerLink]="['/auth']">Sign in</button>
+          </div>
 
-            <!-- <button class="btn btn-outline-primary me-2" type="submit">Register</button>
-            <button class="btn btn-outline-success" type="submit" (click)="navigateToAuth()">Sign in</button> -->
-          </div>
-        </div>
-      </nav>
-    </header>
-  
-    <main>
-      <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel" data-bs-interval="60000" data-bs-pause="hover">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-            aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" calss="btn-outline-dark"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
-            </svg>
-            <div class="container">
-              <div class="carousel-caption">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0RHhiQ6hGLKgjE7eqNdXzh?utm_source=generator" width="70%" height="352" frameBorder="" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-              </div>
+          <div *ngIf="isUserLoggedIn()" class="nav-item text-white me-2 badge text-bg-primary">{{getRole() !== 'USER' ?
+            getRole() : ''}}</div>
+          <div *ngIf="isUserLoggedIn()">
+            <div class="dropdown-center">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-position">
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#" (click)="logOut()">Log Out</a></li>
+              </ul>
             </div>
           </div>
-          <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-            </svg>
-            <div class="container">
-              <div class="carousel-caption">
-                <h1>Another example headline.</h1>
-                <p>Some representative placeholder content for the second slide of the carousel.</p>
-                <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-            </svg>
-            <div class="container">
-              <div class="carousel-caption text-end">
-                <h1>One more for good measure.</h1>
-                <p>Some representative placeholder content for the third slide of this carousel.</p>
-                <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-              </div>
-            </div>
-          </div>
+
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-  
-  
-      <!-- Marketing messaging and featurettes
+    </nav>
+  </header>
+
+  <main>
+    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel" data-bs-interval="60000"
+      data-bs-pause="hover">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+          aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"
+          calss="btn-outline-dark"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+          </svg>
+          <div class="container">
+            <div class="carousel-caption">
+              <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/playlist/0RHhiQ6hGLKgjE7eqNdXzh?utm_source=generator" width="70%"
+                height="352" frameBorder="" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+          </svg>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Another example headline.</h1>
+              <p>Some representative placeholder content for the second slide of the carousel.</p>
+              <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+          </svg>
+          <div class="container">
+            <div class="carousel-caption text-end">
+              <h1>One more for good measure.</h1>
+              <p>Some representative placeholder content for the third slide of this carousel.</p>
+              <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+
+    <!-- Marketing messaging and featurettes
   ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
-  
-      <div class="container marketing">
-  
-          <div class="row align-items-center" >
-              <div class="col text-center">
-                  <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <div class="row align-items-center">
+        <div class="col text-center">
+          <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
                     role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <title>Placeholder</title>
                     <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
                 </svg> -->
-                <img src="../../assets/sunglasses-emoji2.png" height="200">
+          <img src="../../assets/sunglasses-emoji2.png" height="200">
+          <h2 class="fw-normal">Get paid as a courier</h2>
+          <p>Some representative placeholder content for the three columns of text below the carousel. This is the first
+            column.</p>
+          <p><a class="btn btn-outline-primary" href="#">Apply now</a></p>
+        </div>
 
-            <h2 class="fw-normal">Get paid as a courier</h2>
-            <p>Some representative placeholder content for the three columns of text below the carousel. This is the first
-              column.</p>
-            <p><a class="btn btn-outline-primary"  >Apply now</a></p>
-          </div>
-
-          <div class="col text-center px-2">
-            <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
+        <div class="col text-center px-2">
+          <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
               role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
               <title>Placeholder</title>
               <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
             </svg> -->
-            <img src="../../assets/sunglasses-emoji2.png" height="200" >
+          <img src="../../assets/sunglasses-emoji2.png" height="200">
 
+          <h2 class="fw-normal">Become partner</h2>
+          <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.
+          </p>
+          <p><a class="btn btn-outline-primary" href="#">Apply now</a></p>
+        </div>
+      </div>
+
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading fw-normal lh-1">First featurette heading.
+            <span class="text-body-secondary">It’ll blow your mind.</span>
+          </h2>
+          <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose
+            here.</p>
+        </div>
+        <div class="col-md-5">
+          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+            height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+            preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="var(--bs-secondary-bg)" /><text x="50%" y="50%"
+              fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
+          </svg>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good.
+            <span class="text-body-secondary">See for yourself.</span>
+          </h2>
+          <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this
+            layout would work with some actual real-world content in place.</p>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+            height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+            preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="var(--bs-secondary-bg)" /><text x="50%" y="50%"
+              fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
+          </svg>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span
+              class="text-body-secondary">Checkmate.</span></h2>
+          <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really
+            intended to be actually read, simply here to give you a better view of what this would look like with some
+            actual content. Your content.</p>
+        </div>
+        <div class="col-md-5">
+          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+            height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+            preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="var(--bs-secondary-bg)" /><text x="50%" y="50%"
+              fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
+          </svg>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+    </div><!-- /.container -->
+
+
+    <!-- FOOTER -->
+    <footer class="container">
+      <p class="float-end"><a href="#">Back to top</a></p>
+      <p>&copy; 2017-2023 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+  </main>
+  <!-- <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"
             <h2 class="fw-normal">Become partner</h2>
             <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.
             </p>
             <p><a class="btn btn-outline-primary" (click)="navigateToRegisterPartner()" >Apply now</a></p>
           </div>
         </div>
-  
-  
-        <!-- START THE FEATURETTES -->
-  
+
+
+         START THE FEATURETTES -->
+
         <hr class="featurette-divider">
-  
+
         <div class="row featurette">
           <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">First featurette heading. 
+            <h2 class="featurette-heading fw-normal lh-1">First featurette heading.
               <span class="text-body-secondary">It’ll blow your mind.</span></h2>
             <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose
               here.</p>
@@ -177,12 +270,12 @@
             </svg>
           </div>
         </div>
-  
+
         <hr class="featurette-divider">
-  
+
         <div class="row featurette">
           <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. 
+            <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good.
               <span class="text-body-secondary">See for yourself.</span></h2>
             <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this
               layout would work with some actual real-world content in place.</p>
@@ -197,9 +290,9 @@
             </svg>
           </div>
         </div>
-  
+
         <hr class="featurette-divider">
-  
+
         <div class="row featurette">
           <div class="col-md-7">
             <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span
@@ -218,14 +311,14 @@
             </svg>
           </div>
         </div>
-  
+
         <hr class="featurette-divider">
-  
+
         <!-- /END THE FEATURETTES -->
-  
+
       </div><!-- /.container -->
-  
-  
+
+
       <!-- FOOTER -->
       <footer class="container">
         <p class="float-end"><a href="#">Back to top</a></p>
@@ -237,17 +330,18 @@
       crossorigin="anonymous">
     </script> -->
 </body>
-  
+
 <ng-template #demoModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Disable your adblock!!!</h4>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-    </div>
-    <div class="rounded mx-auto d-block">
-      <img src="../assets/wrr-buzka.jpg">
-    </div>
-    
-    <!-- <div class="modal-body">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Disable your adblock!!!</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="rounded mx-auto d-block">
+    <img src="../assets/wrr-buzka.jpg">
+  </div>
+
+  <!-- <div class="modal-body">
       <form>
         <div class="form-group">
           <label for="dateOfBirth">Date of birth</label>
