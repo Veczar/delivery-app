@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("api/users")
@@ -25,4 +27,10 @@ public class UserController extends GenericControllerWithReadDto<UserDto, UserRe
         Page<UserReadDto> users = userService.getUsersPage(criteria);
         return ResponseEntity.ok(users);
     }
+    
+    @GetMapping("/role/user")
+    public List<UserDto> getUserRoleUser() {
+        return service.getAllUsersRoleUser();
+    }
+    
 }
