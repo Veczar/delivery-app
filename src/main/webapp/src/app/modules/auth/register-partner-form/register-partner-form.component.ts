@@ -61,13 +61,15 @@ export class RegisterPartnerFormComponent implements OnInit {
     window.scrollTo(0, 0);
   
     this.partnerForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, customNameValidator, Validators.minLength(2),]],
+      firstName: ['', [Validators.required, customNameValidator, Validators.minLength(2), 
+        Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)]],
       lastName: [
         '',
         [
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(20)
+          Validators.maxLength(20),
+          Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)
         ]
       ],
       telephoneNumber: [
@@ -144,14 +146,6 @@ export class RegisterPartnerFormComponent implements OnInit {
       return;
     }
 
-    const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
-    const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
-  
-    this.partnerForm.patchValue({
-      contactNumber: combinedContactNumber,
-      telephoneNumber: combinedTelephoneNumber,
-    });
-
      //console.log(JSON.stringify(this.partnerForm.value, null, 2));
      //console.log(this.partnerForm)
 
@@ -160,6 +154,13 @@ export class RegisterPartnerFormComponent implements OnInit {
         console.log('response:', response);
 
         if (response.message == 'success') {
+          const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
+          const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
+        
+          this.partnerForm.patchValue({
+            contactNumber: combinedContactNumber,
+            telephoneNumber: combinedTelephoneNumber,
+          });
           console.log('succesfully registered a user');
           this.router.navigate(['']);
         }
