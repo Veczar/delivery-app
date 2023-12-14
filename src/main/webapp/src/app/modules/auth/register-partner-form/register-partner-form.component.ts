@@ -54,10 +54,12 @@ export class RegisterPartnerFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {} 
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
+  
     this.partnerForm = this.formBuilder.group({
       firstName: ['', [Validators.required, customNameValidator, Validators.minLength(2),]],
       lastName: [
@@ -107,7 +109,7 @@ export class RegisterPartnerFormComponent implements OnInit {
         postalCode: [
           '',
           [
-            Validators.required,
+            Validators.required,Validators.minLength(6),Validators.maxLength(6),
             Validators.pattern(/^\d{2}-\d{3}$/) // Format kodu pocztowego XX-XXX
           ]
         ],
@@ -137,22 +139,21 @@ export class RegisterPartnerFormComponent implements OnInit {
       }
     });
 
+    if (this.partnerForm.invalid) {
+      console.log('wrong form')
+      return;
+    }
+
     const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
     const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
   
-    // Update the form values with combined numbers
     this.partnerForm.patchValue({
       contactNumber: combinedContactNumber,
       telephoneNumber: combinedTelephoneNumber,
     });
 
-    console.log(JSON.stringify(this.partnerForm.value, null, 2));
-    console.log(this.partnerForm)
-    
-    if (this.partnerForm.invalid) {
-      console.log('wrong form')
-      return;
-    }
+     //console.log(JSON.stringify(this.partnerForm.value, null, 2));
+     //console.log(this.partnerForm)
 
     this.authService.registerParnter(this.partnerForm.value as RegisterPartnerDto).subscribe(
       (response: RegisterResponseDto) => {
@@ -160,7 +161,7 @@ export class RegisterPartnerFormComponent implements OnInit {
 
         if (response.message == 'success') {
           console.log('succesfully registered a user');
-          //this.router.navigate(['']);
+          this.router.navigate(['']);
         }
         else {
           this.wrongEmail = true;
@@ -180,4 +181,18 @@ export class RegisterPartnerFormComponent implements OnInit {
   get addressForm(): FormGroup {
     return this.partnerForm.get('address') as FormGroup;
   }
+  formatPostalCode(event: any): void {
+    
+    const cleanedValue = event.target.value.replace(/-/g, '');
+
+    if (/^\d+$/.test(cleanedValue)) {
+  
+      const formattedValue = cleanedValue.slice(0, 2) + '-' + cleanedValue.slice(2);
+      this.addressForm.patchValue({ postalCode: formattedValue });
+
+    } else {
+      const newValue = cleanedValue.slice(0, -1);
+      this.addressForm.patchValue({ postalCode: newValue });
+    }
+  }  
 }

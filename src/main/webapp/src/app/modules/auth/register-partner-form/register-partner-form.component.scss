@@ -15,12 +15,10 @@ body {
   // background-color: #f5f5f5;
 }
 
-main {
+.regist-form {
   background-color: whitesmoke;
   border-radius: 20px;
   padding: 35px;
-  margin-top: 10vh; // Adjust the margin-top as needed
-  margin-bottom: 10vh; // Adjust the margin-bottom as needed
   
 }
 
@@ -67,10 +65,24 @@ p{
 
 .exit-btn {
   position: absolute;
-  right: 6%;
-  top: 6%;
+  top: 2vh;
+  right: 3vh;
 }
 
 h1 {
     margin-bottom: 30px;
+}
+
+.margins{
+  // margin:auto;
+  // margin-left: auto;
+  // margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.rel{
+  position: relative;
+}
+.m-t{
+  margin-top: 1vh;
 }
