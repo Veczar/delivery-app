@@ -34,6 +34,11 @@
       <td mat-cell *matCellDef="let row"> {{row.email}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="telephone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Telephone Number</th>
+      <td mat-cell *matCellDef="let row"> {{row.telephoneNumber}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
       <td mat-cell *matCellDef="let row"> {{row.role.name}} </td>

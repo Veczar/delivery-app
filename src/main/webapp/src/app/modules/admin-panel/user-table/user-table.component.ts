@@ -19,7 +19,7 @@ export class UserTableComponent {
   editable = false;
   submitted: boolean = false;
 
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'role'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'telephone' ,'role'];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -41,6 +41,8 @@ export class UserTableComponent {
       exampleModal.addEventListener('hidden.bs.modal', () => {
         // console.log('Modal exited or closed');
         this.loadData(); //refresh
+        this.editable = false;
+        this.userForm.disable();
       });
     }
   }
