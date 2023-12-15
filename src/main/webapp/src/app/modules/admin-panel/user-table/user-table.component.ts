@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { UserDto, UserReadDto } from 'src/app/shared/model/api-models';
+import { UserDto } from 'src/app/shared/model/api-models';
 import { ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../user/user.service';
 
 @Component({
@@ -28,7 +25,6 @@ export class UserTableComponent {
     private userService: UserService
   ) {
     // console.log("users?: " + this.route.snapshot.url);
-
     this.userService.getUserRoleUser().subscribe(
       (users: UserDto[]) => {
         this.dataSource = new MatTableDataSource<UserDto>(users);

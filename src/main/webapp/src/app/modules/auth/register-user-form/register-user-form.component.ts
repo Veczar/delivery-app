@@ -3,8 +3,6 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { AuthService } from '../auth.service';
 import { RegisterResponseDto, RegisterUserDto } from 'src/app/shared/model/api-models';
 import { Router } from '@angular/router';
-import { ChangeDetectorRef } from '@angular/core';
-
 
 @Component({
   selector: 'app-register-user-form',
@@ -111,7 +109,6 @@ export class RegisterUserFormComponent implements OnInit {
         else {
           this.wrongEmail = true;
         }
-        // console.log('wrong email?: ', this.wrongEmail)
       },
       (error) => {
         console.error('Error while registering a user:', error);

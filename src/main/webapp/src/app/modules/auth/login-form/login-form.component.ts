@@ -10,8 +10,6 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent  {
 
-  private apiUrl = 'http://localhost:8080';
-
   loginObj = {
     email: '',
     password: ''
@@ -32,5 +30,4 @@ export class LoginFormComponent  {
       console.error('Authentication failed:', error);
     };
   }
-
 }

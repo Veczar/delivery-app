@@ -23,5 +23,4 @@ export class UserService {
     return this.http.get<UserDto[]>(this.apiUrl + "/api/users/role/user");
   }
 
-
 }
