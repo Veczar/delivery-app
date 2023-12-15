@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AddressService
-        extends GenericService<Address, AddressDto, AddressRepository, AddressAssembler>
-        implements IService<AddressDto> {
+        extends GenericService<Address, AddressDto, Long, AddressRepository, AddressAssembler>
+{
     
     public AddressService(AddressRepository repository, AddressAssembler assembler) {
         super(repository, assembler);

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/partners/reviews")
-public class PartnerReviewController extends GenericController<PartnerReviewDto, PartnerReviewService> {
+public class PartnerReviewController extends GenericController<PartnerReviewDto, Long, PartnerReviewService> {
     public PartnerReviewController(PartnerReviewService service) {
         super(service);
     }

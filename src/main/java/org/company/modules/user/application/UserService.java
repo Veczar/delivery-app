@@ -16,8 +16,8 @@ import org.company.shared.aplication.IServiceWithReadDto;
 
 
 @Service
-public class UserService extends GenericServiceWithReadDto<User, UserDto, UserReadDto, UserRepository, UserAssembler, UserReadAssembler>
-        implements IServiceWithReadDto<UserDto, UserReadDto> {
+public class UserService extends GenericServiceWithReadDto<User, UserDto, UserReadDto, Long, UserRepository, UserAssembler, UserReadAssembler>
+{
     
     private final UserReadAssembler userReadAssembler;
     private final UserRepository userRepository;

@@ -22,9 +22,10 @@ import java.util.stream.Collectors;
 public class GenericService<
         Entity,
         Dto,
-        Repository extends JpaRepository<Entity, Long>,
+        EntityKey,
+        Repository extends JpaRepository<Entity, EntityKey>,
         Assembler extends IAssembler<Entity,Dto>>
-        implements IService<Dto>
+        implements IService<Dto, EntityKey>
 {
         protected final Repository repository;
         protected final Assembler assembler;
@@ -39,13 +40,14 @@ public class GenericService<
 
         private final Class<Entity> entityType;
         public List<Dto> getAllItems() {
-                return repository.findAll()
+                List<Dto> list = repository.findAll()
                         .stream()
                         .map(assembler::toDto)
                         .collect(Collectors.toList());
+                return list;
         }
 
-        public Dto getItem(Long id) {
+        public Dto getItem(EntityKey id) {
                 Entity item = repository.findById(id).orElse(null);
 
                 if (item == null) {
@@ -57,7 +59,7 @@ public class GenericService<
         // statements printed twice is the result of p6spy logging error
         // hibernate displays it correctly
         @Transactional
-        public Dto removeItem(Long id) {
+        public Dto removeItem(EntityKey id) {
                 Entity item = repository.findById(id).orElse(null);
 
                 if (item == null) {
@@ -82,7 +84,7 @@ public class GenericService<
         }
 
         @Transactional
-        public Dto updateItem(Long id, Dto dto) {
+        public Dto updateItem(EntityKey id, Dto dto) {
                 Entity itemToUpdate = repository.findById(id).orElse(null);
 
                 if (itemToUpdate == null) {

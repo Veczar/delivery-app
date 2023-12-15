@@ -8,7 +8,7 @@ import org.company.shared.aplication.IService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProductService extends GenericService<Product, ProductDto,  ProductRepository, ProductAssembler>
+public class ProductService extends GenericService<Product, ProductDto, Long,  ProductRepository, ProductAssembler>
 {
     public ProductService(ProductRepository productRepository, ProductAssembler productAssembler)
     {

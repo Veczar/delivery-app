@@ -7,7 +7,7 @@ import org.company.shared.aplication.GenericService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CategoryService extends GenericService<Category, CategoryDto, CategoryRepository,CategoryAssembler> {
+public class CategoryService extends GenericService<Category, CategoryDto, Long, CategoryRepository,CategoryAssembler> {
     public CategoryService(CategoryRepository repository, CategoryAssembler assembler) {
         super(repository,assembler);
     }

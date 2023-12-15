@@ -7,7 +7,7 @@ import org.company.shared.aplication.GenericService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PartnerReviewService extends GenericService<PartnerReview, PartnerReviewDto, PartnerReviewRepository,PartnerReviewAssebler> {
+public class PartnerReviewService extends GenericService<PartnerReview, PartnerReviewDto, Long, PartnerReviewRepository,PartnerReviewAssebler> {
     public PartnerReviewService(PartnerReviewRepository repository, PartnerReviewAssebler assembler) {
         super(repository, assembler);
     }
