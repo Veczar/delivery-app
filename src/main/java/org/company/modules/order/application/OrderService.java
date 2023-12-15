@@ -7,7 +7,7 @@ import org.company.shared.aplication.GenericService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderService extends GenericService<Order, OrderDto, OrderRepository,OrderAssembler> {
+public class OrderService extends GenericService<Order, OrderDto, Long, OrderRepository,OrderAssembler> {
     public OrderService(OrderRepository repository, OrderAssembler assembler) {
         super(repository, assembler);
     }

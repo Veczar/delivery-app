@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/categories")
-public class CategoryController extends GenericController<CategoryDto, CategoryService> {
+public class CategoryController extends GenericController<CategoryDto, Long, CategoryService> {
     public CategoryController(CategoryService service) {
         super(service);
     }

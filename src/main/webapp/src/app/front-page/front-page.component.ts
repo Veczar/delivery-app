@@ -45,6 +45,9 @@ export class FrontPageComponent {
   navigateToAuth(): void {
     this.router.navigate(['/auth']);
   }
+  navigateToRegisterPartner(): void {
+    this.router.navigate(['/register/partner']);
+  }
 
   isUserLoggedIn(): any {
     return this.authService.isUserLogged();

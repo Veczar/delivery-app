@@ -122,6 +122,7 @@ export interface RegisterPartnerDto {
     accountNumber?: string;
     contactNumber?: string;
     address?: AddressDto;
+    category?:string;
 }
 
 export interface RegisterResponseDto {

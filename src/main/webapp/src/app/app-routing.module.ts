@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
   {path: 'auth', component: LoginFormComponent},
   {path: 'register/user', component: RegisterUserFormComponent},
+  {path: 'register/partner', component: RegisterPartnerFormComponent},
   {
     path: 'admin',
     component: AdminPanelComponent,

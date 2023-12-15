@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/delivery_mans")
-public class DeliveryManController extends GenericController<DeliveryManDto, DeliveryManService> {
+public class DeliveryManController extends GenericController<DeliveryManDto, Long, DeliveryManService> {
     public DeliveryManController(DeliveryManService service) {
         super(service);
     }

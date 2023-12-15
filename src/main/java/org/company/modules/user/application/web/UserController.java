@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/users")
 @CrossOrigin(origins = "http://localhost:4200")
-public class UserController extends GenericControllerWithReadDto<UserDto, UserReadDto, UserService> {
+public class UserController extends GenericControllerWithReadDto<UserDto, UserReadDto, Long, UserService> {
     private final UserService userService;
     
     public UserController(UserService userService)

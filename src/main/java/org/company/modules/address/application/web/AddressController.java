@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/addresses")
-public class AddressController extends GenericController<AddressDto, AddressService> {
+public class AddressController extends GenericController<AddressDto, Long, AddressService> {
     public AddressController(AddressService service) {
         super(service);
     }
