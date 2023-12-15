@@ -45,6 +45,7 @@
         (click)="click(row)"
         [class.demo-row-is-clicked]=""
         *matRowDef="let row; columns: displayedColumns;"
+        data-bs-toggle="modal" data-bs-target="#userModal"
     ></tr>
 
     <!-- Row shown when there is no matching data. -->
@@ -57,4 +58,105 @@
 
   <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="25"
     aria-label="Select page of users"></mat-paginator>
+</div>
+
+
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">{{ editable ? 'Edit User' : 'User Details' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userForm" class="row g-3 needs-validation">
+          <div class="form-group col-md-6">
+            <label for="firstName" class="form-label">First name</label>
+            <input
+              type="text"
+              name="name"
+              formControlName="firstName"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['firstName'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="submitted && f['firstName'].errors">
+              <p>Name is required</p>
+            </div> 
+          </div>
+      
+          <div class="form-group col-md-6">
+            <label for="lastName" class="form-label">Last name</label>
+            <input
+              type="text"
+              name="lastName"
+              formControlName="lastName"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['lastName'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf=" submitted && f['lastName'].errors">
+              <p>Last Name is required</p>
+            </div> 
+          </div>
+      
+          <div class="form-group col-md-12">
+            <label for="tel" class="form-label">Telephone number</label>
+            <input
+              type="tel"
+              name="telephone"
+              formControlName="telephoneNumber"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['telephoneNumber'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['telephoneNumber'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="submitted && f['telephoneNumber'].errors">
+              <p>Provide valid telephone Number</p>
+            </div> 
+          </div>
+      
+          <div class="form-group col-md-12">
+            <label for="email" class="form-label">E-mail</label>
+            <input
+              type="email"
+              name="email"
+              formControlName="email"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['email'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="f['email'].errors">
+              <p>Provide valid email</p>
+            </div>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="role" class="form-label">Role</label>
+            <select  
+              class="form-select"
+              id="role"
+              name="role"
+              formControlName="role"
+            >
+              <option value="1" selected>USER</option>
+              <option value="2">PARTNER</option>
+              <option value="3">COURIER</option>
+              <option value="4">ADMIN</option>
+            </select>
+          </div>
+          
+
+          <div class="mb-3">
+            <button type="button" class="btn btn-primary me-2" (click)="toggleEditMode()">
+              {{ editable ? 'Save Changes' : 'Edit User' }}
+            </button>
+            <span> </span>
+            <button type="button" class="btn btn-danger" (click)="deleteUser()">
+              Delete User
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

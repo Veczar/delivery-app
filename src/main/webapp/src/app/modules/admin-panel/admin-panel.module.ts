@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UserTableComponent } from './user-table/user-table.component';
 import { AdminPanelComponent } from './admin-panel.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,6 +26,8 @@ import { AdminPanelComponent } from './admin-panel.component';
     MatSortModule, 
     MatPaginatorModule, 
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminPanelModule { }
