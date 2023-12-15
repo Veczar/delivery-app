@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../user/user.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-table',
@@ -14,7 +15,6 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 })
 export class UserTableComponent {
   dataSource!: MatTableDataSource<UserDto>;
-  selectedUser: UserDto = {};
   userForm: FormGroup;
   editable = false;
   submitted: boolean = false;
@@ -29,18 +29,12 @@ export class UserTableComponent {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
+    private router: Router,
   ) {
-    // console.log("users?: " + this.route.snapshot.url);
-    this.userService.getUserRoleUser().subscribe(
-      (users: UserDto[]) => {
-        this.dataSource = new MatTableDataSource<UserDto>(users);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        console.log(users);
-      }
-    );
+    this.loadData();
 
     this.userForm = this.formBuilder.group({
+      id: [''],
       firstName: [
         '',
         [
@@ -82,6 +76,17 @@ export class UserTableComponent {
     this.userForm.disable();
   }
 
+  loadData(): void {
+    this.userService.getUserRoleUser().subscribe(
+      (users: UserDto[]) => {
+        this.dataSource = new MatTableDataSource<UserDto>(users);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(users);
+      }
+    );
+  }
+
   get f(): { [key: string]: AbstractControl } {
     return this.userForm.controls;
   }
@@ -90,7 +95,6 @@ export class UserTableComponent {
     this.submitted = false;
     this.userForm.patchValue(user);
     this.userForm.get('role')?.setValue(user.role?.id);
-    console.log(this.userForm);
   }
 
   toggleEditMode(): void {
@@ -114,16 +118,33 @@ export class UserTableComponent {
       this.userForm.enable();
     } 
     else {
+      // transform the role to be an object with id
+      const roleId = this.userForm.value.role;
+      const user: UserDto = this.userForm.value;
+      user.role = { id: roleId };
+      
       // saves changes
-      console.log(JSON.stringify(this.userForm.value, null, 2));
+      console.log(user);
+      this.userService.updateUser(user).subscribe(r => {
+        console.log('user updated')
+        // console.log(r)
+      });
 
       this.submitted = false;
       this.userForm.disable();
     }
   }
 
-  deleteUser() {
-    throw new Error('Method not implemented.');
+  deleteUser(): void {
+    this.userService.deleteUser(this.userForm.value.id).subscribe(r => {
+      console.log('user deleted')
+      this.onExit();
+      // console.log(r)
+    });
+  }
+
+  onExit(): void {
+    this.loadData();
   }
 
   applyFilter(event: Event) {

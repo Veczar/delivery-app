@@ -10,17 +10,22 @@ export class UserService {
 
   apiUrl: string = "http://localhost:8080";
   
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   getUsers(): Observable<UserDto[]> {
-    console.log('GET users:');
-    return this.http.get<UserDto[]>(this.apiUrl + "/api/users");
+    return this.http.get<UserDto[]>(`${this.apiUrl}/api/users/`);
   }
 
-  getUserRoleUser() {
-    return this.http.get<UserDto[]>(this.apiUrl + "/api/users/role/user");
+  getUserRoleUser(): Observable<UserDto[]> {
+    return this.http.get<UserDto[]>(`${this.apiUrl}/api/users/role/user`);
+  }
+
+  updateUser(user: UserDto): Observable<UserDto> {
+    return this.http.put<UserDto>(`${this.apiUrl}/api/users/${user.id}`, user);
+  }
+
+  deleteUser(userId: number): Observable<UserDto> {
+    return this.http.delete<UserDto>(`${this.apiUrl}/api/users/${userId}`);
   }
 
 }
