@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { UserDto } from 'src/app/shared/model/api-models';
 import { ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../user/user.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-user-table',
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class UserTableComponent {
   dataSource!: MatTableDataSource<UserDto>;
-  userForm: FormGroup;
+  userForm!: FormGroup;
   editable = false;
   submitted: boolean = false;
 
@@ -29,10 +29,23 @@ export class UserTableComponent {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router,
   ) {
     this.loadData();
+    this.initForm();
+  }
+  
+  ngAfterViewInit(): void {
+    // Check if exampleModal is defined before accessing nativeElement
+    const exampleModal = document.getElementById('userModal');
+    if (exampleModal) {
+      exampleModal.addEventListener('hidden.bs.modal', () => {
+        // console.log('Modal exited or closed');
+        this.loadData(); //refresh
+      });
+    }
+  }
 
+  initForm(): void {
     this.userForm = this.formBuilder.group({
       id: [''],
       firstName: [
@@ -138,7 +151,7 @@ export class UserTableComponent {
   deleteUser(): void {
     this.userService.deleteUser(this.userForm.value.id).subscribe(r => {
       console.log('user deleted')
-      this.onExit();
+      this.loadData();
       // console.log(r)
     });
   }
