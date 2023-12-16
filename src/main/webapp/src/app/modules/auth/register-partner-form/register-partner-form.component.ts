@@ -43,25 +43,25 @@ export class RegisterPartnerFormComponent implements OnInit {
       postalCode: new FormControl(''),
       street: new FormControl(''),
     }),
-    
+
   });
   submitted = false;
   wrongEmail: boolean = false;
-  phonePrefixes = ['+48 PL','+355 AL','+376 AD','+43 AT','+375 BY','+32 BE','+387 BA','+359 BG','+385 HR','+357 CY', 
-  '+420 CZ','+45 DK','+372 EE','+358 FI','+33 FR','+49 DE','+30 GR','+36 HU','+354 IS','+353 IE','+39 IT','+383 XK', 
+  phonePrefixes = ['+48 PL','+355 AL','+376 AD','+43 AT','+375 BY','+32 BE','+387 BA','+359 BG','+385 HR','+357 CY',
+  '+420 CZ','+45 DK','+372 EE','+358 FI','+33 FR','+49 DE','+30 GR','+36 HU','+354 IS','+353 IE','+39 IT','+383 XK',
   '+371 LV','+423 LI','+370 LT','+352 LU','+356 MT'];
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-  ) {} 
+  ) {}
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-  
+
     this.partnerForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, customNameValidator, Validators.minLength(2), 
+      firstName: ['', [Validators.required, customNameValidator, Validators.minLength(2),
         Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)]],
       lastName: [
         '',
@@ -122,11 +122,11 @@ export class RegisterPartnerFormComponent implements OnInit {
 
   removeAfterSpace(input: string): string {
     const indexOfSpace = input.indexOf(' ');
-  
+
     if (indexOfSpace !== -1) {
       return input.substring(0, indexOfSpace);
     }
-  
+
     return input;
   }
 
@@ -140,6 +140,7 @@ export class RegisterPartnerFormComponent implements OnInit {
         control.setValue(control.value);
       }
     });
+//     console.log(JSON.stringify(this.partnerForm.value, null, 2));
 
     if (this.partnerForm.invalid) {
       console.log('wrong form')
@@ -156,7 +157,7 @@ export class RegisterPartnerFormComponent implements OnInit {
         if (response.message == 'success') {
           const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
           const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
-        
+
           this.partnerForm.patchValue({
             contactNumber: combinedContactNumber,
             telephoneNumber: combinedTelephoneNumber,
@@ -178,16 +179,16 @@ export class RegisterPartnerFormComponent implements OnInit {
   get f(): { [key: string]: AbstractControl } {
     return this.partnerForm.controls;
   }
-  
+
   get addressForm(): FormGroup {
     return this.partnerForm.get('address') as FormGroup;
   }
   formatPostalCode(event: any): void {
-    
+
     const cleanedValue = event.target.value.replace(/-/g, '');
 
     if (/^\d+$/.test(cleanedValue)) {
-  
+
       const formattedValue = cleanedValue.slice(0, 2) + '-' + cleanedValue.slice(2);
       this.addressForm.patchValue({ postalCode: formattedValue });
 
@@ -195,5 +196,5 @@ export class RegisterPartnerFormComponent implements OnInit {
       const newValue = cleanedValue.slice(0, -1);
       this.addressForm.patchValue({ postalCode: newValue });
     }
-  }  
+  }
 }
