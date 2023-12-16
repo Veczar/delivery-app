@@ -133,6 +133,8 @@ export class RegisterPartnerFormComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
     this.wrongEmail = false;
+    const contactNumber = `${this.partnerForm.value.contactNumber}`;
+    const telephoneNumber = `${this.partnerForm.value.telephoneNumber}`;
 
     Object.keys(this.partnerForm.controls).forEach(key => {
       const control = this.partnerForm.get(key);
@@ -147,6 +149,18 @@ export class RegisterPartnerFormComponent implements OnInit {
       return;
     }
 
+    const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
+    const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
+
+    this.partnerForm.patchValue({
+      contactNumber: combinedContactNumber,
+      telephoneNumber: combinedTelephoneNumber,
+    });
+
+      console.log(JSON.stringify(this.partnerForm.value, null, 2));
+      console.log(this.partnerForm)
+    
+
      //console.log(JSON.stringify(this.partnerForm.value, null, 2));
      //console.log(this.partnerForm)
 
@@ -155,17 +169,18 @@ export class RegisterPartnerFormComponent implements OnInit {
         console.log('response:', response);
 
         if (response.message == 'success') {
-          const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
-          const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
+
+          console.log('succesfully registered a user');
+          this.router.navigate(['']);
+        }
+        else {
+          const combinedContactNumber = contactNumber;
+          const combinedTelephoneNumber = telephoneNumber;
 
           this.partnerForm.patchValue({
             contactNumber: combinedContactNumber,
             telephoneNumber: combinedTelephoneNumber,
           });
-          console.log('succesfully registered a user');
-          this.router.navigate(['']);
-        }
-        else {
           this.wrongEmail = true;
         }
         // console.log('wrong email?: ', this.wrongEmail)
