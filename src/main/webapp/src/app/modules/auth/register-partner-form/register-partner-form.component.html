@@ -17,7 +17,7 @@
           
           <input
             type="text"
-            name="name"
+            name="firstName"
             formControlName="firstName"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
@@ -59,7 +59,7 @@
               <input
                 maxlength="9"
                 type="tel"
-                name="telephone"
+                name="telephoneNumber"
                 formControlName="telephoneNumber"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['telephoneNumber'].errors }"
@@ -111,7 +111,7 @@
         
 
         <div class="form-group col-md-12">
-          <label for="name" class="form-label"> Partner Name</label>
+          <label for="name" class="form-label">Partner Name</label>
           <input
             type="text"
             name="partnerName"
@@ -130,7 +130,7 @@
           <input
             maxlength="26"
             type="text"
-            name="restaurationName"
+            name="accountNumber"
             formControlName="accountNumber"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f['accountNumber'].errors }"
@@ -157,10 +157,9 @@
               <input 
                 maxlength="9"
                 type="text" 
+                name="contactNumber"
                 class="form-control" 
                 formControlName="contactNumber"
-                aria-label="Username" 
-                aria-describedby="basic-addon1"
                 [ngClass]="{ 'is-invalid': submitted && f['contactNumber'].errors }"
                 [ngClass]="{ 'is-valid':submitted && !f['contactNumber'].errors }"
                 />
@@ -171,7 +170,7 @@
           </div>
         </div>
 
-    <div class="form-group col-md-12">
+        <div class="form-group col-md-12">
           <label for="category" class="form-label"> Category</label>
             <select class="form-select input" aria-label=".form-select-sm example"
               formControlName="category" 
@@ -256,7 +255,7 @@
           <button class="w-100 btn btn-lg btn-primary">Submit</button>
         </div>
 
-      </form>
-  </div>
+        </form>
+      </div>
     </main>
-  </body>
+</body>
