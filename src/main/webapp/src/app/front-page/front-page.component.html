@@ -23,8 +23,8 @@
               <button class="nav-link active" (click)="open(demoModal)">Adblock</button>
             </li>
             <li *ngIf="getRole() === 'ADMIN'">
-              <button class="nav-link active color" [routerLink]="['/admin/dashboard']"><i
-                  class="bi bi-speedometer2"></i> Dashboard</button>
+              <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
+                <i class="bi bi-speedometer2"></i> Dashboard</button>
             </li>
           </ul>
           <!-- <form class="middle-search" role="search">
@@ -42,8 +42,9 @@
             <button class="btn btn-outline-success" type="submit" [routerLink]="['/auth']">Sign in</button>
           </div>
 
-          <div *ngIf="isUserLoggedIn()" class="nav-item text-white me-2 badge text-bg-primary">{{getRole() !== 'USER' ?
-            getRole() : ''}}</div>
+          <div *ngIf="isUserLoggedIn() && getRole() !== 'USER'" class="nav-item text-white me-2 badge text-bg-primary">
+            {{ getRole() }}
+          </div>
           <div *ngIf="isUserLoggedIn()">
             <div class="dropdown-center">
               <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -51,8 +52,8 @@
                 <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
               </button>
               <ul class="dropdown-menu dropdown-menu-dark dropdown-position">
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#" (click)="logOut()">Log Out</a></li>
+                <li><a class="dropdown-item" >Settings</a></li>
+                <li><a class="dropdown-item" (click)="logOut()">Log Out</a></li>
               </ul>
             </div>
           </div>
@@ -251,19 +252,4 @@
   <div class="rounded mx-auto d-block">
     <img src="../assets/wrr-buzka.jpg">
   </div>
-
-  <!-- <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="dateOfBirth">Date of birth</label>
-          <div class="input-group">
-            <input id="dateOfBirth" name="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dp="ngbDatepicker">
-            <button type="button" class="btn btn-outline-secondary bi bi-calendar" (click)="dp.toggle()"></button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-    </div> -->
 </ng-template>

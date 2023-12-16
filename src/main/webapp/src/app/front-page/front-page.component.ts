@@ -33,9 +33,7 @@ export class FrontPageComponent {
   }
 
   private updateAuthenticationState() {
-    const isUserLoggedIn = this.isUserLoggedIn();
-
-    if (isUserLoggedIn) {
+    if (this.isUserLoggedIn()) {
       this.loggedUser = this.authService.getLoggedUser();
     }
   }
@@ -55,7 +53,7 @@ export class FrontPageComponent {
     return this.authService.isUserLogged();
   }
 
-  logOut():void {
+  logOut(): void {
     this.authService.logOut();
     this.updateAuthenticationState();
   }

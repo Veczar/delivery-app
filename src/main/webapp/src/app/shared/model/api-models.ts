@@ -180,9 +180,9 @@ export interface UserDto {
 }
 
 export interface UserReadDto {
-    id?: number;
-    firstName?: string;
-    lastName?: string;
+    id: number;
+    firstName: string;
+    lastName: string;
 }
 
 export enum Direction {

@@ -11,13 +11,15 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './modules/auth/auth-interceptor.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FrontPageComponent
+    FrontPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,9 +28,11 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    BrowserAnimationsModule,
     
     UserModule,
     AuthModule,
+    AdminPanelModule
   ],
   providers: [
     {

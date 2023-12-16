@@ -1,4 +1,4 @@
-
+$primary-color: #3f51b5;
 
 .bi {
     vertical-align: -.125em;
@@ -76,7 +76,7 @@ body {
 }
 
 .sidebar .nav-link.active {
-    color: #2470dc;
+    color: $primary-color;
 }
 
 .sidebar .nav-link:hover .feather,
@@ -88,9 +88,6 @@ body {
     font-size: .75rem;
 }
 
-/*
-   * Navbar
-   */
 
 .navbar-brand {
     padding-top: .75rem;
@@ -116,7 +113,7 @@ ul > li > a {
 }
 
 ul > li:hover > a {
-    color: #82898f;
+    color: $primary-color;
 }
 
 span {
@@ -126,3 +123,4 @@ span {
 header {
     height: 56px;
 }
+

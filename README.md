@@ -60,3 +60,7 @@ https://github.com/ali-bouali/spring-boot-3-jwt-security/tree/main
 
 frontend auth: 
 https://www.youtube.com/watch?v=PhzxED19FVA
+
+angular material docs:
+https://v16.material.angular.io/components/categories
+

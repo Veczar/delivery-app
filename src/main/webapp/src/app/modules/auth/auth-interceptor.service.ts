@@ -16,10 +16,9 @@ export class AuthInterceptor implements HttpInterceptor {
     var authRequest;
     
     if (!this.authService.isTokenExpired() || token !== null) {
-        console.log(token)
         authRequest = request.clone({
-        headers: request.headers.set("Authorization", "Bearer " + token)
-      });
+          headers: request.headers.set("Authorization", "Bearer " + token)
+        });
       return next.handle(authRequest);
     }
     else {
