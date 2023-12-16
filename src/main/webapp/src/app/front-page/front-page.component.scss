@@ -114,6 +114,42 @@ ul > li:hover > button {
     color: #82898f;
 }
 
+.user-dropdown {
+    color: white !important;
+    cursor: pointer;
+}
+
 nav {
     height: 56px;
+}
+
+$focus-ring-opacity: 0%;
+.search-bar {
+    width: 60%;
+    font-size: 22;
+}
+
+.addr-search {
+    height: 40vh;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../../assets/bcg.jpg);
+    background-size: cover;
+}
+
+
+.input-group {
+    // box-shadow: #82898f;
+    box-shadow: 0px 0px 4px black;
+    border-radius: 7px !important;
+}
+
+h2 {
+    color: white;
+    text-shadow: 1px 1px 4px black;
+}
+
+.form-control:focus {
+    border-color: none;
+    box-shadow: none;
 }
