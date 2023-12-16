@@ -7,6 +7,7 @@ import { RegisterUserFormComponent } from './modules/auth/register-user-form/reg
 import { AdminPanelComponent } from './modules/admin-panel/admin-panel.component';
 import { AdminDashboardComponent } from './modules/admin-panel/admin-dashboard/admin-dashboard.component';
 import { UserTableComponent } from './modules/admin-panel/user-table/user-table.component';
+import { RegisterPartnerFormComponent } from './modules/auth/register-partner-form/register-partner-form.component';
 
 
 const routes: Routes = [
