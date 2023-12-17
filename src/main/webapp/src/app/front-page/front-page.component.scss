@@ -127,11 +127,10 @@ nav {
 $focus-ring-opacity: 0%;
 .search-bar {
     width: 60%;
-    font-size: 22;
 }
 
 .addr-search {
-    height: 50vh;
+    height: 60vh;
     align-items: center;
     justify-content: center;
     background-image: url(../../assets/bcg.jpg);
@@ -159,3 +158,6 @@ $focus-ring-opacity: 0%;
     text-decoration: underline;
 }
   
+.card-desc {
+    padding: 0 90px;
+}
