@@ -1,0 +1,34 @@
+header {
+    background-color: lightblue; /* Replace with your desired background color */
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr; /* Three columns, adjust as needed */
+    column-gap: 20px; /* Adjust the gap between columns */
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px; /* Add padding to the container */
+}
+
+.position-div {
+    display: flex;
+    align-items: center;
+}
+
+.middle-grid {
+    display: grid;
+    grid-template-columns: auto auto; /* Two columns for search and button */
+    column-gap: 10px; /* Adjust the gap between columns */
+    align-items: baseline; /* Align elements based on their baseline */
+}
+
+.inline-div {
+    display: inline-block;
+    position: sticky;
+}
+
+
+.form-control {
+    border: 1px solid #f8c146;
+}

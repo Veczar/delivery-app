@@ -1,10 +1,9 @@
 package org.company.modules.partner.application;
 
-import org.company.modules.address.domain.Address;
-import org.company.modules.address.domain.AddressRepository;
 import org.company.modules.partner.application.web.PartnerDto;
 import org.company.modules.partner.domain.Partner;
 import org.company.modules.partner.domain.PartnerRepository;
+import org.company.modules.partner.domain.PartnerSpecifications;
 import org.company.shared.aplication.GenericService;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -30,11 +29,3 @@ public class PartnerService extends GenericService<Partner, PartnerDto, Long, Pa
 }
 
 
-class PartnerSpecifications {
-    
-    public static Specification<Partner> hasCity(String city) {
-        return (root, query, criteriaBuilder) -> {
-            return criteriaBuilder.equal(root.join("address").get("city"), city);
-        };
-    }
-}
