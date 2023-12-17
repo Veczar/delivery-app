@@ -4,8 +4,9 @@
 
 body {
     padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-bottom: 0;
     color: rgb(var(--bs-tertiary-color-rgb));
+    // margin-bottom: 0px;
 }
   
 /* CUSTOMIZE THE CAROUSEL
@@ -130,7 +131,7 @@ $focus-ring-opacity: 0%;
 }
 
 .addr-search {
-    height: 40vh;
+    height: 50vh;
     align-items: center;
     justify-content: center;
     background-image: url(../../assets/bcg.jpg);
@@ -144,12 +145,17 @@ $focus-ring-opacity: 0%;
     border-radius: 7px !important;
 }
 
-h2 {
+.search-header {
     color: white;
-    text-shadow: 1px 1px 4px black;
+    text-shadow: 1px 1px 5px black;
 }
 
 .form-control:focus {
     border-color: none;
     box-shadow: none;
 }
+
+.nav-hover-underline li.nav-item a:hover {
+    text-decoration: underline;
+}
+  
