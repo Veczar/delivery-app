@@ -5,7 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.company.modules.address.application.web.AddressDto;
-import org.company.modules.user.domain.User;
+import org.company.modules.delivery_man.appliction.web.DeliveryManDto;
+import org.company.modules.delivery_man.domain.DeliveryMan;
+import org.company.modules.order.domain.Status;
+import org.company.modules.partner.application.web.PartnerDto;
+import org.company.modules.user.application.web.UserDto;
 import java.util.Date;
 
 @Getter
@@ -16,9 +20,12 @@ public class OrderDto {
     private Long id;
     private AddressDto addressStart;
     private AddressDto addressEnd;
-    private User customer;
+    private UserDto customer;
+    private PartnerDto partner;
+    private DeliveryManDto deliveryMan;
     private Double totalPrice;
     private Double tip;
     private Date creationDate;
     private Date completionDate;
+    private Status status;
 }
