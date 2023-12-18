@@ -44,5 +44,6 @@ public class Order {
     private Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date completionDate;
+    @Enumerated(EnumType.STRING)
     private Status status;
 }
