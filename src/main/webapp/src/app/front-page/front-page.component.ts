@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../modules/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-front-page',
@@ -12,6 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./front-page.component.scss']
 })
 export class FrontPageComponent {
+  cityName: string = '';
 
   loggedUser = {
     firstName: '',
@@ -20,7 +18,6 @@ export class FrontPageComponent {
 
   constructor(
     private modalService: NgbModal,
-    private router: Router,
     public authService: AuthService,
     public http: HttpClient
   ) {
@@ -37,13 +34,6 @@ export class FrontPageComponent {
     this.modalService.open(modal);
   }
 
-  navigateToAuth(): void {
-    this.router.navigate(['/auth']);
-  }
-  navigateToRegisterPartner(): void {
-    this.router.navigate(['/register/partner']);
-  }
-
   isUserLoggedIn(): any {
     return this.authService.isUserLogged();
   }
@@ -55,6 +45,10 @@ export class FrontPageComponent {
 
   getRole(): string {
     return localStorage.getItem('role') || '';
+  }
+
+  onSearch() {
+    console.log(this.cityName);
   }
 
 }

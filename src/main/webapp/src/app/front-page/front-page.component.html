@@ -70,28 +70,25 @@
         <label for="addr" class="form-label"><h2 class="mb-1 search-header">Order a delivery in your city</h2></label>
         <div class="input-group mb-3 input-group-lg">
           <label class="input-group-text" for="inputGroupSelect01"><i class="bi bi-geo-alt-fill"></i></label>
-          <input type="text" name="city" class="form-control" placeholder="enter your city name" aria-describedby="button-addon2">
-          <button class="btn btn-primary" type="button" id="button-addon2"><i class="bi bi-search"></i> Search</button>
+          <input type="text" name="city" class="form-control" placeholder="enter your city name"
+            [(ngModel)]="cityName">
+          <button class="btn btn-primary" type="button" id="button-addon2" (click)="onSearch()">
+            <i class="bi bi-search"></i> Search
+          </button>
         </div>
       </div>
     </div>
 
 
-    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel" data-bs-interval="60000"
+    <!-- <div id="myCarousel" class="carousel carousel-dark slide mb-6" data-bs-ride="carousel" data-bs-interval="60000"
       data-bs-pause="hover">
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-          aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"
-          calss="btn-outline-dark"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" calss="btn-outline-dark"></button>
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="grey" />
-          </svg>
           <div class="container">
             <div class="carousel-caption">
               <iframe style="border-radius:12px"
@@ -103,10 +100,6 @@
           </div>
         </div>
         <div class="carousel-item">
-          <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-          </svg>
           <div class="container">
             <div class="carousel-caption">
               <h1>Another example headline.</h1>
@@ -116,10 +109,6 @@
           </div>
         </div>
         <div class="carousel-item">
-          <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-          </svg>
           <div class="container">
             <div class="carousel-caption text-end">
               <h1>One more for good measure.</h1>
@@ -137,7 +126,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
-    </div>
+    </div> -->
 
 
     <!-- Marketing messaging and featurettes
@@ -145,11 +134,14 @@
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing">
+      
+      <div class="featurette-divider"></div>
+      <!-- <hr class="featurette-divider"> -->
 
       <div class="row align-items-center">
         <div class="col text-center">
           <a [routerLink]="['register/courier']">
-            <img src="../../assets/courier.jpg" height="300" class="mb-3">
+            <img src="../../assets/courier.jpg" height="350" class="mb-3">
           </a>
           <h2 class="fw-normal">Get paid as a courier</h2>
           <p class="card-desc">Deliver goods for us and get well payed with stable salary. We are waiting for you!</p>
@@ -158,7 +150,7 @@
 
         <div class="col text-center">
           <a [routerLink]="['register/partner']">
-            <img src="../../assets/partner.jpg" height="300" class="mb-3">
+            <img src="../../assets/partner.jpg" height="350" class="mb-3">
           </a>
           <h2 class="fw-normal">Become partner</h2>
           <p class="card-desc">You provide a menu, we provide a delivery service for your business.</p>
@@ -166,9 +158,9 @@
         </div>
       </div>
 
-      <!-- START THE FEATURETTES -->
 
-      <hr class="featurette-divider">
+      <!-- START THE FEATURETTES -->
+      <!-- <hr class="featurette-divider">
 
       <div class="row featurette">
         <div class="col-md-7">
@@ -229,7 +221,7 @@
               fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
           </svg>
         </div>
-      </div>
+      </div> -->
 
       <hr class="featurette-divider">
 
