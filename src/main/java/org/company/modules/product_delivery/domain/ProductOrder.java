@@ -9,9 +9,9 @@ import org.company.modules.product.domain.Product;
 @Entity
 @Getter
 @Setter
-public class product_order {
+public class ProductOrder {
     @EmbeddedId
-    private product_orderPk id;
+    private ProductOrderPk id;
     @ManyToOne
     @MapsId("productId")
     @JoinColumn(name = "product_id")

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthRequestDto, AuthResponseDto, RegisterPartnerDto, RegisterResponseDto, RegisterUserDto } from 'src/app/shared/model/api-models';
+import { AuthRequestDto, AuthResponseDto, RegisterPartnerDto, RegisterResponseDto, RegisterUserDto, RegisterDeliveryManDto } from 'src/app/shared/model/api-models';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,11 @@ export class AuthService {
 
   registerParnter(partner: RegisterPartnerDto): Observable<RegisterResponseDto> {
     return this.http.post(`${this.apiUrl}/api/auth/register/partner`, partner);
+
+  }
+
+  registerDeliveryMan(deliveryMan: RegisterDeliveryManDto): Observable<RegisterResponseDto> {
+    return this.http.post(`${this.apiUrl}/api/auth/register/courier`, deliveryMan);
 
   }
 

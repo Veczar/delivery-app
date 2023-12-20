@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class
-product_orderPk implements Serializable {
+ProductOrderPk implements Serializable {
     @Column(name = "productId")
     private Long productId;
     @Column(name = "orderId")
