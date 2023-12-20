@@ -21,10 +21,14 @@ const routes: Routes = [
   {path: 'register/user', component: RegisterUserFormComponent},
   {path: 'register/partner', component: RegisterPartnerFormComponent},
 <<<<<<< HEAD
+<<<<<<< HEAD
   {path: 'register/courier', component: RegisterCourierFormComponent},
 =======
   {path:'partners/city', component: PartnerViewComponent},
 >>>>>>> 4a99dc4 (Partner city search + raw component)
+=======
+  {path: 'partners/city', component: PartnerViewComponent},
+>>>>>>> 3d9365d (filters html)
   {
     path: 'admin',
     component: AdminPanelComponent,
