@@ -20,4 +20,6 @@ public class RegisterDeliveryManDto {
     
     // delivery man part
     private String workingArea;
+    private String accountNumber;
+
 }
