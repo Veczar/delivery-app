@@ -10,6 +10,6 @@ public class DeliveryManDto {
     private long id;
     private String workingArea;
     private int rating;
-
+    private String accountNumber;
     private UserDto user;
 }

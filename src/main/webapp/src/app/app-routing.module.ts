@@ -8,13 +8,14 @@ import { AdminPanelComponent } from './modules/admin-panel/admin-panel.component
 import { AdminDashboardComponent } from './modules/admin-panel/admin-dashboard/admin-dashboard.component';
 import { UserTableComponent } from './modules/admin-panel/user-table/user-table.component';
 import { RegisterPartnerFormComponent } from './modules/auth/register-partner-form/register-partner-form.component';
-
+import { RegisterCourierFormComponent } from './modules/auth/register-courier-form/register-courier-form.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
   {path: 'auth', component: LoginFormComponent},
   {path: 'register/user', component: RegisterUserFormComponent},
   {path: 'register/partner', component: RegisterPartnerFormComponent},
+  {path: 'register/courier', component: RegisterCourierFormComponent},
   {
     path: 'admin',
     component: AdminPanelComponent,

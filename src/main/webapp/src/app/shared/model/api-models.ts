@@ -43,6 +43,7 @@ export interface DeliveryManDto {
     rating?: number;
     user?: UserDto;
     workingArea?: string;
+    accountNumber?: string;
 }
 
 export interface Iterable<T> {
@@ -110,6 +111,7 @@ export interface RegisterDeliveryManDto {
     email?: string;
     password?: string;
     workingArea?: string;
+    accountNumber?: string;
 }
 
 export interface RegisterPartnerDto {
