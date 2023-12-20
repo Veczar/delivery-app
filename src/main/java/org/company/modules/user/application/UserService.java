@@ -1,5 +1,6 @@
 package org.company.modules.user.application;
 
+import org.company.modules.role.domain.Role;
 import org.company.modules.role.domain.RoleRepository;
 import org.company.modules.user.application.web.UserDto;
 import org.company.modules.user.application.web.UserReadDto;
@@ -44,7 +45,7 @@ public class UserService extends GenericServiceWithReadDto<User, UserDto, UserRe
     }
     
     public List<UserDto> getAllUsersRoleUser() {
-        return userRepository.findByRole(roleRepository.findById(1L).orElse(null))
+        return userRepository.findByRole(new Role(1L,""))
                 .stream().map(userAssembler::toDto).collect(Collectors.toList());
     }
 }

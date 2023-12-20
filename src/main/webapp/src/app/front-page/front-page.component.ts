@@ -1,15 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../modules/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-}
 
 @Component({
   selector: 'app-front-page',
@@ -17,6 +9,7 @@ interface User {
   styleUrls: ['./front-page.component.scss']
 })
 export class FrontPageComponent {
+  cityName: string = '';
 
   loggedUser = {
     firstName: '',
@@ -25,7 +18,6 @@ export class FrontPageComponent {
 
   constructor(
     private modalService: NgbModal,
-    private router: Router,
     public authService: AuthService,
     public http: HttpClient
   ) {
@@ -42,16 +34,6 @@ export class FrontPageComponent {
     this.modalService.open(modal);
   }
 
-  navigateToAuth(): void {
-    this.router.navigate(['/auth']);
-  }
-  navigateToRegisterPartner(): void {
-    this.router.navigate(['/register/partner']);
-  }
-  navigateToRegisterCourier(): void {
-    this.router.navigate(['/register/courier']);
-  }
-
   isUserLoggedIn(): any {
     return this.authService.isUserLogged();
   }
@@ -65,16 +47,8 @@ export class FrontPageComponent {
     return localStorage.getItem('role') || '';
   }
 
-  // for token testing this is onvoked by "Contact" button on navbar
-  getUsers() {
-    this.getUsers2().subscribe((r) => {
-      console.log(r);
-    });
-  }
-
-  getUsers2(): Observable<User[]> {
-    console.log('GET request');
-    return this.http.get<User[]>("http://localhost:8080/api/users");
+  onSearch() {
+    console.log(this.cityName);
   }
 
 }
