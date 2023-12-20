@@ -31,7 +31,6 @@ import { PartnerViewComponent } from './modules/partner-view/partner-view.compon
     ReactiveFormsModule,
     RouterModule,
     BrowserAnimationsModule,
-    
     UserModule,
     AuthModule,
     AdminPanelModule
