@@ -22,7 +22,7 @@ export class FrontPageComponent {
     private modalService: NgbModal,
     public authService: AuthService,
     public http: HttpClient,
-    public toastservice: ToastService,
+    public toastService: ToastService,
   ) {
     this.updateAuthenticationState();
   }
@@ -44,6 +44,7 @@ export class FrontPageComponent {
   logOut(): void {
     this.authService.logOut();
     this.updateAuthenticationState();
+    this.toastService.showInfo('logged out');
   }
 
   getRole(): string {
@@ -55,7 +56,8 @@ export class FrontPageComponent {
   }
 
   onToast() {
-    this.toastservice.show("dupa", { classname: 'bg-success text-light', delay: 3000 });
-    this.toastservice.show("dupa info");
+    this.toastService.showInfo('info');
+    this.toastService.showSuccess('Yeah buddy!!!');
+    this.toastService.showError('error');
   }
 }

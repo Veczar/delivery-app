@@ -1,18 +1,33 @@
 <ngb-toast
   *ngFor="let toast of toastService.toasts"
-  [autohide]="true" [delay]="toast.delay || 5000"
+  [autohide]="true" [delay]="toast.delay || 4000"
   (hiddden)="toastService.remove(toast)"
-  [class]="toast.classname" 
+  [class]="toast.classname"
 >
   <div class="d-flex justify-content-between align-items-start">
-    <div *ngIf="toast.classname == 'bg-success text-light' " class="me-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022"/>
-      </svg>
-    </div>
+    <ng-container [ngSwitch]="toast.classname">
+      <div *ngSwitchCase="'bg-success text-light'" class="me-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+          <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022"/>
+        </svg>
+      </div>
+      <div *ngSwitchCase="'bg-danger text-light'" class="me-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 17 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+        </svg>
+      </div>
+      <div *ngSwitchDefault class="me-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+        </svg>
+      </div>
+    </ng-container>
+    
     <div>
       {{toast.body}}
     </div>
-    <button class="btn btn-close exit-btn ms-auto" (click)="toastService.remove(toast)"></button>
+    <button class="btn btn-close ms-auto" (click)="toastService.remove(toast)"></button>
   </div>
 </ngb-toast>
