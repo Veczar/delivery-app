@@ -123,7 +123,7 @@ export class RegisterCourierFormComponent implements OnInit {
           this.courierForm.patchValue({
             telephoneNumber: combinedTelephoneNumber,
           });
-          this.toastService.showSuccess('Account created, now log in');
+          this.toastService.showSuccess('Account created, you can now now log in');
           this.router.navigate(['']);
         }
         else {

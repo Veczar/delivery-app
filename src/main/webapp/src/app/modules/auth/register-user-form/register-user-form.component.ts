@@ -105,7 +105,7 @@ export class RegisterUserFormComponent implements OnInit {
         console.log('response:', response);
 
         if (response.message == 'success') {
-          this.toastService.showSuccess('Account created, now log in')
+          this.toastService.showSuccess('Account created, you can now now log in');
           this.router.navigate(['']);
         }
         else {
