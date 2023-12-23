@@ -13,9 +13,12 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log("error interceptor", error);
-        this.toastService.showError("Something went wrong");
 
-        // You can also re-throw the error to propagate it to the calling code.
+        if (error.status === 403) {
+          this.toastService.showError("Authentication error");
+        }
+        else this.toastService.showError("Something went wrong");
+
         return throwError(error);
       })
     );

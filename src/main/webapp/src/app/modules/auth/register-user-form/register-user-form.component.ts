@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { AuthService } from '../auth.service';
 import { RegisterResponseDto, RegisterUserDto } from 'src/app/shared/model/api-models';
 import { Router } from '@angular/router';
+import { ToastService } from 'src/app/shared/toast/toast.service';
 
 @Component({
   selector: 'app-register-user-form',
@@ -25,6 +26,7 @@ export class RegisterUserFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -103,7 +105,7 @@ export class RegisterUserFormComponent implements OnInit {
         console.log('response:', response);
 
         if (response.message == 'success') {
-          console.log('succesfully registered a user');
+          this.toastService.showSuccess('Account created, now log in')
           this.router.navigate(['']);
         }
         else {

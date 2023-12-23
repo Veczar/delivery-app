@@ -27,7 +27,7 @@ export class LoginFormComponent  {
     this.authService.logIn(this.loginObj).subscribe((result) => {
       this.authService.setLoggedUser(result);
       this.router.navigate(['']);
-      this.toastService.show('Logged in', { classname: 'bg-success text-light', delay: 3000 });
+      this.toastService.showSuccess('Logged in');
     }),
     (error: any) => {
       console.error('Authentication failed:', error);
