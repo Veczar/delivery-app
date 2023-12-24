@@ -34,10 +34,9 @@ public class AuthService {
     private final DeliveryManRepository deliveryManRepository;
     private final RoleRepository roleRepository;
     private final AddressRepository addressRepository;
-
-    private final AddressAssembler addressAssembler;
-
     private final CategoryRepository categoryRepository;
+    
+    private final AddressAssembler addressAssembler;
     
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
@@ -78,6 +77,11 @@ public class AuthService {
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .role(role)
                 .build();
+        
+        Address address = new Address();
+        addressAssembler.toEntity(userDto.getAddress(), address);
+        addressRepository.save(address);
+        user.getAddresses().add(address);
         
         userRepository.save(user);
         
@@ -128,6 +132,7 @@ public class AuthService {
                 .password(passwordEncoder.encode(partnerDto.getPassword()))
                 .role(role)
                 .build();
+        user.getAddresses().add(address);
         
         userRepository.save(user);
         
@@ -136,7 +141,6 @@ public class AuthService {
                 .name(partnerDto.getName())
                 .accountNumber(partnerDto.getAccountNumber())
                 .contactNumber(partnerDto.getContactNumber())
-                .address(address)
                 .owner(user)
                 .categories(Set.of(category))
                 .build();

@@ -3,6 +3,7 @@ package org.company.modules.address.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.company.modules.user.domain.User;
 
 
 @Getter
@@ -16,4 +17,8 @@ public class Address {
     private String street;
     private String city;
     private String postalCode;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.company.modules.address.application.web.AddressDto;
 import org.company.modules.category.application.web.CategoryDto;
-import org.company.modules.category.domain.Category;
 import org.company.modules.user.application.web.UserDto;
 
 import java.util.Set;
@@ -22,7 +20,7 @@ public class PartnerDto {
     private String accountNumber;
     private String contactNumber;
     
-    private AddressDto address;
+//    private AddressDto address;
     private UserDto owner;
     private Set<CategoryDto> categories;
 }

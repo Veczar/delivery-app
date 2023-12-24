@@ -9,7 +9,6 @@ import org.company.modules.address.domain.Address;
 import org.company.modules.delivery_man.domain.DeliveryMan;
 import org.company.modules.partner.domain.Partner;
 import org.company.modules.user.domain.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
 
@@ -36,7 +35,7 @@ public class Order {
     @JoinColumn(name = "partner_id")
     private Partner partner;
     @ManyToOne
-    @JoinColumn(name = "delivery_man_id")
+    @JoinColumn(name = "courier_id")
     private DeliveryMan deliveryMan;
     private Double totalPrice;
     private Double tip;

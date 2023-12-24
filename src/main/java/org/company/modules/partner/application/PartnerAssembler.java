@@ -37,7 +37,7 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partnerDto.setName(partner.getName());
         partnerDto.setAccountNumber(partner.getAccountNumber());
         partnerDto.setContactNumber(partner.getContactNumber());
-        partnerDto.setAddress(addressAssembler.toDto(partner.getAddress()));
+//        partnerDto.setAddress(addressAssembler.toDto(partner.getAddress()));
         partnerDto.setOwner(userAssembler.toDto(partner.getOwner()));
         partnerDto.setCategories(partner.getCategories()
                 .stream().map(categoryAssembler::toDto).collect((Collectors.toSet())));
@@ -49,16 +49,16 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partner.setName(partnerDto.getName());
         partner.setAccountNumber(partnerDto.getAccountNumber());
         partner.setContactNumber(partnerDto.getContactNumber());
-        UpdateAddress(partnerDto, partner);
+//        UpdateAddress(partnerDto, partner);
         UpdateUser(partnerDto, partner);
 
         partner.setCategories(partnerDto.getCategories().stream().map(categoryDto -> GetCategory(categoryDto)).collect(Collectors.toSet()));
     }
     
-    private void UpdateAddress(PartnerDto partnerDto, Partner partner) {
-        Address address = addressRepository.findById(partnerDto.getAddress().getId()).orElseThrow(null);
-        partner.setAddress(address);
-    }
+//    private void UpdateAddress(PartnerDto partnerDto, Partner partner) {
+//        Address address = addressRepository.findById(partnerDto.getAddress().getId()).orElseThrow(null);
+//        partner.setAddress(address);
+//    }
     
     private void UpdateUser(PartnerDto partnerDto, Partner partner) {
         User user = userRepository.findById(partnerDto.getOwner().getId()).orElseThrow(null);

@@ -24,9 +24,9 @@ public class Partner {
     private String accountNumber;
     private String contactNumber;
 
-    @OneToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+//    @OneToOne
+//    @JoinColumn(name = "address_id")
+//    private Address address;
 
     @OneToOne
     @JoinColumn(name = "owner_id")
