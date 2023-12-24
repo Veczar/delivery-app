@@ -51,7 +51,6 @@ public class RecurringOrderService extends GenericService<RecurringOrder, Recurr
         lock.lock();
         List<RecurringOrderDto> recurringOrderDtoList = getAllItems();
         Date curDate = new Date();
-        int secondsInDay = 86400;
         for(RecurringOrderDto recurringOrderDto : recurringOrderDtoList)
         {
             while(!recurringOrderDto.getStartDate().after(curDate))
