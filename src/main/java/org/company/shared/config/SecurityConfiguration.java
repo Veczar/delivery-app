@@ -37,6 +37,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("api/partners/reviews/**").hasAuthority("ADMIN")
                                 .requestMatchers("api/orders/**").hasAuthority("ADMIN")
                                 .requestMatchers("api/product_order/**").hasAuthority("ADMIN")
+                                .requestMatchers("api/recurring_orders/**").hasAuthority("ADMIN")
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

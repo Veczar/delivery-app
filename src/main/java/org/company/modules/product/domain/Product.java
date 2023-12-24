@@ -21,14 +21,14 @@ public class Product  {
     private String photoPath;
     private Boolean onSale;
     private Double price;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
     @OneToOne
-    @JoinColumn(name = "seller_id")
+    @JoinColumn(name = "partner_id")
     private Partner partner;
 
 }
