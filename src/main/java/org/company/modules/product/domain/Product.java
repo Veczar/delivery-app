@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.company.modules.category.domain.Category;
+import org.company.modules.partner.domain.Partner;
 
 import java.util.Set;
 
@@ -26,5 +27,8 @@ public class Product  {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
+    @OneToOne
+    @JoinColumn(name = "seller_id")
+    private Partner partner;
 
 }

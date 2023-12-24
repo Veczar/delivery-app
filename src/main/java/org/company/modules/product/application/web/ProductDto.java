@@ -3,8 +3,7 @@ package org.company.modules.product.application.web;
 import lombok.Getter;
 import lombok.Setter;
 import org.company.modules.category.application.web.CategoryDto;
-import org.company.modules.category.domain.Category;
-
+import org.company.modules.partner.application.web.PartnerDto;
 import java.util.Set;
 
 @Getter
@@ -17,5 +16,6 @@ import java.util.Set;
         private Boolean onSale;
         private Double price;
         Set<CategoryDto> categories;
+        private PartnerDto partner;
 
     }
