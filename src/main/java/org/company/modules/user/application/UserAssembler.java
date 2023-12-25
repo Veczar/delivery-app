@@ -13,7 +13,6 @@ import org.company.modules.user.domain.User;
 import org.company.shared.aplication.IAssembler;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;

@@ -38,11 +38,11 @@ public class User implements UserDetails {
     @JoinColumn(name = "role_id")
     private Role role;
     
-    @Fetch(FetchMode.SUBSELECT)
+//    @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private final List<Address> addresses = new ArrayList<>();
     
     @Override
