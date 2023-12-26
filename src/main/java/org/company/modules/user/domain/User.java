@@ -38,7 +38,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "role_id")
     private Role role;
     
-//    @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true,

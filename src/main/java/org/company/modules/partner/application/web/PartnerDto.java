@@ -19,8 +19,6 @@ public class PartnerDto {
     private String name;
     private String accountNumber;
     private String contactNumber;
-    
-//    private AddressDto address;
     private UserDto owner;
     private Set<CategoryDto> categories;
 }

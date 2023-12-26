@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.company.modules.address.application.web.AddressDto;
 import org.company.modules.role.application.web.RoleDto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,5 +17,5 @@ public class UserDto {
     private String telephoneNumber;
     private String email;
     private RoleDto role;
-    private List<AddressDto> addresses = new ArrayList<>();
+    private List<AddressDto> addresses;
 }

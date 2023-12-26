@@ -119,10 +119,7 @@ public class AuthService {
         addressRepository.save(address);
 
         Category category = categoryRepository.findByName(partnerDto.getCategory()).orElse(null);
-
-//       if(address == null) {
-//           return RegisterResponseDto.builder().message("address not available").build();
-//       }
+        
         // create user
         User user = User.builder()
                 .firstName(partnerDto.getFirstName())

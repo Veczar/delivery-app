@@ -2,7 +2,6 @@ package org.company.modules.partner.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.company.modules.address.domain.Address;
 import org.company.modules.category.domain.Category;
 import org.company.modules.user.domain.User;
 
@@ -23,10 +22,6 @@ public class Partner {
     private String name;
     private String accountNumber;
     private String contactNumber;
-
-//    @OneToOne
-//    @JoinColumn(name = "address_id")
-//    private Address address;
 
     @OneToOne
     @JoinColumn(name = "owner_id")

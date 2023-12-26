@@ -1,12 +1,16 @@
 package org.company.modules.auth;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Key;
 import java.util.Date;
@@ -18,7 +22,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     
-    private static final String SECRET_KEY = "2b32ea2d805a2fc88a51dbea22d7998873d6d6a1d54be974ca1d7726a76809c4";
+    private static final String SECRET_KEY = "2b32ea2d805a2fc88a51dbea22d7998873d6d6a1d54be974ca1d7726a76809c4"; //todo: hide it
     
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -40,7 +44,6 @@ public class JwtService {
                 .setIssuedAt(new Date(System.currentTimeMillis()))
 //                .setExpiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 1) // day
                 .setExpiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 7)) // week
-//                .setExpiration(new Date(System.currentTimeMillis() + 1000L * 10)) // 10s
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -59,11 +62,16 @@ public class JwtService {
     }
     
     private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(getSignInKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(getSignInKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        }
+        catch (ExpiredJwtException e) {
+            throw new ExpiredJwtException(Jwts.header(), Jwts.claims(), "token expired");
+        }
     }
     
     private Key getSignInKey() {
