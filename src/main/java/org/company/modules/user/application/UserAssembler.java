@@ -47,6 +47,17 @@ public class UserAssembler implements IAssembler<User, UserDto> {
     }
     
     /**
+     * <ul>
+     *     <li>
+     *         if you want to add an addr to user: put address object in addresses array (PUT, POST).
+     *     </li>
+     *     <li>
+     *         if you want to remove it: don't include it in PUT request.
+     *     </li>
+     *     <li>
+     *         if you want to keep an addr: put an <B>id</B> of the ones you want to keep (PUT).
+     *     </li>
+     * </ul>
      * @param userDto Dto containing the data from the outside (JSON)
      * @param user    user to put the Dto's data in
      */
