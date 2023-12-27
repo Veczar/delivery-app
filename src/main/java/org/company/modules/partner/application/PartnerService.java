@@ -1,6 +1,7 @@
 package org.company.modules.partner.application;
 
 import org.company.modules.partner.application.web.PartnerDto;
+import org.company.modules.partner.application.web.PartnerReadDto;
 import org.company.modules.partner.domain.Partner;
 import org.company.modules.partner.domain.PartnerRepository;
 import org.company.modules.partner.domain.PartnerSpecifications;
@@ -22,9 +23,9 @@ public class PartnerService extends GenericService<Partner, PartnerDto, Long, Pa
         this.partnerAssembler = assembler;
     }
     
-    public List<PartnerDto> getPartnersInCity(String city) {
+    public List<PartnerReadDto> getPartnersInCity(String city) {
         Specification<Partner> citySpec = PartnerSpecifications.hasCity(city);
-        return partnerRepository.findAll(citySpec).stream().map(partnerAssembler::toDto).collect(Collectors.toList());
+        return partnerRepository.findAll(citySpec).stream().map(partnerAssembler::toReadDto).collect(Collectors.toList());
     }
 }
 

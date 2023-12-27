@@ -9,6 +9,7 @@ import org.company.modules.category.application.web.CategoryDto;
 import org.company.modules.category.domain.Category;
 import org.company.modules.category.domain.CategoryRepository;
 import org.company.modules.partner.application.web.PartnerDto;
+import org.company.modules.partner.application.web.PartnerReadDto;
 import org.company.modules.partner.domain.Partner;
 import org.company.modules.user.application.UserAssembler;
 import org.company.modules.user.domain.User;
@@ -42,6 +43,14 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partnerDto.setCategories(partner.getCategories()
                 .stream().map(categoryAssembler::toDto).collect((Collectors.toSet())));
         return partnerDto;
+    }
+    public PartnerReadDto toReadDto(Partner partner) {
+        PartnerReadDto partnerReadDto = new PartnerReadDto();
+        partnerReadDto.setName(partner.getName());
+        partnerReadDto.setAddress(addressAssembler.toDto(partner.getAddress()));
+        partnerReadDto.setCategories(partner.getCategories()
+                .stream().map(categoryAssembler::toDto).collect((Collectors.toSet())));
+        return partnerReadDto;
     }
 
     @Override

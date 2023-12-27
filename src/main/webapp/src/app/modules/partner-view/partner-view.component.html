@@ -1,4 +1,4 @@
-<header class="bg-light">
+<header class="blight">
     <div class="container" id="navbarTogglerDemo02">
         <div class="position-div">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -82,11 +82,36 @@
             <h1>Restauracje w {{currentCity}}</h1>
 
             <div class="category-page-stores-container">
-                <div class="category-stores-pagination">
-                    <div class="category_stores-list">
 
+                <!-- <div class="row">
+                    <div class="col-md-4" *ngFor="let restaurant of restaurants">
+                      <div class="card mb-3">
+                        <img src="../../../../assets/wrr-buzka.jpg"  class="card-img-top h-100" alt="Restaurant Image">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ restaurant?.name }}</h5>
+                          <p class="card-text">{{ restaurant?.description }}</p>
+                        </div>
+                      </div>
                     </div>
-                </div>
+                  </div> -->
+
+                  <div class="row">
+                    <div class="col-md-4" *ngFor="let partner of partners">
+                      <div class="card mb-3">
+                        <img src="../../../../assets/wrr-buzka.jpg" class="card-img-top h-100" alt="Restaurant Image">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ partner?.name }}</h5>
+                          <p class="card-text"><span *ngFor="let category of partner?.categories">{{ category?.name }} </span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                <!-- <div class="category-stores-pagination">
+                    <div class="category_stores-list">
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>

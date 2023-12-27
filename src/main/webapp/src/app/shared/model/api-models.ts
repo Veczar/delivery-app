@@ -84,6 +84,11 @@ export interface PartnerDto {
     address?: AddressDto;
     categories?: CategoryDto[];
 }
+export interface PartnerReadDto {
+    name?: string;
+    address?: AddressDto;
+    categories?: CategoryDto[];
+}
 
 export interface PartnerReviewDto {
     id?: number;

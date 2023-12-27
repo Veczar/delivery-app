@@ -20,7 +20,7 @@ public class PartnerController extends GenericController<PartnerDto, Long, Partn
     }
 
     @GetMapping("/city/{city}")
-    public List<PartnerDto> getPartnersCity(@PathVariable String city) {
+    public List<PartnerReadDto> getPartnersCity(@PathVariable String city) {
         return partnerService.getPartnersInCity(city);
     }
 }
