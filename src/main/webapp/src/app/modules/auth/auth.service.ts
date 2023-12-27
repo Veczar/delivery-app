@@ -45,6 +45,7 @@ export class AuthService {
     localStorage.setItem('expirationDate', responseObj.expirationDate || '');
     localStorage.setItem('firstName', responseObj.firstName || '');
     localStorage.setItem('lastName', responseObj.lastName || '');
+    localStorage.setItem('id', responseObj.id?.toString() || '' );
 
     console.log(responseObj)
   }

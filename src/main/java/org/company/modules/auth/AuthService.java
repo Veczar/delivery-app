@@ -59,6 +59,7 @@ public class AuthService {
                 .expirationDate(isoFormat.format(jwtService.extractExpiration(jwtToken)))
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .id(user.getId())
                 .build();
     }
     

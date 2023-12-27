@@ -46,21 +46,6 @@ public class UserAssembler implements IAssembler<User, UserDto> {
         return userDto;
     }
     
-    /**
-     * <ul>
-     *     <li>
-     *         if you want to add an addr to user: put address object in addresses array (PUT, POST).
-     *     </li>
-     *     <li>
-     *         if you want to remove it: don't include it in PUT request.
-     *     </li>
-     *     <li>
-     *         if you want to keep an addr: put an <B>id</B> of the ones you want to keep (PUT).
-     *     </li>
-     * </ul>
-     * @param userDto Dto containing the data from the outside (JSON)
-     * @param user    user to put the Dto's data in
-     */
     //update
     public void toEntity(UserDto userDto, User user) {
         user.setFirstName(userDto.getFirstName());
@@ -76,6 +61,21 @@ public class UserAssembler implements IAssembler<User, UserDto> {
         user.setRole(role);
     }
     
+    /**
+     * <ul>
+     *     <li>
+     *         if you want to add an addr to user: put address object in addresses array (PUT, POST).
+     *     </li>
+     *     <li>
+     *         if you want to remove it: don't include it in PUT request.
+     *     </li>
+     *     <li>
+     *         if you want to keep an addr: put an <B>id</B> of the ones you want to keep (PUT).
+     *     </li>
+     * </ul>
+     * @param userDto Dto containing the data from the outside (JSON)
+     * @param user    user to put the Dto's data in
+     */
     private void updateUserAdresses(UserDto userDto, User user) {
         if(!user.getAddresses().isEmpty()) {
             Set<Long> adressesIds = userDto.getAddresses()

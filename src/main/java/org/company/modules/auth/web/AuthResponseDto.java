@@ -17,4 +17,5 @@ public class AuthResponseDto {
     private String expirationDate;
     private String firstName;
     private String lastName;
+    private Long id;
 }

@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
+import { UserSettingsComponent } from './modules/user/user-settings/user-settings.component';
 
 
 
@@ -20,6 +21,7 @@ import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
   declarations: [
     AppComponent,
     FrontPageComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,

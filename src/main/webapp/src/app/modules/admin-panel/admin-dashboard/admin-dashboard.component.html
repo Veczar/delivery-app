@@ -3,10 +3,22 @@
   <h1 class="h2">Dashboard</h1>
 </div>
 
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
-</button>
+</button> -->
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let restaurant of restaurants; let i = index ">
+    <div class="card mb-3">
+      <img src="../../../../assets/wrr-buzka.jpg" height="120" class="card-img-top" alt="Restaurant Image">
+      <div class="card-body">
+        <h5 class="card-title">{{ restaurant?.name}} {{i+1}}</h5>
+        <p class="card-text">{{ restaurant?.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

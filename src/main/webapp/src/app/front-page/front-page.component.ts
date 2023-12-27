@@ -50,5 +50,9 @@ export class FrontPageComponent {
   onSearch() {
     console.log(this.cityName);
   }
+  
+  openSettings(modal: any) {
+    this.modalService.open(modal);
+  }
 
 }
