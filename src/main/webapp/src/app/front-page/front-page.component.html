@@ -26,6 +26,9 @@
               <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
                 <i class="bi bi-speedometer2"></i> Dashboard</button>
             </li>
+            <li>
+              <button class="btn btn-outline-primary" (click)="onToast()">Show toasts</button>
+            </li>
           </ul>
           <!-- <form class="middle-search" role="search">
               <div class="input-group">
@@ -39,7 +42,7 @@
           <div *ngIf="!(isUserLoggedIn())">
             <button class="btn btn-outline-primary me-2" type="submit"
               [routerLink]="['/register/user']">Register</button>
-            <button class="btn btn-outline-success" type="submit" [routerLink]="['/auth']">Sign in</button>
+            <button class="btn btn-outline-success" type="submit" [routerLink]="['/auth']">Log in</button>
           </div>
 
           <div *ngIf="isUserLoggedIn() && getRole() !== 'USER'" class="nav-item text-white me-2 badge text-bg-primary">

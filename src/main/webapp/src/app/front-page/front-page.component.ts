@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BootstrapOptions, Component } from '@angular/core';
+import { NgbModal, NgbToast, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../modules/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { ToastService } from '../shared/toast/toast.service';
 
 @Component({
   selector: 'app-front-page',
@@ -10,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FrontPageComponent {
   cityName: string = '';
+  show = false;
 
   loggedUser = {
     firstName: '',
@@ -19,7 +21,8 @@ export class FrontPageComponent {
   constructor(
     private modalService: NgbModal,
     public authService: AuthService,
-    public http: HttpClient
+    public http: HttpClient,
+    public toastService: ToastService,
   ) {
     this.updateAuthenticationState();
   }
@@ -41,6 +44,7 @@ export class FrontPageComponent {
   logOut(): void {
     this.authService.logOut();
     this.updateAuthenticationState();
+    this.toastService.showInfo('logged out');
   }
 
   getRole(): string {
@@ -51,4 +55,9 @@ export class FrontPageComponent {
     console.log(this.cityName);
   }
 
+  onToast() {
+    this.toastService.showInfo('info');
+    this.toastService.showSuccess('Yeah buddy!!!');
+    this.toastService.showError('error');
+  }
 }
