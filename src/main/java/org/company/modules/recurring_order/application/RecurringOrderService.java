@@ -2,89 +2,90 @@ package org.company.modules.recurring_order.application;
 
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.company.modules.order.application.OrderService;
 import org.company.modules.order.application.web.OrderDto;
 import org.company.modules.order.domain.Status;
 import org.company.modules.product_order.application.ProductOrderService;
 import org.company.modules.product_order.application.web.ProductOrderDto;
 import org.company.modules.recurring_order.application.web.RecurringOrderDto;
-import org.company.modules.recurring_order.domain.Frequency;
 import org.company.modules.recurring_order.domain.RecurringOrderRepository;
 import org.company.modules.recurring_order.domain.RecurringOrder;
 import org.company.shared.aplication.GenericService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 public class RecurringOrderService extends GenericService<RecurringOrder, RecurringOrderDto, Long, RecurringOrderRepository, RecurringOrderAssembler > {
-    private final Lock lock = new ReentrantLock();
-    private final OrderService orderService;
     private final ProductOrderService productOrderService;
-    private final HashMap<Long, ScheduledFuture<?>> hashMap = new HashMap<>();
+    private final OrderService orderService;
+    final HashMap<Long, ScheduledFuture<?>> hashMap;
     private final ThreadPoolTaskScheduler taskScheduler;
-    public RecurringOrderService(ProductOrderService productOrderService, OrderService orderService, RecurringOrderRepository repository, RecurringOrderAssembler assembler) {
+
+    public RecurringOrderService(ProductOrderService productOrderService, OrderService orderService,
+                                 RecurringOrderRepository repository, RecurringOrderAssembler assembler,
+                                 ThreadPoolTaskScheduler taskScheduler) {
         super(repository, assembler);
         this.productOrderService = productOrderService;
         this.orderService = orderService;
-        taskScheduler = new ThreadPoolTaskScheduler();
-        taskScheduler.setPoolSize(50);
-        taskScheduler.setThreadNamePrefix("ThreadPoolTaskScheduler");
-        taskScheduler.initialize();
+        this.taskScheduler = taskScheduler;
+        hashMap = new HashMap<>();
+        init();
     }
-    @PostConstruct
-    private void init()
+    void init()
     {
-        lock.lock();
-        List<RecurringOrderDto> recurringOrderDtoList = getAllItems();
-        Date curDate = new Date();
-        for(RecurringOrderDto recurringOrderDto : recurringOrderDtoList)
+        synchronized (hashMap)
         {
-            while(!recurringOrderDto.getStartDate().after(curDate))
+            List<RecurringOrderDto> recurringOrderDtoList = getAllItems();
+            Date curDate = new Date();
+            for(RecurringOrderDto recurringOrderDto : recurringOrderDtoList)
             {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(recurringOrderDto.getStartDate());
-                int amount = switch (recurringOrderDto.getFrequency())
+                if(!recurringOrderDto.getStartDate().after(curDate))
                 {
-                    case everyDay -> 1;
-                    case every2Days -> 2;
-                    case every3Days -> 3;
-                    case every4Days -> 4;
-                    case every5Days -> 5;
-                    case every6Days -> 6;
-                    case everyWeek -> 7;
-                    case every2Weeks -> 14;
-                    case every3Weeks -> 21;
-                    case every4Weeks -> 28;
-                    case everyMonth -> 1;
-                };
-                if (recurringOrderDto.getFrequency() == Frequency.everyMonth)
-                {
-                    calendar.add(Calendar.MONTH, 1);
+                    Calendar calendar = Calendar.getInstance();
+                    Date tmpDate = recurringOrderDto.getStartDate();
+                    calendar.setTime(tmpDate);
+                    int amount = switch (recurringOrderDto.getFrequency())
+                    {
+                        case everyDay -> 1;
+                        case every2Days -> 2;
+                        case every3Days -> 3;
+                        case every4Days -> 4;
+                        case every5Days -> 5;
+                        case every6Days -> 6;
+                        case everyWeek -> 7;
+                        case every2Weeks -> 14;
+                        case every3Weeks -> 21;
+                        case every4Weeks -> 28;
+                    };
+                    long difference = curDate.getTime() - recurringOrderDto.getStartDate().getTime();
+                    long days = (difference/86400000) + (difference%86400000  == 0 ? 0 : 1);
+                    long multiplier = days / amount;
+                    int  remainder = days % amount != 0 ? 1 : 0;
+                    int  daysToAdd = (int)(multiplier*amount + remainder*amount);
+                    calendar.add(Calendar.DATE, daysToAdd);
+                    Date tmpDate2 = calendar.getTime();
+                    tmpDate.setYear(tmpDate2.getYear());
+                    tmpDate.setMonth(tmpDate2.getMonth());
+                    tmpDate.setDate(tmpDate2.getDate());
                 }
-                else
-                {
-                    calendar.add(Calendar.DATE, 1);
-                }
-                recurringOrderDto.setStartDate(calendar.getTime());
+                ScheduledFuture<?> scheduledFuture = taskScheduler.schedule(new OrderStarter(recurringOrderDto, productOrderService,orderService, hashMap, taskScheduler), recurringOrderDto.getStartDate());
+                hashMap.put(recurringOrderDto.getId(), scheduledFuture);
             }
-            ScheduledFuture<?> scheduledFuture = taskScheduler.schedule(new OrderStarter(recurringOrderDto, productOrderService,orderService, hashMap, lock, taskScheduler), recurringOrderDto.getStartDate().toInstant());
-            hashMap.put(recurringOrderDto.getId(), scheduledFuture);
         }
-        lock.unlock();
+
     }
 
     public PeriodicTrigger periodicFixedDelayTrigger(Duration duration, Duration delay) {
@@ -96,12 +97,13 @@ public class RecurringOrderService extends GenericService<RecurringOrder, Recurr
     @Override
     @Transactional
     public RecurringOrderDto removeItem(Long id) {
-        lock.lock();
-        hashMap.get(id).cancel(false);
-        hashMap.remove(id);
-        lock.unlock();
+
         RecurringOrderDto recurringOrderDto = null;
         recurringOrderDto = super.removeItem(id);
+        synchronized (hashMap) {
+            hashMap.get(recurringOrderDto.getId()).cancel(false);
+            hashMap.remove(recurringOrderDto.getId());
+        }
         return recurringOrderDto;
     }
 
@@ -109,38 +111,41 @@ public class RecurringOrderService extends GenericService<RecurringOrder, Recurr
 
         RecurringOrderDto recurringOrderDto = null;
         recurringOrderDto = super.saveItem(dto);
-        lock.lock();
-        ScheduledFuture<?> scheduledFuture = taskScheduler.schedule(new OrderStarter(recurringOrderDto, productOrderService,orderService, hashMap, lock, taskScheduler), dto.getStartDate().toInstant());
-        hashMap.put(recurringOrderDto.getId(), scheduledFuture);
-        lock.unlock();
+        synchronized (hashMap)
+        {
+            ScheduledFuture<?> scheduledFuture = taskScheduler.schedule(new OrderStarter(recurringOrderDto, productOrderService,orderService, hashMap,  taskScheduler), dto.getStartDate());
+            hashMap.put(recurringOrderDto.getId(), scheduledFuture);
+        }
         return recurringOrderDto;
     }
 
     @Override
     @Transactional
     public RecurringOrderDto updateItem(Long id, RecurringOrderDto dto) {
-        lock.lock();
+
         RecurringOrderDto recurringOrderDto = null;
         recurringOrderDto = super.updateItem(id, dto);
-        hashMap.get(id).cancel(false);
-        hashMap.remove(id);
-        ScheduledFuture<?> scheduledFuture = taskScheduler.schedule(new OrderStarter(recurringOrderDto, productOrderService,orderService, hashMap, lock, taskScheduler), dto.getStartDate().toInstant());
-        hashMap.put(id, scheduledFuture);
-        lock.unlock();
+        synchronized (hashMap)
+        {
+            hashMap.get(id).cancel(false);
+            hashMap.remove(id);
+            ScheduledFuture<?> scheduledFuture = taskScheduler.schedule(new OrderStarter(recurringOrderDto, productOrderService,orderService, hashMap,  taskScheduler), dto.getStartDate());
+            hashMap.put(id, scheduledFuture);
+        }
         return recurringOrderDto;
     }
     @AllArgsConstructor
     static class OrderStarter implements Runnable
     {
+        @Getter
         private RecurringOrderDto recurringOrderDto;
         private final ProductOrderService productOrderService;
         private final OrderService orderService;
         private HashMap<Long, ScheduledFuture<?>> hashMap;
-        private Lock lock;
         private ThreadPoolTaskScheduler taskScheduler;
         @Override
         public void run() {
-            Trigger cronTrigger =
+            PeriodicTrigger trigger =
             switch (recurringOrderDto.getFrequency())
             {
                 case everyDay -> createPeriodicTrigger(1);
@@ -153,12 +158,13 @@ public class RecurringOrderService extends GenericService<RecurringOrder, Recurr
                 case every2Weeks -> createPeriodicTrigger(14);
                 case every3Weeks -> createPeriodicTrigger(21);
                 case every4Weeks -> createPeriodicTrigger(28);
-                case everyMonth -> new CronTrigger(recurringOrderDto.getStartDate().getMinutes()+" "+recurringOrderDto.getStartDate().getHours()+" "+ recurringOrderDto.getStartDate().getDay()+" * ?");
             };
-            lock.lock();
-            ScheduledFuture<?> scheduledFuture = taskScheduler.schedule(new OrderCreator(recurringOrderDto, productOrderService, orderService, hashMap, lock), cronTrigger);
-            hashMap.put(recurringOrderDto.getId(), scheduledFuture);
-            lock.unlock();
+            synchronized (hashMap)
+            {
+                hashMap.remove(recurringOrderDto.getId());
+                ScheduledFuture<?> scheduledFuture = taskScheduler.schedule(new OrderCreator(recurringOrderDto, productOrderService, orderService), trigger);
+                hashMap.put(recurringOrderDto.getId(), scheduledFuture);
+            }
 
         }
         private PeriodicTrigger createPeriodicTrigger(long days)
@@ -172,17 +178,16 @@ public class RecurringOrderService extends GenericService<RecurringOrder, Recurr
 
     @AllArgsConstructor
     static class OrderCreator implements Runnable {
+        @Getter
         private RecurringOrderDto recurringOrderDto;
         private final ProductOrderService productOrderService;
         private final OrderService orderService;
-        private HashMap<Long, ScheduledFuture<?>> hashMap;
-        private Lock lock;
         @Override
         public void run() {
-            makeOrder(recurringOrderDto, productOrderService, orderService, hashMap, lock);
+            makeOrder(recurringOrderDto, productOrderService, orderService);
         }
     }
-    private static synchronized void makeOrder(RecurringOrderDto recurringOrderDto, ProductOrderService productOrderService, OrderService orderService, HashMap<Long, ScheduledFuture<?>> hashMap, Lock lock)
+    private static synchronized void makeOrder(RecurringOrderDto recurringOrderDto, ProductOrderService productOrderService, OrderService orderService)
     {
         OrderDto orderDto = new OrderDto();
         orderDto.setAddressStart(recurringOrderDto.getAddressStart());

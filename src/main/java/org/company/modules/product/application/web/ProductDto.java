@@ -6,7 +6,7 @@ import org.company.modules.category.application.web.CategoryDto;
 import org.company.modules.partner.application.web.PartnerDto;
 import java.util.Set;
 
-@Getter
+    @Getter
     @Setter
     public class ProductDto {
         private Long id;

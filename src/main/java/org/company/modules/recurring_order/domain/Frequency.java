@@ -10,6 +10,5 @@ public enum Frequency {
     everyWeek,
     every2Weeks,
     every3Weeks,
-    every4Weeks,
-    everyMonth
+    every4Weeks
 }

@@ -25,11 +25,11 @@ public class RecurringOrderAssembler implements IAssembler<RecurringOrder, Recur
     private final UserRepository userRepository;
     private final ProductAssembler productAssembler;
     private final UserAssembler userAssembler;
+    private final AddressAssembler addressAssembler;
     @Override
     public RecurringOrderDto toDto(RecurringOrder recurringOrder) {
         RecurringOrderDto recurringOrderDto  = new RecurringOrderDto();
         recurringOrderDto.setId(recurringOrder.getId());
-        AddressAssembler addressAssembler = new AddressAssembler();
         recurringOrderDto.setAddressStart(addressAssembler.toDto(recurringOrder.getAddressStart()));
         recurringOrderDto.setAddressEnd(addressAssembler.toDto(recurringOrder.getAddressEnd()));
         recurringOrderDto.setQuantity(recurringOrder.getQuantity());
