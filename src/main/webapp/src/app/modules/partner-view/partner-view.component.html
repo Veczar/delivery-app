@@ -9,14 +9,14 @@
         </div>
 
         <div class="header-search">
-            <div class="header-search-input"> 
+            <div class="header-search-input">
                 <form class="margin-search" >
-                
+
                         <button type="button" class="btn header-search-input-placeholder px-4 r-10" (click)="search(searchTerm)">
                             <i class="fa-solid fa-magnifying-glass"></i>
                           </button>
-                   
-                     <div class="text-input"> 
+
+                     <div class="text-input">
                         <label for="search-input" class="Visual-hidden">
                             <input id="search-input" [(ngModel)]="searchTerm" (keyup.enter)="search(searchTerm)" [ngModelOptions]="{standalone: true}"/>
                         </label>
@@ -52,12 +52,6 @@
                             </li>
                             <li class="list-element">
                                 <a>
-                                <i class="fa-solid fa-burger"></i>        
-                                 Kategoria
-                                </a>
-                            </li>
-                            <li class="list-element">
-                                <a>
                                 <i class="fa-solid fa-burger"></i>
                                  Kategoria
                                 </a>
@@ -71,7 +65,13 @@
                             <li class="list-element">
                                 <a>
                                 <i class="fa-solid fa-burger"></i>
-                                 Kategoria 
+                                 Kategoria
+                                </a>
+                            </li>
+                            <li class="list-element">
+                                <a>
+                                <i class="fa-solid fa-burger"></i>
+                                 Kategoria
                                 </a>
                             </li>
                           </ul>
@@ -79,25 +79,52 @@
                 </div>
             </div>
         </div>
-        <div calss="category-page_results">
+        <div class="category-page_results">
+            <ng-container *ngIf="searchActivated">
+                <h1>Search Results for '{{ searchTerm }}'</h1>
+
+                <div class="category-page-stores-container">
+                  <div class="row">
+                    <!-- Loop through searchPartners array and display cards -->
+                    <div class="col-lg-6 col-xl-4" *ngFor="let searchPartner of searchPartners">
+                      <a [routerLink]="['/']">
+                        <div class="card mb-3">
+                          <img src="../../../../assets/wrr-buzka.jpg" class="card-img-top h-100" alt="Restaurant Image">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ searchPartner?.name }}</h5>
+                            <p class="card-text">
+                              <span *ngFor="let category of searchPartner?.categories">{{ category?.name }} </span>
+                            </p>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+
+
+
+
             <h1>Restauracje w {{currentCity}}</h1>
 
             <div class="category-page-stores-container">
 
 
                   <div class="row">
-                    <div class="col-md-4" *ngFor="let partner of partners">
-                      <div class="card mb-3">
-                        <img src="../../../../assets/wrr-buzka.jpg" class="card-img-top h-100" alt="Restaurant Image">
-                        <div class="card-body">
-                          <h5 class="card-title">{{ partner?.name }}</h5>
-                          <p class="card-text"><span *ngFor="let category of partner?.categories">{{ category?.name }} </span></p>
+                    <div class="col-lg-6 col-xl-4" *ngFor="let partner of partners">
+                      <a [routerLink]="['/']" ><div class="card mb-3" >
+                            <img src="../../../../assets/wrr-buzka.jpg" class="card-img-top h-100" alt="Restaurant Image">
+                            <div class="card-body">
+                            <h5 class="card-title">{{ partner?.name }}</h5>
+                            <p class="card-text"><span *ngFor="let category of partner?.categories">{{ category?.name }} </span></p>
+                            </div>
                         </div>
-                      </div>
+                      </a>
                     </div>
                   </div>
 
-                  
+
                 <!-- <div class="category-stores-pagination">
                     <div class="category_stores-list">
                     </div>
@@ -105,5 +132,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>

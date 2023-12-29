@@ -13,11 +13,12 @@ export class PartnerService {
   constructor(
     private http: HttpClient,
   ) { }
-  
+
   getPartners(city: string): Observable<PartnerReadDto[]> {
     return this.http.get<PartnerReadDto[]>(`/api/partners/city/${city}`);
   }
   getPartnersSearch(city: string, name: string): Observable<PartnerReadDto[]> {
     return this.http.get<PartnerReadDto[]>(`/api/partners/city/${city}/name/${name}`);
   }
+
 }
