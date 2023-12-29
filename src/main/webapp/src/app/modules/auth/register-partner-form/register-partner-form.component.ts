@@ -3,6 +3,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { RegisterPartnerDto,RegisterResponseDto } from 'src/app/shared/model/api-models';
+import { ToastComponent } from 'src/app/shared/toast/toast-component/toast.component';
+import { ToastService } from 'src/app/shared/toast/toast.service';
 
 
 function customNameValidator(control: FormControl) {
@@ -55,6 +57,7 @@ export class RegisterPartnerFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -162,7 +165,7 @@ export class RegisterPartnerFormComponent implements OnInit {
             contactNumber: combinedContactNumber,
             telephoneNumber: combinedTelephoneNumber,
           });
-          console.log('succesfully registered a user');
+          this.toastService.showSuccess('Account created, now log in');
           this.router.navigate(['']);
         }
         else {
