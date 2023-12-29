@@ -27,6 +27,12 @@ public class PartnerService extends GenericService<Partner, PartnerDto, Long, Pa
         Specification<Partner> citySpec = PartnerSpecifications.hasCity(city);
         return partnerRepository.findAll(citySpec).stream().map(partnerAssembler::toReadDto).collect(Collectors.toList());
     }
+    public List<PartnerReadDto> getPartnersInCityAndName(String city, String name) {
+        Specification<Partner> citySpec = PartnerSpecifications.hasCityAndName(city, name);
+        return partnerRepository.findAll(citySpec).stream().map(partnerAssembler::toReadDto).collect(Collectors.toList());
+    }
+
+
 }
 
 

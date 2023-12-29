@@ -8,20 +8,21 @@
             </ul>
         </div>
 
-        <div class="position-div middle-grid">
-            <form class="form-inline my-2">
-                <div>
-                    <div class="inline-div">
-                        <input class="form-control mr-sm-2 " type="search" placeholder="Search">
+        <div class="header-search">
+            <div class="header-search-input"> 
+                <form class="margin-search" >
+                
+                        <button type="button" class="btn header-search-input-placeholder px-4 r-10" (click)="search(searchTerm)">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                          </button>
+                   
+                     <div class="text-input"> 
+                        <label for="search-input" class="Visual-hidden">
+                            <input id="search-input" [(ngModel)]="searchTerm" (keyup.enter)="search(searchTerm)" [ngModelOptions]="{standalone: true}"/>
+                        </label>
                     </div>
-                    
-                    <div class="inline-div">
-                        <button class="btn btn-warning" type="submit">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
 
         <div class="position-div">
@@ -83,17 +84,6 @@
 
             <div class="category-page-stores-container">
 
-                <!-- <div class="row">
-                    <div class="col-md-4" *ngFor="let restaurant of restaurants">
-                      <div class="card mb-3">
-                        <img src="../../../../assets/wrr-buzka.jpg"  class="card-img-top h-100" alt="Restaurant Image">
-                        <div class="card-body">
-                          <h5 class="card-title">{{ restaurant?.name }}</h5>
-                          <p class="card-text">{{ restaurant?.description }}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
 
                   <div class="row">
                     <div class="col-md-4" *ngFor="let partner of partners">

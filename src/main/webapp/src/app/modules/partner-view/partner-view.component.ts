@@ -20,10 +20,12 @@ export interface Restaurant {
 
 export class PartnerViewComponent {
 
+  searchTerm: string = '';
   restaurants: Restaurant[] = [];
   partners: PartnerReadDto[] = [];
+  searchPartners: PartnerReadDto[] = [];
 
-  currentCity!: string | null; 
+  currentCity: string = ''; 
 
   constructor(
     private router: Router,
@@ -67,9 +69,9 @@ export class PartnerViewComponent {
     localStorage.setItem('userCity', city);
   }
 
-  getCity(): string | null {
+  getCity(): string {
     if (!this.currentCity) {
-      this.currentCity = localStorage.getItem('userCity');
+      this.currentCity = localStorage.getItem('userCity') || '';
     }
     return this.currentCity;
   }
@@ -79,6 +81,18 @@ export class PartnerViewComponent {
      { this.partners = partners; console.log('Partners in', city, ':', this.partners); });
     
   }
+
+  search(searchTerm: string): void {
+    const city = this.getCity(); 
+    if (city !== null) {
+        this.partnerService.getPartnersSearch(city, searchTerm).subscribe((searchPartners) => {
+            this.searchPartners = searchPartners;
+            console.log('Partners in', city, ':', this.searchPartners);
+        });
+    } else {
+        console.error('Unable to determine city.'); 
+    }
+}
   
 
 
