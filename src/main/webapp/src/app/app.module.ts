@@ -23,7 +23,7 @@ import { UserSettingsComponent } from './modules/user/user-settings/user-setting
   declarations: [
     AppComponent,
     FrontPageComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
     ToastComponent
   ],
   imports: [
