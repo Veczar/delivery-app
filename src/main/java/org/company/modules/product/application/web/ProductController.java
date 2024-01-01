@@ -18,7 +18,7 @@ public class ProductController extends GenericController<ProductDto, Long, Produ
     }
     
     @GetMapping("/from/{partnerId}")
-    public List<ProductDto> productsFromPartner(@PathVariable Long partnerId) {
+    public List<ProductReadDto> productsFromPartner(@PathVariable Long partnerId) {
         return service.productsFromPartner(partnerId);
     }
 }

@@ -1,6 +1,7 @@
 package org.company.modules.product.application;
 
 import org.company.modules.product.application.web.ProductDto;
+import org.company.modules.product.application.web.ProductReadDto;
 import org.company.modules.product.domain.Product;
 import org.company.modules.product.domain.ProductRepository;
 import org.company.shared.aplication.GenericService;
@@ -22,8 +23,8 @@ public class ProductService extends GenericService<Product, ProductDto, Long,  P
         this.productAssembler = productAssembler;
     }
     
-    public List<ProductDto> productsFromPartner(Long partnerId) {
+    public List<ProductReadDto> productsFromPartner(Long partnerId) {
         return productRepository.findByPartnerId(partnerId)
-                .stream().map(productAssembler::toDto).collect(Collectors.toList()); //todo: add partner_id FK in new migration
+                .stream().map(productAssembler::toReadDto).collect(Collectors.toList());
     }
 }
