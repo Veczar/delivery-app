@@ -23,8 +23,8 @@ public class ProductService extends GenericService<Product, ProductDto, Long,  P
         this.productAssembler = productAssembler;
     }
     
-    public List<ProductReadDto> productsFromPartner(Long partnerId) {
-        return productRepository.findByPartnerId(partnerId)
+    public List<ProductReadDto> productsFromPartner(String partnerName) {
+        return productRepository.findByPartnerName(partnerName)
                 .stream().map(productAssembler::toReadDto).collect(Collectors.toList());
     }
 }

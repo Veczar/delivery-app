@@ -1,1 +1,11 @@
-<p>partner-products works!</p>
+<div class="row">
+  <div class="col-md-4" *ngFor="let product of products; let i = index ">
+    <div class="card mb-3">
+      <img src="../../../../assets/wrr-buzka.jpg" height="120" class="card-img-top" alt="Restaurant Image">
+      <div class="card-body">
+        <h5 class="card-title">{{ product?.name}} {{i+1}}</h5>
+        <p class="card-text">{{ product?.price }}$</p>
+      </div>
+    </div>
+  </div>
+</div>

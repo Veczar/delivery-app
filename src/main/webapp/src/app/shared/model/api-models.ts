@@ -14,12 +14,12 @@ export interface AuthRequestDto {
 }
 
 export interface AuthResponseDto {
-    token?: string;
     expirationDate?: string;
-    role?: string;
     firstName?: string;
-    lastName?: string;
     id?: number;
+    lastName?: string;
+    role?: string;
+    token?: string;
 }
 
 export interface AutoCloseable {
@@ -114,6 +114,7 @@ export interface ProductDto {
     id?: number;
     name?: string;
     onSale?: boolean;
+    owner?: PartnerDto;
     photoPath?: string;
     price?: number;
 }
@@ -123,6 +124,15 @@ export interface ProductOrderDto {
     product?: ProductDto;
     quantity?: number;
     subtotal?: number;
+}
+
+export interface ProductReadDto {
+    categories?: CategoryDto[];
+    id?: number;
+    name?: string;
+    onSale?: boolean;
+    photoPath?: string;
+    price?: number;
 }
 
 export interface RegisterDeliveryManDto {

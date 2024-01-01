@@ -16,6 +16,10 @@ export class ProductsService {
     return this.http.get<ProductDto[]>(`${this.apiUrl}/api/products/`);
   }
 
+  getProductsFromPartner(partnerName: string): Observable<ProductDto[]> {
+    return this.http.get<ProductDto[]>(`${this.apiUrl}/api/products/from/${partnerName}`);
+  }
+
   getProduct(id: number): Observable<ProductDto> {
     return this.http.get<ProductDto>(`${this.apiUrl}/api/products/${id}`);
   }
