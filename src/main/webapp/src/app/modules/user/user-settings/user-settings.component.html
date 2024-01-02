@@ -1,4 +1,9 @@
-<form [formGroup]="userForm" class="row g-3 needs-validation">
+<form 
+  [formGroup]="userForm" 
+  class="row g-3 needs-validation" 
+  (keydown.enter)="$event.preventDefault()" 
+  (ngSubmit)="toggleEditMode()"
+  >
 
   <div class="form-group col-md-6">
     <label for="firstName" class="form-label">First name</label>
@@ -69,11 +74,6 @@
           <div>
             <p class="address-title">Address {{i + 1}}</p>
           </div>
-          <!-- <div class="">
-            <button type="button" class="btn btn-danger btn-sm remove" (click)="removeAddress(i)">
-              X
-            </button>
-          </div> -->
           <button class="btn btn-close" (click)="removeAddress(i)" [disabled]="editable === false"></button>
         </div>
 
@@ -122,17 +122,22 @@
           />
           <div class="invalid-feedback" *ngIf="submitted && addressGroup.get('street')?.errors">
             <p *ngIf="addressGroup.get('street')?.hasError('required')">Street is required</p>
-          </div> 
+          </div>
         </div>
-      </div> 
-    </div> 
+      </div>
+
+    </div>
+
     <button [disabled]="userForm.get('addresses')?.invalid || editable === false" type="button" 
-      class="btn btn btn-outline-primary col-md-12" (click)="addAddress()">+ Add Address</button>
+    class="btn btn btn-outline-primary col-md-12" (click)="addAddress()">+ Add Address</button>
   </div>
 
   <div class="mb-3">
     <button type="button" class="btn btn-primary me-2" (click)="toggleEditMode()">
       {{ editable ? 'Save Changes' : 'Edit mode' }}
+    </button>
+    <button *ngIf="editable" type="button" class="btn btn-secondary me-2" (click)="cancel()">
+      cancel
     </button>
   </div>
 </form>

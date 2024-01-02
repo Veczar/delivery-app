@@ -22,10 +22,11 @@ export class UserSettingsComponent {
     this.userService.getUser(parseInt(localStorage.getItem('id') as string)).subscribe(user => {
       console.log(user);
       this.submitted = false;
+      this.addresses.clear();
       user.addresses?.forEach(address => {
         this.addAddress();
       });
-      this.removeAddress(0); //one too much
+      // this.removeAddress(0); //one too much
 
       this.userForm.patchValue(user);
       this.userForm.get('role')?.setValue(user.role?.id);
@@ -42,6 +43,7 @@ export class UserSettingsComponent {
   }
 
   removeAddress(index: number): void {
+    console.log('delete addr ', index)
     this.addresses.removeAt(index);
   }
 
@@ -72,6 +74,7 @@ export class UserSettingsComponent {
         [
           Validators.required,
           Validators.minLength(9),
+          Validators.maxLength(11),
           Validators.pattern(/^[0-9]+(?:[ -][0-9]+)*$/),
         ]
       ],
@@ -83,7 +86,7 @@ export class UserSettingsComponent {
           Validators.maxLength(30),
         ]
       ],
-      role: [],
+      role: [], // don't change this
       addresses: this.formBuilder.array([this.createAddressFormGroup()])
     });
 
@@ -108,7 +111,7 @@ export class UserSettingsComponent {
   get f(): { [key: string]: AbstractControl } {
     return this.userForm.controls;
   }
-
+  
   toggleEditMode(): void {
     console.log(this.userForm.value);
     Object.keys(this.userForm.controls).forEach(key => {
@@ -117,19 +120,19 @@ export class UserSettingsComponent {
         control.setValue(control.value);
       }
     });
-
+    
     if (this.userForm.invalid) {
       console.log('wrong form')
       return;
     }
-
+    
     this.editable = !this.editable;
-
+    
     // Enable or disable form controls based on edit mode
     if (this.editable) {
       this.submitted = true;
       this.userForm.enable();
-    } 
+    }
     else {
       // transform the role to be an object with id
       const roleId = this.userForm.value.role;
@@ -138,14 +141,34 @@ export class UserSettingsComponent {
       
       // saves changes
       // console.log(user);
-      console.log('save changes');
-      // this.userService.updateUser(user).subscribe(r => {
-      //   console.log('user updated')
-      //   // console.log(r)
-      // });
+      this.userService.updateUser(user).subscribe(r => {
+        console.log('user updated')
+        // console.log(r)
+      });
 
       this.submitted = false;
       this.userForm.disable();
+    }
+  }
+
+  // cancel the changes
+  cancel() {
+    if (this.editable) {
+      this.editable = !this.editable;
+      console.log('cancelled')
+
+      this.userService.getUser(parseInt(localStorage.getItem('id') as string)).subscribe(user => {
+        // console.log(user);
+        this.addresses.clear();
+        user.addresses?.forEach(address => {
+          this.addAddress();
+        });
+        this.userForm.reset(user);
+        this.userForm.get('role')?.setValue(user.role?.id);
+
+        this.submitted = false;
+        this.userForm.disable();
+      })
     }
   }
 }
