@@ -26,7 +26,6 @@ function customNameValidator(control: FormControl) {
 })
 export class RegisterPartnerFormComponent implements OnInit {
 
-
   partnerForm: FormGroup = new FormGroup({
     //User data
     firstName: new FormControl(''),
@@ -40,19 +39,21 @@ export class RegisterPartnerFormComponent implements OnInit {
     accountNumber: new FormControl(''),
     contactNumber: new FormControl(''),
     category: new FormControl(''),
+    photo: new FormControl(''),
     address: new FormGroup({
       city: new FormControl(''),
       postalCode: new FormControl(''),
       street: new FormControl(''),
     }),
 
+
   });
   submitted = false;
   wrongEmail: boolean = false;
+  wrongPhoto: boolean = false;
   phonePrefixes = ['+48 PL','+355 AL','+376 AD','+43 AT','+375 BY','+32 BE','+387 BA','+359 BG','+385 HR','+357 CY',
   '+420 CZ','+45 DK','+372 EE','+358 FI','+33 FR','+49 DE','+30 GR','+36 HU','+354 IS','+353 IE','+39 IT','+383 XK',
   '+371 LV','+423 LI','+370 LT','+352 LU','+356 MT'];
-
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -107,8 +108,9 @@ export class RegisterPartnerFormComponent implements OnInit {
           Validators.required,
           Validators.pattern(/^\d{9}$/),
         ]
-      ],category:['', [Validators.required]],
-
+      ],
+      category:['', [Validators.required]],
+      photo:['', [Validators.required]],
       address: this.formBuilder.group({
         city: ['', [Validators.required, Validators.minLength(2)]],
         postalCode: [
@@ -121,6 +123,13 @@ export class RegisterPartnerFormComponent implements OnInit {
         street: ['', [Validators.required, Validators.minLength(2)]],
       }),
     });
+  }
+  
+  selectedFile: File | null = null;
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile?.name);
   }
 
   removeAfterSpace(input: string): string {
@@ -136,14 +145,16 @@ export class RegisterPartnerFormComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
     this.wrongEmail = false;
-
     Object.keys(this.partnerForm.controls).forEach(key => {
-      const control = this.partnerForm.get(key);
-      if (control) {
-        control.setValue(control.value);
+      if(key != "photo")
+      {
+        const control = this.partnerForm.get(key);
+        if (control) {
+          control.setValue(control.value);
+        }
       }
+ 
     });
-//     console.log(JSON.stringify(this.partnerForm.value, null, 2));
 
     if (this.partnerForm.invalid) {
       console.log('wrong form')
@@ -151,9 +162,9 @@ export class RegisterPartnerFormComponent implements OnInit {
     }
 
      //console.log(JSON.stringify(this.partnerForm.value, null, 2));
-     //console.log(this.partnerForm)
-
-    this.authService.registerParnter(this.partnerForm.value as RegisterPartnerDto).subscribe(
+     //console.log(this.partnerForm.value as RegisterPartnerDto)
+     //console.log(this.partnerForm.value)
+    this.authService.registerParnter(this.partnerForm.value as RegisterPartnerDto, this.selectedFile).subscribe(
       (response: RegisterResponseDto) => {
         console.log('response:', response);
 
@@ -169,7 +180,15 @@ export class RegisterPartnerFormComponent implements OnInit {
           this.router.navigate(['']);
         }
         else {
-          this.wrongEmail = true;
+          if(response.message == 'email not available')
+          {
+            this.wrongEmail = true;
+          }else
+          if(response.message == 'photo do not have a suitable extension')
+          {
+              this.wrongPhoto = true;
+              console.log('wrong photo');
+          }
         }
         // console.log('wrong email?: ', this.wrongEmail)
       },
@@ -201,4 +220,5 @@ export class RegisterPartnerFormComponent implements OnInit {
       this.addressForm.patchValue({ postalCode: newValue });
     }
   }
+  
 }

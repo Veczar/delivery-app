@@ -33,4 +33,5 @@ public class Partner {
             joinColumns = @JoinColumn(name = "partner_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
+    private String photoPath;
 }

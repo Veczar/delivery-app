@@ -46,8 +46,10 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         UpdateUser(partnerDto, partner);
 
         partner.setCategories(partnerDto.getCategories().stream().map(categoryDto -> GetCategory(categoryDto)).collect(Collectors.toSet()));
+
+        partner.setPhotoPath(partnerDto.getPhotoPath());
     }
-    
+
     private void UpdateUser(PartnerDto partnerDto, Partner partner) {
         User user = userRepository.findById(partnerDto.getOwner().getId()).orElseThrow(null);
         partner.setOwner(user);

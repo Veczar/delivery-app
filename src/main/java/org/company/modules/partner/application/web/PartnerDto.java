@@ -21,4 +21,5 @@ public class PartnerDto {
     private String contactNumber;
     private UserDto owner;
     private Set<CategoryDto> categories;
+    private String photoPath;
 }
