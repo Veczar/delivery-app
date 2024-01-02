@@ -8,25 +8,6 @@ body {
     color: rgb(var(--bs-tertiary-color-rgb));
     // margin-bottom: 0px;
 }
-  
-/* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
-
-/* Carousel base class */
-.carousel {
-    margin-bottom: 4rem;
-}
-/* Since positioning the image, we need to help out the caption */
-.carousel-caption {
-    bottom: 3rem;
-    z-index: 10;
-}
-
-/* Declare heights because of positioning of img element */
-.carousel-item {
-    height: 32rem;
-}
-
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
@@ -95,12 +76,6 @@ p {
     padding-right: 40px;
 }
 
-
-.bg-color {
-    background-color: #C62368 !important;
-}
-
-
 .color:hover {
     color: rgb(33, 102, 193) !important;
 }
@@ -121,7 +96,8 @@ ul > li:hover > button {
 }
 
 nav {
-    height: 56px;
+    // height: 56px;
+    height: 65px;
 }
 
 $focus-ring-opacity: 0%;
@@ -136,7 +112,6 @@ $focus-ring-opacity: 0%;
     background-image: url(../../assets/bcg.jpg);
     background-size: cover;
 }
-
 
 .input-group {
     // box-shadow: #82898f;
@@ -160,4 +135,20 @@ $focus-ring-opacity: 0%;
   
 .card-desc {
     padding: 0 90px;
+}
+
+.footer {
+    margin-top: 60px;
+    padding: 40px 130px 0px 130px;
+    // background-color: #212529; // same as nav
+    background-color: #202020;
+    color: white;
+
+    h5 {
+        color: rgba(255, 255, 255, 0.72);
+    }
+
+    ul > li > a {
+       color: white !important; 
+    }
 }
