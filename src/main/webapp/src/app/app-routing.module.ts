@@ -8,27 +8,26 @@ import { AdminPanelComponent } from './modules/admin-panel/admin-panel.component
 import { AdminDashboardComponent } from './modules/admin-panel/admin-dashboard/admin-dashboard.component';
 import { UserTableComponent } from './modules/admin-panel/user-table/user-table.component';
 import { RegisterPartnerFormComponent } from './modules/auth/register-partner-form/register-partner-form.component';
-<<<<<<< HEAD
 import { RegisterCourierFormComponent } from './modules/auth/register-courier-form/register-courier-form.component';
-=======
 import { PartnerViewComponent } from './modules/partner-view/partner-view.component';
+import { CityViewComponent } from './modules/partner-view/city-view/city-view.component';
+import { SearchViewComponent } from './modules/partner-view/search-view/search-view.component';
 
->>>>>>> 4a99dc4 (Partner city search + raw component)
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
   {path: 'auth', component: LoginFormComponent},
   {path: 'register/user', component: RegisterUserFormComponent},
   {path: 'register/partner', component: RegisterPartnerFormComponent},
-<<<<<<< HEAD
-<<<<<<< HEAD
   {path: 'register/courier', component: RegisterCourierFormComponent},
-=======
-  {path:'partners/city', component: PartnerViewComponent},
->>>>>>> 4a99dc4 (Partner city search + raw component)
-=======
-  {path: 'partners/city', component: PartnerViewComponent},
->>>>>>> 3d9365d (filters html)
+  {
+    path: 'partners', 
+    component: PartnerViewComponent,
+    children: [
+      {path: ':city', component: CityViewComponent},
+      {path: ':search/:city/:name', component: SearchViewComponent}
+    ]
+  },
   {
     path: 'admin',
     component: AdminPanelComponent,

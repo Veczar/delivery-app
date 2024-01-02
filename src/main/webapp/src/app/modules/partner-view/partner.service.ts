@@ -18,7 +18,7 @@ export class PartnerService {
     return this.http.get<PartnerReadDto[]>(`/api/partners/city/${city}`);
   }
   getPartnersSearch(city: string, name: string): Observable<PartnerReadDto[]> {
-    return this.http.get<PartnerReadDto[]>(`/api/partners/city/${city}/name/${name}`);
+    return this.http.get<PartnerReadDto[]>(`/api/partners/search/${city}/${name}`);
   }
 
 }

@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PartnerReadDto } from 'src/app/shared/model/api-models';
 import { PartnerService } from './partner.service';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Restaurant {
   id: number;
@@ -21,35 +22,24 @@ export interface Restaurant {
 export class PartnerViewComponent {
 
   searchTerm: string = '';
-  restaurants: Restaurant[] = [];
   partners: PartnerReadDto[] = [];
   searchPartners: PartnerReadDto[] = [];
   searchActivated: boolean = false;
-
+  citySearch: string = '';
+  cityName: string = '';
   currentCity: string = '';
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private partnerService: PartnerService) {}
 
   ngOnInit(): void {
-    const restaurants: Restaurant[] = [
-      { id: 1, name: 'Restaurant 1', description: 'Description 1', imageUrl: 'image1.jpg' },
-      { id: 2, name: 'Restaurant 2', description: 'Description 2', imageUrl: 'image2.jpg' },
-      { id: 3, name: 'Restaurant 2', description: 'Description 2', imageUrl: 'image2.jpg' },
-      { id: 4, name: 'Restaurant 2', description: 'Description 2', imageUrl: 'image2.jpg' },
-      { id: 5, name: 'Restaurant 2', description: 'Description 2', imageUrl: 'image2.jpg' },
-      { id: 6, name: 'Restaurant 2', description: 'Description 2', imageUrl: 'image2.jpg' },
-      { id: 7, name: 'Restaurant 2', description: 'Description 2', imageUrl: 'image2.jpg' },
-      { id: 8, name: 'Restaurant 2', description: 'Description 2', imageUrl: 'image2.jpg' },
-      { id: 9, name: 'Restaurant 2', description: 'Description 2', imageUrl: 'image2.jpg' },
-      // Add more restaurants as needed
-    ];
-    this.restaurants = restaurants;
+    this.route.params.subscribe(params => {
+      this.cityName = params['city'];});
 
 
-
-    this.setCity('Kraków');
+    this.setCity(this.cityName);
     const retrievedCity = this.getCity();
 
     if (retrievedCity) {
@@ -59,7 +49,7 @@ export class PartnerViewComponent {
     }
 
 
-    this.getPartners('Kraków');
+    this.getPartners(retrievedCity);
     console.log('Partners in', '', ':', this.partners);
   }
 
@@ -71,9 +61,6 @@ export class PartnerViewComponent {
   }
 
   getCity(): string {
-    if (!this.currentCity) {
-      this.currentCity = localStorage.getItem('userCity') || '';
-    }
     return this.currentCity;
   }
 
@@ -85,16 +72,19 @@ export class PartnerViewComponent {
 
   search(searchTerm: string): void {
     const city = this.getCity();
-    if (city !== null) {
-        this.partnerService.getPartnersSearch(city, searchTerm).subscribe((searchPartners) => {
-            this.searchPartners = searchPartners;
-            console.log('Partners in', city, ':', this.searchPartners);
-        });
-        this.searchActivated = true;
-    } else {
+    this.citySearch = searchTerm;
+    console.log('searchTerm:', searchTerm);
+    if (city === '' || city === null ){
+        this.resetSearchState();
         console.error('Unable to determine city.');
+    } else if (city !== null) {
+      this.partnerService.getPartnersSearch(city, searchTerm).subscribe((searchPartners) => {
+          this.searchPartners = searchPartners;
+          console.log('Partners in', city, ':', this.searchPartners);
+      });
+      this.searchActivated = true;
     }
-}
+  }
 
 private resetSearchState(): void {
   // Reset search-related properties to default state
