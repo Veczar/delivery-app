@@ -10,6 +10,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UserTableComponent } from './user-table/user-table.component';
 import { AdminPanelComponent } from './admin-panel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserSettingsComponent } from '../user/user-settings/user-settings.component';
+import { UserModule } from '../user/user.module';
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminPanelComponent,
     AdminDashboardComponent,
     UserTableComponent,
+    // UserSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +30,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule, 
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    UserModule
+  ],
 })
 export class AdminPanelModule { }

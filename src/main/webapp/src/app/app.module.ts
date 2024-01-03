@@ -23,7 +23,6 @@ import { PartnerProductsComponent } from './modules/products/partner-products/pa
   declarations: [
     AppComponent,
     FrontPageComponent,
-    UserSettingsComponent,
     ToastComponent,
     PartnerProductsComponent
   ],
