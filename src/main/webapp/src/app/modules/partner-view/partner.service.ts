@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import {  RegisterPartnerDto, RegisterResponseDto, PartnerDto,PartnerReadDto } from 'src/app/shared/model/api-models';
 
 @Injectable({
@@ -17,8 +17,16 @@ export class PartnerService {
   getPartners(city: string): Observable<PartnerReadDto[]> {
     return this.http.get<PartnerReadDto[]>(`/api/partners/city/${city}`);
   }
-  getPartnersSearch(city: string, name: string): Observable<PartnerReadDto[]> {
-    return this.http.get<PartnerReadDto[]>(`/api/partners/search/${city}/${name}`);
+  getPartnersSearch(city: string, searchTerm: string): Observable<PartnerReadDto[]> {
+    return this.http.get<PartnerReadDto[]>(`/api/partners/search/${city}/${searchTerm}`);
+  }
+
+  
+  private searchTermSubject = new BehaviorSubject<string>('');
+  searchTerm$ = this.searchTermSubject.asObservable();
+
+  updateSearchTerm(searchTerm: string): void {
+    this.searchTermSubject.next(searchTerm);
   }
 
 }

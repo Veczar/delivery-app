@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/partners")
 public class PartnerController extends GenericController<PartnerDto, Long, PartnerService> {
-    private final PartnerService partnerService;
+    private final   PartnerService partnerService;
     public PartnerController(PartnerService service) {
         super(service);
         this.partnerService = service;
@@ -23,8 +23,8 @@ public class PartnerController extends GenericController<PartnerDto, Long, Partn
     public List<PartnerReadDto> getPartnersCity(@PathVariable String city) {
         return partnerService.getPartnersInCity(city);
     }
-    @GetMapping("/search/{city}/{name}")
-    public List<PartnerReadDto> getPartnersCityAndName(@PathVariable String city, @PathVariable String name) {
-        return partnerService.getPartnersInCityAndName(city, name);
+    @GetMapping("/search/{city}/{searchTerm}")
+    public List<PartnerReadDto> getPartnersCityAndName(@PathVariable String city, @PathVariable String searchTerm) {
+        return partnerService.getPartnersInCityAndName(city, searchTerm);
     }
 }

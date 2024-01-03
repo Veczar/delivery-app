@@ -18,7 +18,7 @@ import java.util.Set;
 public class Partner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
     private String accountNumber;

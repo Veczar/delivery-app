@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "p_category")
-public class Category extends Partner {
+public class Category{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
