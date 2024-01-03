@@ -1,0 +1,2 @@
+ALTER TABLE p_order ALTER COLUMN delivery_man_id DROP NOT NULL;
+ALTER TABLE p_order ALTER COLUMN total_price DROP NOT NULL;

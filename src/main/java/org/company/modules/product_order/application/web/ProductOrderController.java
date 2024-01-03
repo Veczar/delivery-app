@@ -1,8 +1,8 @@
-package org.company.modules.product_delivery.application.web;
+package org.company.modules.product_order.application.web;
 
 import lombok.AllArgsConstructor;
-import org.company.modules.product_delivery.application.ProductOrderService;
-import org.company.modules.product_delivery.domain.ProductOrderPk;
+import org.company.modules.product_order.application.ProductOrderService;
+import org.company.modules.product_order.domain.ProductOrderPk;
 import org.company.shared.aplication.web.IController;
 import org.springframework.web.bind.annotation.*;
 

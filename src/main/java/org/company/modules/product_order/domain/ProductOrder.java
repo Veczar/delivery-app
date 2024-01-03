@@ -1,4 +1,4 @@
-package org.company.modules.product_delivery.domain;
+package org.company.modules.product_order.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;

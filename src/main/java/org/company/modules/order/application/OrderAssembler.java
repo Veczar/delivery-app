@@ -43,7 +43,10 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
         orderDto.setAddressStart(addressAssembler.toDto(order.getAddressStart()));
         orderDto.setCustomer(userAssembler.toDto(order.getCustomer()));
         orderDto.setAddressEnd(addressAssembler.toDto(order.getAddressEnd()));
-        orderDto.setDeliveryMan(deliveryManAssembler.toDto(order.getDeliveryMan()));
+        if(order.getDeliveryMan() != null)
+        {
+            orderDto.setDeliveryMan(deliveryManAssembler.toDto(order.getDeliveryMan()));
+        }
         orderDto.setPartner(partnerAssembler.toDto(order.getPartner()));
         orderDto.setTotalPrice(order.getTotalPrice());
         orderDto.setTip(order.getTip());
@@ -57,7 +60,6 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
     public void toEntity(OrderDto orderDto, Order order) {
     updateAddresses(orderDto,order);
     updateCustomer(orderDto, order);
-    updateDeliveryMan(orderDto, order);
     updatePartner(orderDto, order);
     order.setTotalPrice(orderDto.getTotalPrice());
     order.setTip(orderDto.getTip());

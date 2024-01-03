@@ -5,6 +5,9 @@ import org.company.modules.category.application.CategoryAssembler;
 import org.company.modules.category.application.web.CategoryDto;
 import org.company.modules.category.domain.Category;
 import org.company.modules.category.domain.CategoryRepository;
+import org.company.modules.partner.application.PartnerAssembler;
+import org.company.modules.partner.domain.Partner;
+import org.company.modules.partner.domain.PartnerRepository;
 import org.company.modules.product.application.web.ProductDto;
 import org.company.modules.product.domain.Product;
 import org.company.shared.aplication.IAssembler;
@@ -15,7 +18,9 @@ import java.util.stream.Collectors;
 @Component
 @AllArgsConstructor
 public class ProductAssembler implements IAssembler<Product, ProductDto> {
-    private static CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+    private final PartnerAssembler partnerAssembler;
+    private final PartnerRepository partnerRepository;
     @Override
     public ProductDto toDto(Product product) {
         CategoryAssembler categoryAssembler = new CategoryAssembler();
@@ -27,6 +32,7 @@ public class ProductAssembler implements IAssembler<Product, ProductDto> {
         productDto.setOnSale(product.getOnSale());
         productDto.setPrice(product.getPrice());
         productDto.setCategories(product.getCategories().stream().map(categoryAssembler::toDto).collect(Collectors.toSet()));
+        productDto.setPartner(partnerAssembler.toDto(product.getPartner()));
         return productDto;
     }
 
@@ -45,6 +51,11 @@ public class ProductAssembler implements IAssembler<Product, ProductDto> {
     {
         Category result = categoryRepository.findById(category.getId()).orElseThrow(null);
         return result;
+    }
+    private void setPartner(ProductDto productDto, Product product)
+    {
+        Partner partner = partnerRepository.findById(productDto.getPartner().getId()).orElseThrow(null);
+        product.setPartner(partner);
     }
 
 
