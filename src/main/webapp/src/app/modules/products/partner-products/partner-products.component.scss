@@ -1,0 +1,134 @@
+body {
+  padding-top: 3rem;
+  display: block;
+  // padding-bottom: 0;
+  // display: flex;
+  // flex-direction: column;
+  // height: 50vh;
+  margin: 0;
+  background-color: bisque;
+  overflow: hidden;
+}
+
+// .my-container {
+//   margin-top: 70px;
+// }
+
+nav {
+  // height: 56px;
+  height: 65px;
+}
+
+.color:hover {
+  color: rgb(33, 102, 193) !important;
+}
+
+ul > li > a,
+ul > li > button {
+  transition: color 0.1s ease-in-out;
+}
+
+ul > li:hover > a,
+ul > li:hover > button {
+  color: #82898f;
+}
+
+.user-dropdown {
+  color: white !important;
+  cursor: pointer;
+}
+
+.dropdown-toggle {
+  height: 39px;
+}
+
+
+// --------- product card container -----------
+
+.restaurant-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: rgb(194, 255, 255);
+}
+
+// --------- product card -----------
+
+// .product-card {
+//   border: 1px solid #ddd;
+//   border-radius: 8px;
+//   margin-bottom: 20px;
+// }
+
+// .product-card img {
+//   max-width: 100%;
+//   border-top-left-radius: 8px;
+//   border-top-right-radius: 8px;
+// }
+
+.card {
+  padding: 10px;
+  transition: transform 0.15s ease;
+}
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card-body {
+  padding: 0px;
+  padding-left: 10px;
+  height: 120px;
+
+  h5 {
+    margin-bottom: 5px;
+  }
+
+  p {
+    line-height: 1;
+  }
+
+  .price {
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+  }
+}
+
+.img {
+  background-color: rgb(0, 66, 44);
+}
+
+img {
+  object-fit: cover;
+  height: 100%;
+}
+
+
+// --------- footer -----------
+
+.nav-hover-underline li.nav-item a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  display: block;
+  justify-content: center;
+  margin-top: 60px;
+  padding: 40px 130px 0px 130px;
+
+
+  // background-color: #212529; // same as nav
+  background-color: #202020;
+  color: white;
+
+  footer {
+    width: 1500px;
+  }
+
+  h5 {
+      color: rgba(255, 255, 255, 0.72);
+  }
+
+  ul > li > a {
+     color: white !important; 
+  }
+}

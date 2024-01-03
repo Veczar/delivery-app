@@ -17,7 +17,7 @@
               <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" [routerLink]="['/', 'McDonald']">Contact</a>
+              <a class="nav-link active" [routerLink]="['/', 'McDonald']">Contact-McDonald</a>
             </li>
             <li class="nav-item">
               <button class="nav-link active" (click)="open(demoModal)">Adblock</button>
@@ -38,7 +38,6 @@
               <button class="btn btn-outline-secondary" (click)="open(demoModal)">search</button>
             </form> -->
 
-          <!-- auth.component.html -->
           <div *ngIf="!(isUserLoggedIn())">
             <button class="btn btn-outline-primary me-2" type="submit"
               [routerLink]="['/register/user']">Register</button>
@@ -91,7 +90,7 @@
             <img src="../../assets/courier.jpg" height="350" class="mb-3">
           </a>
           <h2 class="fw-normal">Get paid as a courier</h2>
-          <p>Join the thrill of being a culinary hero with us – where you're not just a courier, but
+          <p >Join the thrill of being a culinary hero with us – where you're not just a courier, but
           an ambassador, delivering smiles and savor to doorsteps across the city!</p>
           <p><a class="btn btn-outline-primary" [routerLink]="['register/courier']">Apply now</a></p>
         </div>
@@ -101,7 +100,8 @@
             <img src="../../assets/partner.jpg" height="350" class="mb-3">
           </a>
           <h2 class="fw-normal">Become partner</h2>
-          <p class="card-desc">You provide a menu, we provide a delivery service for your business.</p>
+          <p >You provide a menu, we provide a delivery service for your business.
+            Rock your business like never before!</p>
           <p><a class="btn btn-outline-primary" [routerLink]="['register/partner']">Apply now</a></p>
         </div>
       </div>

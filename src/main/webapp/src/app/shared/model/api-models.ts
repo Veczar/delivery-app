@@ -128,6 +128,7 @@ export interface ProductOrderDto {
 
 export interface ProductReadDto {
     categories?: CategoryDto[];
+    description?: string;
     id?: number;
     name?: string;
     onSale?: boolean;

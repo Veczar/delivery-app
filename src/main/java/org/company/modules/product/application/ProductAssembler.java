@@ -6,7 +6,6 @@ import org.company.modules.category.application.web.CategoryDto;
 import org.company.modules.category.domain.Category;
 import org.company.modules.category.domain.CategoryRepository;
 import org.company.modules.partner.application.PartnerAssembler;
-import org.company.modules.partner.domain.Partner;
 import org.company.modules.partner.domain.PartnerRepository;
 import org.company.modules.product.application.web.ProductDto;
 import org.company.modules.product.application.web.ProductReadDto;
@@ -44,6 +43,7 @@ public class ProductAssembler implements IAssembler<Product, ProductDto> {
         ProductReadDto productDto = new ProductReadDto();
         productDto.setId(product.getId());
         productDto.setName(product.getName());
+        productDto.setDescription(product.getDescription());
         productDto.setPhotoPath(product.getPhotoPath());
         productDto.setOnSale(product.getOnSale());
         productDto.setPrice(product.getPrice());
