@@ -56,16 +56,70 @@
     </nav>
   </header>
 
-  <main>
+<main>
 
   <!-- Restaurant section -->
+  <div class="wrapper py-4">
+    <div class="center">
+      <div class="partner" *ngIf="partner">
+        <img src="../../../../assets/partner.jpg" class="rounded">
+
+        <div class="partner-info-wrapper">
+          <h1>{{partner.name}}</h1>
+          
+          <div class="partner-info">
+            <i class="bi bi-geo-alt-fill"></i>
+            <div class="info-col">
+              {{address.street}} <br>
+              {{address.postalCode}}, {{address.city}} <br>
+            </div>
+            <i class="bi bi-telephone-fill"></i>
+            <div class="info-col">
+              {{partner.contactNumber}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
   
-  <!-- Restaurant Content -->
-  <div class="restaurant-container mt-5">
+  <!-- main Content -->
+  <div class="restaurant-container ">
 
+    <div class="center">
+      <div class="search pt-3 mb-4">
+
+        <div class="input-group filter-search">
+          <span class="input-group-text"><span class="material-icons">search</span></span>
+          <input class="form-control" [(ngModel)]="searchText" type="text" placeholder="search">
+        </div>
+
+        <div class="badge-container">
+          <div class="d-flex">
+            <div class="badge-item"
+                *ngFor="let category of categories"
+                [ngClass]="{ 'selected': selectedCategory === category }"
+                (click)="selectCategory(category)">
+              {{category}}
+            </div>
+          </div>
+          <button class="btn btn-outline-secondary" (click)="clearSelection()">Clear</button>
+        </div>
+
+        <!-- <mat-form-field class="example-form-field">
+          <mat-label>Search</mat-label>
+          <input matInput type="text" [(ngModel)]="searchText">
+          <button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchText=''">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </mat-form-field> -->
+        
+      </div>
+    </div>
+    
     <div class="row">
-      <div class="col-md-4" *ngFor="let product of products; let i = index ">
-
+      <div class="col-md-4" *ngFor="let product of products | filter: searchText;">
         <!-- card -->
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
@@ -74,15 +128,22 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">{{ product?.name}} {{i+1}}</h5>
-                <p class="card-text"><small class="text-muted">{{product?.description}}alhfahfghsogf hoshgpishfl kfsssssssssssss</small></p>
-                <h6 class="card-text price">{{ product?.price }},00 $</h6>
+                <h5 class="card-title">{{product?.name}}</h5>
+                <p class="card-text"><small class="text-muted">{{product?.description}}</small></p>
+                <div class="badge-container">
+                  <span class="badge rounded-pill text-bg-info me-1" *ngFor="let category of product?.categories">
+                    {{category.name}}
+                  </span>
+                </div>
+                <h6 class="card-text price">{{ product?.price }} $</h6>
               </div>
             </div>
           </div>
         </div>
 
       </div>
+
+      
     </div>
 
   </div>

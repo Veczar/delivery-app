@@ -17,6 +17,7 @@ import { ToastComponent } from './shared/toast/toast-component/toast.component';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { UserSettingsComponent } from './modules/user/user-settings/user-settings.component';
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
+import { ProductsModule } from './modules/products/products.module';
 
 
 @NgModule({
@@ -24,7 +25,6 @@ import { PartnerProductsComponent } from './modules/products/partner-products/pa
     AppComponent,
     FrontPageComponent,
     ToastComponent,
-    PartnerProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +38,7 @@ import { PartnerProductsComponent } from './modules/products/partner-products/pa
     UserModule,
     AuthModule,
     AdminPanelModule,
+    ProductsModule
   ],
   providers: [
     {

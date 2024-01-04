@@ -21,4 +21,9 @@ public class PartnerController extends GenericController<PartnerDto, Long, Partn
     public List<PartnerDto> getPartnersFromCity(@PathVariable String city) {
         return service.getPartnersFromCity(city);
     }
+    
+    @GetMapping("/name/{name}")
+    public PartnerDto getPartnerByName(@PathVariable String name) {
+        return service.getPartnerByName(name);
+    }
 }

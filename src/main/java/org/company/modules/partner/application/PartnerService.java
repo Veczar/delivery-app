@@ -31,4 +31,8 @@ public class PartnerService extends GenericService<Partner, PartnerDto, Long, Pa
                 .stream().map(partnerAssembler::toDto).collect(Collectors.toList());
     }
     
+    public PartnerDto getPartnerByName(String name) {
+        Partner partner = partnerRepository.findByName(name).orElse(null);
+        return partnerAssembler.toDto(partner);
+    }
 }

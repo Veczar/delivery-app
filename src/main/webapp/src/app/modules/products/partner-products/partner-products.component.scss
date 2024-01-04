@@ -1,18 +1,16 @@
-body {
-  padding-top: 3rem;
-  display: block;
-  // padding-bottom: 0;
-  // display: flex;
-  // flex-direction: column;
-  // height: 50vh;
+html, body {
+  padding-top: 65px;
   margin: 0;
-  background-color: bisque;
+  // background-color: bisque;
   overflow: hidden;
+  height: 100%;
+  // font-weight: 450;
 }
 
-// .my-container {
-//   margin-top: 70px;
-// }
+main {
+  min-height: 100vh;
+  background-color: #fbfbfbf6;
+}
 
 nav {
   // height: 56px;
@@ -42,13 +40,124 @@ ul > li:hover > button {
   height: 39px;
 }
 
-
-// --------- product card container -----------
-
+// --------- main container -----------
 .restaurant-container {
-  max-width: 1200px;
+  max-width: 1400px;
+  padding-left: 100px;
+  padding-right: 100px;
   margin: 0 auto;
-  background-color: rgb(194, 255, 255);
+  // background-color: rgb(194, 255, 255);
+  padding-bottom: 60px;
+}
+
+
+.badge-container {
+  display: flex;
+  // overflow-x: auto;
+  // overflow-y: hidden;
+  max-width: 65%;
+  align-items: center;
+  max-height: 40px;
+}
+
+.selected {
+  background-color: rgb(189, 239, 255);
+  border-radius: 20px;
+}
+
+.badge-item {
+  margin-right: 10px;
+  font-weight: 500;
+  transition: none;
+  padding: 5px 8px 5px 8px;
+  white-space: nowrap;
+}
+
+.badge-item:hover {
+  color: #0DCAF0;
+  cursor: pointer;
+}
+
+
+// --------- filter --------------
+
+.example-form-field {
+  width: 300px;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  width: 1200px;
+  // padding-left: 30px;
+  // padding-right: 30px;
+}
+
+.filter-search {
+  width: 32%;
+  // max-width: 400px;
+  display: flex;
+  margin-right: 20px;
+
+  input, span {
+    border-radius: 10px;
+  }
+  input {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  };
+}
+
+.form-control:focus {
+  border-color: none;
+  box-shadow: none;
+}
+
+
+// ---------- partner info container ---------
+
+.wrapper {
+  width: 100%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+  // background-color: beige;
+  background-color: white;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.partner {
+  width: 1400px;
+  padding-left: 100px;
+  padding-right: 100px;
+  height: 150px;
+  // background-color: bisque;
+  display: flex;
+
+  img {
+    max-height: 150px;
+    margin-right: 25px;
+  }
+
+  .partner-info-wrapper {
+    width: 100%;
+  }
+
+  h1 {
+    width: 100%;
+    height: fit-content;
+    // background-color: #ff9494;
+  }
+  .partner-info {
+    display: flex;
+  }
+
+  .info-col {
+    // background-color: aqua;
+    margin-right: 25px;
+    padding-left: 5px;
+  }
 }
 
 // --------- product card -----------
@@ -68,9 +177,11 @@ ul > li:hover > button {
 .card {
   padding: 10px;
   transition: transform 0.15s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
 }
 .card:hover {
   transform: scale(1.02);
+  cursor: pointer;
 }
 
 .card-body {
@@ -84,6 +195,22 @@ ul > li:hover > button {
 
   p {
     line-height: 1;
+  }
+
+  .badge-container {
+    max-width: 40%;
+    max-height: 25px;
+    // background-color: aqua;
+    position: absolute;
+    bottom: 10px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    .badge {
+      font-weight: 450 !important;
+    }
   }
 
   .price {
@@ -110,9 +237,9 @@ img {
 }
 
 .footer {
-  display: block;
+  display: flex;
   justify-content: center;
-  margin-top: 60px;
+  // margin-top: 60px;
   padding: 40px 130px 0px 130px;
 
 
@@ -125,10 +252,10 @@ img {
   }
 
   h5 {
-      color: rgba(255, 255, 255, 0.72);
+    color: rgba(255, 255, 255, 0.72);
   }
 
   ul > li > a {
-     color: white !important; 
+    color: white !important;
   }
 }

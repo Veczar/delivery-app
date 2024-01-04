@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductReadDto } from 'src/app/shared/model/api-models';
+import { AddressDto, PartnerDto, ProductDto, ProductReadDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from '../../auth/auth.service';
+
 
 @Component({
   selector: 'app-partner-products',
@@ -16,6 +17,10 @@ export class PartnerProductsComponent implements OnInit {
 
   products: ProductReadDto[] = [];
   partnerName: string = '';
+  searchText!: string;
+  partner!: PartnerDto;
+  address!: AddressDto;
+  categories: string[] = [];
 
   loggedUser = {
     firstName: '',
@@ -42,14 +47,48 @@ export class PartnerProductsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const partnerName = params['partner'];
-      console.log('name: ', partnerName);
+      // console.log('name: ', partnerName);
+      //TODO: use partner service when its ready
+      this.http.get<PartnerDto>(`http://localhost:8080/api/partners/name/${partnerName}`).subscribe((partner) => {
+        this.partner = partner;
+        this.address = partner.owner.addresses[0];
+      })
+
       this.productService.getProductsFromPartner(partnerName).subscribe(products => {
         this.products = products;
+        this.initCategories(products);
       })
     })
   }
 
-  public open(modal: any): void {
+  initCategories(products: ProductDto[]): void {
+    // Extract categories from products
+    const allCategories: string[] = products.flatMap(product => 
+      product.categories ? product.categories.map(category => category.name || '') : []
+    );
+
+    // Filter out duplicates
+    this.categories = Array.from(new Set(allCategories)); 
+  }
+
+  selectedCategory: string | null = null;
+
+  selectCategory(category: string): void {
+    // Toggle selection
+    this.selectedCategory = this.selectedCategory === category ? null : category;
+    this.searchText = category;
+  }
+
+  clearSelection(): void {
+    // Clear selected category
+    this.selectedCategory = null;
+    this.searchText = '';
+  }
+
+
+
+  // ----------- navbar -----------------
+  open(modal: any): void {
     this.modalService.open(modal);
   }
 
@@ -70,5 +109,4 @@ export class PartnerProductsComponent implements OnInit {
   openSettings(modal: any) {
     this.modalService.open(modal);
   }
-
 }
