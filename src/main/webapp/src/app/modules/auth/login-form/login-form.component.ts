@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
 import { ToastService } from 'src/app/shared/toast/toast.service';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -18,15 +18,15 @@ export class LoginFormComponent  {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private location: Location
   ) {}
 
   onLogin() {
     console.log(this.loginObj)
     this.authService.logIn(this.loginObj).subscribe((result) => {
       this.authService.setLoggedUser(result);
-      this.router.navigate(['']);
+      this.location.back(); // back to the site
       this.toastService.showSuccess('Logged in');
     }),
     (error: any) => {

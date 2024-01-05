@@ -1,9 +1,9 @@
 html, body {
   padding-top: 65px;
   margin: 0;
-  // background-color: bisque;
   overflow: hidden;
   height: 100%;
+  // background-color: bisque;
   // font-weight: 450;
 }
 
@@ -40,6 +40,7 @@ ul > li:hover > button {
   height: 39px;
 }
 
+
 // --------- main container -----------
 .restaurant-container {
   max-width: 1400px;
@@ -48,35 +49,6 @@ ul > li:hover > button {
   margin: 0 auto;
   // background-color: rgb(194, 255, 255);
   padding-bottom: 60px;
-}
-
-
-.badge-container {
-  display: flex;
-  max-width: 65%;
-  align-items: center;
-
-  .d-flex {
-    flex-wrap: wrap;
-  }
-}
-
-.selected {
-  background-color: rgb(189, 239, 255);
-  border-radius: 20px;
-}
-
-.badge-item {
-  margin-left: 10px;
-  font-weight: 500;
-  transition: none;
-  padding: 5px 8px 5px 8px;
-  white-space: nowrap;
-}
-
-.badge-item:hover {
-  color: #0DCAF0;
-  cursor: pointer;
 }
 
 
@@ -122,6 +94,8 @@ ul > li:hover > button {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
   // background-color: beige;
   background-color: white;
+  
+  overflow: auto;
 }
 
 .center {
@@ -133,10 +107,10 @@ ul > li:hover > button {
   width: 1400px;
   padding-left: 100px;
   padding-right: 100px;
-  height: 150px;
+  max-height: 150px;
   // background-color: bisque;
   display: flex;
-
+  
   img {
     max-height: 150px;
     margin-right: 25px;
@@ -149,6 +123,8 @@ ul > li:hover > button {
   h1 {
     width: fit-content;
     height: fit-content;
+    width: 100%;
+    margin-right: 20px;
     // background-color: #ff9494;
   }
 
@@ -158,6 +134,7 @@ ul > li:hover > button {
 
   .partner-info {
     display: flex;
+    flex-wrap: wrap;
   }
 
   .info-col {
@@ -167,19 +144,55 @@ ul > li:hover > button {
   }
 }
 
+.pointer:hover {
+  cursor: pointer;
+  color: #82898f !important;
+  a {
+    color: #82898f;
+  }
+}
+
+.ownerOptions {
+  height: fit-content;
+  // width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  border-radius: 5px;
+}
+
+
+// ------------ categories -------------
+.badge-container {
+  display: flex;
+  max-width: 65%;
+  align-items: center;
+
+  .d-flex {
+    flex-wrap: wrap;
+  }
+}
+
+.selected {
+  background-color: rgb(189, 239, 255);
+  border-radius: 20px;
+}
+
+.badge-item {
+  margin-left: 10px;
+  font-weight: 500;
+  transition: none;
+  padding: 5px 8px 5px 8px;
+  white-space: nowrap;
+}
+
+.badge-item:hover {
+  color: #0DCAF0;
+  cursor: pointer;
+}
+
+
 // --------- product card -----------
-
-// .product-card {
-//   border: 1px solid #ddd;
-//   border-radius: 8px;
-//   margin-bottom: 20px;
-// }
-
-// .product-card img {
-//   max-width: 100%;
-//   border-top-left-radius: 8px;
-//   border-top-right-radius: 8px;
-// }
 
 .card {
   padding: 10px;
@@ -195,13 +208,17 @@ ul > li:hover > button {
   padding: 0px;
   padding-left: 10px;
   height: 120px;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
 
   h5 {
     margin-bottom: 5px;
   }
 
-  p {
+  .card-text {
     line-height: 1;
+    overflow: hidden;
+    max-height: 55%;
   }
 
   .badge-container {

@@ -18,7 +18,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
   ) { }
-  
 
   registerUser(user: RegisterUserDto): Observable<RegisterResponseDto> {
     return this.http.post(`${this.apiUrl}/api/auth/register/user`, user);
@@ -53,7 +52,6 @@ export class AuthService {
     localStorage.setItem('lastName', ln);
   }
   
-
   isUserLogged(): boolean {
     return localStorage.getItem('authToken') ? true : false;
   }
