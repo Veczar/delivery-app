@@ -30,9 +30,15 @@ export class PartnerService {
   updateSearchTerm(searchTerm: string): void {
     this.searchTermSubject.next(searchTerm);
   }
+  getSearchTerm(searchTerm: string): string {
+    return this.searchTermSubject.getValue();
+  }
 
-  setCity(city: string): void {
+  updateCity(city: string): void {
     this.citySource.next(city);
+  }
+  getCity(city: string): string {
+    return this.citySource.getValue();
   }
 
 }

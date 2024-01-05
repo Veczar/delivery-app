@@ -21,6 +21,7 @@ export class PartnerViewComponent {
   citySearch: string = '';
   cityName: string = '';
   currentCity: string = '';
+  newAddress: string = '';
 
   loggedUser = {
     firstName: '',
@@ -35,6 +36,16 @@ export class PartnerViewComponent {
     private partnerService: PartnerService,
     public http: HttpClient) {
       this.updateAuthenticationState();
+    }
+
+    ngOnInit(): void {
+      
+      this.partnerService.currentCity.subscribe(city => {
+        this.cityName = city;
+        this.setCity(this.cityName);
+        console.log('City name: ',this.cityName);
+      });
+
     }
 
     private updateAuthenticationState() {
@@ -60,44 +71,47 @@ export class PartnerViewComponent {
       return localStorage.getItem('role') || '';
     }
 
-    ngOnInit(): void {
-      
-      this.partnerService.currentCity.subscribe(city => {
-        this.cityName = city;
-        this.setCity(this.cityName);
-        console.log('City name: ',this.cityName);
-      });
 
+    changeAddress(): void {
+      // Tutaj możesz dodać logikę do zapisywania nowego adresu
+      this.setCity(this.newAddress);
+      this.partnerService.updateCity(this.newAddress);
+      console.log('New Address:', this.newAddress);
+
+      this.router.navigate(['/partners/', this.newAddress]);
+      
+      // Zamknij modal po zapisie
+      this.modalService.dismissAll();
     }
 
   //Funkcje do wrzucenia potem do servisu
 
-  setCity(city: string): void {
-    this.currentCity = city;
-    localStorage.setItem('userCity', city);
-  }
-
-  getCity(): string {
-    return this.currentCity;
-  }
-
-
-  search(searchTerm: string): void {
-    this.currentCity = this.getCity();
-    this.citySearch = searchTerm;
-
-    console.log('searchTerm:', this.citySearch);
-    console.log('cityName:', this.currentCity);
-
-    if (this.cityName === '' || this.cityName === null ){
-        console.error('Unable to determine city.');
-    } else if (this.cityName !== null) {
-      
-      this.partnerService.updateSearchTerm(this.citySearch);
-      this.router.navigate(['/partners/search/', this.cityName, this.citySearch]);
-      this.searchActivated = true;
+    setCity(city: string): void {
+      this.currentCity = city;
+      localStorage.setItem('userCity', city);
     }
-  }
+
+    getCity(): string {
+      return this.currentCity;
+    }
+
+
+    search(searchTerm: string): void {
+      this.currentCity = this.getCity();
+      this.citySearch = searchTerm;
+
+      console.log('searchTerm:', this.citySearch);
+      console.log('cityName:', this.currentCity);
+
+      if (this.cityName === '' || this.cityName === null ){
+          console.error('Unable to determine city.');
+      } else if (this.cityName !== null) {
+        
+        this.partnerService.updateSearchTerm(this.citySearch);
+        this.router.navigate(['/partners/search/', this.cityName, this.citySearch]);
+        this.searchActivated = true;
+      }
+    }
 
 
 

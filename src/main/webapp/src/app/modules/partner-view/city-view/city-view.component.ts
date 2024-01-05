@@ -24,19 +24,21 @@ export class CityViewComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.cityName = params.get('city') || '';
 
-      this.partnerService.setCity(this.cityName);
+      this.partnerService.updateCity(this.cityName);
+      this.getPartners(this.cityName);
+      this.setCity(this.cityName);
     });
 
-    this.setCity(this.cityName);
-    const retrievedCity = this.getCity();
+    
+    
 
-    if (retrievedCity) {
-      console.log(`Current city: ${retrievedCity}`);
-    } else {
-      console.log('City not found in localStorage');
-    }
+    // if (retrievedCity) {
+    //   console.log(`Current city: ${retrievedCity}`);
+    // } else {
+    //   console.log('City not found in localStorage');
+    // }
 
-    this.getPartners(retrievedCity);
+    // this.getPartners(retrievedCity);
   }
 
   setCity(city: string): void {

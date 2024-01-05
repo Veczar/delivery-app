@@ -302,7 +302,7 @@ ul > li:hover > button {
 }
 
 nav {
-    height: 80px; //56 domyślnie
+    height: 65px; //56 domyślnie
 }
 
 $focus-ring-opacity: 0%;
@@ -344,4 +344,7 @@ $focus-ring-opacity: 0%;
 }
 main {
     padding-top: 56px; // Adjust this value based on the height of your fixed-top navbar
+}
+.black{
+    color:black;
 }

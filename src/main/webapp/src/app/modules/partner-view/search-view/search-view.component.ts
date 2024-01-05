@@ -50,7 +50,6 @@ export class SearchViewComponent {
 
       // Call the search function with the retrieved parameters
       
-      console.log('City:',retrievedCity);
       this.partnerService.searchTerm$.subscribe((searchTerm) => {
         this.searchTerm = searchTerm;
         localStorage.setItem('searchTerm', searchTerm);
