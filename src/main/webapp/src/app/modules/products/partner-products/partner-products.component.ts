@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AddressDto, PartnerDto, ProductDto, ProductReadDto } from 'src/app/shared/model/api-models';
+import { AddressDto, PartnerDto, PartnerReviewDto, PartnerReviewReadDto, ProductDto, ProductReadDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -21,6 +21,8 @@ export class PartnerProductsComponent implements OnInit {
   partner!: PartnerDto;
   address!: AddressDto;
   categories: string[] = [];
+  reviewsCount: number = 0;
+  rating: number = 0;
 
   loggedUser = {
     firstName: '',
@@ -48,10 +50,19 @@ export class PartnerProductsComponent implements OnInit {
     this.route.params.subscribe(params => {
       const partnerName = params['partner'];
       // console.log('name: ', partnerName);
-      //TODO: use partner service when its ready
+      //TODO: use partner service nad review service when its ready
       this.http.get<PartnerDto>(`http://localhost:8080/api/partners/name/${partnerName}`).subscribe((partner) => {
         this.partner = partner;
         this.address = partner.owner.addresses[0];
+
+        this.http.get<PartnerReviewReadDto[]>(`http://localhost:8080/api/partners/reviews/partner/${partner.id}`).subscribe((reviews) => {
+          this.reviewsCount = reviews.length;
+
+          if (this.reviewsCount > 0) {
+            const totalRating = reviews.reduce((sum, review) => sum + (review.gradeInStars || 0), 0);
+            this.rating = totalRating / this.reviewsCount;
+          }
+        })
       })
 
       this.productService.getProductsFromPartner(partnerName).subscribe(products => {
@@ -76,7 +87,7 @@ export class PartnerProductsComponent implements OnInit {
   selectCategory(category: string): void {
     // Toggle selection
     this.selectedCategory = this.selectedCategory === category ? null : category;
-    this.searchText = category;
+    this.searchText = this.selectedCategory || '';
   }
 
   clearSelection(): void {

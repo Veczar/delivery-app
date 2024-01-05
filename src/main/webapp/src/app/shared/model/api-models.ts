@@ -96,16 +96,22 @@ export interface PartnerDto {
     contactNumber?: string;
     id?: number;
     name?: string;
-    owner?: UserDto;
+    owner: UserDto;
 }
 
 export interface PartnerReviewDto {
     date?: Date;
     description?: string;
-    grade_in_stars?: number;
+    gradeInStars?: number;
     id?: number;
     partner?: PartnerDto;
     reviewer?: UserDto;
+}
+
+export interface PartnerReviewReadDto {
+    gradeInStars?: number;
+    id?: number;
+    partnerId?: number;
 }
 
 export interface ProductDto {
@@ -206,7 +212,7 @@ export interface UserCriteria extends BaseCriteria {
 }
 
 export interface UserDto {
-    addresses?: AddressDto[];
+    addresses: AddressDto[];
     email?: string;
     firstName?: string;
     id?: number;

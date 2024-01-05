@@ -58,7 +58,7 @@
 
 <main>
 
-  <!-- Restaurant section -->
+  <!-- partner section -->
   <div class="wrapper py-4">
     <div class="center">
       <div class="partner" *ngIf="partner">
@@ -66,7 +66,13 @@
 
         <div class="partner-info-wrapper">
           <h1>{{partner.name}}</h1>
-          
+
+          <div class="my-3">
+            <i class="bi bi-star-fill"></i>
+            {{rating}}/5
+            <a href="">({{reviewsCount}}) reviews</a>
+          </div>
+
           <div class="partner-info">
             <i class="bi bi-geo-alt-fill"></i>
             <div class="info-col">
@@ -104,7 +110,7 @@
               {{category}}
             </div>
           </div>
-          <button class="btn btn-outline-secondary" (click)="clearSelection()">Clear</button>
+          <!-- <button class="btn btn-outline-secondary" (click)="clearSelection()">Clear</button> -->
         </div>
 
         <!-- <mat-form-field class="example-form-field">

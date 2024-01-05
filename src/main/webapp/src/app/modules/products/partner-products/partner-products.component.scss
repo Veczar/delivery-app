@@ -53,11 +53,12 @@ ul > li:hover > button {
 
 .badge-container {
   display: flex;
-  // overflow-x: auto;
-  // overflow-y: hidden;
   max-width: 65%;
   align-items: center;
-  max-height: 40px;
+
+  .d-flex {
+    flex-wrap: wrap;
+  }
 }
 
 .selected {
@@ -66,7 +67,7 @@ ul > li:hover > button {
 }
 
 .badge-item {
-  margin-right: 10px;
+  margin-left: 10px;
   font-weight: 500;
   transition: none;
   padding: 5px 8px 5px 8px;
@@ -98,6 +99,7 @@ ul > li:hover > button {
   // max-width: 400px;
   display: flex;
   margin-right: 20px;
+  max-height: 38px;
 
   input, span {
     border-radius: 10px;
@@ -145,10 +147,15 @@ ul > li:hover > button {
   }
 
   h1 {
-    width: 100%;
+    width: fit-content;
     height: fit-content;
     // background-color: #ff9494;
   }
+
+  a {
+    color: black;
+  }
+
   .partner-info {
     display: flex;
   }

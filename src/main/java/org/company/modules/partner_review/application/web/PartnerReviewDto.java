@@ -6,11 +6,12 @@ import org.company.modules.partner.application.web.PartnerDto;
 import org.company.modules.user.application.web.UserDto;
 import java.util.Date;
 
+
 @Getter
 @Setter
 public class PartnerReviewDto {
-    private long id;
-    private int grade_in_stars;
+    private Long id;
+    private int gradeInStars;
     private String description;
     private Date date;
     private UserDto reviewer;
