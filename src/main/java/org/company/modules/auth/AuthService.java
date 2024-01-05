@@ -78,13 +78,14 @@ public class AuthService {
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .role(role)
                 .build();
+        userRepository.save(user);
         
         Address address = new Address();
         addressAssembler.toEntity(userDto.getAddress(), address);
+        address.setUser(user);
         addressRepository.save(address);
-        user.getAddresses().add(address);
         
-        userRepository.save(user);
+        user.getAddresses().add(address);
         
         return RegisterResponseDto.builder().message("success").build();
     }
@@ -115,10 +116,6 @@ public class AuthService {
         }
         Role role = roleRepository.findById(2L).orElse(null);
 
-        Address address = new Address();
-        addressAssembler.toEntity(partnerDto.getAddress(), address);
-        addressRepository.save(address);
-
         Category category = categoryRepository.findByName(partnerDto.getCategory()).orElse(null);
         
         // create user
@@ -130,9 +127,14 @@ public class AuthService {
                 .password(passwordEncoder.encode(partnerDto.getPassword()))
                 .role(role)
                 .build();
-        user.getAddresses().add(address);
-        
         userRepository.save(user);
+        
+        Address address = new Address();
+        addressAssembler.toEntity(partnerDto.getAddress(), address);
+        address.setUser(user);
+        addressRepository.save(address);
+        
+        user.getAddresses().add(address);
         
         // create partner
         Partner partner = Partner.builder()
