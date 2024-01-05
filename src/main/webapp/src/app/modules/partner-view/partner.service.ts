@@ -14,6 +14,12 @@ export class PartnerService {
     private http: HttpClient,
   ) { }
 
+  private searchTermSubject = new BehaviorSubject<string>('');
+  searchTerm$ = this.searchTermSubject.asObservable();
+
+  private citySource = new BehaviorSubject<string>('');
+  currentCity = this.citySource.asObservable();
+
   getPartners(city: string): Observable<PartnerReadDto[]> {
     return this.http.get<PartnerReadDto[]>(`/api/partners/city/${city}`);
   }
@@ -21,12 +27,12 @@ export class PartnerService {
     return this.http.get<PartnerReadDto[]>(`/api/partners/search/${city}/${searchTerm}`);
   }
 
-  
-  private searchTermSubject = new BehaviorSubject<string>('');
-  searchTerm$ = this.searchTermSubject.asObservable();
-
   updateSearchTerm(searchTerm: string): void {
     this.searchTermSubject.next(searchTerm);
+  }
+
+  setCity(city: string): void {
+    this.citySource.next(city);
   }
 
 }

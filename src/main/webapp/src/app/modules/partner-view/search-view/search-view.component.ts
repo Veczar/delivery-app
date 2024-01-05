@@ -25,11 +25,22 @@ export class SearchViewComponent {
     ngOnInit(): void {
       // Retrieve city and searchTerm from route parameters
       this.route.params.subscribe(params => {
-        this.citySearch = params['city'];
+        this.citySearch = params['city'],
+        this.searchTerm = params['searchTerm'];
       });
 
       this.setCity(this.citySearch);  
       const retrievedCity = this.getCity();
+
+      this.setSearch(this.searchTerm);
+      const retrievedSearch = this.getSearch();
+    
+      if (retrievedSearch) {
+        console.log(`Current search: ${retrievedSearch}`);
+      } else {
+        console.log(`Current search: not found `);
+      }
+      
 
       if (retrievedCity) {
         console.log(`Current city: ${retrievedCity}`);
@@ -42,16 +53,26 @@ export class SearchViewComponent {
       console.log('City:',retrievedCity);
       this.partnerService.searchTerm$.subscribe((searchTerm) => {
         this.searchTerm = searchTerm;
-        this.getPartners(retrievedCity);
+        localStorage.setItem('searchTerm', searchTerm);
+
+        if(!searchTerm){
+          searchTerm = retrievedSearch;
+          this.setSearch(searchTerm);
+        }
+        this.getPartners(retrievedCity,searchTerm);
+        
       });
 
+      
+
+      // this.getPartners(retrievedCity,retrievedSearch);
 
     
     }
 
-    getPartners(city: string): void {
+    getPartners(city: string, searchTerm: string): void {
       // Use this.searchTerm in the request to consider the updated search term
-      this.partnerService.getPartnersSearch(city, this.searchTerm).subscribe((searchPartners) => {
+      this.partnerService.getPartnersSearch(city, searchTerm).subscribe((searchPartners) => {
         this.searchPartners = searchPartners;
         console.log('Partners in', city, ':', this.searchPartners);
       });
@@ -60,19 +81,19 @@ export class SearchViewComponent {
     setCity(city: string): void {
     this.currentCity = city;
     localStorage.setItem('userCity', city);
-  }
+    }
 
-  getCity(): string {
-    return this.currentCity;
-  }
+    getCity(): string {
+      return this.currentCity;
+    }
+    setSearch(search: string): void {
+      this.searchTerm = search;
+      localStorage.setItem('searchTerm', search);
+    }
+    getSearch(): string {
+      return this.searchTerm;
+    }
 
-  // search(searchTerm: string, city: string): void {
-    
-  //     this.partnerService.getPartnersSearch(city, searchTerm).subscribe((searchPartners) => {
-  //         this.searchPartners = searchPartners;
-  //         console.log('Partners in', city, ':', this.searchPartners);
-  //     });
-  //     this.searchActivated = true;
   }
 
 

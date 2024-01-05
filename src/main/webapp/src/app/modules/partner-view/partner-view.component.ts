@@ -1,8 +1,10 @@
 import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PartnerReadDto } from 'src/app/shared/model/api-models';
 import { PartnerService } from './partner.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../auth/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -20,29 +22,53 @@ export class PartnerViewComponent {
   cityName: string = '';
   currentCity: string = '';
 
+  loggedUser = {
+    firstName: '',
+    lastName: ''
+  }
+
   constructor(
+    public authService: AuthService,
+    private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router,
-    private partnerService: PartnerService) {}
+    private partnerService: PartnerService,
+    public http: HttpClient) {
+      this.updateAuthenticationState();
+    }
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.cityName = params['city'];});
-
-
-     this.setCity(this.cityName);
-      const retrievedCity = this.getCity();
-
-      if (retrievedCity) {
-        console.log(`Current city: ${retrievedCity}`);
-      } else {
-        console.log('City not found in localStorage');
+    private updateAuthenticationState() {
+      if (this.isUserLoggedIn()) {
+        this.loggedUser = this.authService.getLoggedUser();
       }
+    }
 
+    public open(modal: any): void {
+      this.modalService.open(modal);
+    }
+  
+    isUserLoggedIn(): any {
+      return this.authService.isUserLogged();
+    }
+  
+    logOut(): void {
+      this.authService.logOut();
+      this.updateAuthenticationState();
+    }
+  
+    getRole(): string {
+      return localStorage.getItem('role') || '';
+    }
 
-    // this.getPartners(retrievedCity);
-    // console.log('Partners in', '', ':', this.partners);
-  }
+    ngOnInit(): void {
+      
+      this.partnerService.currentCity.subscribe(city => {
+        this.cityName = city;
+        this.setCity(this.cityName);
+        console.log('City name: ',this.cityName);
+      });
+
+    }
 
   //Funkcje do wrzucenia potem do servisu
 
@@ -55,22 +81,20 @@ export class PartnerViewComponent {
     return this.currentCity;
   }
 
-  // getPartners(city: string): void {
-  //   this.partnerService.getPartners(city).subscribe((partners) =>
-  //    { this.partners = partners; console.log('Partners in', city, ':', this.partners); });
-
-  // }
 
   search(searchTerm: string): void {
-    const city = this.getCity();
+    this.currentCity = this.getCity();
     this.citySearch = searchTerm;
-    console.log('searchTerm:', searchTerm);
-    if (city === '' || city === null ){
+
+    console.log('searchTerm:', this.citySearch);
+    console.log('cityName:', this.currentCity);
+
+    if (this.cityName === '' || this.cityName === null ){
         console.error('Unable to determine city.');
-    } else if (city !== null) {
-      this.setCity(city);
+    } else if (this.cityName !== null) {
+      
       this.partnerService.updateSearchTerm(this.citySearch);
-      this.router.navigate(['/partners/search/', 'Laskowa', this.citySearch]);
+      this.router.navigate(['/partners/search/', this.cityName, this.citySearch]);
       this.searchActivated = true;
     }
   }

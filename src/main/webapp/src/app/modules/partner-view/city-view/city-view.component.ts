@@ -23,6 +23,8 @@ export class CityViewComponent implements OnInit {
     // Use paramMap instead of params
     this.route.paramMap.subscribe(params => {
       this.cityName = params.get('city') || '';
+
+      this.partnerService.setCity(this.cityName);
     });
 
     this.setCity(this.cityName);
@@ -35,7 +37,6 @@ export class CityViewComponent implements OnInit {
     }
 
     this.getPartners(retrievedCity);
-    console.log('Partners in', '', ':', this.partners);
   }
 
   setCity(city: string): void {

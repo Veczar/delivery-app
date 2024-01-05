@@ -1,87 +1,136 @@
-<header class="blight">
-    <div class="container" id="navbarTogglerDemo02">
-        <div class="position-div">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
+<header data-bs-theme="dark">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+  
+          <a class="navbar-brand" [routerLink]="['/']">Glovo Eats</a>
+  
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <div class="collapse navbar-collapse " id="navbarCollapse">
+  
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <!-- <li class="nav-item">
+                <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link active" [routerLink]="['/']">Contact</a>
+              </li>
+              <!-- <li class="nav-item">
+                <button class="nav-link active" (click)="open(demoModal)">Adblock</button>
+              </li> -->
+              <!-- <li *ngIf="getRole() === 'ADMIN'">
+                <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
+                  <i class="bi bi-speedometer2"></i> Dashboard</button>
+              </li> -->
             </ul>
-        </div>
+            <div class="container" id="navbarTogglerDemo02">
+                <div class="position-div">
+                
+                </div>
 
-        <div class="header-search">
-            <div class="header-search-input">
-                <form class="margin-search" >
+                <div class="header-search">
+                    <div class="header-search-input">
+                        <form class="margin-search" >
 
-                        <button type="button" class="btn header-search-input-placeholder px-4 r-10" (click)="search(searchTerm)">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                          </button>
+                            <button type="button" class="btn header-search-input-placeholder px-4 r-10" (click)="search(searchTerm)">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
 
-                     <div class="text-input">
-                        <label for="search-input" class="Visual-hidden">
-                            <input id="search-input" [(ngModel)]="searchTerm" (keyup.enter)="search(searchTerm)" [ngModelOptions]="{standalone: true}"/>
-                        </label>
+                            <div class="text-input">
+                                <label for="search-input" class="Visual-hidden">
+                                    <input id="search-input" [(ngModel)]="searchTerm" (keyup.enter)="search(searchTerm)" [ngModelOptions]="{standalone: true}"/>
+                                </label>
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div>
-        </div>
+                </div>
 
-        <div class="position-div">
-            <button class="btn">Settings</button>
+            </div>
+           
+                    <div *ngIf="!(isUserLoggedIn())">
+                    <button class="btn btn-outline-primary me-2" type="submit"
+                        [routerLink]="['/register/user']">Register</button>
+                    <button class="btn btn-outline-success" type="submit" [routerLink]="['/auth']">Sign in</button>
+                    </div>
+        
+                    <div *ngIf="isUserLoggedIn() && getRole() !== 'USER'" class="nav-item text-white me-2 badge text-bg-primary">
+                    {{ getRole() }}
+                    </div>
+                    <div *ngIf="isUserLoggedIn()">
+                    <div class="dropdown-center">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-position ">
+                        <li><a class="dropdown-item user-dropdown">Settings</a></li>
+                        <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
+                        </ul> 
+                    </div>
+                    </div>
+  
+          </div>
         </div>
-    </div>
+      </nav>
+
+    
 </header>
-
-<div class="main-container">
-    <div class="category-page_body">
-        <div class="store-wall">
-            <div class="store-wall-content">
-                <div class="wall-element">
-                    <div>
-                        <a>Cos tu napewno będzie</a>
+<main class="mt-5">
+    <div class="main-container">
+        <div class="category-page_body">
+            <div class="store-wall">
+                <div class="store-wall-content">
+                    <div class="wall-element">
+                        <div>
+                            <a>Cos tu napewno będzie</a>
+                        </div>
                     </div>
-                </div>
-                <div class="wall-element">
-                    <h3>Filtry</h3>
-                    <div class="filter-section">
-                        <ul class="">
-                            <li class="list-element">
-                                <a>
-                                <i class="fa-solid fa-burger"></i>
-                                 Kategoria
-                                </a>
-                            </li>
-                            <li class="list-element">
-                                <a>
-                                <i class="fa-solid fa-burger"></i>
-                                 Kategoria
-                                </a>
-                            </li>
-                            <li class="list-element">
-                                <a>
-                                <i class="fa-solid fa-burger"></i>
-                                 Kategoria
-                                </a>
-                            </li>
-                            <li class="list-element">
-                                <a>
-                                <i class="fa-solid fa-burger"></i>
-                                 Kategoria
-                                </a>
-                            </li>
-                            <li class="list-element">
-                                <a>
-                                <i class="fa-solid fa-burger"></i>
-                                 Kategoria
-                                </a>
-                            </li>
-                          </ul>
+                    <div class="wall-element">
+                        <h3>Filtry</h3>
+                        <div class="filter-section">
+                            <ul class="">
+                                <li class="list-element">
+                                    <a>
+                                    <i class="fa-solid fa-burger"></i>
+                                    Kategoria
+                                    </a>
+                                </li>
+                                <li class="list-element">
+                                    <a>
+                                    <i class="fa-solid fa-burger"></i>
+                                    Kategoria
+                                    </a>
+                                </li>
+                                <li class="list-element">
+                                    <a>
+                                    <i class="fa-solid fa-burger"></i>
+                                    Kategoria
+                                    </a>
+                                </li>
+                                <li class="list-element">
+                                    <a>
+                                    <i class="fa-solid fa-burger"></i>
+                                    Kategoria
+                                    </a>
+                                </li>
+                                <li class="list-element">
+                                    <a>
+                                    <i class="fa-solid fa-burger"></i>
+                                    Kategoria
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="category-page_results">
+                <router-outlet ></router-outlet>
+            </div>
         </div>
-        <div class="category-page_results">
-            <router-outlet ></router-outlet>
-        </div>
-    </div>
 
-</div>
+    </div>
+</main>

@@ -3,11 +3,10 @@
 
     <div class="category-page-stores-container">
       <div class="row">
-        <!-- Loop through searchPartners array and display cards -->
         <div class="col-lg-6 col-xl-4" *ngFor="let searchPartner of searchPartners">
           <a [routerLink]="['/']">
-            <div class="card mb-3">
-              <img src="../../../../assets/wrr-buzka.jpg" class="card-img-top h-100" alt="Restaurant Image">
+            <div class="card mb-3 ">
+              <img src="../../../../assets/wrr-buzka.jpg" class="card-img-top h-100 " alt="Restaurant Image">
               <div class="card-body">
                 <h5 class="card-title">{{ searchPartner?.name }}</h5>
                 <p class="card-text">
