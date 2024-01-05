@@ -65,24 +65,79 @@
         <img src="../../../../assets/partner.jpg" class="rounded">
 
         <div class="partner-info-wrapper">
-          <h1>{{partner.name}}</h1>
 
-          <div class="my-3">
-            <i class="bi bi-star-fill"></i>
+          <div class="d-flex">
+            <h1>
+              {{partner.name}}
+            </h1>
+            <h3 class="d-flex align-items-center">
+              <span class="badge text-bg-primary" *ngIf="owner">Owner mode</span>
+            </h3>
+
+            <div class="d-flex align-items-center" *ngIf="owner">
+              <button 
+                class="ownerOptions btn btn-outline-primary me-2"
+                matTooltip="Add new product to your business"
+                [matTooltipShowDelay]="500"
+                (click)="addProduct(addProductForm)"
+                >
+                <h5>
+                  <i class="bi bi-plus-lg"></i>
+                  Add product
+                </h5>
+              </button>
+            
+              <button 
+                class="ownerOptions btn btn-outline-primary"
+                matTooltip="Edit your business information"
+                [matTooltipShowDelay]="500"
+                >  
+                <!-- (click)="openSettings(settingsModal)" todo: partner settings modal -->
+                <h5>
+                  <i class="bi bi-pen-fill"></i>
+                  Edit
+                </h5>
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <i class="bi bi-star-fill text-warning"></i>
             {{rating}}/5
-            <a href="">({{reviewsCount}}) reviews</a>
+            <a class="pointer">({{reviewsCount}}) reviews</a>
           </div>
 
           <div class="partner-info">
             <i class="bi bi-geo-alt-fill"></i>
             <div class="info-col">
               {{address.street}} <br>
-              {{address.postalCode}}, {{address.city}} <br>
+              <span class="text-muted"> {{address.postalCode}}, {{address.city}} </span>
             </div>
-            <i class="bi bi-telephone-fill"></i>
+
+            <i class="bi bi-clock"></i>
             <div class="info-col">
-              {{partner.contactNumber}}
+              <span class="text-success">Open</span> ⋅ 10:00 - 22:00
             </div>
+
+            <div class="pointer d-flex">
+              <i class="bi bi-info-circle"></i>
+              <div class="info-col">
+                <a (click)="open(detailsModal)"
+                >Show details</a>
+              </div>
+            </div>
+
+            <div class="pointer d-flex">
+              <i class="bi bi-globe2"></i>
+              <div class="info-col">
+                <a href="">mcdonalds.pl</a>
+              </div>
+            </div>
+              
+            <!-- <div class="info-col">
+              <i class="bi bi-telephone-fill"></i>
+              {{partner.contactNumber}}
+            </div> -->
           </div>
 
         </div>
@@ -110,22 +165,12 @@
               {{category}}
             </div>
           </div>
-          <!-- <button class="btn btn-outline-secondary" (click)="clearSelection()">Clear</button> -->
-        </div>
-
-        <!-- <mat-form-field class="example-form-field">
-          <mat-label>Search</mat-label>
-          <input matInput type="text" [(ngModel)]="searchText">
-          <button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchText=''">
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </mat-form-field> -->
-        
+        </div>        
       </div>
     </div>
     
     <div class="row">
-      <div class="col-md-4" *ngFor="let product of products | filter: searchText;">
+      <div class="col-md-4" *ngFor="let product of products | filter: searchText;" (click)="openProductModal(productModal, product)">
         <!-- card -->
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
@@ -135,7 +180,9 @@
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title">{{product?.name}}</h5>
-                <p class="card-text"><small class="text-muted">{{product?.description}}</small></p>
+                <p class="card-text">
+                  <small class="text-muted">{{product?.description}}</small>
+                </p>
                 <div class="badge-container">
                   <span class="badge rounded-pill text-bg-info me-1" *ngFor="let category of product?.categories">
                     {{category.name}}
@@ -148,8 +195,6 @@
         </div>
 
       </div>
-
-      
     </div>
 
   </div>
@@ -238,5 +283,74 @@
   </div>
   <div class="modal-body p-4">
     <app-user-settings></app-user-settings>
+  </div>
+</ng-template>
+
+
+<ng-template #detailsModal let-modal class="modal">
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-basic-title">{{partner.name}}</h2>
+    <button type="button" class="btn-close me-2" data-bs-dismiss="modal" aria-label="Close"
+    (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body p-4">
+
+    <div class="modal-map rounded mb-3">
+      <img src="../../../../assets/map.png" class="img-fluid rounded">
+    </div>
+
+    <p>placeholder for some additional details about the business</p>
+    
+    <h3>Address</h3>
+    <div class="info-col">
+      <i class="bi bi-geo-alt-fill me-1"></i>
+      {{address.street}} <br>
+      <span class="text-muted ms-4"> {{address.postalCode}}, {{address.city}} </span>
+    </div>
+
+    <h3>Open hours</h3>
+    <div class="info-col">
+      <i class="bi bi-clock me-2"></i>
+      <span class="text-success">Open</span> ⋅ 10:00 - 22:00
+    </div>
+
+    <h3>Website</h3>
+    <div class="info-col">
+      <div class="pointer d-flex">
+      <i class="bi bi-globe2  me-2"></i>
+        <a href="">mcdonalds.pl</a>
+      </div>
+    </div>
+    
+    <h3>Contact number</h3>
+    <div class="info-col">
+      <i class="bi bi-telephone-fill me-1"></i>
+      {{partner.contactNumber}}
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addProductForm let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add new Product</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body p-4">
+    <app-add-product-form></app-add-product-form>
+  </div>
+</ng-template>
+
+<ng-template #productModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{selectedProduct.name}}</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body p-3">
+    <div class="img rounded">
+      <img src="../../../../assets/product-placeholder.png" class="img-fluid rounded" alt="product">
+    </div>
+    <app-product></app-product>
   </div>
 </ng-template>

@@ -16,13 +16,16 @@ import { AuthService } from '../../auth/auth.service';
 export class PartnerProductsComponent implements OnInit {
 
   products: ProductReadDto[] = [];
+  address!: AddressDto;
+  partner!: PartnerDto;
   partnerName: string = '';
   searchText!: string;
-  partner!: PartnerDto;
-  address!: AddressDto;
+  selectedCategory: string | null = null;
   categories: string[] = [];
   reviewsCount: number = 0;
   rating: number = 0;
+  owner: boolean = false;
+  selectedProduct!: ProductReadDto;
 
   loggedUser = {
     firstName: '',
@@ -55,6 +58,12 @@ export class PartnerProductsComponent implements OnInit {
         this.partner = partner;
         this.address = partner.owner.addresses[0];
 
+        const id: number = Number(localStorage.getItem('id') || 0);
+
+        if (partner.owner.id == id) {
+          this.owner = true;
+        }
+
         this.http.get<PartnerReviewReadDto[]>(`http://localhost:8080/api/partners/reviews/partner/${partner.id}`).subscribe((reviews) => {
           this.reviewsCount = reviews.length;
 
@@ -82,8 +91,6 @@ export class PartnerProductsComponent implements OnInit {
     this.categories = Array.from(new Set(allCategories)); 
   }
 
-  selectedCategory: string | null = null;
-
   selectCategory(category: string): void {
     // Toggle selection
     this.selectedCategory = this.selectedCategory === category ? null : category;
@@ -95,6 +102,16 @@ export class PartnerProductsComponent implements OnInit {
     this.selectedCategory = null;
     this.searchText = '';
   }
+
+  addProduct(modal: any): void {
+    this.modalService.open(modal);
+  }
+
+  openProductModal(modal: any, product: ProductReadDto) {
+    this.selectedProduct = product;
+    this.modalService.open(modal);
+  }
+
 
 
 
@@ -111,6 +128,7 @@ export class PartnerProductsComponent implements OnInit {
     this.authService.logOut();
     // this.updateAuthenticationState();
     this.toastService.showInfo('logged out');
+    this.owner = false;
   }
 
   getRole(): string {
