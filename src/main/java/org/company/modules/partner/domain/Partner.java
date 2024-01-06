@@ -1,6 +1,7 @@
 package org.company.modules.partner.domain;
 
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.*;
 import org.company.modules.category.domain.Category;
 import org.company.modules.user.domain.User;
@@ -26,12 +27,8 @@ public class Partner {
     @OneToOne
     @JoinColumn(name = "owner_id")
     private User owner;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "partner_category",
-            joinColumns = @JoinColumn(name = "partner_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    @Name("photo_path")
     private String photoPath;
+    @Enumerated(EnumType.STRING)
+    private PartnerType type;
 }

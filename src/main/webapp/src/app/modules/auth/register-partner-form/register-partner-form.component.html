@@ -171,24 +171,24 @@
         </div>
       </div>
 
-      <div class="form-group col-md-12">
-        <label for="category" class="form-label"> Category</label>
-          <select class="form-select input" aria-label=".form-select-sm example"
-            formControlName="category"
-            [ngClass]="{ 'is-invalid': submitted && f['category'].errors }"
-            [ngClass]="{ 'is-valid':submitted && !f['category'].errors }"
-            placeholder="">
+        <div class="form-group col-md-12">
+          <label for="type" class="form-label">Type</label>
+            <select class="form-select input" aria-label=".form-select-sm example"
+              formControlName="type"
+              [ngClass]="{ 'is-invalid': submitted && f['type'].errors }"
+              [ngClass]="{ 'is-valid':submitted && !f['type'].errors }"
+              placeholder="">
 
-            <option value="Sklep" >Shop (elektronika,kosmetyki,prezenty)</option>
-            <option value="Restauracja">Restauracja</option>
-            <option value="Kwiaciarnia">Kwiaciarnia</option>
-            <option value="Apteka">Apteka</option>
-            <option value="Sklep Spożywczy">Sklep Spożywczy</option>
-            <option value="Kawiarnia">Kawiarnia</option>
+              <option value="Restaurant" >Restaurant</option>
+              <option value="Pharmacy">Pharmacy</option>
+              <option value="Grocery store">Grocery store</option>
+              <option value="Pharmacy">Pharmacy</option>
+              <option value="Florist's">Florist's</option>
+              <option value="Coffeehouse">Coffeehouse</option>
 
             </select>
-            <div class="invalid-feedback" *ngIf="submitted && f['category'].errors">
-              <p *ngIf="f['category'].errors">Provide Category</p>
+            <div class="invalid-feedback" *ngIf="submitted && f['type'].errors">
+              <p *ngIf="f['type'].errors">Provide type</p>
             </div>
 
             <div class="input-group mb-3" id="inputPhotoDiv" >

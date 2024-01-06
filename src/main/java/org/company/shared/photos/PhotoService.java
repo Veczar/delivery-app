@@ -22,9 +22,9 @@ public class PhotoService{
     private void init()
     {
 
-        directoryPath = System.getProperty("user.dir")+"\\"+directoryPathInConfig;
+        directoryPath = System.getProperty("user.dir")+'\\'+directoryPathInConfig;
         path = Path.of(directoryPath).toAbsolutePath().normalize();
-        Path tmpPath = Path.of(path.toString()+"\\"+PhotoType.partner).toAbsolutePath().normalize();
+        Path tmpPath = Path.of(path.toString()+'\\'+PhotoType.partner).toAbsolutePath().normalize();
         if (!Files.exists(tmpPath)) {
             try {
                 Files.createDirectories(tmpPath);
@@ -32,7 +32,7 @@ public class PhotoService{
                 throw new RuntimeException(e);
             }
         }
-        tmpPath = Path.of(path.toString()+"\\"+PhotoType.product).toAbsolutePath().normalize();
+        tmpPath = Path.of(path.toString()+'\\'+PhotoType.product).toAbsolutePath().normalize();
         if (!Files.exists(tmpPath)) {
             try {
                 Files.createDirectories(tmpPath);
@@ -44,7 +44,8 @@ public class PhotoService{
 
     public void removePhoto(String photoPath) {
         try {
-            Files.delete(Path.of(directoryPath + "\\" + photoPath));
+            String test = directoryPath + '\\' + photoPath;
+            Files.delete(Path.of(directoryPath + '\\' + photoPath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -52,8 +53,8 @@ public class PhotoService{
     public String  savePhoto(MultipartFile photo, PhotoType photoType) {
         String orgName = photo.getOriginalFilename();
         String extension = orgName.substring(orgName.lastIndexOf("."));
-        String photoPath  = photoType+"\\"+ UUID.randomUUID().toString()+extension;
-        Path targetLocation = path.resolve(directoryPath+"\\"+photoPath);
+        String photoPath  = photoType.toString() + '\\' + UUID.randomUUID().toString()+extension;
+        Path targetLocation = path.resolve(directoryPath+'\\'+photoPath);
             try {
                 Files.copy(photo.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {

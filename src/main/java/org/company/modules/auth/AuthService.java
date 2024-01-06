@@ -11,6 +11,7 @@ import org.company.modules.delivery_man.domain.DeliveryMan;
 import org.company.modules.delivery_man.domain.DeliveryManRepository;
 import org.company.modules.partner.domain.Partner;
 import org.company.modules.partner.domain.PartnerRepository;
+import org.company.modules.partner.domain.PartnerType;
 import org.company.modules.role.domain.Role;
 import org.company.modules.role.domain.RoleRepository;
 import org.company.modules.user.domain.User;
@@ -124,7 +125,7 @@ public class AuthService {
         Role role = roleRepository.findById(2L).orElse(null);
 
         Category category = categoryRepository.findByName(partnerDto.getCategory()).orElse(null);
-        
+
         // create user
         User user = User.builder()
                 .firstName(partnerDto.getFirstName())
@@ -140,17 +141,17 @@ public class AuthService {
         addressAssembler.toEntity(partnerDto.getAddress(), address);
         address.setUser(user);
         addressRepository.save(address);
-        
+
         user.getAddresses().add(address);
-        
+
         // create partner
         Partner partner = Partner.builder()
                 .name(partnerDto.getName())
                 .accountNumber(partnerDto.getAccountNumber())
                 .contactNumber(partnerDto.getContactNumber())
                 .owner(user)
-                .categories(Set.of(category))
                 .photoPath( photoService.savePhoto(photo, PhotoType.partner))
+                .type(PartnerType.fromString(partnerDto.getType()))
                 .build();
         
         partnerRepository.save(partner);

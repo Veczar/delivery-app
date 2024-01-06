@@ -38,7 +38,7 @@ export class RegisterPartnerFormComponent implements OnInit {
     name: new FormControl(''),
     accountNumber: new FormControl(''),
     contactNumber: new FormControl(''),
-    category: new FormControl(''),
+    type: new FormControl(''),
     photo: new FormControl(''),
     address: new FormGroup({
       city: new FormControl(''),
@@ -109,7 +109,7 @@ export class RegisterPartnerFormComponent implements OnInit {
           Validators.pattern(/^\d{9}$/),
         ]
       ],
-      category:['', [Validators.required]],
+      type:['', [Validators.required]],
       photo:['', [Validators.required]],
       address: this.formBuilder.group({
         city: ['', [Validators.required, Validators.minLength(2)]],

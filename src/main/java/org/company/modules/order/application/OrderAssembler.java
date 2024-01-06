@@ -23,7 +23,6 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class OrderAssembler implements IAssembler<Order, OrderDto> {
-    
     private final AddressRepository addressRepository;
     private final UserRepository userRepository;
     private final AddressAssembler addressAssembler;
@@ -32,9 +31,13 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
     private final PartnerAssembler partnerAssembler;
     private final DeliveryManRepository deliveryManRepository;
     private final PartnerRepository partnerRepository;
-    
+
     @Override
     public OrderDto toDto(Order order) {
+        AddressAssembler addressAssembler = new AddressAssembler();
+        UserAssembler userAssembler = new UserAssembler(roleAssembler,roleRepository);
+        DeliveryManAssembler deliveryManAssembler = new DeliveryManAssembler(userAssembler,userRepository);
+        PartnerAssembler partnerAssembler = new PartnerAssembler(userAssembler,userRepository,addressAssembler,addressRepository,new CategoryAssembler(),categoryRepository);
         OrderDto orderDto = new OrderDto();
         orderDto.setId(order.getId());
         orderDto.setAddressStart(addressAssembler.toDto(order.getAddressStart()));

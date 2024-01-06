@@ -24,5 +24,5 @@ public class RegisterPartnerDto {
     private String accountNumber;
     private String contactNumber;
     private AddressDto address;
-    private String category;
+    private String type;
 }
