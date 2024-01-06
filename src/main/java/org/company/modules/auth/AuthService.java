@@ -5,13 +5,11 @@ import org.company.modules.address.application.AddressAssembler;
 import org.company.modules.address.domain.Address;
 import org.company.modules.address.domain.AddressRepository;
 import org.company.modules.auth.web.*;
-import org.company.modules.category.domain.Category;
 import org.company.modules.category.domain.CategoryRepository;
 import org.company.modules.delivery_man.domain.DeliveryMan;
 import org.company.modules.delivery_man.domain.DeliveryManRepository;
 import org.company.modules.partner.domain.Partner;
 import org.company.modules.partner.domain.PartnerRepository;
-import org.company.modules.partner.domain.PartnerType;
 import org.company.modules.role.domain.Role;
 import org.company.modules.role.domain.RoleRepository;
 import org.company.modules.user.domain.User;
@@ -151,7 +149,7 @@ public class AuthService {
                 .contactNumber(partnerDto.getContactNumber())
                 .owner(user)
                 .photoPath( photoService.savePhoto(photo, PhotoType.partner))
-                .type(PartnerType.fromString(partnerDto.getType()))
+                .type(partnerDto.getType())
                 .build();
         
         partnerRepository.save(partner);
