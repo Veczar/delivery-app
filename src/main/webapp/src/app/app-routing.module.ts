@@ -9,6 +9,7 @@ import { AdminDashboardComponent } from './modules/admin-panel/admin-dashboard/a
 import { UserTableComponent } from './modules/admin-panel/user-table/user-table.component';
 import { RegisterPartnerFormComponent } from './modules/auth/register-partner-form/register-partner-form.component';
 import { RegisterCourierFormComponent } from './modules/auth/register-courier-form/register-courier-form.component';
+import { CourierTableComponent } from './modules/admin-panel/courier-table/courier-table.component';
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
 
 const routes: Routes = [
@@ -23,8 +24,9 @@ const routes: Routes = [
     component: AdminPanelComponent,
     canActivate: [authGuard],
     children: [
-      { path: 'dashboard', component: AdminDashboardComponent}, 
-      { path: 'users', component: UserTableComponent }, 
+      { path: 'dashboard', component: AdminDashboardComponent},
+      { path: 'users', component: UserTableComponent },
+      { path: 'couriers-table', component: CourierTableComponent },
     ]
   }
 ];

@@ -1,4 +1,4 @@
-package org.company.modules.product_delivery.application.web;
+package org.company.modules.product_order.application.web;
 
 import lombok.Getter;
 import lombok.Setter;

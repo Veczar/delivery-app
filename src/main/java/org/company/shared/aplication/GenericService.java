@@ -74,7 +74,7 @@ public class GenericService<
                 {
                         Entity item = entityType.newInstance();
                         assembler.toEntity(dto, item);
-                        repository.save(item);
+                        item = repository.save(item);
                         return assembler.toDto(item);
                 }
                 catch (InstantiationException | IllegalAccessException e)
@@ -92,7 +92,7 @@ public class GenericService<
                 }
 
                 assembler.toEntity(dto, itemToUpdate);
-                repository.save(itemToUpdate); // nie trzeba przy transakcjach ale widac id od razu
+                itemToUpdate = repository.save(itemToUpdate); // nie trzeba przy transakcjach ale widac id od razu
                 return assembler.toDto(itemToUpdate);
         }
 }

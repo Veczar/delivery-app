@@ -5,6 +5,7 @@ import org.company.modules.address.application.AddressAssembler;
 import org.company.modules.address.domain.Address;
 import org.company.modules.address.domain.AddressRepository;
 import org.company.modules.category.application.CategoryAssembler;
+import org.company.modules.category.domain.CategoryRepository;
 import org.company.modules.delivery_man.appliction.DeliveryManAssembler;
 import org.company.modules.delivery_man.domain.DeliveryMan;
 import org.company.modules.delivery_man.domain.DeliveryManRepository;
@@ -39,7 +40,10 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
         orderDto.setAddressStart(addressAssembler.toDto(order.getAddressStart()));
         orderDto.setCustomer(userAssembler.toDto(order.getCustomer()));
         orderDto.setAddressEnd(addressAssembler.toDto(order.getAddressEnd()));
-        orderDto.setDeliveryMan(deliveryManAssembler.toDto(order.getDeliveryMan()));
+        if(order.getDeliveryMan() != null)
+        {
+            orderDto.setDeliveryMan(deliveryManAssembler.toDto(order.getDeliveryMan()));
+        }
         orderDto.setPartner(partnerAssembler.toDto(order.getPartner()));
         orderDto.setTotalPrice(order.getTotalPrice());
         orderDto.setTip(order.getTip());

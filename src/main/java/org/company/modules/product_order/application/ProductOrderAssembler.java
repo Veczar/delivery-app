@@ -1,15 +1,15 @@
-package org.company.modules.product_delivery.application;
+package org.company.modules.product_order.application;
 
 import lombok.AllArgsConstructor;
 import org.company.modules.order.application.OrderAssembler;
 import org.company.modules.order.domain.Order;
 import org.company.modules.order.domain.OrderRepository;
+import org.company.modules.product_order.application.web.ProductOrderDto;
+import org.company.modules.product_order.domain.ProductOrder;
 import org.company.modules.product.application.ProductAssembler;
 import org.company.modules.product.domain.Product;
 import org.company.modules.product.domain.ProductRepository;
-import org.company.modules.product_delivery.application.web.ProductOrderDto;
-import org.company.modules.product_delivery.domain.ProductOrder;
-import org.company.modules.product_delivery.domain.ProductOrderPk;
+import org.company.modules.product_order.domain.ProductOrderPk;
 import org.company.shared.aplication.IAssembler;
 import org.springframework.stereotype.Component;
 

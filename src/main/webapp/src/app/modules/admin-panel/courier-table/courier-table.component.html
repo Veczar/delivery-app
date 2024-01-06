@@ -1,0 +1,133 @@
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Couriers</h1>
+</div>
+
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="user">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+      <td mat-cell *matCellDef="let row"> {{row.user.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rating">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> rating </th>
+      <td mat-cell *matCellDef="let row"> {{row.rating}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="workingArea">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> rating </th>
+      <td mat-cell *matCellDef="let row"> {{row.workingArea}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="accountNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> rating </th>
+      <td mat-cell *matCellDef="let row"> {{row.accountNumber}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+        mat-row
+        (click)="click(row)"
+        [class.demo-row-is-clicked]=""
+        *matRowDef="let row; columns: displayedColumns;"
+        data-bs-toggle="modal" data-bs-target="#courierModal"
+    ></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="alert alert-danger " colspan="6" role="alert">
+        No data matching the filter "{{input.value}}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="25"
+    aria-label="Select page of couriers"></mat-paginator>
+</div>
+
+
+<div class="modal fade" id="courierModal" tabindex="-1" aria-labelledby="courierModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="courierModalLabel">{{ editable ? 'Edit Courier' : 'Courier Details' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="courierForm" class="row g-3 needs-validation">
+          <h5>ID: {{this.courierForm.value.id}}</h5>
+          <h6>Email: {{this.courierForm.value.user.email}}</h6>
+          <div class="form-group col-md-6">
+            <label for="rating" class="form-label">Rating</label>
+            <input
+              type="number"
+              name="rating"
+              formControlName="rating"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['rating'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['rating'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="submitted && f['rating'].errors">
+              <p>Rating should be between 0 and 5</p>
+            </div> 
+          </div>
+      
+          <div class="form-group col-md-6">
+            <label for="workingArea" class="form-label">Working area</label>
+            <input
+              type="text"
+              name="workingArea"
+              formControlName="workingArea"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['workingArea'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['workingArea'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf=" submitted && f['workingArea'].errors">
+              <p>Provide suitable wroking area</p>
+            </div> 
+          </div>
+      
+      
+          <div class="form-group col-md-12">
+            <label for="accountNumber" class="form-label">E-mail</label>
+            <input
+              maxlength="26"
+              type="text"
+              name="accountNumber"
+              formControlName="accountNumber"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['accountNumber'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['accountNumber'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="submitted && f['accountNumber'].errors" >
+              <p *ngIf="f['accountNumber'].errors">Account number is required</p>
+            </div> 
+          </div>
+
+          <div class="mb-3">
+            <button type="button" class="btn btn-primary me-2" (click)="toggleEditMode()">
+              {{ editable ? 'Save Changes' : 'Edit Courier' }}
+            </button>
+            <span> </span>
+            <button type="button" class="btn btn-danger" (click)="deleteCourier()" data-bs-dismiss="modal">
+              Delete courier
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

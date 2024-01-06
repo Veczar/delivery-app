@@ -27,7 +27,7 @@ public class Partner {
     @JoinColumn(name = "owner_id")
     private User owner;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "partner_category",
             joinColumns = @JoinColumn(name = "partner_id"),
