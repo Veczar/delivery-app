@@ -82,7 +82,7 @@
       id="inputGroupFile01"
       (change)="onFileSelected($event)"
       [ngClass]="{ 'is-invalid': submitted && f['photoPath'].errors }"
-      [ngClass]="{ 'is-valid':submitted && !f['photoPath'].errors }"
+      [ngClass]="{ 'is-valid': submitted && !f['photoPath'].errors }"
     >
     <div class="invalid-feedback" *ngIf="submitted && f['photoPath'].errors" >
       <p>Provide valid photo .png/.jpg/.jpeg</p>

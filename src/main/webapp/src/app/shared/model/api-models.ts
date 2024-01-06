@@ -115,14 +115,14 @@ export interface PartnerReviewReadDto {
 }
 
 export interface ProductDto {
+    id: number;
     categories?: CategoryDto[];
     description?: string;
-    id?: number;
     name?: string;
     onSale?: boolean;
     owner?: PartnerDto;
     photoPath?: string;
-    price?: number;     
+    price: number;     
 }
 
 export interface ProductOrderDto {
@@ -133,9 +133,9 @@ export interface ProductOrderDto {
 }
 
 export interface ProductReadDto {
+    id: number;
     categories?: CategoryDto[];
     description?: string;
-    id?: number;
     name?: string;
     onSale?: boolean;
     photoPath?: string;

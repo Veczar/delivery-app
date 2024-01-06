@@ -1,0 +1,39 @@
+<div *ngIf="product">
+
+  <div class="img rounded">
+    <img src="../../../../assets/product-placeholder.png" class="img-fluid rounded" alt="product">
+  </div>
+
+  <h5 class="mt-3">
+    {{product.description}}
+  </h5> 
+
+  <div class="modal-footer justify-content-center mt-3">
+
+    <div class="quantity-picker">
+      
+      <button class="btn btn-outline-secondary" (click)="decQuantity()">
+        <i class="bi bi-dash-lg"></i>
+      </button>
+      
+      <div type="text" class="quantity">
+        {{quantity}}
+      </div>
+      
+      <button class="btn btn-outline-secondary" (click)="incQuantity()">
+        <i class="bi bi-plus-lg"></i>
+      </button>
+    </div>
+    
+    <button class="btn btn-primary btn-lg add-btn d-flex justify-content-between" (click)="addToCart()">
+      <div>
+        Add to cart 
+      </div>
+      <div>
+        {{ subtotal | number: '1.2-2' }} $
+      </div>      
+    </button>
+  </div>
+    
+</div>
+

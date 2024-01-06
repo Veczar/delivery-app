@@ -173,12 +173,14 @@
         <!-- card -->
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
-            <div class="col-md-4 img rounded">
+            <div class="col-md-5 img rounded">
+              <div *ngIf="product?.onSale" class="on-sale-indicator">On Sale!</div>
               <img src="../../../../assets/product-placeholder.png" class="img-fluid rounded" alt="product">
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
               <div class="card-body">
                 <h5 class="card-title">{{product?.name}}</h5>
+
                 <p class="card-text">
                   <small class="text-muted">{{product?.description}}</small>
                 </p>
@@ -188,6 +190,7 @@
                   </span>
                 </div>
                 <h6 class="card-text price">{{ product?.price }} $</h6>
+
               </div>
             </div>
           </div>
@@ -344,14 +347,11 @@
 
 <ng-template #productModal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{selectedProduct.name}}</h4>
+    <h3 class="modal-title" id="modal-basic-title">{{selectedProduct.name}}</h3>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
       (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body p-3">
-    <div class="img rounded">
-      <img src="../../../../assets/product-placeholder.png" class="img-fluid rounded" alt="product">
-    </div>
-    <app-product></app-product>
+    <app-product [productId]="selectedProduct.id"></app-product>
   </div>
 </ng-template>
