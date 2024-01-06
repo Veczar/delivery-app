@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AddressDto, PartnerDto, PartnerReviewDto, PartnerReviewReadDto, ProductDto, ProductReadDto } from 'src/app/shared/model/api-models';
+import { AddressDto, PartnerDto, PartnerReviewReadDto, ProductDto, ProductReadDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -67,11 +67,12 @@ export class PartnerProductsComponent implements OnInit {
         this.http.get<PartnerReviewReadDto[]>(`http://localhost:8080/api/partners/reviews/partner/${partner.id}`).subscribe((reviews) => {
           this.reviewsCount = reviews.length;
 
+          // calculate rating
           if (this.reviewsCount > 0) {
             const totalRating = reviews.reduce((sum, review) => sum + (review.gradeInStars || 0), 0);
             this.rating = totalRating / this.reviewsCount;
           }
-        })
+        });
       })
 
       this.productService.getProductsFromPartner(partnerName).subscribe(products => {
@@ -111,7 +112,6 @@ export class PartnerProductsComponent implements OnInit {
     this.selectedProduct = product;
     this.modalService.open(modal);
   }
-
 
 
 

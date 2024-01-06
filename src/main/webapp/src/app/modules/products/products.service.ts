@@ -13,7 +13,7 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<ProductDto[]> {
-    return this.http.get<ProductDto[]>(`${this.apiUrl}/api/products/`);
+    return this.http.get<ProductDto[]>(`${this.apiUrl}/api/products`);
   }
 
   getProductsFromPartner(partnerName: string): Observable<ProductDto[]> {
@@ -22,6 +22,10 @@ export class ProductsService {
 
   getProduct(id: number): Observable<ProductDto> {
     return this.http.get<ProductDto>(`${this.apiUrl}/api/products/${id}`);
+  }
+
+  addProduct(product: ProductDto): Observable<ProductDto> {
+    return this.http.post<ProductDto>(`${this.apiUrl}/api/products`, product);
   }
 
   updateProduct(product: ProductDto): Observable<ProductDto> {

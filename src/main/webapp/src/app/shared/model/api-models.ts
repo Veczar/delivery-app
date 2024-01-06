@@ -122,7 +122,7 @@ export interface ProductDto {
     onSale?: boolean;
     owner?: PartnerDto;
     photoPath?: string;
-    price?: number;
+    price?: number;     
 }
 
 export interface ProductOrderDto {

@@ -137,12 +137,12 @@ export class UserSettingsComponent {
     else {
       // transform the role to be an object with id
       const roleId = this.userForm.value.role;
-      const user: UserDto = this.userForm.value;
-      user.role = { id: roleId };
+      const userform: UserDto = this.userForm.value;
+      userform.role = { id: roleId };
 
       // saves changes
       // console.log(user);
-      this.userService.updateUser(user).subscribe(updatedUser => {
+      this.userService.updateUser(userform).subscribe(updatedUser => {
         console.log('user updated');
         this.authService.setCredentials(updatedUser.firstName, updatedUser.lastName);
       });

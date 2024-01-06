@@ -6,7 +6,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { UserModule } from '../user/user.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,6 +27,7 @@ import { ProductComponent } from './product/product.component';
     AppRoutingModule,
     BrowserModule,
     RouterModule,
+    ReactiveFormsModule,
     FormsModule,
     MatFormFieldModule, 
     MatInputModule, 
