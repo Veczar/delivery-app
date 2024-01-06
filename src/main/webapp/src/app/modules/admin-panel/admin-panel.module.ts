@@ -10,6 +10,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UserTableComponent } from './user-table/user-table.component';
 import { AdminPanelComponent } from './admin-panel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CourierTableComponent } from './courier-table/courier-table.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminPanelComponent,
     AdminDashboardComponent,
     UserTableComponent,
+    CourierTableComponent,
   ],
   imports: [
     CommonModule,
