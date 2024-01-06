@@ -109,9 +109,12 @@ ul{
 .header-search{
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    justify-content: center;
-    width: 100%;
+    flex-grow: 2;
+    padding-left: 5%;
+    padding-right: 5%;
+    place-items: center;
+    // justify-content: center;
+    // width: 10px;
 }
 .header-search-input {
     background: gainsboro;
@@ -121,7 +124,7 @@ ul{
     height: 44px;
     justify-content: space-around;
     position: relative;
-    width: 100%;
+    width: 400px;
 }
 
 @media (max-width: 1024px){
@@ -343,7 +346,8 @@ $focus-ring-opacity: 0%;
     padding: 0 90px;
 }
 main {
-    padding-top: 56px; // Adjust this value based on the height of your fixed-top navbar
+    margin-top: auto;
+    padding-top: 35px; // Adjust this value based on the height of your fixed-top navbar
 }
 .black{
     color:black;
