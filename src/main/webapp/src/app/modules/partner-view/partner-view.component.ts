@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { filter } from 'rxjs';
 
 
 
@@ -84,7 +85,10 @@ export class PartnerViewComponent {
       this.modalService.dismissAll();
     }
 
-  //Funkcje do wrzucenia potem do servisu
+    goToAllPartners(): void {
+      this.router.navigate(['/partners']);
+      this.partnerService.updateCity('');
+    }
 
     setCity(city: string): void {
       this.currentCity = city;

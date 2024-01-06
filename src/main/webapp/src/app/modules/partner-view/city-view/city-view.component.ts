@@ -25,7 +25,8 @@ export class CityViewComponent implements OnInit {
       this.cityName = params.get('city') || '';
 
       this.partnerService.updateCity(this.cityName);
-      this.getPartners(this.cityName);
+      // this.getPartnersCity(this.cityName);
+      this.getPartners();
       this.setCity(this.cityName);
     });
 
@@ -40,8 +41,14 @@ export class CityViewComponent implements OnInit {
     return this.currentCity;
   }
 
-  getPartners(city: string): void {
-    this.partnerService.getPartners(city).subscribe((partners) => {
+  getPartners(): void {
+    this.partnerService.getPartners().subscribe((partners) => {
+      this.partners = partners;
+      console.log('Partners:', this.partners);
+    });
+  }
+  getPartnersCity(city: string): void {
+    this.partnerService.getPartnersCity(city).subscribe((partners) => {
       this.partners = partners;
       console.log('Partners in', city, ':', this.partners);
     });

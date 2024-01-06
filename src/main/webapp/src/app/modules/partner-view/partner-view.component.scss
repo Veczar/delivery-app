@@ -155,29 +155,29 @@ ul{
 .text-input {
     position: relative;
 }
-input {
-    background-color: gainsboro;
-    border: none;
-    border-radius: 0;
-    box-sizing: border-box;
-    caret-color: black;
-    color: black;
+    
+
+#search-input{
+    padding: 0 48px;
+    text-align: left;
     font-size: 18px;
     font-weight: 400;
     height: 100%;
+    box-sizing: border-box;
+    caret-color: black;
+    color: black;
     line-height: 1.4;
-    padding: 0 48px;
-    text-align: left;
-    text-overflow: ellipsis;
-    width: 100%;
+    border: none;
+    background-color: gainsboro;
     box-shadow: none; /* Remove the default box-shadow when clicked */
     outline: none; /* Remove the default outline when clicked */
 }
+    
 
-.header-search-input:focus-within {
-    background: gainsboro; /* Adjust the background color when focused */
-    border-radius: 24px;
-}
+// .header-search-input:focus-within {
+//     background: gainsboro; /* Adjust the background color when focused */
+//     border-radius: 24px;
+// }
 .r-10{
     position: absolute;
     right: 10px;

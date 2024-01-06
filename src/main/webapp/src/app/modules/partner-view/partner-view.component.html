@@ -73,7 +73,7 @@
 
         <div class="text-input">
           <label for="search-input" class="Visual-hidden">
-            <input id="search-input" [(ngModel)]="searchTerm" (keyup.enter)="search(searchTerm)"
+            <input id="search-input"  [(ngModel)]="searchTerm" (keyup.enter)="search(searchTerm)"
               [ngModelOptions]="{standalone: true}" />
           </label>
         </div>
@@ -90,7 +90,7 @@
           <div class="store-wall-content">
             <div class="wall-element">
               <div>
-                <a>Cos tu napewno będzie</a>
+                <!-- <a (click)="goToAllPartners()">Przejdź do strony z wszystkimi Partnerami</a> -->
               </div>
             </div>
             <div class="wall-element">

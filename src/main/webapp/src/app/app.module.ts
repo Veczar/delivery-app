@@ -13,21 +13,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
-import { PartnerViewComponent } from './modules/partner-view/partner-view.component';
-import { CityViewComponent } from './modules/partner-view/city-view/city-view.component';
-import { SearchViewComponent } from './modules/partner-view/search-view/search-view.component';
-
+import { PartnerModule } from './modules/partner-view/partner.module';
+import { FilterPipe } from './shared/filter.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FrontPageComponent,
-    PartnerViewComponent,
-    CityViewComponent,
-    SearchViewComponent,
   ],
   imports: [
+    PartnerModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
