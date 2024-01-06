@@ -44,6 +44,7 @@ export class SearchViewComponent {
 
       if (retrievedCity) {
         console.log(`Current city: ${retrievedCity}`);
+        this.partnerService.updateCity(retrievedCity);
       } else {
         console.log('City not found in localStorage');
       }

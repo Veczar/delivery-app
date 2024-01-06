@@ -29,16 +29,6 @@ export class CityViewComponent implements OnInit {
       this.setCity(this.cityName);
     });
 
-    
-    
-
-    // if (retrievedCity) {
-    //   console.log(`Current city: ${retrievedCity}`);
-    // } else {
-    //   console.log('City not found in localStorage');
-    // }
-
-    // this.getPartners(retrievedCity);
   }
 
   setCity(city: string): void {

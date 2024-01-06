@@ -100,11 +100,14 @@ export class PartnerViewComponent {
       this.currentCity = this.getCity();
       this.citySearch = searchTerm;
 
-      console.log('searchTerm:', this.citySearch);
-      console.log('cityName:', this.currentCity);
+      // console.log('searchTerm:', this.citySearch);
+      // console.log('cityName:', this.currentCity);
 
       if (this.cityName === '' || this.cityName === null ){
           console.error('Unable to determine city.');
+      } else if(this.citySearch === ''|| this.citySearch === null){
+        this.partnerService.updateSearchTerm(this.citySearch);
+        this.router.navigate(['/partners/', this.cityName]);
       } else if (this.cityName !== null) {
         
         this.partnerService.updateSearchTerm(this.citySearch);
