@@ -35,19 +35,24 @@ export class ProductComponent implements OnInit {
     console.log('subtotal: ', this.subtotal);
   }
 
-  decQuantity() {
+  decQuantity(): void {
     if (this.quantity > 1) {
       this.quantity--;
       this.updateSubtotal();
     }
   }
 
-  incQuantity() {
+  incQuantity(): void {
     this.quantity++;
     this.updateSubtotal();
   }
 
-  updateSubtotal() {
+  updateSubtotal(): void {
     this.subtotal = this.product.price * this.quantity;
   }
+
+  // deleteProduct():void {
+  //   console.log(this.productId);
+  //   // this.productService.deleteProduct(this.productId);
+  // }
 }

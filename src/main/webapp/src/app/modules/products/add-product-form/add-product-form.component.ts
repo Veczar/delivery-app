@@ -40,7 +40,7 @@ export class AddProductFormComponent {
   initCategories() {
     this.http.get<CategoryDto[]>(`http://localhost:8080/api/categories`).subscribe((categories) => {
       this.categories = categories;
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -73,12 +73,12 @@ export class AddProductFormComponent {
           Validators.required,
         ]
       ],
-      onSale: [false], // Assuming it's a boolean value
+      onSale: [false],
       photoPath: [
         '',
         [
           Validators.required,
-          Validators.pattern(/\.(png|jpg|jpeg)$/i), // Validates for a valid image URL
+          Validators.pattern(/\.(png|jpg|jpeg)$/i),
         ]
       ],
       owner: [],

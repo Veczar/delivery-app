@@ -108,7 +108,7 @@ export class PartnerProductsComponent implements OnInit {
     this.modalService.open(modal);
   }
 
-  openProductModal(modal: any, product: ProductReadDto) {
+  openProductModal(modal: any, product: ProductReadDto): void {
     this.selectedProduct = product;
     this.modalService.open(modal);
   }
@@ -135,7 +135,7 @@ export class PartnerProductsComponent implements OnInit {
     return localStorage.getItem('role') || '';
   }
   
-  openSettings(modal: any) {
+  openSettings(modal: any): void {
     this.modalService.open(modal);
   }
 }
