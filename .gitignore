@@ -41,3 +41,4 @@ build/
 /spy.log
 .hintrc
 vpproject/delivery_app.vpp
+/lib/
