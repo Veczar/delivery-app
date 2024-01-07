@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { filter } from 'rxjs';
+import { PartnerReadDto } from 'src/app/shared/model/api-models';
 
 
 
@@ -17,12 +18,14 @@ import { filter } from 'rxjs';
 
 export class PartnerViewComponent {
 
+  partners: PartnerReadDto[] = [];
   searchTerm: string = '';
   searchActivated: boolean = false;
   citySearch: string = '';
   cityName: string = '';
   currentCity: string = '';
   newAddress: string = '';
+  flag: boolean = false;
 
   loggedUser = {
     firstName: '',
@@ -47,6 +50,21 @@ export class PartnerViewComponent {
         console.log('City name: ',this.cityName);
       });
 
+      this.getPartners();
+
+      this.router.events.subscribe(() => {
+        // Pobierz aktualny adres URL
+        const currentUrl = this.router.url;
+        // Sprawdź, czy aktualny adres URL zawiera '/partners'
+        if (currentUrl === '/partners') {
+          // Wykonaj odpowiednie działania dla '/partners'
+          this.flag = true;
+        }else{
+          this.flag = false;
+        }
+  
+        console.log(this.flag);
+      });
     }
 
     private updateAuthenticationState() {
@@ -104,22 +122,40 @@ export class PartnerViewComponent {
       this.currentCity = this.getCity();
       this.citySearch = searchTerm;
 
-      // console.log('searchTerm:', this.citySearch);
-      // console.log('cityName:', this.currentCity);
+        // console.log('searchTerm:', this.citySearch);
+        // console.log('cityName:', this.currentCity);
 
-      if (this.cityName === '' || this.cityName === null ){
-          console.error('Unable to determine city.');
-      } else if(this.citySearch === ''|| this.citySearch === null){
-        this.partnerService.updateSearchTerm(this.citySearch);
-        this.router.navigate(['/partners/', this.cityName]);
-      } else if (this.cityName !== null) {
-        
-        this.partnerService.updateSearchTerm(this.citySearch);
-        this.router.navigate(['/partners/search/', this.cityName, this.citySearch]);
-        this.searchActivated = true;
+        if (this.cityName === '' || this.cityName === null ){
+            console.error('Unable to determine city.');
+        } else if(this.citySearch === ''|| this.citySearch === null){
+          this.partnerService.updateSearchTerm(this.citySearch);
+          this.router.navigate(['/partners/', this.cityName]);
+        } else if (this.cityName !== null) {
+          
+          this.partnerService.updateSearchTerm(this.citySearch);
+          this.router.navigate(['/partners/search/', this.cityName, this.citySearch]);
+          this.searchActivated = true;
+        }
       }
-    }
 
+      getPartners(): void {
+        this.partnerService.getPartners().subscribe((partners) => {
+          this.partners = partners;
+          // Zapisz dane partners w serwisie
+          this.partnerService.setPartnersData(this.partners);
+          console.log('Partners:', this.partners);
+        });
+      }
 
+    private updatePartnersData(): void {
+      this.partnerService.getPartners().subscribe((partners) => {
+        this.partners = partners;
+    
+        // Zapisz dane w serwisie, aby były dostępne dla innych komponentów
+        this.partnerService.setPartnersData(this.partners);
+    
+        console.log(this.partners);
+      });
 
+  }
 }

@@ -1,5 +1,4 @@
 import { Component,OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { PartnerReadDto } from 'src/app/shared/model/api-models';
 import { PartnerService } from '../partner.service';
 import { ActivatedRoute } from '@angular/router';
@@ -25,10 +24,11 @@ export class CityViewComponent implements OnInit {
       this.cityName = params.get('city') || '';
 
       this.partnerService.updateCity(this.cityName);
-      // this.getPartnersCity(this.cityName);
-      this.getPartners();
       this.setCity(this.cityName);
+      this.getPartners();
     });
+
+    
 
   }
 
@@ -42,11 +42,15 @@ export class CityViewComponent implements OnInit {
   }
 
   getPartners(): void {
-    this.partnerService.getPartners().subscribe((partners) => {
-      this.partners = partners;
+    this.partnerService.partners$.subscribe((partners) => {
+      // Otrzymujesz dane partners z serwisu
+      const selectedCity = this.getCity();
+      console.log('SelectedCity:', selectedCity);
+      this.partners = partners.filter(partner => partner?.address?.city === selectedCity);
       console.log('Partners:', this.partners);
     });
   }
+  
   getPartnersCity(city: string): void {
     this.partnerService.getPartnersCity(city).subscribe((partners) => {
       this.partners = partners;

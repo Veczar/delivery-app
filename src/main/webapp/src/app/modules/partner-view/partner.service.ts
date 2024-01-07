@@ -20,6 +20,9 @@ export class PartnerService {
   private citySource = new BehaviorSubject<string>('');
   currentCity = this.citySource.asObservable();
 
+  private partnersDataSubject = new BehaviorSubject<PartnerReadDto[]>([]);
+  public partners$ = this.partnersDataSubject.asObservable();
+
   getPartners():Observable<PartnerReadDto[]> {
     return this.http.get<PartnerReadDto[]>(`/api/partners`);
   }
@@ -28,6 +31,13 @@ export class PartnerService {
   }
   getPartnersSearch(city: string, searchTerm: string): Observable<PartnerReadDto[]> {
     return this.http.get<PartnerReadDto[]>(`/api/partners/search/${city}/${searchTerm}`);
+  }
+
+  setPartnersData(partners: PartnerReadDto[]): void {
+    this.partnersDataSubject.next(partners);
+  }
+  getPartnersData(): Observable<PartnerReadDto[]> {
+    return this.partnersDataSubject.asObservable();
   }
 
   updateSearchTerm(searchTerm: string): void {

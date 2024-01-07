@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./search-view.component.scss']
 })
 export class SearchViewComponent {
+  partners: PartnerReadDto[] = [];
   currentCity: string = '';
   searchTerm: string = '';
   searchPartners: PartnerReadDto[] = [];
@@ -59,7 +60,7 @@ export class SearchViewComponent {
           searchTerm = retrievedSearch;
           this.setSearch(searchTerm);
         }
-        this.getPartners(retrievedCity,searchTerm);
+        this.getPartners();
         
       });
 
@@ -70,13 +71,31 @@ export class SearchViewComponent {
     
     }
 
-    getPartners(city: string, searchTerm: string): void {
-      // Use this.searchTerm in the request to consider the updated search term
-      this.partnerService.getPartnersSearch(city, searchTerm).subscribe((searchPartners) => {
-        this.searchPartners = searchPartners;
-        console.log('Partners in', city, ':', this.searchPartners);
+    getPartners():void{
+      this.partnerService.partners$.subscribe((partners) => {
+        // Otrzymujesz dane partners z serwisu
+        const selectedCity = this.getCity();
+        const selectedSearch = this.getSearch();
+
+        console.log('SelectedCity:', selectedCity,'SelectedSearch: ', selectedSearch);
+        this.partners = partners.filter(partner =>
+          partner?.address?.city === selectedCity &&
+          partner?.name?.toLowerCase().includes(selectedSearch.toLowerCase())
+        );
+    
+
+        console.log('Partners:', this.partners);
       });
     }
+
+    
+    // getPartners(city: string, searchTerm: string): void {
+    //   // Use this.searchTerm in the request to consider the updated search term
+    //   this.partnerService.getPartnersSearch(city, searchTerm).subscribe((searchPartners) => {
+    //     this.searchPartners = searchPartners;
+    //     console.log('Partners in', city, ':', this.searchPartners);
+    //   });
+    // }
 
     setCity(city: string): void {
     this.currentCity = city;
