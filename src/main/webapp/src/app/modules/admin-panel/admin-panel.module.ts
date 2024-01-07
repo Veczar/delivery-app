@@ -31,7 +31,8 @@ import { UserModule } from '../user/user.module';
     MatPaginatorModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UserModule
   ]
 })
 export class AdminPanelModule { }

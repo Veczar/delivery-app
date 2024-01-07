@@ -41,7 +41,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.EAGER)
     private final List<Address> addresses = new ArrayList<>();
     
     @Override
