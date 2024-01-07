@@ -87,14 +87,25 @@ ul > li:hover > button {
 }
 
 
+.cart-btn {
+  // border-color: white;
+  background-color: whitesmoke;
+  color: #202020;
+}
+
+.cart-btn:hover {
+  background-color: whitesmoke;
+  background-color: lightgray;
+}
+
 // ---------- partner info container ---------
 
 .wrapper {
   width: 100%;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   // background-color: beige;
   background-color: white;
-  
+
   overflow: auto;
 }
 
@@ -110,7 +121,7 @@ ul > li:hover > button {
   max-height: 150px;
   // background-color: bisque;
   display: flex;
-  
+
   img {
     max-height: 150px;
     margin-right: 25px;
@@ -127,7 +138,7 @@ ul > li:hover > button {
     white-space: nowrap;
     // background-color: #ff9494;
   }
-  
+
   h3 {
     width: 100%;
   }
@@ -243,9 +254,9 @@ ul > li:hover > button {
   }
 
   .card-text {
-    line-height: 1;
-    overflow: hidden;
-    max-height: 55%;
+    line-height: 1.2;
+    overflow-y: hidden;
+    max-height: 30%;
   }
 
   .badge-container {

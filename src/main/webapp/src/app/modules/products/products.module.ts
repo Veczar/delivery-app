@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AddProductFormComponent } from './add-product-form/add-product-form.component';
 import { ProductComponent } from './product/product.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ProductComponent } from './product/product.component';
     FilterPipe,
     PartnerProductsComponent,
     AddProductFormComponent,
-    ProductComponent
+    ProductComponent,
+    ShoppingCartComponent
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AddressDto, PartnerDto, PartnerReviewReadDto, ProductDto, ProductReadDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from '../../auth/auth.service';
+import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 
 
 @Component({
@@ -34,12 +35,13 @@ export class PartnerProductsComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    public authService: AuthService,
-    public http: HttpClient,
-    public toastService: ToastService,
-    private productService: ProductsService, 
+    private authService: AuthService,
+    private http: HttpClient,
+    private toastService: ToastService,
+    private productService: ProductsService,
     private route: ActivatedRoute,
-  ) {  
+    private shoppingCartService: ShoppingCartService
+  ) {
     this.updateAuthenticationState();
   }
 
@@ -84,12 +86,12 @@ export class PartnerProductsComponent implements OnInit {
 
   initCategories(products: ProductDto[]): void {
     // Extract categories from products
-    const allCategories: string[] = products.flatMap(product => 
+    const allCategories: string[] = products.flatMap(product =>
       product.categories ? product.categories.map(category => category.name || '') : []
     );
 
     // Filter out duplicates
-    this.categories = Array.from(new Set(allCategories)); 
+    this.categories = Array.from(new Set(allCategories));
   }
 
   selectCategory(category: string): void {
@@ -113,6 +115,10 @@ export class PartnerProductsComponent implements OnInit {
     this.modalService.open(modal);
   }
 
+  getTotal(): number {
+    return this.shoppingCartService.getTotalPrice();
+  }
+
 
 
   // ----------- navbar -----------------
@@ -134,7 +140,7 @@ export class PartnerProductsComponent implements OnInit {
   getRole(): string {
     return localStorage.getItem('role') || '';
   }
-  
+
   openSettings(modal: any): void {
     this.modalService.open(modal);
   }
