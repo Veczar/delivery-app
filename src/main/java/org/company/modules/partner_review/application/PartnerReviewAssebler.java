@@ -5,6 +5,7 @@ import org.company.modules.partner.application.PartnerAssembler;
 import org.company.modules.partner.domain.Partner;
 import org.company.modules.partner.domain.PartnerRepository;
 import org.company.modules.partner_review.application.web.PartnerReviewDto;
+import org.company.modules.partner_review.application.web.PartnerReviewReadDto;
 import org.company.modules.partner_review.domain.PartnerReview;
 import org.company.modules.user.application.UserAssembler;
 import org.company.modules.user.domain.User;
@@ -24,17 +25,25 @@ public class PartnerReviewAssebler implements IAssembler<PartnerReview, PartnerR
     public PartnerReviewDto toDto(PartnerReview partnerReview) {
         PartnerReviewDto partnerReviewDto = new PartnerReviewDto();
         partnerReviewDto.setId(partnerReview.getId());
-        partnerReviewDto.setGrade_in_stars(partnerReview.getGrade_in_stars());
+        partnerReviewDto.setGradeInStars(partnerReview.getGrade_in_stars());
         partnerReviewDto.setDescription(partnerReview.getDescription());
         partnerReviewDto.setDate(partnerReview.getCreatedDate());
         partnerReviewDto.setReviewer(userAssembler.toDto(partnerReview.getUser()));
         partnerReviewDto.setPartner(partnerAssembler.toDto(partnerReview.getPartner()));
         return partnerReviewDto;
     }
+    
+    public PartnerReviewReadDto toReadDto(PartnerReview partnerReview) {
+        PartnerReviewReadDto partnerReviewReadDto = new PartnerReviewReadDto();
+        partnerReviewReadDto.setId(partnerReview.getId());
+        partnerReviewReadDto.setGradeInStars(partnerReview.getGrade_in_stars());
+        partnerReviewReadDto.setPartnerId(partnerReview.getPartner().getId());
+        return partnerReviewReadDto;
+    }
 
     @Override
     public void toEntity(PartnerReviewDto partnerReviewDto, PartnerReview partnerReview) {
-        partnerReview.setGrade_in_stars(partnerReviewDto.getGrade_in_stars());
+        partnerReview.setGrade_in_stars(partnerReviewDto.getGradeInStars());
         partnerReview.setDescription(partnerReviewDto.getDescription());
         partnerReview.setCreatedDate(partnerReviewDto.getDate());
         UpdateReviewer(partnerReviewDto,partnerReview);

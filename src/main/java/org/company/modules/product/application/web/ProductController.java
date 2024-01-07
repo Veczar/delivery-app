@@ -2,8 +2,12 @@ package org.company.modules.product.application.web;
 
 import org.company.modules.product.application.ProductService;
 import org.company.shared.aplication.web.GenericController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("api/products")
@@ -11,5 +15,10 @@ public class ProductController extends GenericController<ProductDto, Long, Produ
 
     public ProductController(ProductService service) {
         super(service);
+    }
+    
+    @GetMapping("/from/{partnerName}")
+    public List<ProductReadDto> productsFromPartner(@PathVariable String partnerName) {
+        return service.productsFromPartner(partnerName);
     }
 }

@@ -11,6 +11,8 @@ import { UserTableComponent } from './user-table/user-table.component';
 import { AdminPanelComponent } from './admin-panel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourierTableComponent } from './courier-table/courier-table.component';
+import { UserSettingsComponent } from '../user/user-settings/user-settings.component';
+import { UserModule } from '../user/user.module';
 
 
 @NgModule({
@@ -22,14 +24,15 @@ import { CourierTableComponent } from './courier-table/courier-table.component';
   ],
   imports: [
     CommonModule,
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatTableModule, 
-    MatSortModule, 
-    MatPaginatorModule, 
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UserModule
   ]
 })
 export class AdminPanelModule { }

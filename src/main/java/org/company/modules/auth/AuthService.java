@@ -34,10 +34,9 @@ public class AuthService {
     private final DeliveryManRepository deliveryManRepository;
     private final RoleRepository roleRepository;
     private final AddressRepository addressRepository;
-
-    private final AddressAssembler addressAssembler;
-
     private final CategoryRepository categoryRepository;
+    
+    private final AddressAssembler addressAssembler;
     
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
@@ -60,6 +59,7 @@ public class AuthService {
                 .expirationDate(isoFormat.format(jwtService.extractExpiration(jwtToken)))
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .id(user.getId())
                 .build();
     }
     
@@ -78,8 +78,14 @@ public class AuthService {
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .role(role)
                 .build();
-        
         userRepository.save(user);
+        
+        Address address = new Address();
+        addressAssembler.toEntity(userDto.getAddress(), address);
+        address.setUser(user);
+        addressRepository.save(address);
+        
+        user.getAddresses().add(address);
         
         return RegisterResponseDto.builder().message("success").build();
     }
@@ -110,15 +116,8 @@ public class AuthService {
         }
         Role role = roleRepository.findById(2L).orElse(null);
 
-        Address address = new Address();
-        addressAssembler.toEntity(partnerDto.getAddress(), address);
-        addressRepository.save(address);
-
         Category category = categoryRepository.findByName(partnerDto.getCategory()).orElse(null);
-
-//       if(address == null) {
-//           return RegisterResponseDto.builder().message("address not available").build();
-//       }
+        
         // create user
         User user = User.builder()
                 .firstName(partnerDto.getFirstName())
@@ -128,15 +127,20 @@ public class AuthService {
                 .password(passwordEncoder.encode(partnerDto.getPassword()))
                 .role(role)
                 .build();
-        
         userRepository.save(user);
+        
+        Address address = new Address();
+        addressAssembler.toEntity(partnerDto.getAddress(), address);
+        address.setUser(user);
+        addressRepository.save(address);
+        
+        user.getAddresses().add(address);
         
         // create partner
         Partner partner = Partner.builder()
                 .name(partnerDto.getName())
                 .accountNumber(partnerDto.getAccountNumber())
                 .contactNumber(partnerDto.getContactNumber())
-                .address(address)
                 .owner(user)
                 .categories(Set.of(category))
                 .build();

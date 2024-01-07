@@ -11,7 +11,7 @@ import org.company.modules.user.domain.User;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "p_delivery_man")
+@Table(name = "p_courier")
 public class DeliveryMan {
     
     @Id

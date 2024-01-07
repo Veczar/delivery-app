@@ -2,10 +2,10 @@
 /* eslint-disable */
 
 export interface AddressDto {
-    id?: number;
     city?: string;
-    street?: string;
+    id?: number;
     postalCode?: string;
+    street?: string;
 }
 
 export interface AuthRequestDto {
@@ -14,11 +14,12 @@ export interface AuthRequestDto {
 }
 
 export interface AuthResponseDto {
-    token?: string;
     expirationDate?: string;
-    role?: string;
     firstName?: string;
+    id?: number;
     lastName?: string;
+    role?: string;
+    token?: string;
 }
 
 export interface AutoCloseable {
@@ -33,17 +34,17 @@ export interface BaseStream<T, S> extends AutoCloseable {
 }
 
 export interface CategoryDto {
+    description?: string;
     id?: number;
     name?: string;
-    description?: string;
 }
 
 export interface DeliveryManDto {
+    accountNumber?: string;
     id?: number;
     rating?: number;
     user?: UserDto;
     workingArea?: string;
-    accountNumber?: string;
 }
 
 export interface Iterable<T> {
@@ -58,73 +59,110 @@ export interface Order extends Serializable {
     property?: string;
 }
 
+export interface OrderDto {
+    addressEnd?: AddressDto;
+    addressStart?: AddressDto;
+    completionDate?: Date;
+    creationDate?: Date;
+    customer?: UserDto;
+    deliveryMan?: DeliveryManDto;
+    id?: number;
+    partner?: PartnerDto;
+    status?: Status;
+    tip?: number;
+    totalPrice?: number;
+}
+
 export interface PageRequestDto {
     page?: number;
+    pageRequest?: Pageable;
     size?: number;
     sortBy?: string;
     sortDirection?: Direction;
-    pageRequest?: Pageable;
 }
 
 export interface Pageable {
-    sort?: Sort;
+    offset?: number;
     pageNumber?: number;
     pageSize?: number;
-    offset?: number;
     paged?: boolean;
+    sort?: Sort;
     unpaged?: boolean;
 }
 
 export interface PartnerDto {
+    accountNumber?: string;
+    categories?: CategoryDto[];
+    contactNumber?: string;
     id?: number;
     name?: string;
-    accountNumber?: string;
-    contactNumber?: string;
-    owner?: UserDto;
-    address?: AddressDto;
-    categories?: CategoryDto[];
+    owner: UserDto;
 }
 
 export interface PartnerReviewDto {
-    id?: number;
     date?: Date;
     description?: string;
-    grade_in_stars?: number;
+    gradeInStars?: number;
+    id?: number;
     partner?: PartnerDto;
     reviewer?: UserDto;
 }
 
-export interface ProductDto {
+export interface PartnerReviewReadDto {
+    gradeInStars?: number;
     id?: number;
-    name?: string;
+    partnerId?: number;
+}
+
+export interface ProductDto {
+    id: number;
+    categories?: CategoryDto[];
     description?: string;
+    name?: string;
+    onSale?: boolean;
+    owner?: PartnerDto;
+    photoPath?: string;
+    price: number;     
+}
+
+export interface ProductOrderDto {
+    order?: OrderDto;
+    product?: ProductDto;
+    quantity?: number;
+    subtotal?: number;
+}
+
+export interface ProductReadDto {
+    id: number;
+    categories?: CategoryDto[];
+    description?: string;
+    name?: string;
+    onSale?: boolean;
     photoPath?: string;
     price?: number;
-    onSale?: boolean;
-    categories?: CategoryDto[];
 }
 
 export interface RegisterDeliveryManDto {
+    accountNumber?: string;
+    email?: string;
     firstName?: string;
     lastName?: string;
-    telephoneNumber?: string;
-    email?: string;
     password?: string;
+    telephoneNumber?: string;
     workingArea?: string;
-    accountNumber?: string;
 }
 
 export interface RegisterPartnerDto {
+    accountNumber?: string;
+    address?: AddressDto;
+    category?: string;
+    contactNumber?: string;
+    email?: string;
     firstName?: string;
     lastName?: string;
-    telephoneNumber?: string;
-    email?: string;
-    password?: string;
     name?: string;
-    accountNumber?: string;
-    contactNumber?: string;
-    address?: AddressDto;
-    category?:string;
+    password?: string;
+    telephoneNumber?: string;
 }
 
 export interface RegisterResponseDto {
@@ -132,11 +170,12 @@ export interface RegisterResponseDto {
 }
 
 export interface RegisterUserDto {
+    address?: AddressDto;
+    email?: string;
     firstName?: string;
     lastName?: string;
-    telephoneNumber?: string;
-    email?: string;
     password?: string;
+    telephoneNumber?: string;
 }
 
 export interface RoleDto {
@@ -173,18 +212,19 @@ export interface UserCriteria extends BaseCriteria {
 }
 
 export interface UserDto {
-    id?: number;
-    firstName?: string;
-    lastName?: string;
-    telephoneNumber?: string;
+    addresses: AddressDto[];
     email?: string;
+    firstName?: string;
+    id?: number;
+    lastName?: string;
     role?: RoleDto;
+    telephoneNumber?: string;
 }
 
 export interface UserReadDto {
-    id: number;
-    firstName: string;
-    lastName: string;
+    firstName?: string;
+    id?: number;
+    lastName?: string;
 }
 
 export enum Direction {
@@ -196,4 +236,11 @@ export enum NullHandling {
     NATIVE = "NATIVE",
     NULLS_FIRST = "NULLS_FIRST",
     NULLS_LAST = "NULLS_LAST",
+}
+
+export enum Status {
+    done = "done",
+    inPreparation = "inPreparation",
+    inDelivery = "inDelivery",
+    readyForDelivery = "readyForDelivery",
 }

@@ -11,7 +11,6 @@ import { ToastService } from '../shared/toast/toast.service';
 })
 export class FrontPageComponent {
   cityName: string = '';
-  show = false;
 
   loggedUser = {
     firstName: '',
@@ -53,6 +52,10 @@ export class FrontPageComponent {
 
   onSearch() {
     console.log(this.cityName);
+  }
+  
+  openSettings(modal: any) {
+    this.modalService.open(modal);
   }
 
   onToast() {

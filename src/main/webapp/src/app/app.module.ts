@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule, NgbToast } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { FrontPageComponent } from './front-page/front-page.component';
@@ -14,15 +14,17 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
 import { ToastComponent } from './shared/toast/toast-component/toast.component';
-import { NgIf } from '@angular/common';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { UserSettingsComponent } from './modules/user/user-settings/user-settings.component';
+import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
+import { ProductsModule } from './modules/products/products.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FrontPageComponent,
-    ToastComponent
+    ToastComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,11 +34,11 @@ import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
     ReactiveFormsModule,
     RouterModule,
     BrowserAnimationsModule,
-    NgIf,
-    
+
     UserModule,
     AuthModule,
     AdminPanelModule,
+    ProductsModule
   ],
   providers: [
     {

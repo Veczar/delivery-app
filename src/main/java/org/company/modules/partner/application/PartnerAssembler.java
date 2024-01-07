@@ -1,9 +1,6 @@
 package org.company.modules.partner.application;
 
 import lombok.AllArgsConstructor;
-import org.company.modules.address.application.AddressAssembler;
-import org.company.modules.address.domain.Address;
-import org.company.modules.address.domain.AddressRepository;
 import org.company.modules.category.application.CategoryAssembler;
 import org.company.modules.category.application.web.CategoryDto;
 import org.company.modules.category.domain.Category;
@@ -25,8 +22,6 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
     
     private final UserAssembler userAssembler;
     private final UserRepository userRepository;
-    private final AddressAssembler addressAssembler;
-    private final AddressRepository addressRepository;
     private final CategoryAssembler categoryAssembler;
     private final CategoryRepository categoryRepository;
 
@@ -37,7 +32,6 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partnerDto.setName(partner.getName());
         partnerDto.setAccountNumber(partner.getAccountNumber());
         partnerDto.setContactNumber(partner.getContactNumber());
-        partnerDto.setAddress(addressAssembler.toDto(partner.getAddress()));
         partnerDto.setOwner(userAssembler.toDto(partner.getOwner()));
         partnerDto.setCategories(partner.getCategories()
                 .stream().map(categoryAssembler::toDto).collect((Collectors.toSet())));
@@ -49,15 +43,9 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partner.setName(partnerDto.getName());
         partner.setAccountNumber(partnerDto.getAccountNumber());
         partner.setContactNumber(partnerDto.getContactNumber());
-        UpdateAddress(partnerDto, partner);
         UpdateUser(partnerDto, partner);
 
         partner.setCategories(partnerDto.getCategories().stream().map(categoryDto -> GetCategory(categoryDto)).collect(Collectors.toSet()));
-    }
-    
-    private void UpdateAddress(PartnerDto partnerDto, Partner partner) {
-        Address address = addressRepository.findById(partnerDto.getAddress().getId()).orElseThrow(null);
-        partner.setAddress(address);
     }
     
     private void UpdateUser(PartnerDto partnerDto, Partner partner) {

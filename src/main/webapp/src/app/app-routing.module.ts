@@ -10,19 +10,22 @@ import { UserTableComponent } from './modules/admin-panel/user-table/user-table.
 import { RegisterPartnerFormComponent } from './modules/auth/register-partner-form/register-partner-form.component';
 import { RegisterCourierFormComponent } from './modules/auth/register-courier-form/register-courier-form.component';
 import { CourierTableComponent } from './modules/admin-panel/courier-table/courier-table.component';
+import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
+
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
   {path: 'auth', component: LoginFormComponent},
   {path: 'register/user', component: RegisterUserFormComponent},
   {path: 'register/partner', component: RegisterPartnerFormComponent},
   {path: 'register/courier', component: RegisterCourierFormComponent},
+  {path: ':partner', component: PartnerProductsComponent},
   {
     path: 'admin',
     component: AdminPanelComponent,
     canActivate: [authGuard],
     children: [
-      { path: 'dashboard', component: AdminDashboardComponent}, 
-      { path: 'users', component: UserTableComponent }, 
+      { path: 'dashboard', component: AdminDashboardComponent},
+      { path: 'users', component: UserTableComponent },
       { path: 'couriers-table', component: CourierTableComponent },
     ]
   }

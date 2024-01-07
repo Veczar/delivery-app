@@ -1,6 +1,5 @@
 package org.company.modules.recurring_order.application;
 
-import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.company.modules.order.application.OrderService;
@@ -9,23 +8,20 @@ import org.company.modules.order.domain.Status;
 import org.company.modules.product_order.application.ProductOrderService;
 import org.company.modules.product_order.application.web.ProductOrderDto;
 import org.company.modules.recurring_order.application.web.RecurringOrderDto;
-import org.company.modules.recurring_order.domain.RecurringOrderRepository;
 import org.company.modules.recurring_order.domain.RecurringOrder;
+import org.company.modules.recurring_order.domain.RecurringOrderRepository;
 import org.company.shared.aplication.GenericService;
-import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 public class RecurringOrderService extends GenericService<RecurringOrder, RecurringOrderDto, Long, RecurringOrderRepository, RecurringOrderAssembler > {
@@ -193,7 +189,7 @@ public class RecurringOrderService extends GenericService<RecurringOrder, Recurr
         orderDto.setAddressStart(recurringOrderDto.getAddressStart());
         orderDto.setAddressEnd(recurringOrderDto.getAddressEnd());
         orderDto.setCustomer(recurringOrderDto.getCustomer());
-        orderDto.setPartner(recurringOrderDto.getProduct().getPartner());
+        orderDto.setPartner(recurringOrderDto.getProduct().getOwner());
         orderDto.setTip(0.0);
         orderDto.setCreationDate(new Date());
         orderDto.setStatus(Status.inPreparation);

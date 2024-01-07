@@ -18,7 +18,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
   ) { }
-  
 
   registerUser(user: RegisterUserDto): Observable<RegisterResponseDto> {
     return this.http.post(`${this.apiUrl}/api/auth/register/user`, user);
@@ -26,12 +25,10 @@ export class AuthService {
 
   registerParnter(partner: RegisterPartnerDto): Observable<RegisterResponseDto> {
     return this.http.post(`${this.apiUrl}/api/auth/register/partner`, partner);
-
   }
 
   registerDeliveryMan(deliveryMan: RegisterDeliveryManDto): Observable<RegisterResponseDto> {
     return this.http.post(`${this.apiUrl}/api/auth/register/courier`, deliveryMan);
-
   }
 
   logIn(loginObj: AuthRequestDto): Observable<AuthResponseDto> {
@@ -39,16 +36,22 @@ export class AuthService {
   }
 
   setLoggedUser(responseObj: AuthResponseDto): void {
-    localStorage.clear()
+    // localStorage.clear();
     localStorage.setItem('authToken', responseObj.token || '');
     localStorage.setItem('role', responseObj.role || '');
     localStorage.setItem('expirationDate', responseObj.expirationDate || '');
     localStorage.setItem('firstName', responseObj.firstName || '');
     localStorage.setItem('lastName', responseObj.lastName || '');
+    localStorage.setItem('id', responseObj.id?.toString() || '' );
 
-    console.log(responseObj)
+    console.log(responseObj);
   }
 
+  setCredentials(fn: any, ln: any): void {
+    localStorage.setItem('firstName', fn);
+    localStorage.setItem('lastName', ln);
+  }
+  
   isUserLogged(): boolean {
     return localStorage.getItem('authToken') ? true : false;
   }

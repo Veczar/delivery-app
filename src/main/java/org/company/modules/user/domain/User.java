@@ -2,11 +2,15 @@ package org.company.modules.user.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.company.modules.address.domain.Address;
 import org.company.modules.role.domain.Role;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -34,6 +38,11 @@ public class User implements UserDetails {
     @JoinColumn(name = "role_id")
     private Role role;
     
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
+    private final List<Address> addresses = new ArrayList<>();
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

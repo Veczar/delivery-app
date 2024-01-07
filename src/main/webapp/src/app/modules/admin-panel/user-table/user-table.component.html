@@ -50,7 +50,8 @@
         (click)="click(row)"
         [class.demo-row-is-clicked]=""
         *matRowDef="let row; columns: displayedColumns;"
-        data-bs-toggle="modal" data-bs-target="#userModal"
+        data-bs-toggle="modal" 
+        data-bs-target="#userModal"
     ></tr>
 
     <!-- Row shown when there is no matching data. -->

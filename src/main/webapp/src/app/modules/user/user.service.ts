@@ -16,6 +16,10 @@ export class UserService {
     return this.http.get<UserDto[]>(`${this.apiUrl}/api/users/`);
   }
 
+  getUser(id: number | string): Observable<UserDto> {
+    return this.http.get<UserDto>(`${this.apiUrl}/api/users/${id}`);
+  }
+
   getUserRoleUser(): Observable<UserDto[]> {
     return this.http.get<UserDto[]>(`${this.apiUrl}/api/users/role/user`);
   }
