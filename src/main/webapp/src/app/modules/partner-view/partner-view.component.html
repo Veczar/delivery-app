@@ -100,13 +100,13 @@
               <h3 class="text-center">Filtry</h3>
               <div class="filter-section">
                 <ul class="">
-                  <li class="list-element" (click)="selectCategory('Category1')">
+                  <li class="list-element" (click)="selectCategory('Category1')" [ngClass]="{'active': categoryActiveName === 'Category1'}"> 
                     <a>
                       <i class="fa-solid fa-burger"></i>
                       Kategoria
                     </a>
                   </li>
-                  <li class="list-element" (click)="selectCategory('Category2')">
+                  <li class="list-element" (click)="selectCategory('Category2')" [ngClass]="{'active': categoryActiveName === 'Category2'}">
                     <a>
                       <i class="fa-solid fa-burger"></i>
                       Kategoria
@@ -143,7 +143,7 @@
           <div *ngIf="flag" class="category-page-stores-container">
             <div class="row">
               <div class="col-md-4" *ngFor="let partner of partners">
-                  <div class="card mb-3" style="max-width: 540px;" [routerLink]="['/']" >
+                  <div class="card mb-3" style="max-width: 540px;" [routerLink]="['/',partner.name]" >
                     <div class="row g-0">
                       <div class="col-md-4 img rounded w-100">
                         <img src="../../../../assets/wrr-buzka.jpg" class="card-img-top h-100" alt="Restaurant Image">

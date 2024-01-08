@@ -325,7 +325,7 @@ cursor: pointer;
       position: absolute;
       bottom: 10px;
   
-      overflow: hidden;
+    //   overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
   
@@ -365,4 +365,11 @@ cursor: pointer;
   }
   .main-color{
     background-color: #fafafaf6;
+  }
+  .list-element.active {
+    background-color:  #e1ecf6 !important;   /* Tutaj możesz dostosować styl podświetlenia */
+  }
+  .list-element:hover {
+    cursor: pointer;
+    background-color: #e1ecf6;
   }

@@ -3,7 +3,7 @@
             <div class="category-page-stores-container">
                   <div class="row">
                     <div class="col-md-4" *ngFor="let partner of partners">
-                        <div class="card mb-3" style="max-width: 540px;" [routerLink]="['/']" >
+                        <div class="card mb-3" style="max-width: 540px;" [routerLink]="['/',partner.name]" >
                           <div class="row g-0">
                             <div class="col-md-4 img rounded w-100">
                               <img src="../../../../assets/wrr-buzka.jpg" class="card-img-top h-100" alt="Restaurant Image">

@@ -66,7 +66,7 @@ export class PartnerViewComponent {
           this.flag = false;
         }
   
-        console.log(this.flag);
+        // console.log(this.flag);
       });
     }
 
@@ -188,5 +188,7 @@ export class PartnerViewComponent {
       this.categoryActiveName = categoryName; // Ustaw aktywną kategorię
       this.categoryActive = true;
     }
+    console.log(this.categoryActiveName);
+    console.log(this.categoryActive);
   }
 }
