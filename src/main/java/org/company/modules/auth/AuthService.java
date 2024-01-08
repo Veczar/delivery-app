@@ -5,7 +5,6 @@ import org.company.modules.address.application.AddressAssembler;
 import org.company.modules.address.domain.Address;
 import org.company.modules.address.domain.AddressRepository;
 import org.company.modules.auth.web.*;
-import org.company.modules.category.domain.CategoryRepository;
 import org.company.modules.delivery_man.domain.DeliveryMan;
 import org.company.modules.delivery_man.domain.DeliveryManRepository;
 import org.company.modules.partner.domain.Partner;
@@ -21,9 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.text.SimpleDateFormat;
-import java.util.Set;
 
 
 
@@ -36,7 +33,6 @@ public class AuthService {
     private final DeliveryManRepository deliveryManRepository;
     private final RoleRepository roleRepository;
     private final AddressRepository addressRepository;
-    private final CategoryRepository categoryRepository;
     
     private final AddressAssembler addressAssembler;
     
@@ -122,7 +118,6 @@ public class AuthService {
         }
         Role role = roleRepository.findById(2L).orElse(null);
 
-        Category category = categoryRepository.findByName(partnerDto.getCategory()).orElse(null);
 
         // create user
         User user = User.builder()

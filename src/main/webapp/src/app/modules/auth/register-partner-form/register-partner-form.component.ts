@@ -3,7 +3,6 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { RegisterPartnerDto,RegisterResponseDto } from 'src/app/shared/model/api-models';
-import { ToastComponent } from 'src/app/shared/toast/toast-component/toast.component';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 
 
@@ -174,7 +173,7 @@ export class RegisterPartnerFormComponent implements OnInit {
      //console.log(JSON.stringify(this.partnerForm.value, null, 2));
      //console.log(this.partnerForm.value as RegisterPartnerDto)
      //console.log(this.partnerForm.value)
-    this.authService.registerParnter(this.partnerForm.value as RegisterPartnerDto, this.selectedFile).subscribe(
+    this.authService.registerPartner(this.partnerForm.value as RegisterPartnerDto, this.selectedFile).subscribe(
       (response: RegisterResponseDto) => {
         console.log('response:', response);
 
@@ -230,5 +229,4 @@ export class RegisterPartnerFormComponent implements OnInit {
       this.addressForm.patchValue({ postalCode: newValue });
     }
   }
-  
 }

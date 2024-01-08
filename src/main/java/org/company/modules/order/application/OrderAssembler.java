@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import org.company.modules.address.application.AddressAssembler;
 import org.company.modules.address.domain.Address;
 import org.company.modules.address.domain.AddressRepository;
-import org.company.modules.category.application.CategoryAssembler;
-import org.company.modules.category.domain.CategoryRepository;
 import org.company.modules.delivery_man.appliction.DeliveryManAssembler;
 import org.company.modules.delivery_man.domain.DeliveryMan;
 import org.company.modules.delivery_man.domain.DeliveryManRepository;
@@ -34,10 +32,6 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
 
     @Override
     public OrderDto toDto(Order order) {
-        AddressAssembler addressAssembler = new AddressAssembler();
-        UserAssembler userAssembler = new UserAssembler(roleAssembler,roleRepository);
-        DeliveryManAssembler deliveryManAssembler = new DeliveryManAssembler(userAssembler,userRepository);
-        PartnerAssembler partnerAssembler = new PartnerAssembler(userAssembler,userRepository,addressAssembler,addressRepository,new CategoryAssembler(),categoryRepository);
         OrderDto orderDto = new OrderDto();
         orderDto.setId(order.getId());
         orderDto.setAddressStart(addressAssembler.toDto(order.getAddressStart()));

@@ -9,7 +9,7 @@ UPDATE p_partner SET photo_path = 'partners\b4c23d81-c3c2-4850-917e-0727cd19ed1a
 ALTER TABLE p_partner ALTER COLUMN photo_path SET NOT NULL;
 
 ALTER TABLE p_partner ADD "type" VARCHAR(60) NULL;
-ALTER TABLE p_partner ADD CONSTRAINT p_partner_type_check CHECK ((("type")::text = ANY ((ARRAY['other'::character varying, 'restaurant'::character varying, 'pharmacy'::character varying, 'groceryStore'::character varying, 'florist'::character varying, 'coffeehouse'::character varying])::text[])));
+ALTER TABLE p_partner ADD CONSTRAINT p_partner_type_check CHECK ((("type")::text = ANY ((ARRAY['other'::character varying, 'restaurant'::character varying, 'pharmacy'::character varying, 'groceryStore'::character varying, 'florists'::character varying, 'coffeehouse'::character varying])::text[])));
 
 UPDATE p_partner SET "type" = 'restaurant'  WHERE id = 1;
 UPDATE p_partner SET "type" = 'restaurant'  WHERE id = 2;

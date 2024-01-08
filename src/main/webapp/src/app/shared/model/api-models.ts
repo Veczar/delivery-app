@@ -244,3 +244,11 @@ export enum Status {
     inDelivery = "inDelivery",
     readyForDelivery = "readyForDelivery",
 }
+export enum Type {
+    other = "other",
+    restaurant = "restaurant",
+    pharmacy = "pharmacy",
+    groceryStore = "groceryStore",
+    florists = "florists",
+    coffeehouse = "coffeehouse"
+}
