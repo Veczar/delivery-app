@@ -80,13 +80,12 @@ public class AuthService {
                 .build();
         userRepository.save(user);
         
-        // todo: add address to user registration form
-//        Address address = new Address();
-//        addressAssembler.toEntity(userDto.getAddress(), address);
-//        address.setUser(user);
-//        addressRepository.save(address);
-//
-//        user.getAddresses().add(address);
+        Address address = new Address();
+        addressAssembler.toEntity(userDto.getAddress(), address);
+        address.setUser(user);
+        addressRepository.save(address);
+
+        user.getAddresses().add(address);
         
         return RegisterResponseDto.builder().message("success").build();
     }
