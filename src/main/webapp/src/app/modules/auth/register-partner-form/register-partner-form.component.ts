@@ -54,6 +54,8 @@ export class RegisterPartnerFormComponent implements OnInit {
   phonePrefixes = ['+48 PL','+355 AL','+376 AD','+43 AT','+375 BY','+32 BE','+387 BA','+359 BG','+385 HR','+357 CY',
   '+420 CZ','+45 DK','+372 EE','+358 FI','+33 FR','+49 DE','+30 GR','+36 HU','+354 IS','+353 IE','+39 IT','+383 XK',
   '+371 LV','+423 LI','+370 LT','+352 LU','+356 MT'];
+  imageUrl: string | ArrayBuffer | null | undefined;
+  selectedFile: File | null = null;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -124,11 +126,19 @@ export class RegisterPartnerFormComponent implements OnInit {
       }),
     });
   }
-  
-  selectedFile: File | null = null;
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
+    this.imageUrl = event.target?.result;
+    if(this.selectedFile )
+    {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this.imageUrl = e.target?.result;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    }
+
     console.log(this.selectedFile?.name);
   }
 
