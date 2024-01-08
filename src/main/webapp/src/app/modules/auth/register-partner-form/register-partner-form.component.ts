@@ -186,6 +186,7 @@ export class RegisterPartnerFormComponent implements OnInit {
   get addressForm(): FormGroup {
     return this.partnerForm.get('address') as FormGroup;
   }
+  
   formatPostalCode(event: any): void {
 
     const cleanedValue = event.target.value.replace(/-/g, '');

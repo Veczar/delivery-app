@@ -18,6 +18,12 @@ export class RegisterUserFormComponent implements OnInit {
     telephoneNumber: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
+
+    address: new FormGroup({
+      city: new FormControl(''),
+      postalCode: new FormControl(''),
+      street: new FormControl(''),
+    }),
   });
   submitted = false;
   wrongEmail: boolean = false;
@@ -30,6 +36,8 @@ export class RegisterUserFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
+    
     this.userForm = this.formBuilder.group({
       firstName: [
         '',
@@ -73,12 +81,43 @@ export class RegisterUserFormComponent implements OnInit {
           Validators.minLength(3),
           Validators.maxLength(25)
         ]
-      ]
+      ],
+
+      address: this.formBuilder.group({
+        city: ['', [Validators.required, Validators.minLength(2)]],
+        postalCode: [
+          '',
+          [
+            Validators.required,Validators.minLength(6),Validators.maxLength(6),
+            Validators.pattern(/^\d{2}-\d{3}$/) // Format kodu pocztowego XX-XXX
+          ]
+        ],
+        street: ['', [Validators.required, Validators.minLength(2)]],
+      }),
     });
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.userForm.controls;
+  }
+
+  get addressForm(): FormGroup {
+    return this.userForm.get('address') as FormGroup;
+  }
+
+  formatPostalCode(event: any): void {
+
+    const cleanedValue = event.target.value.replace(/-/g, '');
+
+    if (/^\d+$/.test(cleanedValue)) {
+
+      const formattedValue = cleanedValue.slice(0, 2) + '-' + cleanedValue.slice(2);
+      this.addressForm.patchValue({ postalCode: formattedValue });
+
+    } else {
+      const newValue = cleanedValue.slice(0, -1);
+      this.addressForm.patchValue({ postalCode: newValue });
+    }
   }
 
   onSubmit(): void {

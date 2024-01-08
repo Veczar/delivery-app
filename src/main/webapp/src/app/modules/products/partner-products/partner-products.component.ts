@@ -91,7 +91,7 @@ export class PartnerProductsComponent implements OnInit {
     );
 
     // Filter out duplicates
-    this.categories = Array.from(new Set(allCategories));
+    this.categories = Array.from(allCategories);
   }
 
   selectCategory(category: string): void {
