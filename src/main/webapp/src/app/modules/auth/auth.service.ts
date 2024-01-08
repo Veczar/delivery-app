@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthRequestDto, AuthResponseDto, RegisterPartnerDto, RegisterResponseDto, RegisterUserDto, RegisterDeliveryManDto } from 'src/app/shared/model/api-models';
-
+import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
@@ -70,7 +70,21 @@ export class AuthService {
     this.loggedUser.lastName = lastName;
     return this.loggedUser;
   }
-
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch(Error) {
+      return null;
+    }
+  }
+  getLoggedUserEmail() {
+    const token = localStorage.getItem('authToken') || '';
+    
+    const tokenInfo = this.getDecodedAccessToken(token); // decode token
+    const email = tokenInfo.sub; // get token expiration dateTime
+    console.log("email::"+email);
+    return email;
+  }
   isTokenExpired(): boolean {
     const expirationDateStr = localStorage.getItem('expirationDate');
 

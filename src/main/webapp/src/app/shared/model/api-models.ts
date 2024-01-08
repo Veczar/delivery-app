@@ -46,6 +46,37 @@ export interface DeliveryManDto {
     user?: UserDto;
     workingArea?: string;
 }
+export interface OrderDto {
+    id?: number;
+    addressStart?: AddressDto;    
+    addressEnd?: AddressDto;
+    customer?: UserDto;
+    partner?: PartnerDto;
+    deliveryMan?: DeliveryManDto;
+    totalPrice?: number;
+    tip?: number;
+    creationDate?: Date;
+    completionDate?: Date;
+    status?: string;
+    distanceInKm?: number;
+}
+
+export interface OrderReadDto {
+    id?: number;
+    addressStart?: string;    
+    addressEnd?: string;
+    customerFirstName?: string;
+    customerLastName?: string;
+    customerTelephoneNumber?: string;
+    partner?: string;
+    deliveryMan?: string;
+    totalPrice?: number;
+    tip?: number;
+    creationDate?: string;
+    completionDate?: string;
+    status?: string;
+    distanceInKm?: number;
+}
 
 export interface Iterable<T> {
 }

@@ -1,0 +1,167 @@
+<body>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " [routerLink]="['/']">Glovo Eats</a>
+      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <button class="btn btn-secondary me-2 px-4" [routerLink]="['/']">Exit</button>
+    </header>
+  
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <div class="position-sticky pt-3 sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <button class="nav-link" (click)="showInDelivery()" active>
+                  <i class="bi bi-backpack4"></i> In delivery assigned to me</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" (click)="showReadyForDelivery()" active>
+                  <i class="bi bi-bag"></i> Ready for pick up</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" (click)="showDone()">
+                  <i class="bi bi-bag-check"></i> Done</button>
+              </li>
+            </ul>
+          </div>
+        </nav>
+  
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+          </mat-form-field>
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let row">{{row.id}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="addressStart">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>start adress</th>
+                <td mat-cell *matCellDef="let row">{{row.addressStart}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="addressEnd">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>destination</th>
+                <td mat-cell *matCellDef="let row">{{row.addressEnd}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>first name</th>
+                <td mat-cell *matCellDef="let row">{{row.customerFirstName}}</td>
+              </ng-container>
+              
+              <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>last name</th>
+                <td mat-cell *matCellDef="let row">{{row.customerLastName}}</td>
+              </ng-container>
+        
+              <ng-container matColumnDef="telephoneNumber">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>telephone number</th>
+                <td mat-cell *matCellDef="let row">{{row.customerTelephoneNumber}}</td>
+              </ng-container>
+          
+              <ng-container matColumnDef="partner">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Patner name</th>
+                <td mat-cell *matCellDef="let row">{{row.partner}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="creationDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cretion date</th>
+                <td mat-cell *matCellDef="let row">{{row.creationDate}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="completionDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Completion date</th>
+                <td mat-cell *matCellDef="let row">{{row.completionDate}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="distanceInKm">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Distance</th>
+                <td mat-cell *matCellDef="let row">{{row.distanceInKm}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="totalPrice">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Total price</th>
+                <td mat-cell *matCellDef="let row">{{row.totalPrice}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="tip">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tip</th>
+                <td mat-cell *matCellDef="let row">{{row.tip}}</td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr
+                  mat-row
+                  (click)="click(row)"
+                  [class.demo-row-is-clicked]=""
+                  *matRowDef="let row; columns: displayedColumns;"
+                  data-bs-toggle="modal" data-bs-target="#orderModal"
+              ></tr>
+          
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="alert alert-danger " colspan="12" role="alert">
+                  No order with status 
+                  {{this.selectedStatus === "done" ? "\"done\"" : "" }} 
+                  {{this.selectedStatus === "inDelivery" ? "\"in delivery\"" : ""}} 
+                  {{this.selectedStatus === "readyForDelivery" ? "\"ready for pickup\"" : "" }} 
+                  matches the filter "{{input.value}}"
+                </td>
+              </tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="25"
+              aria-label="Select page of users"></mat-paginator>
+          </div>
+  
+        </main>
+      </div>
+    </div>
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderModalLabel">Set order as done</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="orderForm" class="row g-3 needs-validation">
+              <h5>ID: {{this.orderForm.value.id}}</h5>
+    
+              <div class="form-group col-md-12">
+                <label for="distanceInKm" class="form-label">Set the distance traveled while delivering order</label>
+                <input
+                  type="number"
+                  name="name"
+                  formControlName="distanceInKm"
+                  class="form-control"
+                  max=20
+                  min=0
+                  value=3
+                  [ngClass]="{ 'is-invalid': f['distanceInKm'].errors }"
+                  [ngClass]="{ 'is-valid': !f['distanceInKm'].errors }"
+                />
+                <div class="invalid-feedback" *ngIf="f['distanceInKm'].errors">
+                  <p>Distance betwen 0 and 20 is required to set order as done</p>
+                </div> 
+              </div>
+
+              <div class="mb-3">
+                <button type="button" class="btn btn-primary me-2" (click)="setStatusDone()" data-bs-dismiss="modal">
+                  Set order as done
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>

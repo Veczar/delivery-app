@@ -26,6 +26,10 @@
               <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
                 <i class="bi bi-speedometer2"></i> Dashboard</button>
             </li>
+            <li *ngIf="getRole() === 'COURIER'">
+              <button class="nav-link active color" [routerLink]="['/courier/my-deliveries']">
+                <i class="bi bi-backpack4"></i> My deliveries</button>
+            </li>
             <li>
               <button class="btn btn-outline-primary" (click)="onToast()">Show toasts</button>
             </li>
