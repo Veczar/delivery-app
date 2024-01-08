@@ -122,7 +122,7 @@ export interface ProductDto {
     onSale?: boolean;
     owner?: PartnerDto;
     photoPath?: string;
-    price: number;     
+    price: number;
 }
 
 export interface ProductOrderDto {
@@ -155,7 +155,7 @@ export interface RegisterDeliveryManDto {
 export interface RegisterPartnerDto {
     accountNumber?: string;
     address?: AddressDto;
-    category?: string;
+    type? : Type;
     contactNumber?: string;
     email?: string;
     firstName?: string;
@@ -243,4 +243,12 @@ export enum Status {
     inPreparation = "inPreparation",
     inDelivery = "inDelivery",
     readyForDelivery = "readyForDelivery",
+}
+export enum Type {
+    other = "other",
+    restaurant = "restaurant",
+    pharmacy = "pharmacy",
+    groceryStore = "groceryStore",
+    florists = "florists",
+    coffeehouse = "coffeehouse"
 }

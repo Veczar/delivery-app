@@ -19,12 +19,19 @@ export class AuthService {
     private http: HttpClient,
   ) { }
 
+
   registerUser(user: RegisterUserDto): Observable<RegisterResponseDto> {
     return this.http.post(`${this.apiUrl}/api/auth/register/user`, user);
   }
 
-  registerParnter(partner: RegisterPartnerDto): Observable<RegisterResponseDto> {
-    return this.http.post(`${this.apiUrl}/api/auth/register/partner`, partner);
+  registerPartner(partner: RegisterPartnerDto, photo: File | null): Observable<RegisterResponseDto> {
+    const formData:FormData = new FormData();
+    if(photo != null)
+    {
+      formData.append('photo', photo);
+    }
+    formData.append('partner', new Blob([JSON.stringify(partner)], {type: "application/json"}));
+    return this.http.post(`${this.apiUrl}/api/auth/register/partner`, formData);
   }
 
   registerDeliveryMan(deliveryMan: RegisterDeliveryManDto): Observable<RegisterResponseDto> {
@@ -42,7 +49,6 @@ export class AuthService {
     localStorage.setItem('expirationDate', responseObj.expirationDate || '');
     localStorage.setItem('firstName', responseObj.firstName || '');
     localStorage.setItem('lastName', responseObj.lastName || '');
-    localStorage.setItem('id', responseObj.id?.toString() || '' );
 
     console.log(responseObj);
   }
@@ -51,7 +57,7 @@ export class AuthService {
     localStorage.setItem('firstName', fn);
     localStorage.setItem('lastName', ln);
   }
-  
+
   isUserLogged(): boolean {
     return localStorage.getItem('authToken') ? true : false;
   }

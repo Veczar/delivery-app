@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import org.company.modules.address.application.AddressAssembler;
 import org.company.modules.address.domain.Address;
 import org.company.modules.address.domain.AddressRepository;
-import org.company.modules.category.application.CategoryAssembler;
-import org.company.modules.category.domain.CategoryRepository;
 import org.company.modules.delivery_man.appliction.DeliveryManAssembler;
 import org.company.modules.delivery_man.domain.DeliveryMan;
 import org.company.modules.delivery_man.domain.DeliveryManRepository;
@@ -23,7 +21,6 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class OrderAssembler implements IAssembler<Order, OrderDto> {
-    
     private final AddressRepository addressRepository;
     private final UserRepository userRepository;
     private final AddressAssembler addressAssembler;
@@ -32,7 +29,7 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
     private final PartnerAssembler partnerAssembler;
     private final DeliveryManRepository deliveryManRepository;
     private final PartnerRepository partnerRepository;
-    
+
     @Override
     public OrderDto toDto(Order order) {
         OrderDto orderDto = new OrderDto();

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.company.modules.address.application.web.AddressDto;
+import org.company.modules.partner.domain.PartnerType;
+import org.company.shared.photos.PhotoType;
 
 
 @Data
@@ -24,5 +26,5 @@ public class RegisterPartnerDto {
     private String accountNumber;
     private String contactNumber;
     private AddressDto address;
-    private String category;
+    private PartnerType type;
 }
