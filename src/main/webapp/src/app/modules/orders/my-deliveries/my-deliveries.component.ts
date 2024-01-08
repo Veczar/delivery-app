@@ -17,11 +17,10 @@ import { AuthService } from '../../auth/auth.service';
 export class MyDeliveriesComponent {
   dataSource!: MatTableDataSource<OrderReadDto>;
   orderForm!: FormGroup;
-  submitted: boolean = false;
   selectedStatus: string = 'inDelivery';
   filter: string = '';
   displayedColumns: string[] = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
-  'partner', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip"];
+  'partner', "creationDate", "totalPrice", "tip"];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -54,15 +53,10 @@ export class MyDeliveriesComponent {
   initForm(): void {
     this.orderForm = this.formBuilder.group({
       id: [''],
-      distanceInKm: [
-        '',
-        [
-          Validators.required,
-          Validators.min(0),
-          Validators.max(20)
-        ]
-      ]
+      addressStart: [''],
+      addressEnd: ['']
     });
+    
   }
 
   loadData(): void {
@@ -98,25 +92,32 @@ export class MyDeliveriesComponent {
   showInDelivery() {
     this.selectedStatus = "inDelivery";
     this.dataSource.filter = this.filter + " " + this.selectedStatus;
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+    'partner', "creationDate", "totalPrice", "tip"];
   }
 
   showReadyForDelivery() {
     this.selectedStatus = "readyForDelivery";
-     this.dataSource.filter = this.filter+ " " + this.selectedStatus;
+    this.dataSource.filter = this.filter+ " " + this.selectedStatus;
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+    'partner', "creationDate", "distanceInKm", "totalPrice", "tip"];
+
   }
 
   showDone() {
     this.selectedStatus = "done";
-     this.dataSource.filter = this.filter + " " + this.selectedStatus;
+    this.dataSource.filter = this.filter + " " + this.selectedStatus;
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+    'partner', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip"];
   }
 
   click(order: OrderReadDto) {
-    this.submitted = false;
+
     this.orderForm.patchValue(order);
+
   }
 
   setStatusDone(): void {
-    this.submitted = true;
     Object.keys(this.orderForm.controls).forEach(key => {
       const control = this.orderForm.get(key);
       if (control) {
@@ -131,11 +132,11 @@ export class MyDeliveriesComponent {
       const order: OrderReadDto = this.orderForm.value;
       
       // saves changes
+      order.status = "done";
       console.log(order);
-      this.orderService.setStatusDone(order).subscribe(r => {
+      this.orderService.setStatus(order).subscribe(r => {
         this.toastService.show(`Order ${r.id} satus was set to done`);
         // console.log(r)
       });
-      this.submitted = false;
   }
 }

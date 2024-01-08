@@ -1,6 +1,7 @@
 package org.company.modules.order.application.web;
 
 import org.company.modules.order.application.OrderService;
+import org.company.modules.order.domain.Status;
 import org.company.shared.aplication.web.GenericController;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,8 @@ public class OrderController  extends GenericController<OrderDto, Long, OrderSer
         return service.getOrdersWithUserEmailForDeliveryMan(email);
     }
     @PutMapping("/make-done/{id}")
-    public OrderReadDto getAllOrdersConnectedWithDeliveryMan(@PathVariable Long id, @RequestBody Double distance)
+    public OrderReadDto getAllOrdersConnectedWithDeliveryMan(@PathVariable Long id, @RequestBody String status)
     {
-        return service.setStatusDone(id, distance);
+        return service.setStatusDone(id, Status.valueOf(status));
     }
 }

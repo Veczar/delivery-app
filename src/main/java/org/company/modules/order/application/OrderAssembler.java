@@ -81,7 +81,7 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
         orderReadDto.setCustomerTelephoneNumber(order.getCustomer().getTelephoneNumber());
         orderReadDto.setPartner(order.getPartner().getName());
         orderReadDto.setTotalPrice(order.getTotalPrice());
-        orderReadDto.setTip(orderReadDto.getTip());
+        orderReadDto.setTip(order.getTip());
         orderReadDto.setCreationDate(order.getCreationDate().toString());
         Date completionDate = order.getCompletionDate();
         if(completionDate != null)orderReadDto.setCompletionDate(completionDate.toString());

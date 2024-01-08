@@ -21,8 +21,8 @@ export class OrderService {
   updateOrder(order: OrderDto): Observable<OrderDto> {
     return this.http.put<OrderDto>(`${this.apiUrl}/api/orders/${order.id}`, order);
   }
-  setStatusDone(order: OrderReadDto): Observable<OrderReadDto> {
-    return this.http.put<OrderReadDto>(`${this.apiUrl}/api/orders/make-done/${order.id}`, order.distanceInKm);
+  setStatus(order: OrderReadDto): Observable<OrderReadDto> {
+    return this.http.put<OrderReadDto>(`${this.apiUrl}/api/orders/make-done/${order.id}`, order.status);
   }
   deleteOrder(orderId: number): Observable<OrderDto> {
     return this.http.delete<OrderDto>(`${this.apiUrl}/api/orders/${orderId}`);

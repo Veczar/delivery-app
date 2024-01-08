@@ -28,14 +28,13 @@ public class OrderService extends GenericService<Order, OrderDto, Long, OrderRep
                 .collect(Collectors.toList());
         return list;
     }
-    public OrderReadDto setStatusDone(Long id, Double distance)
+    public OrderReadDto setStatusDone(Long id, Status status)
     {
         Order order = repository.findById(id).orElse(null);
         OrderReadDto orderReadDto = null;
         if(order != null)
         {
-            order.setDistanceInKm(distance);
-            order.setStatus(Status.done);
+            order.setStatus(status);
             order.setCompletionDate(new Date());
             orderReadDto = assembler.toReadDto(repository.save(order));
         }
