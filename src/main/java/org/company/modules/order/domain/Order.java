@@ -45,4 +45,5 @@ public class Order {
     private Date completionDate;
     @Enumerated(EnumType.STRING)
     private Status status;
+    private Double distanceInKm;
 }

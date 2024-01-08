@@ -12,3 +12,15 @@ export const authGuard = () => {
     return false
   }
 }
+
+export const authCurierGuard = () => {
+  const router = inject(Router);
+
+  if (localStorage.getItem('role') === 'COURIER') {
+    return true;
+  }
+  else {
+    router.navigate(['/']);
+    return false
+  }
+}
