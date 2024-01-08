@@ -57,7 +57,7 @@ export interface OrderDto {
     tip?: number;
     creationDate?: Date;
     completionDate?: Date;
-    status?: string;
+    status?: Status;
     distanceInKm?: number;
 }
 

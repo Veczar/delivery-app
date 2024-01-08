@@ -31,10 +31,6 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
     private final PartnerAssembler partnerAssembler;
     private final DeliveryManRepository deliveryManRepository;
     private final PartnerRepository partnerRepository;
-    private final AddressAssembler addressAssembler;
-    private final UserAssembler userAssembler;
-    private final DeliveryManAssembler deliveryManAssembler;
-    private final PartnerAssembler partnerAssembler;
 
     @Override
     public OrderDto toDto(Order order) {

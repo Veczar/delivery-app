@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OrderReadDto } from 'src/app/shared/model/api-models';
+import { OrderReadDto, Status } from 'src/app/shared/model/api-models';
 import { ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -132,7 +132,7 @@ export class MyDeliveriesComponent {
       const order: OrderReadDto = this.orderForm.value;
       
       // saves changes
-      order.status = "done";
+      order.status = Status.done;
       console.log(order);
       this.orderService.setStatus(order).subscribe(r => {
         this.toastService.show(`Order ${r.id} satus was set to done`);
