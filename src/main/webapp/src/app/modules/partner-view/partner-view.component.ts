@@ -27,6 +27,9 @@ export class PartnerViewComponent {
   newAddress: string = '';
   flag: boolean = false;
 
+  categoryActive: boolean = false;
+  categoryActiveName: string | null = null;
+
   loggedUser = {
     firstName: '',
     lastName: ''
@@ -125,8 +128,14 @@ export class PartnerViewComponent {
         // console.log('searchTerm:', this.citySearch);
         // console.log('cityName:', this.currentCity);
 
-        if (this.cityName === '' || this.cityName === null ){
+        if (this.cityName === '' || this.cityName === null){
+          
+          if(this.flag){
+            this.filterPartners(this.citySearch);
+          }else{
             console.error('Unable to determine city.');
+          }
+            
         } else if(this.citySearch === ''|| this.citySearch === null){
           this.partnerService.updateSearchTerm(this.citySearch);
           this.router.navigate(['/partners/', this.cityName]);
@@ -138,14 +147,14 @@ export class PartnerViewComponent {
         }
       }
 
-      getPartners(): void {
-        this.partnerService.getPartners().subscribe((partners) => {
-          this.partners = partners;
-          // Zapisz dane partners w serwisie
-          this.partnerService.setPartnersData(this.partners);
-          console.log('Partners:', this.partners);
-        });
-      }
+    getPartners(): void {
+      this.partnerService.getPartners().subscribe((partners) => {
+        this.partners = partners;
+        // Zapisz dane partners w serwisie
+        this.partnerService.setPartnersData(this.partners);
+        console.log('Partners:', this.partners);
+      });
+  }
 
     private updatePartnersData(): void {
       this.partnerService.getPartners().subscribe((partners) => {
@@ -157,5 +166,27 @@ export class PartnerViewComponent {
         console.log(this.partners);
       });
 
+  }
+  private filterPartners(searchTerm: string): void {
+    // Logika filtrowania partnerów bez miasta
+    if (searchTerm && searchTerm.trim() !== '') {
+      this.partners = this.partners.filter(partner => {
+        // Dostosuj logikę filtrowania do własnych potrzeb
+        // Poniżej przykład dla prostego filtrowania po nazwie partnera
+        return partner?.name?.toLowerCase().includes(searchTerm.toLowerCase());
+      });
+    } else {
+      // Brak terminu wyszukiwania, można przywrócić pełną listę partnerów
+      this.updatePartnersData();
+    }
+  }
+  selectCategory(categoryName: string): void {
+    if (this.categoryActiveName === categoryName) {
+      this.categoryActiveName = null;
+      this.categoryActive = false; // Jeżeli ta sama kategoria jest ponownie kliknięta, dezaktywuj ją
+    } else {
+      this.categoryActiveName = categoryName; // Ustaw aktywną kategorię
+      this.categoryActive = true;
+    }
   }
 }

@@ -81,29 +81,32 @@
     </div>
   </div> 
 
-  <main class="mt-4">
+  <main class="main-color">
     
 
-    <div class=" main-container">
+    <div class=" main-container pt-5">
       <div class="category-page_body">
         <div class="store-wall">
           <div class="store-wall-content">
-            <div class="wall-element">
-              <div>
-                <a (click)="goToAllPartners()">Przejdź do strony z wszystkimi Partnerami</a>
+            <div class="wall-element background-btn">
+              <div class="toAllPartners d-flex justify-content-center">
+                <a (click)="goToAllPartners()">
+                  <i class="fa-solid fa-earth-americas"></i>
+                  Show all partners
+                </a>
               </div>
             </div>
             <div class="wall-element">
-              <h3>Filtry</h3>
+              <h3 class="text-center">Filtry</h3>
               <div class="filter-section">
                 <ul class="">
-                  <li class="list-element">
+                  <li class="list-element" (click)="selectCategory('Category1')">
                     <a>
                       <i class="fa-solid fa-burger"></i>
                       Kategoria
                     </a>
                   </li>
-                  <li class="list-element">
+                  <li class="list-element" (click)="selectCategory('Category2')">
                     <a>
                       <i class="fa-solid fa-burger"></i>
                       Kategoria
@@ -136,6 +139,7 @@
         <div class="category-page_results">
           
           <router-outlet></router-outlet>
+          
           <div *ngIf="flag" class="category-page-stores-container">
             <div class="row">
               <div class="col-md-4" *ngFor="let partner of partners">
