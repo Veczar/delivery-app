@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
+import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 
 
 @Component({
@@ -17,9 +18,12 @@ export class ProductComponent implements OnInit {
   quantity: number = 1;
   subtotal: number = 0;
 
+  @Input()
+  modal!: any; //for the exit event when adding to cart
+
   constructor(
-    private productService: ProductsService
-    // todo: shopping cart service
+    private productService: ProductsService,
+    private shoppingCartService: ShoppingCartService
   ) {}
 
   ngOnInit(): void {
@@ -30,9 +34,7 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(): void {
-    // todo: cart
-    console.log('product added, quantity: ', this.quantity);
-    console.log('subtotal: ', this.subtotal);
+    this.shoppingCartService.addProduct(this.product, this.quantity, this.subtotal);
   }
 
   decQuantity(): void {
@@ -51,6 +53,7 @@ export class ProductComponent implements OnInit {
     this.subtotal = this.product.price * this.quantity;
   }
 
+  // for partner mode
   // deleteProduct():void {
   //   console.log(this.productId);
   //   // this.productService.deleteProduct(this.productId);

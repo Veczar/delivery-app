@@ -8,7 +8,7 @@
     {{product.description}}
   </h5> 
 
-  <div class="modal-footer justify-content-center mt-3">
+  <div class="modal-footer justify-content-center mt-3 pb-0">
 
     <div class="quantity-picker">
       
@@ -25,7 +25,7 @@
       </button>
     </div>
     
-    <button class="btn btn-primary btn-lg add-btn d-flex justify-content-between" (click)="addToCart()">
+    <button class="btn btn-primary btn-lg add-btn d-flex justify-content-between" (click)="addToCart()" (click)="modal.dismiss('Cross click')">
       <div>
         Add to cart 
       </div>

@@ -111,9 +111,6 @@ export class RegisterUserFormComponent implements OnInit {
         else {
           this.wrongEmail = true;
         }
-      },
-      (error) => {
-        console.error('Error while registering a user:', error);
       }
     );
   }

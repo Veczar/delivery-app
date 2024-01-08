@@ -29,6 +29,16 @@
             </li>
           </ul>
 
+          <a class="btn cart-btn me-3" data-bs-toggle="offcanvas" href="#offcanvasShoppingCart" 
+            role="button" aria-controls="offcanvasShoppingCart" *ngIf="getTotal() > 0">
+            <h6 class="mb-0 d-flex align-items-center">
+              <h4 class="mb-0 me-2">
+                <i class="bi bi-cart2"></i> 
+              </h4>
+              See your order <span class="me-4"></span> {{getTotal() | number: '1.2-2'}} $
+            </h6>
+          </a>
+
           <div *ngIf="!(isUserLoggedIn())">
             <button class="btn btn-outline-primary me-2" type="submit"
               [routerLink]="['/register/user']">Register</button>
@@ -342,10 +352,14 @@
 <ng-template #productModal let-modal>
   <div class="modal-header">
     <h3 class="modal-title" id="modal-basic-title">{{selectedProduct.name}}</h3>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+    <button type="button" class="btn-close" 
       (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body p-3">
-    <app-product [productId]="selectedProduct.id"></app-product>
+    <app-product [productId]="selectedProduct.id" [modal]="modal"></app-product>
   </div>
 </ng-template>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" id="offcanvasShoppingCart" aria-labelledby="offcanvasExampleLabel">
+  <app-shopping-cart></app-shopping-cart>
+</div>
