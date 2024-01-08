@@ -92,11 +92,12 @@ export interface Pageable {
 
 export interface PartnerDto {
     accountNumber?: string;
-    categories?: CategoryDto[];
+    type?: Type;
     contactNumber?: string;
     id?: number;
     name?: string;
     owner: UserDto;
+    photoPath?: string;
 }
 
 export interface PartnerReviewDto {
