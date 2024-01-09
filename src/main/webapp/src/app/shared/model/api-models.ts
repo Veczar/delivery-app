@@ -97,8 +97,25 @@ export interface OrderDto {
     creationDate?: Date;
     customer?: UserDto;
     deliveryMan?: DeliveryManDto;
+    distanceInKm?: number;
     id?: number;
     partner?: PartnerDto;
+    status?: Status;
+    tip?: number;
+    totalPrice?: number;
+}
+
+export interface OrderReadDto {
+    addressEnd?: string;
+    addressStart?: string;
+    completionDate?: string;
+    creationDate?: string;
+    customerFirstName?: string;
+    customerLastName?: string;
+    customerTelephoneNumber?: string;
+    distanceInKm?: number;
+    id?: number;
+    partner?: string;
     status?: Status;
     tip?: number;
     totalPrice?: number;
@@ -135,6 +152,14 @@ export interface PartnerDto {
     owner: UserDto;
     websiteLink?: string;
     photoPath?: string;
+    type?: PartnerType;
+}
+
+export interface PartnerReadDto {
+    address?: AddressDto;
+    name?: string;
+    partnerType?: PartnerType;
+    photoPath?: string;
 }
 
 export interface PartnerReviewDto {
@@ -153,9 +178,9 @@ export interface PartnerReviewReadDto {
 }
 
 export interface ProductDto {
-    id: number;
     categories?: CategoryDto[];
     description?: string;
+    id?: number;
     name?: string;
     onSale?: boolean;
     owner?: PartnerDto;
@@ -308,17 +333,18 @@ export enum NullHandling {
     NULLS_LAST = "NULLS_LAST",
 }
 
-export enum Status {
-    done = "done",
-    inPreparation = "inPreparation",
-    inDelivery = "inDelivery",
-    readyForDelivery = "readyForDelivery",
-}
-export enum Type {
+export enum PartnerType {
     other = "other",
     restaurant = "restaurant",
     pharmacy = "pharmacy",
     groceryStore = "groceryStore",
     florists = "florists",
-    coffeehouse = "coffeehouse"
+    coffeehouse = "coffeehouse",
+}
+
+export enum Status {
+    done = "done",
+    inPreparation = "inPreparation",
+    inDelivery = "inDelivery",
+    readyForDelivery = "readyForDelivery",
 }

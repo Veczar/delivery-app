@@ -9,6 +9,10 @@ import { AdminDashboardComponent } from './modules/admin-panel/admin-dashboard/a
 import { UserTableComponent } from './modules/admin-panel/user-table/user-table.component';
 import { RegisterPartnerFormComponent } from './modules/auth/register-partner-form/register-partner-form.component';
 import { RegisterCourierFormComponent } from './modules/auth/register-courier-form/register-courier-form.component';
+import { PartnerViewComponent } from './modules/partner-view/partner-view.component';
+import { CityViewComponent } from './modules/partner-view/city-view/city-view.component';
+import { SearchViewComponent } from './modules/partner-view/search-view/search-view.component';
+
 import { CourierTableComponent } from './modules/admin-panel/courier-table/courier-table.component';
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
 import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
@@ -19,7 +23,15 @@ const routes: Routes = [
   {path: 'register/user', component: RegisterUserFormComponent},
   {path: 'register/partner', component: RegisterPartnerFormComponent},
   {path: 'register/courier', component: RegisterCourierFormComponent},
-  {path: ':partner', component: PartnerProductsComponent},
+  {path: 'partner/:partner', component: PartnerProductsComponent},
+  {
+    path: 'partners',
+    component: PartnerViewComponent,
+    children: [
+      {path: ':city', component: CityViewComponent},
+      {path: 'search/:city/:searchTerm', component: SearchViewComponent}
+    ]
+  },
   {
     path: 'admin',
     component: AdminPanelComponent,

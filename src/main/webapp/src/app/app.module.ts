@@ -13,6 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
+import { PartnerModule } from './modules/partner-view/partner.module';
+import { FilterPipe } from './shared/filter.pipe';
+
 import { ToastComponent } from './shared/toast/toast-component/toast.component';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { UserSettingsComponent } from './modules/user/user-settings/user-settings.component';
@@ -35,6 +38,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MyDeliveriesComponent,
   ],
   imports: [
+    PartnerModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,

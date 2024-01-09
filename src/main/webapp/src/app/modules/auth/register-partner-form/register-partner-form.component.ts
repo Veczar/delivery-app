@@ -13,6 +13,7 @@ import { ToastService } from 'src/app/shared/toast/toast.service';
 })
 export class RegisterPartnerFormComponent implements OnInit {
 
+
   partnerForm: FormGroup = new FormGroup({
     //User data
     firstName: new FormControl(''),
@@ -152,6 +153,9 @@ export class RegisterPartnerFormComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
     this.wrongEmail = false;
+    const contactNumber = `${this.partnerForm.value.contactNumber}`;
+    const telephoneNumber = `${this.partnerForm.value.telephoneNumber}`;
+
     Object.keys(this.partnerForm.controls).forEach(key => {
       if(key != "photo")
       {
@@ -160,8 +164,8 @@ export class RegisterPartnerFormComponent implements OnInit {
           control.setValue(control.value);
         }
       }
-
     });
+//     console.log(JSON.stringify(this.partnerForm.value, null, 2));
 
     console.log(JSON.stringify(this.partnerForm.value, null, 2));
 
@@ -169,6 +173,18 @@ export class RegisterPartnerFormComponent implements OnInit {
       console.log('wrong form')
       return;
     }
+
+    const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
+    const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
+
+    this.partnerForm.patchValue({
+      contactNumber: combinedContactNumber,
+      telephoneNumber: combinedTelephoneNumber,
+    });
+
+      console.log(JSON.stringify(this.partnerForm.value, null, 2));
+      console.log(this.partnerForm)
+
 
      //console.log(JSON.stringify(this.partnerForm.value, null, 2));
      //console.log(this.partnerForm)
@@ -214,7 +230,6 @@ export class RegisterPartnerFormComponent implements OnInit {
   get addressForm(): FormGroup {
     return this.partnerForm.get('address') as FormGroup;
   }
-
   formatPostalCode(event: any): void {
 
     const cleanedValue = event.target.value.replace(/-/g, '');

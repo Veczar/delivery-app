@@ -27,6 +27,11 @@ public class PartnerController implements IController {
         this.service = service;
         this.photoService = photoService;
     }
+
+    @GetMapping("/read")
+    public List<PartnerReadDto> getReadDtoPartners(){
+        return service.getPartnersReadDto();
+    }
     @GetMapping
     public List<PartnerDto> getAllItems() {
         return service.getAllItems();
@@ -52,11 +57,7 @@ public class PartnerController implements IController {
     public PartnerDto updateItem(@PathVariable Long id, @RequestBody PartnerDto user) {
         return service.updateItem(id, user);
     }
-    @GetMapping("/city/{city}")
-    public List<PartnerDto> getPartnersFromCity(@PathVariable String city) {
-        return service.getPartnersFromCity(city);
-    }
-    
+
     @GetMapping("/name/{name}")
     public PartnerDto getPartnerByName(@PathVariable String name) {
         return service.getPartnerByName(name);

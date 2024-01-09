@@ -3,6 +3,7 @@ import { NgbModal, NgbToast, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../modules/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from '../shared/toast/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-front-page',
@@ -19,6 +20,7 @@ export class FrontPageComponent {
 
   constructor(
     private modalService: NgbModal,
+    private router: Router,
     public authService: AuthService,
     public http: HttpClient,
     public toastService: ToastService,
@@ -52,8 +54,9 @@ export class FrontPageComponent {
 
   onSearch() {
     console.log(this.cityName);
+    this.router.navigate(['/partners/', this.cityName]);
   }
-  
+
   openSettings(modal: any) {
     this.modalService.open(modal);
   }

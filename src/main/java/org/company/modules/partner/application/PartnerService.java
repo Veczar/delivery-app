@@ -1,6 +1,7 @@
 package org.company.modules.partner.application;
 
 import org.company.modules.partner.application.web.PartnerDto;
+import org.company.modules.partner.application.web.PartnerReadDto;
 import org.company.modules.partner.domain.Partner;
 import org.company.modules.partner.domain.PartnerRepository;
 import org.company.modules.partner.domain.PartnerSpecification;
@@ -21,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PartnerService extends GenericService<Partner, PartnerDto, Long, PartnerRepository, PartnerAssembler> {
-    
+
     private final PartnerRepository partnerRepository;
     private final PartnerAssembler partnerAssembler;
     protected final UserService userService;
@@ -40,10 +41,11 @@ public class PartnerService extends GenericService<Partner, PartnerDto, Long, Pa
         partnerDto.setPhotoPath(photoService.savePhoto(photo, PhotoType.partner));
         return super.saveItem(partnerDto);
     }
-    public List<PartnerDto> getPartnersFromCity(String city) {
-        Specification<Partner> partnerSpecification = PartnerSpecification.partnersFromCity(city);
-        return partnerRepository.findAll(partnerSpecification)
-                .stream().map(partnerAssembler::toDto).collect(Collectors.toList());
+    public List<PartnerReadDto> getPartnersReadDto() {
+        List<Partner> partners = partnerRepository.findAll();
+        return partners.stream()
+                .map(partnerAssembler::toReadDto)
+                .collect(Collectors.toList());
     }
 
     public PartnerDto getPartnerByName(String name) {

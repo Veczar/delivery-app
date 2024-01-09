@@ -1,0 +1,23 @@
+<h1 >Partners in {{cityName}}</h1>
+
+            <div class="category-page-stores-container">
+                  <div class="row">
+                    <div class="col-md-4" *ngFor="let partner of partners">
+                        <div class="card mb-3" style="max-width: 540px;" [routerLink]="['/',partner.name]" >
+                          <div class="row g-0">
+                            <div class="col-md-4 img rounded w-100">
+                              <img src="http://localhost:8080/api/partners/photo/{{this.partner.photoPath}}" class="card-img-top h-100" alt="Restaurant Image">
+                            </div>
+
+                            <div class="card-body">
+                              <h5 class="card-title mt-1">{{ partner?.name }}</h5>
+                              <div class="badge-container">
+                                <p class="card-text badge rounded-pill text-bg-info me-1"><span>{{ partner.partnerType?.toString() }} </span></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                
+            </div>
