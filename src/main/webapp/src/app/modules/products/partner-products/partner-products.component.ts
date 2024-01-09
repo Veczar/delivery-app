@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from '../../auth/auth.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
-import { GlobalVariable } from  'src/app/shared/global';
+
 @Component({
   selector: 'app-partner-products',
   templateUrl: './partner-products.component.html',
@@ -116,10 +116,6 @@ export class PartnerProductsComponent implements OnInit {
   getTotal(): number {
     return this.shoppingCartService.getTotalPrice();
   }
-  getPathToImages() : string {
-    return GlobalVariable.pathToImages;
-  }
-
 
   // ----------- navbar -----------------
   open(modal: any): void {
