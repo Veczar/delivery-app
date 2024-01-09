@@ -6,18 +6,6 @@ import { RegisterPartnerDto,RegisterResponseDto } from 'src/app/shared/model/api
 import { ToastService } from 'src/app/shared/toast/toast.service';
 
 
-function customNameValidator(control: FormControl) {
-  // Implement your custom validation logic here
-
-  const forbiddenName = 'admin'; // Example: Forbid the name 'admin'
-
-  if (control.value && control.value.toLowerCase() === forbiddenName) {
-    return { forbiddenName: true }; // Validation failed
-  }
-
-  return null; // Validation passed
-}
-
 @Component({
   selector: 'app-register-partner-form',
   templateUrl: './register-partner-form.component.html',
@@ -40,12 +28,17 @@ export class RegisterPartnerFormComponent implements OnInit {
     contactNumber: new FormControl(''),
     type: new FormControl(''),
     photo: new FormControl(''),
+    description: new FormControl(''),
+    openHour: new FormControl(''),
+    closeHour: new FormControl(''),
+    websiteLink: new FormControl(''),
+    expectedWaitingTime: new FormControl(''),
+    category: new FormControl(''),
     address: new FormGroup({
       city: new FormControl(''),
       postalCode: new FormControl(''),
       street: new FormControl(''),
     }),
-
 
   });
   submitted = false;
@@ -67,7 +60,7 @@ export class RegisterPartnerFormComponent implements OnInit {
     window.scrollTo(0, 0);
 
     this.partnerForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, customNameValidator, Validators.minLength(2),
+      firstName: ['', [Validators.required, Validators.minLength(2),
         Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)]],
       lastName: [
         '',
@@ -95,6 +88,11 @@ export class RegisterPartnerFormComponent implements OnInit {
         ]
       ],
       name: ['', [Validators.required, Validators.minLength(2)]],
+      description: ['', Validators.required],
+      openHour: ['', Validators.required],
+      closeHour: ['', Validators.required],
+      websiteLink: ['', Validators.required],
+      expectedWaitingTime: ['', Validators.required],
       accountNumber: [
         '',
         [
@@ -169,6 +167,8 @@ export class RegisterPartnerFormComponent implements OnInit {
     });
 //     console.log(JSON.stringify(this.partnerForm.value, null, 2));
 
+    console.log(JSON.stringify(this.partnerForm.value, null, 2));
+
     if (this.partnerForm.invalid) {
       console.log('wrong form')
       return;
@@ -187,8 +187,8 @@ export class RegisterPartnerFormComponent implements OnInit {
 
 
      //console.log(JSON.stringify(this.partnerForm.value, null, 2));
-     //console.log(this.partnerForm.value as RegisterPartnerDto)
-     //console.log(this.partnerForm.value)
+     //console.log(this.partnerForm)
+
     this.authService.registerPartner(this.partnerForm.value as RegisterPartnerDto, this.selectedFile).subscribe(
       (response: RegisterResponseDto) => {
         console.log('response:', response);

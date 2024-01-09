@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
+import { ToastService } from 'src/app/shared/toast/toast.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private productService: ProductsService,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class ProductComponent implements OnInit {
 
   addToCart(): void {
     this.shoppingCartService.addProduct(this.product, this.quantity, this.subtotal);
+    this.toastService.showInfo(`added ${this.quantity} ${this.quantity > 1 ? 'items' : 'item'} to cart`);
   }
 
   decQuantity(): void {

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AddressDto, PartnerDto, PartnerReviewReadDto, ProductDto, ProductReadDto } from 'src/app/shared/model/api-models';
+import { Component, OnInit } from '@angular/core';
+import { AddressDto, PartnerDto, PartnerReviewReadDto, ProductReadDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -58,6 +58,7 @@ export class PartnerProductsComponent implements OnInit {
       this.http.get<PartnerDto>(`http://localhost:8080/api/partners/name/${partnerName}`).subscribe((partner) => {
         this.partner = partner;
         this.address = partner.owner.addresses[0];
+        console.log(partner)
 
         const id: number = Number(localStorage.getItem('id') || 0);
         if (partner.owner.id === id) {
@@ -89,7 +90,7 @@ export class PartnerProductsComponent implements OnInit {
     );
 
     // Filter out duplicates
-    this.categories = Array.from(allCategories);
+    this.categories = Array.from(new Set(allCategories)).sort();
   }
 
   selectCategory(category: string): void {
@@ -115,6 +116,11 @@ export class PartnerProductsComponent implements OnInit {
 
   getTotal(): number {
     return this.shoppingCartService.getTotalPrice();
+  }
+
+  navigateToExternalUrl(): void {
+    const externalUrl = this.partner.websiteLink || ''; // Replace with your external URL
+    window.location.href = 'https://' + externalUrl;
   }
 
   // ----------- navbar -----------------
