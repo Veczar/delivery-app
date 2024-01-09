@@ -118,6 +118,11 @@ export class PartnerProductsComponent implements OnInit {
     return this.shoppingCartService.getTotalPrice();
   }
 
+  navigateToExternalUrl(): void {
+    const externalUrl = this.partner.websiteLink || ''; // Replace with your external URL
+    window.location.href = 'https://' + externalUrl;
+  }
+
   // ----------- navbar -----------------
   open(modal: any): void {
     this.modalService.open(modal);

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthRequestDto, AuthResponseDto, RegisterPartnerDto, RegisterResponseDto, RegisterUserDto, RegisterDeliveryManDto } from 'src/app/shared/model/api-models';
 import { jwtDecode } from 'jwt-decode';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -71,6 +72,7 @@ export class AuthService {
     this.loggedUser.lastName = lastName;
     return this.loggedUser;
   }
+  
   getDecodedAccessToken(token: string): any {
     try {
       return jwtDecode(token);

@@ -163,6 +163,38 @@
 
             </div>
           </div>
+
+          <div class="form-group col-md-12 mt-3">  
+            <label class="form-label" for="inputPhoto">Upload your logo</label>
+            <input 
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              name="photo"
+              class="form-control " 
+              formControlName="photo"
+              id="inputPhoto"
+              (change)="onFileSelected($event)"
+              [ngClass]="{ 'is-invalid': submitted && f['photo'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['photo'].errors }"
+            >
+            <div class="invalid-feedback" *ngIf="submitted && f['photo'].errors" >
+              <p>Provide valid photo .png/.jpg/.jpeg</p>
+            </div> 
+        
+            <!-- Display uploaded image -->
+            <div class="btn-group dropup mt-1">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                [ngClass]="{ 'disabled': !imageUrl}">
+                See the image
+              </button>
+              <ul class="dropdown-menu">
+                <div *ngIf="imageUrl" class="">
+                  <img name="photo" [src]="imageUrl" alt="Uploaded Image" class="img-thumbnail">
+                </div>
+              </ul>
+            </div>
+          </div>
+
         </div>
 
         <div class="col">
@@ -276,7 +308,7 @@
               [ngClass]="{ 'is-valid':submitted && !f['accountNumber'].errors }"
             />
             <div class="invalid-feedback" *ngIf="submitted && f['accountNumber'].errors" >
-              <p *ngIf="f['accountNumber'].errors">Account number is required</p>
+              <p>Account number is required</p>
             </div>
           </div>
 
@@ -288,9 +320,7 @@
                   <option *ngFor="let prefix of phonePrefixes" [value]="prefix">{{prefix}}</option>
                 </select>
               </div>
-
               <div class="input-group-spacer"></div>
-
               <input
                 maxlength="9"
                 type="text"
@@ -306,75 +336,53 @@
             </div>
           </div>
 
-        <div class="form-group col-md-12">
-          <label for="type" class="form-label">Type</label>
-            <select class="form-select input" aria-label=".form-select-sm example"
-              formControlName="type"
-              [ngClass]="{ 'is-invalid': submitted && f['type'].errors }"
-              [ngClass]="{ 'is-valid':submitted && !f['type'].errors }"
-              placeholder="">
+          <div class="form-group col-md-12">
+            <label for="type" class="form-label">Category</label>
+              <select class="form-select input" aria-label=".form-select-sm example"
+                formControlName="type"
+                [ngClass]="{ 'is-invalid': submitted && f['type'].errors }"
+                [ngClass]="{ 'is-valid':submitted && !f['type'].errors }"
+                >
 
-              <option value="restaurant" >Restaurant</option>
-              <option value="pharmacy">Pharmacy</option>
-              <option value="grocery store">Grocery store</option>
-              <option value="pharmacy">Pharmacy</option>
-              <option value="florists">Florist's</option>
-              <option value="coffeehouse">Coffeehouse</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="pharmacy">Pharmacy</option>
+                <option value="grocery store">Grocery store</option>
+                <option value="pharmacy">Pharmacy</option>
+                <option value="florists">Florist's</option>
+                <option value="coffeehouse">Coffeehouse</option>
 
-          </select>
-          <div class="invalid-feedback" *ngIf="submitted && f['category'].errors">
-            <p *ngIf="f['category'].errors">Provide Category</p>
-          </div>
-      </div>
-
-        <div class="mb-3" id="inputPhotoDiv" >
-          <label class="form-label" for="inputPhoto">Logo</label>
-          <input type="file" accept=".png, .jpg, .jpeg"
-                 name="photo"
-                 formControlName="photo"
-                 class="form-control"
-                 id="inputPhoto"
-                 (change)="onFileSelected($event)"
-                 [ngClass]="{ 'is-invalid': (submitted && f['photo'].errors) || wrongPhoto}"
-                 [ngClass]="{ 'is-valid': submitted && !f['photo'].errors }">
-          <div class="invalid-feedback" *ngIf="wrongPhoto == true && !f['photo'].errors">
-            <p>Wrong photo</p>
-          </div>
-        </div>
-
-      <h3 class="h3 fw-normal">Address Information</h3>
-
-      <div formGroupName="address">
-
-        <div class="row">
-          <div class="form-group col-md-6">
-            <label for="postalCode" class="form-label">Postal code</label>
-            <input
-              maxlength="6"
-              placeholder="00-000"
-              type="text"
-              name="postalCode"
-              formControlName="postalCode"
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && addressForm.get('postalCode')?.errors }"
-              [ngClass]="{ 'is-valid':submitted && !addressForm.get('postalCode')?.errors }"
-              (input)="formatPostalCode($event)"
-            />
-            <div class="invalid-feedback" *ngIf="submitted && addressForm.get('postalCode')?.errors">
-              <p *ngIf="addressForm.get('postalCode')?.hasError('required')">Postal code is required</p>
+            </select>
+            <div class="invalid-feedback" *ngIf="submitted && f['category'].errors">
+              <p>Provide Category</p>
             </div>
           </div>
 
+            <!-- <div class="mb-3" id="inputPhotoDiv" >
+              <label class="form-label" for="inputPhoto">Logo</label>
+              <input type="file" accept=".png, .jpg, .jpeg"
+                      name="photo"
+                      formControlName="photo"
+                      class="form-control"
+                      id="inputPhoto"
+                      (change)="onFileSelected($event)"
+                      [ngClass]="{ 'is-invalid': (submitted && f['photo'].errors) || wrongPhoto}"
+                      [ngClass]="{ 'is-valid': submitted && !f['photo'].errors }">
+              <div class="invalid-feedback" *ngIf="wrongPhoto == true && !f['photo'].errors">
+                <p>Wrong photo</p>
+              </div>
+            </div> -->
         </div>
       </div>
-      <div class="form-group mt-4">
-        <button class="w-100 btn btn-lg btn-primary">Submit</button>
+      
+      <div class="form-group mt-5 d-flex justify-content-center">
+        <button class="w-50 btn btn-lg btn-primary">Submit</button>
       </div>
-
+      
       <hr class="my-3">
       <small class="text-muted mt-0 text-center">By clicking Submit, you agree to the terms of use.</small>
-
+      
       <p class="mt-4 mb-2 text-muted text-center">&copy; 2023-2024</p>
+        
       </form>
     <!-- </div> -->
   </main>

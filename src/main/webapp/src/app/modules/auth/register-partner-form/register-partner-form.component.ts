@@ -173,7 +173,7 @@ export class RegisterPartnerFormComponent implements OnInit {
      //console.log(JSON.stringify(this.partnerForm.value, null, 2));
      //console.log(this.partnerForm)
 
-    this.authService.registerParnter(this.partnerForm.value as RegisterPartnerDto).subscribe(
+    this.authService.registerPartner(this.partnerForm.value as RegisterPartnerDto, this.selectedFile).subscribe(
       (response: RegisterResponseDto) => {
         console.log('response:', response);
 
