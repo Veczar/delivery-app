@@ -18,9 +18,15 @@ public class OrderController  extends GenericController<OrderDto, Long, OrderSer
     {
         return service.getOrdersWithUserEmailForDeliveryMan(email);
     }
-    @PutMapping("/make-done/{id}")
-    public OrderReadDto getAllOrdersConnectedWithDeliveryMan(@PathVariable Long id, @RequestBody String status)
+    @GetMapping("/my-orders/{id}")
+    public List<OrderReadDto> getAllWithByCustomerId(@PathVariable Long id)
     {
-        return service.setStatusDone(id, Status.valueOf(status));
+        return service.getAllWithByCustomerId(id);
     }
+    @PutMapping("/rating/{id}")
+    public OrderReadDto setOrderRating(@PathVariable Long id,@RequestBody  Long rating)
+    {
+        return service.setOrderRating(id,rating);
+    }
+
 }

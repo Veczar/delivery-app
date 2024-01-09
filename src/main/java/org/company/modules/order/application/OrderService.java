@@ -9,6 +9,7 @@ import org.company.modules.order.domain.Status;
 import org.company.shared.aplication.GenericService;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;
@@ -21,7 +22,6 @@ public class OrderService extends GenericService<Order, OrderDto, Long, OrderRep
     }
     public List<OrderReadDto> getOrdersWithUserEmailForDeliveryMan(String email) {
         Specification<Order> spec = OrderSpecifications.filterOrdersByUserEmailAndStatus(email);
-        List<Order> listt  = repository.findAll(spec);
         List<OrderReadDto> list = repository.findAll(spec)
                 .stream()
                 .map(assembler::toReadDto)
@@ -39,5 +39,21 @@ public class OrderService extends GenericService<Order, OrderDto, Long, OrderRep
             orderReadDto = assembler.toReadDto(repository.save(order));
         }
         return orderReadDto;
+    }
+
+    public List<OrderReadDto> getAllWithByCustomerId(@PathVariable Long id)
+    {
+        List<OrderReadDto> list = repository.findByCustomer_IdOrderByCreationDateDesc(id)
+                .stream()
+                .map(assembler::toReadDto)
+                .collect(Collectors.toList());
+        return list;
+    }
+
+    public OrderReadDto setOrderRating(Long id, Long rating)
+    {
+        Order order = repository.findById(id).orElse(null);
+        order.setRating(rating);
+        return assembler.toReadDto(repository.save(order));
     }
 }

@@ -46,4 +46,5 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private Status status;
     private Double distanceInKm;
+    private Long rating;
 }

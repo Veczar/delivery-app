@@ -1,6 +1,7 @@
 package org.company.modules.product_order.application.web;
 
 import lombok.AllArgsConstructor;
+import org.company.modules.order.application.web.OrderReadDto;
 import org.company.modules.product_order.application.ProductOrderService;
 import org.company.modules.product_order.domain.ProductOrderPk;
 import org.company.shared.aplication.web.IController;
@@ -42,6 +43,11 @@ public class ProductOrderController implements IController {
                                       @PathVariable("orderId") Long orderId,
                                       @RequestBody ProductOrderDto dto) {
         return service.updateItem(new ProductOrderPk(productId, orderId), dto);
+    }
+    @GetMapping("/my-orders/{id}")
+    public List<ProductOrderDto> getAllWithByCustomerId(@PathVariable Long id)
+    {
+        return service.getAllWithByCustomerId(id);
     }
 
 }

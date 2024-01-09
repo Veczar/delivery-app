@@ -57,10 +57,6 @@ export class FrontPageComponent {
     this.router.navigate(['/partners/', this.cityName]);
   }
 
-  openSettings(modal: any) {
-    this.modalService.open(modal);
-  }
-
   onToast() {
     this.toastService.showInfo('info');
     this.toastService.showSuccess('Yeah buddy!!!');
