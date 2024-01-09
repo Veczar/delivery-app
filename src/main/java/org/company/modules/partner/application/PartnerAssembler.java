@@ -7,7 +7,6 @@ import org.company.modules.category.domain.Category;
 import org.company.modules.category.domain.CategoryRepository;
 import org.company.modules.partner.application.web.PartnerDto;
 import org.company.modules.partner.domain.Partner;
-import org.company.modules.partner.domain.PartnerType;
 import org.company.modules.user.application.UserAssembler;
 import org.company.modules.user.domain.User;
 import org.company.modules.user.domain.UserRepository;
@@ -29,8 +28,14 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         PartnerDto partnerDto = new PartnerDto();
         partnerDto.setId(partner.getId());
         partnerDto.setName(partner.getName());
+        partnerDto.setDescription(partner.getDescription());
         partnerDto.setAccountNumber(partner.getAccountNumber());
         partnerDto.setContactNumber(partner.getContactNumber());
+        partnerDto.setOpenHour(partner.getOpenHour());
+        partnerDto.setCloseHour(partner.getCloseHour());
+        partnerDto.setWebsiteLink(partner.getWebsiteLink());
+        partnerDto.setExpectedWaitingTime(partner.getExpectedWaitingTime());
+
         partnerDto.setOwner(userAssembler.toDto(partner.getOwner()));
         partnerDto.setPhotoPath(partner.getPhotoPath());
         partnerDto.setType(partner.getType());
@@ -42,6 +47,7 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partner.setName(partnerDto.getName());
         partner.setAccountNumber(partnerDto.getAccountNumber());
         partner.setContactNumber(partnerDto.getContactNumber());
+        
         UpdateUser(partnerDto, partner);
 
         partner.setPhotoPath(partnerDto.getPhotoPath());

@@ -14,14 +14,11 @@ p {
   padding-right: 40px;
 }
 
-// .middle-search {
-//     position: absolute;
-//     left: 50%;
-//     width: 300px;
-//     margin-left: -150px;
-//     max-width: 300px;
-//     display: flex;
-// }
+.wrapper {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
 
 // --------- navbar -----------
 
@@ -87,9 +84,6 @@ $focus-ring-opacity: 0%;
   box-shadow: none;
 }
 
-// .card-desc {
-//     padding: 0 90px;
-// }
 
 
 // --------- footer -----------
@@ -101,7 +95,7 @@ $focus-ring-opacity: 0%;
 .footer {
   display: flex;
   justify-content: center;
-  margin-top: 60px;
+  
   padding: 40px 130px 0px 130px;
 
   // background-color: #212529; // same as nav

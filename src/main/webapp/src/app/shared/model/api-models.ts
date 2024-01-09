@@ -5,7 +5,7 @@ export interface AddressDto {
     city?: string;
     id?: number;
     postalCode?: string;
-    street?: string;
+    street: string;
 }
 
 export interface AuthRequestDto {
@@ -48,7 +48,7 @@ export interface DeliveryManDto {
 }
 export interface OrderDto {
     id?: number;
-    addressStart?: AddressDto;    
+    addressStart?: AddressDto;
     addressEnd?: AddressDto;
     customer?: UserDto;
     partner?: PartnerDto;
@@ -63,7 +63,7 @@ export interface OrderDto {
 
 export interface OrderReadDto {
     id?: number;
-    addressStart?: string;    
+    addressStart?: string;
     addressEnd?: string;
     customerFirstName?: string;
     customerLastName?: string;
@@ -123,11 +123,17 @@ export interface Pageable {
 
 export interface PartnerDto {
     accountNumber?: string;
+    categories?: CategoryDto[];
+    closeHour?: string;
     type?: Type;
     contactNumber?: string;
+    description?: string;
+    expectedWaitingTime?: number;
     id?: number;
     name?: string;
+    openHour?: string;
     owner: UserDto;
+    websiteLink?: string;
     photoPath?: string;
 }
 
@@ -165,13 +171,25 @@ export interface ProductOrderDto {
 }
 
 export interface ProductReadDto {
-    id: number;
     categories?: CategoryDto[];
     description?: string;
+    id: number;
     name?: string;
     onSale?: boolean;
+    owner?: PartnerDto;
     photoPath?: string;
     price?: number;
+}
+
+export interface RecurringOrderDto {
+    addressEnd?: AddressDto;
+    addressStart?: AddressDto;
+    customer?: UserDto;
+    frequency?: Frequency;
+    id?: number;
+    product?: ProductDto;
+    quantity?: number;
+    startDate?: Date;
 }
 
 export interface RegisterDeliveryManDto {
@@ -187,14 +205,21 @@ export interface RegisterDeliveryManDto {
 export interface RegisterPartnerDto {
     accountNumber?: string;
     address?: AddressDto;
+    categories?: CategoryDto[];
+    closeHour?: string;
     type? : Type;
     contactNumber?: string;
+    description?: string;
     email?: string;
+    expectedDeliveryTime?: number;
     firstName?: string;
     lastName?: string;
     name?: string;
+    openHour?: string;
+    owner?: UserDto;
     password?: string;
     telephoneNumber?: string;
+    websiteLink?: string;
 }
 
 export interface RegisterResponseDto {
@@ -262,6 +287,19 @@ export interface UserReadDto {
 export enum Direction {
     ASC = "ASC",
     DESC = "DESC",
+}
+
+export enum Frequency {
+    everyDay = "everyDay",
+    every2Days = "every2Days",
+    every3Days = "every3Days",
+    every4Days = "every4Days",
+    every5Days = "every5Days",
+    every6Days = "every6Days",
+    everyWeek = "everyWeek",
+    every2Weeks = "every2Weeks",
+    every3Weeks = "every3Weeks",
+    every4Weeks = "every4Weeks",
 }
 
 export enum NullHandling {

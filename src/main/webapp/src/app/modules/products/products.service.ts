@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductDto } from 'src/app/shared/model/api-models';
+import { ProductDto, ProductReadDto } from 'src/app/shared/model/api-models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,8 @@ export class ProductsService {
     return this.http.get<ProductDto[]>(`${this.apiUrl}/api/products`);
   }
 
-  getProductsFromPartner(partnerName: string): Observable<ProductDto[]> {
-    return this.http.get<ProductDto[]>(`${this.apiUrl}/api/products/from/${partnerName}`);
+  getProductsFromPartner(partnerName: string): Observable<ProductReadDto[]> {
+    return this.http.get<ProductReadDto[]>(`${this.apiUrl}/api/products/from/${partnerName}`);
   }
 
   getProduct(id: number): Observable<ProductDto> {

@@ -62,7 +62,7 @@ public class ProductAssembler implements IAssembler<Product, ProductDto> {
         product.setPhotoPath(dto.getPhotoPath());
         product.setOnSale(dto.getOnSale());
         product.setPrice(dto.getPrice());
-        product.setCategories(dto.getCategories().stream().map(this::getCategory).collect(Collectors.toSet()));
+        product.setCategories(dto.getCategories().stream().map(this::getCategory).collect(Collectors.toList()));
         updatePartner(dto, product);
     }
     
