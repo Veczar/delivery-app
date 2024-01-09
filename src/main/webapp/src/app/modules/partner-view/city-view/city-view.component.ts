@@ -45,16 +45,16 @@ export class CityViewComponent implements OnInit {
     this.partnerService.partners$.subscribe((partners) => {
       // Otrzymujesz dane partners z serwisu
       const selectedCity = this.getCity();
-      console.log('SelectedCity:', selectedCity);
+     
       this.partners = partners.filter(partner => partner?.address?.city === selectedCity);
-      console.log('Partners:', this.partners);
+      
     });
   }
   
   getPartnersCity(city: string): void {
     this.partnerService.getPartnersCity(city).subscribe((partners) => {
       this.partners = partners;
-      console.log('Partners in', city, ':', this.partners);
+      
     });
   }
 }

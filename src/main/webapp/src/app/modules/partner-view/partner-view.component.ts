@@ -50,7 +50,6 @@ export class PartnerViewComponent {
       this.partnerService.currentCity.subscribe(city => {
         this.cityName = city;
         this.setCity(this.cityName);
-        console.log('City name: ',this.cityName);
       });
 
       this.getPartners();
@@ -66,7 +65,6 @@ export class PartnerViewComponent {
           this.flag = false;
         }
   
-        // console.log(this.flag);
       });
     }
 
@@ -109,6 +107,7 @@ export class PartnerViewComponent {
     goToAllPartners(): void {
       this.router.navigate(['/partners']);
       this.partnerService.updateCity('');
+      this.getPartners();
     }
 
     setCity(city: string): void {
@@ -124,9 +123,6 @@ export class PartnerViewComponent {
     search(searchTerm: string): void {
       this.currentCity = this.getCity();
       this.citySearch = searchTerm;
-
-        // console.log('searchTerm:', this.citySearch);
-        // console.log('cityName:', this.currentCity);
 
         if (this.cityName === '' || this.cityName === null){
           
@@ -152,7 +148,6 @@ export class PartnerViewComponent {
         this.partners = partners;
         // Zapisz dane partners w serwisie
         this.partnerService.setPartnersData(this.partners);
-        console.log('Partners:', this.partners);
       });
   }
 
@@ -162,8 +157,6 @@ export class PartnerViewComponent {
     
         // Zapisz dane w serwisie, aby były dostępne dla innych komponentów
         this.partnerService.setPartnersData(this.partners);
-    
-        console.log(this.partners);
       });
 
   }
@@ -171,8 +164,6 @@ export class PartnerViewComponent {
     // Logika filtrowania partnerów bez miasta
     if (searchTerm && searchTerm.trim() !== '') {
       this.partners = this.partners.filter(partner => {
-        // Dostosuj logikę filtrowania do własnych potrzeb
-        // Poniżej przykład dla prostego filtrowania po nazwie partnera
         return partner?.name?.toLowerCase().includes(searchTerm.toLowerCase());
       });
     } else {

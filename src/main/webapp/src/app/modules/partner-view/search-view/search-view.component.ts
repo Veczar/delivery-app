@@ -35,22 +35,6 @@ export class SearchViewComponent {
 
       this.setSearch(this.searchTerm);
       const retrievedSearch = this.getSearch();
-    
-      if (retrievedSearch) {
-        console.log(`Current search: ${retrievedSearch}`);
-      } else {
-        console.log(`Current search: not found `);
-      }
-      
-
-      if (retrievedCity) {
-        console.log(`Current city: ${retrievedCity}`);
-        this.partnerService.updateCity(retrievedCity);
-      } else {
-        console.log('City not found in localStorage');
-      }
-
-      // Call the search function with the retrieved parameters
       
       this.partnerService.searchTerm$.subscribe((searchTerm) => {
         this.searchTerm = searchTerm;
@@ -63,10 +47,6 @@ export class SearchViewComponent {
         this.getPartners();
         
       });
-
-      
-
-      // this.getPartners(retrievedCity,retrievedSearch);
 
     
     }
