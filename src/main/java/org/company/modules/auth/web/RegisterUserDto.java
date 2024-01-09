@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.company.modules.address.application.web.AddressDto;
 
 
 @Data
@@ -15,6 +16,7 @@ public class RegisterUserDto {
     private String firstName;
     private String lastName;
     private String telephoneNumber;
+    private AddressDto address;
     private String email;
     private String password;
 }

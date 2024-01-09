@@ -1,20 +1,38 @@
 <body>
-  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " [routerLink]="['/']">Glovo Eats</a>
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow navbar-expand-md">
+
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 pt-3" [routerLink]="['/']">Glovo Eats
+      <div class="nav-item text-white ms-2 badge text-bg-primary">
+        {{ getRole() }}
+      </div>
+    </a>
+
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
       data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"
-        aria-label="Search"> -->
+    aria-label="Search"> -->
 
-    <button class="btn btn-secondary me-2 px-4" [routerLink]="['/']">Exit</button>
+      <div class="collapse navbar-collapse justify-content-end">
+        <div class="dropdown-center user-dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-position ">
+            <li><a class="dropdown-item user-dropdown" (click)="openSettings(settingsModal)">Settings</a></li>
+            <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
+          </ul>
+        </div>
+      </div>
+
   </header>
 
   <div class="container-fluid">
     <div class="row">
       <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-        <div class="position-sticky pt-3 sidebar-sticky">
+        <div class="position-sticky pt-4 sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['dashboard']" routerLinkActive="active">
@@ -122,7 +140,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" [routerLink]="['couriers-table']" routerLinkActive="active">
                 <span class="fs-5">
                   <i class="bi bi-bicycle"></i>
                 </span>
@@ -130,48 +148,24 @@
               </a>
             </li>
           </ul>
-          <!-- <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span class="fs-6">
-                    <i class="bi bi-house-gear"></i>
-                  </span>
-                  Current month
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span class="fs-6">
-                    <i class="bi bi-house-gear"></i>
-                  </span>
-                  Last quarter
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span class="fs-6">
-                    <i class="bi bi-house-gear"></i>
-                  </span>
-                  Social engagement
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span class="fs-6">
-                    <i class="bi bi-house-gear"></i>
-                  </span>
-                  Year-end sale
-                </a>
-              </li>
-            </ul> -->
         </div>
       </nav>
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
         <router-outlet></router-outlet>
-
       </main>
+
     </div>
   </div>
-
 </body>
+
+<ng-template #settingsModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Account Info</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body p-4">
+    <app-user-settings></app-user-settings>
+  </div>
+</ng-template>

@@ -3,19 +3,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { RegisterDeliveryManDto,RegisterResponseDto } from 'src/app/shared/model/api-models';
+import { ToastService } from 'src/app/shared/toast/toast.service';
 
-
-function customNameValidator(control: FormControl) {
-  // Implement your custom validation logic here
-
-  const forbiddenName = 'admin'; // Example: Forbid the name 'admin'
-
-  if (control.value && control.value.toLowerCase() === forbiddenName) {
-    return { forbiddenName: true }; // Validation failed
-  }
-
-  return null; // Validation passed
-}
 
 @Component({
   selector: 'app-register-courier-form',
@@ -47,13 +36,14 @@ export class RegisterCourierFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
 
     this.courierForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, customNameValidator, Validators.minLength(2),
+      firstName: ['', [Validators.required, Validators.minLength(2),
         Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)]],
       lastName: [
         '',
@@ -133,7 +123,7 @@ export class RegisterCourierFormComponent implements OnInit {
           this.courierForm.patchValue({
             telephoneNumber: combinedTelephoneNumber,
           });
-          console.log('succesfully registered a partner');
+          this.toastService.showSuccess('Account created, you can now now log in');
           this.router.navigate(['']);
         }
         else {

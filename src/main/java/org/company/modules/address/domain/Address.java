@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.company.modules.user.domain.User;
 
 
 @Getter
@@ -20,4 +21,8 @@ public class Address {
     private String street;
     private String city;
     private String postalCode;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -6,6 +6,7 @@ export interface AddressDto {
     id?: number;
     postalCode?: string;
     street?: string;
+    postalCode?: string;
 }
 
 export interface AuthRequestDto {
@@ -16,6 +17,7 @@ export interface AuthRequestDto {
 export interface AuthResponseDto {
     expirationDate?: string;
     firstName?: string;
+    id?: number;
     lastName?: string;
     role?: string;
     token?: string;
@@ -44,6 +46,37 @@ export interface DeliveryManDto {
     rating?: number;
     user?: UserDto;
     workingArea?: string;
+}
+export interface OrderDto {
+    id?: number;
+    addressStart?: AddressDto;
+    addressEnd?: AddressDto;
+    customer?: UserDto;
+    partner?: PartnerDto;
+    deliveryMan?: DeliveryManDto;
+    totalPrice?: number;
+    tip?: number;
+    creationDate?: Date;
+    completionDate?: Date;
+    status?: Status;
+    distanceInKm?: number;
+}
+
+export interface OrderReadDto {
+    id?: number;
+    addressStart?: string;
+    addressEnd?: string;
+    customerFirstName?: string;
+    customerLastName?: string;
+    customerTelephoneNumber?: string;
+    partner?: string;
+    deliveryMan?: string;
+    totalPrice?: number;
+    tip?: number;
+    creationDate?: string;
+    completionDate?: string;
+    status?: string;
+    distanceInKm?: number;
 }
 
 export interface Iterable<T> {
@@ -90,68 +123,55 @@ export interface Pageable {
 }
 
 export interface PartnerDto {
-    accountNumber?: string;
-    address?: AddressDto;
-    categories?: CategoryDto[];
-    contactNumber?: string;
     id?: number;
     name?: string;
+    accountNumber?: string;
+    contactNumber?: string;
     owner?: UserDto;
-}
-
-export interface PartnerReadDto {
     address?: AddressDto;
     categories?: CategoryDto[];
-    name?: string;
 }
 
 export interface PartnerReviewDto {
+    id?: number;
     date?: Date;
     description?: string;
     grade_in_stars?: number;
-    id?: number;
     partner?: PartnerDto;
     reviewer?: UserDto;
 }
 
 export interface ProductDto {
-    categories?: CategoryDto[];
-    description?: string;
     id?: number;
     name?: string;
-    onSale?: boolean;
+    description?: string;
     photoPath?: string;
     price?: number;
-}
-
-export interface ProductOrderDto {
-    order?: OrderDto;
-    product?: ProductDto;
-    quantity?: number;
-    subtotal?: number;
+    onSale?: boolean;
+    categories?: CategoryDto[];
 }
 
 export interface RegisterDeliveryManDto {
-    accountNumber?: string;
-    email?: string;
     firstName?: string;
     lastName?: string;
-    password?: string;
     telephoneNumber?: string;
+    email?: string;
+    password?: string;
     workingArea?: string;
+    accountNumber?: string;
 }
 
 export interface RegisterPartnerDto {
-    accountNumber?: string;
-    address?: AddressDto;
-    category?: string;
-    contactNumber?: string;
-    email?: string;
     firstName?: string;
     lastName?: string;
-    name?: string;
-    password?: string;
     telephoneNumber?: string;
+    email?: string;
+    password?: string;
+    name?: string;
+    accountNumber?: string;
+    contactNumber?: string;
+    address?: AddressDto;
+    category?:string;
 }
 
 export interface RegisterResponseDto {
@@ -159,11 +179,11 @@ export interface RegisterResponseDto {
 }
 
 export interface RegisterUserDto {
-    email?: string;
     firstName?: string;
     lastName?: string;
-    password?: string;
     telephoneNumber?: string;
+    email?: string;
+    password?: string;
 }
 
 export interface RoleDto {
@@ -200,18 +220,18 @@ export interface UserCriteria extends BaseCriteria {
 }
 
 export interface UserDto {
-    email?: string;
-    firstName?: string;
     id?: number;
+    firstName?: string;
     lastName?: string;
-    role?: RoleDto;
     telephoneNumber?: string;
+    email?: string;
+    role?: RoleDto;
 }
 
 export interface UserReadDto {
-    firstName?: string;
-    id?: number;
-    lastName?: string;
+    id: number;
+    firstName: string;
+    lastName: string;
 }
 
 export enum Direction {
@@ -223,11 +243,4 @@ export enum NullHandling {
     NATIVE = "NATIVE",
     NULLS_FIRST = "NULLS_FIRST",
     NULLS_LAST = "NULLS_LAST",
-}
-
-export enum Status {
-    done = "done",
-    inPreparation = "inPreparation",
-    inDelivery = "inDelivery",
-    readyForDelivery = "readyForDelivery",
 }

@@ -1,0 +1,333 @@
+html, body {
+  padding-top: 65px;
+  margin: 0;
+  overflow: hidden;
+  height: 100%;
+  // background-color: bisque;
+  // font-weight: 450;
+}
+
+main {
+  min-height: 100vh;
+  background-color: #fbfbfbf6;
+}
+
+nav {
+  // height: 56px;
+  height: 65px;
+}
+
+.color:hover {
+  color: rgb(33, 102, 193) !important;
+}
+
+ul > li > a,
+ul > li > button {
+  transition: color 0.1s ease-in-out;
+}
+
+ul > li:hover > a,
+ul > li:hover > button {
+  color: #82898f;
+}
+
+.user-dropdown {
+  color: white !important;
+  cursor: pointer;
+}
+
+.dropdown-toggle {
+  height: 39px;
+}
+
+
+// --------- main container -----------
+.restaurant-container {
+  max-width: 1400px;
+  padding-left: 100px;
+  padding-right: 100px;
+  margin: 0 auto;
+  // background-color: rgb(194, 255, 255);
+  padding-bottom: 60px;
+}
+
+
+// --------- filter --------------
+
+.example-form-field {
+  width: 300px;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  width: 1200px;
+  // padding-left: 30px;
+  // padding-right: 30px;
+}
+
+.filter-search {
+  width: 32%;
+  // max-width: 400px;
+  display: flex;
+  margin-right: 20px;
+  max-height: 38px;
+
+  input, span {
+    border-radius: 10px;
+  }
+  input {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  };
+}
+
+.form-control:focus {
+  border-color: none;
+  box-shadow: none;
+}
+
+
+.cart-btn {
+  // border-color: white;
+  background-color: whitesmoke;
+  color: #202020;
+}
+
+.cart-btn:hover {
+  background-color: whitesmoke;
+  background-color: lightgray;
+}
+
+// ---------- partner info container ---------
+
+.wrapper {
+  width: 100%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  // background-color: beige;
+  background-color: white;
+
+  overflow: auto;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.partner {
+  width: 1400px;
+  padding-left: 100px;
+  padding-right: 100px;
+  max-height: 150px;
+  // background-color: bisque;
+  display: flex;
+
+  img {
+    max-height: 150px;
+    margin-right: 25px;
+  }
+
+  .partner-info-wrapper {
+    width: 100%;
+  }
+
+  h1 {
+    width: fit-content;
+    height: fit-content;
+    margin-right: 20px;
+    white-space: nowrap;
+    // background-color: #ff9494;
+  }
+
+  h3 {
+    width: 100%;
+  }
+
+  a {
+    color: black;
+  }
+
+  .partner-info {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .info-col {
+    // background-color: aqua;
+    margin-right: 25px;
+    padding-left: 5px;
+  }
+}
+
+.pointer {
+  height: fit-content;
+}
+
+.pointer:hover {
+  cursor: pointer;
+  color: #82898f !important;
+  a {
+    color: #82898f;
+  }
+}
+
+.ownerOptions {
+  height: fit-content;
+  // width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  border-radius: 5px;
+
+  h5 {
+    white-space: nowrap;
+  }
+}
+
+// --------- details modal ----------
+
+.modal-map {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.modal-body > .info-col {
+  margin-bottom: 20px;
+}
+
+.modal-dialog-scrollable {
+  overflow-y: scroll;
+}
+
+
+// ------------ categories -------------
+.badge-container {
+  display: flex;
+  max-width: 65%;
+  align-items: center;
+
+  .d-flex {
+    flex-wrap: wrap;
+  }
+}
+
+.selected {
+  background-color: rgb(189, 239, 255);
+  border-radius: 20px;
+}
+
+.badge-item {
+  margin-left: 10px;
+  font-weight: 500;
+  transition: none;
+  padding: 5px 8px 5px 8px;
+  white-space: nowrap;
+}
+
+.badge-item:hover {
+  color: #0DCAF0;
+  cursor: pointer;
+}
+
+
+// --------- product card -----------
+
+.card {
+  padding: 10px;
+  transition: transform 0.15s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.card:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 0px;
+  padding-left: 10px;
+  height: 120px;
+
+  h5 {
+    margin-bottom: 5px;
+  }
+
+  .card-text {
+    line-height: 1.2;
+    overflow-y: hidden;
+    max-height: 30%;
+  }
+
+  .badge-container {
+    max-width: 40%;
+    max-height: 25px;
+    // background-color: aqua;
+    position: absolute;
+    bottom: 10px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    .badge {
+      font-weight: 450 !important;
+    }
+  }
+
+  .price {
+    position: absolute;
+    right: 15px;
+    bottom: 12px;
+  }
+}
+
+.img {
+  background-color: rgb(0, 66, 44);
+}
+
+img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.on-sale-indicator {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #ff5c40;
+  color: #fff; /* Adjust the text color as needed */
+  padding: 2px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+// --------- footer -----------
+
+.nav-hover-underline li.nav-item a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  // margin-top: 60px;
+  padding: 40px 130px 0px 130px;
+
+
+  // background-color: #212529; // same as nav
+  background-color: #202020;
+  color: white;
+
+  footer {
+    width: 1500px;
+  }
+
+  h5 {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  ul > li > a {
+    color: white !important;
+  }
+}

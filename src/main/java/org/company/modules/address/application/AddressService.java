@@ -4,7 +4,6 @@ import org.company.modules.address.application.web.AddressDto;
 import org.company.modules.address.domain.Address;
 import org.company.modules.address.domain.AddressRepository;
 import org.company.shared.aplication.GenericService;
-import org.company.shared.aplication.IService;
 import org.springframework.stereotype.Service;
 
 

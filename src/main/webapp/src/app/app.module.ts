@@ -8,7 +8,7 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './modules/auth/auth-interceptor.service';
+import { AuthInterceptor } from './shared/interceptors/auth-interceptor.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,11 +16,26 @@ import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
 import { PartnerModule } from './modules/partner-view/partner.module';
 import { FilterPipe } from './shared/filter.pipe';
 
+import { ToastComponent } from './shared/toast/toast-component/toast.component';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { UserSettingsComponent } from './modules/user/user-settings/user-settings.component';
+import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
+import { ProductsModule } from './modules/products/products.module';
+
+import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
     AppComponent,
     FrontPageComponent,
+    ToastComponent,
+    ToastComponent,
+    MyDeliveriesComponent,
   ],
   imports: [
     PartnerModule,
@@ -31,14 +46,26 @@ import { FilterPipe } from './shared/filter.pipe';
     ReactiveFormsModule,
     RouterModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+
     UserModule,
     AuthModule,
-    AdminPanelModule
+    AdminPanelModule,
+    ProductsModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
   ],

@@ -1,8 +1,9 @@
 
 html,
 body {
-  height: 100vh;
-  // height: 100%;
+  // height: 100vh;
+  // padding-top: 50px; 
+  padding-bottom: 100px;
 }
 
 body {
@@ -12,13 +13,15 @@ body {
 main {
   background-color: whitesmoke;
   border-radius: 20px;
-  position: relative;
+  margin-top: 0px !important;
 }
 
 .form-signin {
+  top: 50px;
   max-width: 450px;
   padding: 35px;
   background-attachment: fixed;
+  position: relative;
 }
 
 .form-signin .form-floating:focus-within {
@@ -46,4 +49,26 @@ h1 {
 
 p {
   margin-bottom: 0rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 40px 130px 0px 130px;
+
+  // background-color: #212529; // same as nav
+  background-color: #202020;
+  color: white;
+
+  footer {
+    width: 1500px;
+  }
+
+  h5 {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  ul>li>a {
+    color: white !important;
+  }
 }

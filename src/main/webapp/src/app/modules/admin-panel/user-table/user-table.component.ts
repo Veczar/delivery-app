@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserDto } from 'src/app/shared/model/api-models';
 import { ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../user/user.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastService } from 'src/app/shared/toast/toast.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class UserTableComponent {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
+    private toastService: ToastService
   ) {
     this.loadData();
     this.initForm();
@@ -66,7 +68,6 @@ export class UserTableComponent {
           Validators.minLength(2),
           Validators.maxLength(20),
           Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)
-
         ]
       ],
       telephoneNumber: [
@@ -121,7 +122,7 @@ export class UserTableComponent {
     });
 
     if (this.userForm.invalid) {
-      console.log('wrong form')
+      console.log('wrong form');
       return;
     }
 
@@ -141,7 +142,7 @@ export class UserTableComponent {
       // saves changes
       console.log(user);
       this.userService.updateUser(user).subscribe(r => {
-        console.log('user updated')
+        this.toastService.show(`User ${r.id} edited`);
         // console.log(r)
       });
 
@@ -152,14 +153,10 @@ export class UserTableComponent {
 
   deleteUser(): void {
     this.userService.deleteUser(this.userForm.value.id).subscribe(r => {
-      console.log('user deleted')
-      this.loadData();
+      console.log('user deleted');
+      this.toastService.show(`User ${r.id} deleted`);
       // console.log(r)
     });
-  }
-
-  onExit(): void {
-    this.loadData();
   }
 
   applyFilter(event: Event) {
@@ -170,5 +167,4 @@ export class UserTableComponent {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }

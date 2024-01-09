@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.company.modules.address.application.web.AddressDto;
 import org.company.modules.delivery_man.appliction.web.DeliveryManDto;
-import org.company.modules.delivery_man.domain.DeliveryMan;
 import org.company.modules.order.domain.Status;
 import org.company.modules.partner.application.web.PartnerDto;
 import org.company.modules.user.application.web.UserDto;
@@ -28,4 +27,5 @@ public class OrderDto {
     private Date creationDate;
     private Date completionDate;
     private Status status;
+    private Double distanceInKm;
 }

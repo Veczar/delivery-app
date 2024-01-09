@@ -3,6 +3,7 @@ package org.company.shared.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,17 +28,39 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
-//                                .requestMatchers("api/auth/**").permitAll()
-//                                .requestMatchers("api/users/**").hasAuthority("ADMIN")
-//                                .requestMatchers("api/partners/**").hasAuthority("ADMIN")
-//                                .requestMatchers("api/delivery_mans/**").hasAuthority("ADMIN")
-//                                .requestMatchers("api/addresses/**").hasAuthority("ADMIN")
-//                                .requestMatchers("api/products/**").hasAuthority("ADMIN")
-//                                .requestMatchers("api/categories/**").hasAuthority("ADMIN")
-//                                .requestMatchers("api/partners/reviews/**").hasAuthority("ADMIN")
-//                                .requestMatchers("api/orders/**").hasAuthority("ADMIN")
-//                                .requestMatchers("api/product_order/**").hasAuthority("ADMIN")
-                                  .anyRequest().permitAll()
+//                                .anyRequest().permitAll()
+                                .requestMatchers("api/auth/**").permitAll()
+
+                                .requestMatchers("api/users/**").hasAnyAuthority("ADMIN", "USER", "PARTNER", "COURIER") //user only for himself - will check elsewhere
+
+                                .requestMatchers(HttpMethod.GET, "/api/partners/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/api/partners/photo/**").permitAll()
+
+                                .requestMatchers("api/delivery_mans/**").hasAuthority("ADMIN")
+
+                                .requestMatchers("api/addresses/**").hasAuthority("ADMIN")
+
+                                .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/api/products/photo/**").permitAll()
+
+                                .requestMatchers("api/categories/**").hasAnyAuthority("ADMIN", "PARTNER")
+
+                                .requestMatchers("api/partners/reviews/**").hasAnyAuthority("ADMIN", "USER", "PARTNER", "COURIER")
+
+                                .requestMatchers(HttpMethod.GET, "/api/orders/").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/orders/assigned/**").hasAnyAuthority("COURIER")
+                                .requestMatchers(HttpMethod.PUT, "/api/orders/make-done/**").hasAnyAuthority("COURIER")
+                                .requestMatchers(HttpMethod.POST, "/api/orders/**").hasAnyAuthority("USER", "ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/api/orders/**").hasAnyAuthority("PARTNER", "COURIER", "ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/orders/**").hasAnyAuthority( "ADMIN")
+
+                                .requestMatchers("api/product_order/**").hasAnyAuthority("ADMIN", "USER", "PARTNER")
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

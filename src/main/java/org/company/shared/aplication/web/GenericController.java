@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 public class GenericController<Dto, EntityKey, Service extends IService<Dto, EntityKey>> implements  IController{
     
-    protected final Service service;
+    public final Service service;
     @GetMapping
     public List<Dto> getAllItems() {
         return service.getAllItems();
