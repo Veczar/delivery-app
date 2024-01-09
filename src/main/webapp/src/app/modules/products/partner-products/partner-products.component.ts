@@ -84,14 +84,14 @@ export class PartnerProductsComponent implements OnInit {
     })
   }
 
-  initCategories(products: ProductDto[]): void {
+  initCategories(products: ProductReadDto[]): void {
     // Extract categories from products
     const allCategories: string[] = products.flatMap(product =>
       product.categories ? product.categories.map(category => category.name || '') : []
     );
 
     // Filter out duplicates
-    this.categories = Array.from(allCategories);
+    this.categories = Array.from(new Set(allCategories)).sort();
   }
 
   selectCategory(category: string): void {

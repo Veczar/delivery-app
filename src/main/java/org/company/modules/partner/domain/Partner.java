@@ -20,8 +20,13 @@ public class Partner {
     private long id;
 
     private String name;
+    private String description;
     private String accountNumber;
     private String contactNumber;
+    private String openHour;  // HH:mm
+    private String closeHour; // HH:mm
+    private String websiteLink; // url
+    private Integer expectedDeliveryTime; //in minutes
 
     @OneToOne
     @JoinColumn(name = "owner_id")

@@ -115,14 +115,14 @@ export interface PartnerReviewReadDto {
 }
 
 export interface ProductDto {
-    id: number;
+    id?: number;
     categories?: CategoryDto[];
     description?: string;
     name?: string;
     onSale?: boolean;
     owner?: PartnerDto;
     photoPath?: string;
-    price: number;     
+    price: number;
 }
 
 export interface ProductOrderDto {
@@ -138,8 +138,20 @@ export interface ProductReadDto {
     description?: string;
     name?: string;
     onSale?: boolean;
+    owner?: PartnerDto;
     photoPath?: string;
     price?: number;
+}
+
+export interface RecurringOrderDto {
+    id?: number;
+    addressEnd?: AddressDto;
+    addressStart?: AddressDto;
+    customer?: UserDto;
+    frequency?: Frequency;
+    product?: ProductDto;
+    quantity?: number;
+    startDate?: Date;
 }
 
 export interface RegisterDeliveryManDto {
@@ -230,6 +242,19 @@ export interface UserReadDto {
 export enum Direction {
     ASC = "ASC",
     DESC = "DESC",
+}
+
+export enum Frequency {
+    everyDay = "everyDay",
+    every2Days = "every2Days",
+    every3Days = "every3Days",
+    every4Days = "every4Days",
+    every5Days = "every5Days",
+    every6Days = "every6Days",
+    everyWeek = "everyWeek",
+    every2Weeks = "every2Weeks",
+    every3Weeks = "every3Weeks",
+    every4Weeks = "every4Weeks",
 }
 
 export enum NullHandling {

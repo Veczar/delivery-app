@@ -17,8 +17,14 @@ import java.util.Set;
 public class PartnerDto {
     private long id;
     private String name;
+    private String description;
     private String accountNumber;
     private String contactNumber;
+    private String openHour;  // HH:mm
+    private String closeHour; // HH:mm
+    private String websiteLink; // url
+    private Integer expectedDeliveryTime; //in minutes
+    
     private UserDto owner;
     private Set<CategoryDto> categories;
 }

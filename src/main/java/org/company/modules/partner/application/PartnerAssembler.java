@@ -30,8 +30,13 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         PartnerDto partnerDto = new PartnerDto();
         partnerDto.setId(partner.getId());
         partnerDto.setName(partner.getName());
+        partnerDto.setDescription(partner.getDescription());
         partnerDto.setAccountNumber(partner.getAccountNumber());
         partnerDto.setContactNumber(partner.getContactNumber());
+        partnerDto.setOpenHour(partner.getOpenHour());
+        partnerDto.setCloseHour(partner.getCloseHour());
+        partnerDto.setWebsiteLink(partner.getWebsiteLink());
+
         partnerDto.setOwner(userAssembler.toDto(partner.getOwner()));
         partnerDto.setCategories(partner.getCategories()
                 .stream().map(categoryAssembler::toDto).collect((Collectors.toSet())));
@@ -43,9 +48,9 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partner.setName(partnerDto.getName());
         partner.setAccountNumber(partnerDto.getAccountNumber());
         partner.setContactNumber(partnerDto.getContactNumber());
+        
         UpdateUser(partnerDto, partner);
-
-        partner.setCategories(partnerDto.getCategories().stream().map(categoryDto -> GetCategory(categoryDto)).collect(Collectors.toSet()));
+        partner.setCategories(partnerDto.getCategories().stream().map(this::GetCategory).collect(Collectors.toSet()));
     }
     
     private void UpdateUser(PartnerDto partnerDto, Partner partner) {
@@ -56,5 +61,4 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         Category result = categoryRepository.findById(categoryDto.getId()).orElseThrow(null);
         return result;
     }
-
 }
