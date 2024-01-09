@@ -41,10 +41,11 @@ public class PartnerService extends GenericService<Partner, PartnerDto, Long, Pa
         partnerDto.setPhotoPath(photoService.savePhoto(photo, PhotoType.partner));
         return super.saveItem(partnerDto);
     }
-    public List<PartnerDto> getPartnersFromCity(String city) {
-        Specification<Partner> partnerSpecification = PartnerSpecification.partnersFromCity(city);
-        return partnerRepository.findAll(partnerSpecification)
-                .stream().map(partnerAssembler::toDto).collect(Collectors.toList());
+    public List<PartnerReadDto> getPartnersReadDto() {
+        List<Partner> partners = partnerRepository.findAll();
+        return partners.stream()
+                .map(partnerAssembler::toReadDto)
+                .collect(Collectors.toList());
     }
 
     public PartnerDto getPartnerByName(String name) {

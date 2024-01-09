@@ -1,6 +1,7 @@
 package org.company.modules.partner.application;
 
 import lombok.AllArgsConstructor;
+import org.company.modules.address.application.AddressAssembler;
 import org.company.modules.category.application.CategoryAssembler;
 import org.company.modules.category.application.web.CategoryDto;
 import org.company.modules.category.domain.Category;
@@ -24,6 +25,7 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
     
     private final UserAssembler userAssembler;
     private final UserRepository userRepository;
+    private final AddressAssembler addressAssembler;
 
     @Override
     public PartnerDto toDto(Partner partner) {
@@ -40,9 +42,9 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
     public PartnerReadDto toReadDto(Partner partner) {
         PartnerReadDto partnerReadDto = new PartnerReadDto();
         partnerReadDto.setName(partner.getName());
-        partnerReadDto.setAddress(addressAssembler.toDto(partner.getAddress()));
-        partnerReadDto.setCategories(partner.getCategories()
-                .stream().map(categoryAssembler::toDto).collect((Collectors.toSet())));
+        partnerReadDto.setPartnerType(partner.getType());
+        partnerReadDto.setAddress(addressAssembler.toDto(partner.getOwner().getAddresses().get(0)));
+        partnerReadDto.setPhotoPath(partner.getPhotoPath());
         return partnerReadDto;
     }
 

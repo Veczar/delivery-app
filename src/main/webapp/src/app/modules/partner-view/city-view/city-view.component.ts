@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { PartnerReadDto } from 'src/app/shared/model/api-models';
 import { PartnerService } from '../partner.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-city-view',
@@ -9,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./city-view.component.scss']
 })
 export class CityViewComponent implements OnInit {
+  filteredPartners: PartnerReadDto[] = [];
+  private filteredPartnersSubscription: Subscription | undefined;
   partners: PartnerReadDto[] = [];
   cityName: string = '';
   currentCity: string = '';
@@ -20,41 +23,44 @@ export class CityViewComponent implements OnInit {
 
   ngOnInit(): void {
     // Use paramMap instead of params
-    this.route.paramMap.subscribe(params => {
-      this.cityName = params.get('city') || '';
-
+    this.route.params.subscribe(params => {
+      this.cityName = params['city'];
+      console.log(this.cityName);
       this.partnerService.updateCity(this.cityName);
-      this.setCity(this.cityName);
-      this.getPartners();
+      // this.partners = this.partnerService.getPartnersData();
+      this.partnerService.updateCurrentCity(this.cityName);
+
+      this.filteredPartnersSubscription = this.partnerService.filteredPartnersData$.subscribe(partners => {
+        this.filteredPartners = partners;
+        this.partners = this.filteredPartners;
+        this.partners = this.partners.filter(partner => partner.address?.city == this.cityName);
+      });
+
+      if (this.partners.length === 0) {
+        // Wywołaj metodę getPartners tylko jeżeli partners są puste
+        this.getPartners();
+      } else {
+        this.partners = this.partnerService.getPartnersData();
+        this.partners = this.partners.filter(partner => partner.address?.city === this.cityName);
+      }
+
+      // if(this.partners!){
+      //   this.getPartners();
+      // }else{
+      //   this.partners = this.partnerService.getPartnersData();
+      //   this.partners = this.partners.filter(partner => partner.address?.city == this.cityName);
+      // }
     });
-
-    
-
   }
-
-  setCity(city: string): void {
-    this.currentCity = city;
-    localStorage.setItem('userCity', city);
-  }
-
-  getCity(): string {
-    return this.currentCity;
-  }
-
+    ngOnDestroy(): void {
+      if (this.filteredPartnersSubscription) {
+        this.filteredPartnersSubscription.unsubscribe();
+      }
+    }
   getPartners(): void {
-    this.partnerService.partners$.subscribe((partners) => {
-      // Otrzymujesz dane partners z serwisu
-      const selectedCity = this.getCity();
-     
-      this.partners = partners.filter(partner => partner?.address?.city === selectedCity);
-      
-    });
-  }
-  
-  getPartnersCity(city: string): void {
-    this.partnerService.getPartnersCity(city).subscribe((partners) => {
+    this.partnerService.getPartners().subscribe((partners) => {
       this.partners = partners;
-      
+      this.partners = this.partners.filter(partner => partner.address?.city == this.cityName);
     });
   }
 }

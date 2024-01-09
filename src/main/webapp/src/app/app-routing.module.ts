@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'register/user', component: RegisterUserFormComponent},
   {path: 'register/partner', component: RegisterPartnerFormComponent},
   {path: 'register/courier', component: RegisterCourierFormComponent},
-  {path: ':partner', component: PartnerProductsComponent},
+  {path: 'partner/:partner', component: PartnerProductsComponent},
   {
     path: 'partners',
     component: PartnerViewComponent,

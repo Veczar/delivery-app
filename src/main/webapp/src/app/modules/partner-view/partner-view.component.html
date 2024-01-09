@@ -11,7 +11,7 @@
 
         <div class="collapse navbar-collapse " id="navbarCollapse">
 
-          <ul class="navbar-nav me-auto mb-2 mb-md-0 ">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0 flex-center ">
             <!-- <li class="nav-item">
                   <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
                 </li> -->
@@ -19,9 +19,13 @@
               <a class="nav-link active" [routerLink]="['/']">Contact</a>
             </li>
             <li class="nav-item ml-5">
-              <button type="button" class="btn btn-outline-secondary me-2 border-adress" (click)="open(addressModal)">
+              <button type="button" class="btn btn-outline-secondary me-2 border-adress flex-center" (click)="open(addressModal)">
                 <i class="fa-solid fa-location-dot" ></i>
-                {{cityName}}
+
+                <div *ngIf="cityName" class="p-1">
+                  {{cityName}}
+                </div>
+                
               </button>
             </li>
             <!-- <li class="nav-item">
@@ -100,34 +104,34 @@
               <h3 class="text-center">Filtry</h3>
               <div class="filter-section">
                 <ul class="">
-                  <li class="list-element" (click)="selectCategory('Category1')" [ngClass]="{'active': categoryActiveName === 'Category1'}"> 
+                  <li class="list-element" (click)="selectCategory('restaurant')" [ngClass]="{'active': categoryActiveName === 'restaurant'}"> 
                     <a>
                       <i class="fa-solid fa-burger"></i>
-                      Kategoria
+                      Restaurant
                     </a>
                   </li>
-                  <li class="list-element" (click)="selectCategory('Category2')" [ngClass]="{'active': categoryActiveName === 'Category2'}">
+                  <li class="list-element" (click)="selectCategory('pharmacy')" [ngClass]="{'active': categoryActiveName === 'pharmacy'}">
                     <a>
-                      <i class="fa-solid fa-burger"></i>
-                      Kategoria
+                      <i class="fa-solid fa-burger" ></i>
+                      Pharmacy
                     </a>
                   </li>
-                  <li class="list-element">
+                  <li class="list-element" (click)="selectCategory('groceryStore')" [ngClass]="{'active': categoryActiveName === 'groceryStore'}">
                     <a>
                       <i class="fa-solid fa-burger"></i>
-                      Kategoria
+                      GroceryStore
                     </a>
                   </li>
-                  <li class="list-element">
+                  <li class="list-element" (click)="selectCategory('florists')" [ngClass]="{'active': categoryActiveName === 'florists'}">
                     <a>
                       <i class="fa-solid fa-burger"></i>
-                      Kategoria
+                      Florists
                     </a>
                   </li>
-                  <li class="list-element">
+                  <li class="list-element" (click)="selectCategory('coffeehouse')" [ngClass]="{'active': categoryActiveName === 'coffeehouse'}">
                     <a>
                       <i class="fa-solid fa-burger"></i>
-                      Kategoria
+                      Coffeehouse
                     </a>
                   </li>
                 </ul>
@@ -143,16 +147,16 @@
           <div *ngIf="flag" class="category-page-stores-container">
             <div class="row">
               <div class="col-md-4" *ngFor="let partner of partners">
-                  <div class="card mb-3" style="max-width: 540px;" [routerLink]="['/',partner.name]" >
+                  <div class="card mb-3" style="max-width: 540px;" [routerLink]="['/partner/',partner.name]" >
                     <div class="row g-0">
                       <div class="col-md-4 img rounded w-100">
-                        <img src="../../../../assets/wrr-buzka.jpg" class="card-img-top h-100" alt="Restaurant Image">
+                        <img src="http://localhost:8080/api/partners/photo/{{this.partner.photoPath}}" class="card-img-top h-100" alt="Restaurant Image">
                       </div>
 
                       <div class="card-body">
                         <h5 class="card-title mt-1">{{ partner?.name }}</h5>
                         <div class="badge-container">
-                          <p class="card-text badge rounded-pill text-bg-info me-1"><span *ngFor="let category of partner?.categories">{{ category?.name }} </span></p>
+                          <p class="card-text badge rounded-pill text-bg-info me-1"><span>{{ partner.partnerType?.toString() }} </span></p>
                         </div>
                       </div>
                     </div>

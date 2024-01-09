@@ -6,7 +6,6 @@ export interface AddressDto {
     id?: number;
     postalCode?: string;
     street?: string;
-    postalCode?: string;
 }
 
 export interface AuthRequestDto {
@@ -47,37 +46,6 @@ export interface DeliveryManDto {
     user?: UserDto;
     workingArea?: string;
 }
-export interface OrderDto {
-    id?: number;
-    addressStart?: AddressDto;
-    addressEnd?: AddressDto;
-    customer?: UserDto;
-    partner?: PartnerDto;
-    deliveryMan?: DeliveryManDto;
-    totalPrice?: number;
-    tip?: number;
-    creationDate?: Date;
-    completionDate?: Date;
-    status?: Status;
-    distanceInKm?: number;
-}
-
-export interface OrderReadDto {
-    id?: number;
-    addressStart?: string;
-    addressEnd?: string;
-    customerFirstName?: string;
-    customerLastName?: string;
-    customerTelephoneNumber?: string;
-    partner?: string;
-    deliveryMan?: string;
-    totalPrice?: number;
-    tip?: number;
-    creationDate?: string;
-    completionDate?: string;
-    status?: string;
-    distanceInKm?: number;
-}
 
 export interface Iterable<T> {
 }
@@ -98,8 +66,25 @@ export interface OrderDto {
     creationDate?: Date;
     customer?: UserDto;
     deliveryMan?: DeliveryManDto;
+    distanceInKm?: number;
     id?: number;
     partner?: PartnerDto;
+    status?: Status;
+    tip?: number;
+    totalPrice?: number;
+}
+
+export interface OrderReadDto {
+    addressEnd?: string;
+    addressStart?: string;
+    completionDate?: string;
+    creationDate?: string;
+    customerFirstName?: string;
+    customerLastName?: string;
+    customerTelephoneNumber?: string;
+    distanceInKm?: number;
+    id?: number;
+    partner?: string;
     status?: Status;
     tip?: number;
     totalPrice?: number;
@@ -123,55 +108,98 @@ export interface Pageable {
 }
 
 export interface PartnerDto {
-    id?: number;
-    name?: string;
     accountNumber?: string;
     contactNumber?: string;
-    owner?: UserDto;
+    id?: number;
+    name?: string;
+    owner: UserDto;
+    photoPath?: string;
+    type?: PartnerType;
+}
+
+export interface PartnerReadDto {
     address?: AddressDto;
-    categories?: CategoryDto[];
+    name?: string;
+    partnerType?: PartnerType;
+    photoPath?: string;
 }
 
 export interface PartnerReviewDto {
-    id?: number;
     date?: Date;
     description?: string;
-    grade_in_stars?: number;
+    gradeInStars?: number;
+    id?: number;
     partner?: PartnerDto;
     reviewer?: UserDto;
 }
 
+export interface PartnerReviewReadDto {
+    gradeInStars?: number;
+    id?: number;
+    partnerId?: number;
+}
+
 export interface ProductDto {
+    categories?: CategoryDto[];
+    description?: string;
     id?: number;
     name?: string;
+    onSale?: boolean;
+    owner?: PartnerDto;
+    photoPath?: string;
+    price: number;
+}
+
+export interface ProductOrderDto {
+    order?: OrderDto;
+    product?: ProductDto;
+    quantity?: number;
+    subtotal?: number;
+}
+
+export interface ProductReadDto {
+    categories?: CategoryDto[];
     description?: string;
+    id: number;
+    name?: string;
+    onSale?: boolean;
+    owner?: PartnerDto;
     photoPath?: string;
     price?: number;
-    onSale?: boolean;
-    categories?: CategoryDto[];
+}
+
+export interface RecurringOrderDto {
+    addressEnd?: AddressDto;
+    addressStart?: AddressDto;
+    customer?: UserDto;
+    frequency?: Frequency;
+    id?: number;
+    product?: ProductDto;
+    quantity?: number;
+    startDate?: Date;
 }
 
 export interface RegisterDeliveryManDto {
+    accountNumber?: string;
+    email?: string;
     firstName?: string;
     lastName?: string;
-    telephoneNumber?: string;
-    email?: string;
     password?: string;
+    telephoneNumber?: string;
     workingArea?: string;
-    accountNumber?: string;
 }
 
 export interface RegisterPartnerDto {
+    accountNumber?: string;
+    address?: AddressDto;
+    contactNumber?: string;
+    email?: string;
     firstName?: string;
     lastName?: string;
-    telephoneNumber?: string;
-    email?: string;
-    password?: string;
     name?: string;
-    accountNumber?: string;
-    contactNumber?: string;
-    address?: AddressDto;
-    category?:string;
+    password?: string;
+    telephoneNumber?: string;
+    type?: PartnerType;
 }
 
 export interface RegisterResponseDto {
@@ -179,11 +207,12 @@ export interface RegisterResponseDto {
 }
 
 export interface RegisterUserDto {
+    address?: AddressDto;
+    email?: string;
     firstName?: string;
     lastName?: string;
-    telephoneNumber?: string;
-    email?: string;
     password?: string;
+    telephoneNumber?: string;
 }
 
 export interface RoleDto {
@@ -220,18 +249,19 @@ export interface UserCriteria extends BaseCriteria {
 }
 
 export interface UserDto {
-    id?: number;
-    firstName?: string;
-    lastName?: string;
-    telephoneNumber?: string;
+    addresses: AddressDto[];
     email?: string;
+    firstName?: string;
+    id?: number;
+    lastName?: string;
     role?: RoleDto;
+    telephoneNumber?: string;
 }
 
 export interface UserReadDto {
-    id: number;
-    firstName: string;
-    lastName: string;
+    firstName?: string;
+    id?: number;
+    lastName?: string;
 }
 
 export enum Direction {
@@ -239,8 +269,37 @@ export enum Direction {
     DESC = "DESC",
 }
 
+export enum Frequency {
+    everyDay = "everyDay",
+    every2Days = "every2Days",
+    every3Days = "every3Days",
+    every4Days = "every4Days",
+    every5Days = "every5Days",
+    every6Days = "every6Days",
+    everyWeek = "everyWeek",
+    every2Weeks = "every2Weeks",
+    every3Weeks = "every3Weeks",
+    every4Weeks = "every4Weeks",
+}
+
 export enum NullHandling {
     NATIVE = "NATIVE",
     NULLS_FIRST = "NULLS_FIRST",
     NULLS_LAST = "NULLS_LAST",
+}
+
+export enum PartnerType {
+    other = "other",
+    restaurant = "restaurant",
+    pharmacy = "pharmacy",
+    groceryStore = "groceryStore",
+    florists = "florists",
+    coffeehouse = "coffeehouse",
+}
+
+export enum Status {
+    done = "done",
+    inPreparation = "inPreparation",
+    inDelivery = "inDelivery",
+    readyForDelivery = "readyForDelivery",
 }

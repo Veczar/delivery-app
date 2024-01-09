@@ -14,44 +14,51 @@ export class PartnerService {
     private http: HttpClient,
   ) { }
 
-  private searchTermSubject = new BehaviorSubject<string>('');
-  searchTerm$ = this.searchTermSubject.asObservable();
+  private searchTerm:string = '';
+  
 
-  private citySource = new BehaviorSubject<string>('');
-  currentCity = this.citySource.asObservable();
+  private citySource:string ='';
 
-  private partnersDataSubject = new BehaviorSubject<PartnerReadDto[]>([]);
-  public partners$ = this.partnersDataSubject.asObservable();
+  private currenCity = new BehaviorSubject<string>(localStorage.getItem('userCity') || '');
+  currentCity = this.currenCity.asObservable();
+
+  private partnersData:PartnerReadDto[] = [];
+
+  private filteredPartnersDataSubject = new BehaviorSubject<PartnerReadDto[]>([]);
+  public filteredPartnersData$ = this.filteredPartnersDataSubject.asObservable();
+  
 
   getPartners():Observable<PartnerReadDto[]> {
-    return this.http.get<PartnerReadDto[]>(`/api/partners`);
+    return this.http.get<PartnerReadDto[]>(`/api/partners/read`);
   }
-  getPartnersCity(city: string): Observable<PartnerReadDto[]> {
-    return this.http.get<PartnerReadDto[]>(`/api/partners/city/${city}`);
-  }
-  getPartnersSearch(city: string, searchTerm: string): Observable<PartnerReadDto[]> {
-    return this.http.get<PartnerReadDto[]>(`/api/partners/search/${city}/${searchTerm}`);
-  }
-
+  
   setPartnersData(partners: PartnerReadDto[]): void {
-    this.partnersDataSubject.next(partners);
+    this.partnersData = partners;
   }
-  getPartnersData(): Observable<PartnerReadDto[]> {
-    return this.partnersDataSubject.asObservable();
+  getPartnersData(): PartnerReadDto[] {
+    return this.partnersData;
   }
 
   updateSearchTerm(searchTerm: string): void {
-    this.searchTermSubject.next(searchTerm);
+    this.searchTerm=searchTerm;
   }
-  getSearchTerm(searchTerm: string): string {
-    return this.searchTermSubject.getValue();
+  getSearchTerm(): string {
+    return this.searchTerm;
   }
 
   updateCity(city: string): void {
-    this.citySource.next(city);
+    this.citySource = city;
   }
-  getCity(city: string): string {
-    return this.citySource.getValue();
+  getCity(): string {
+    return this.citySource;
+  }
+  updateCurrentCity(city: string): void {
+    this.currenCity.next(city);
+    localStorage.setItem('userCity', city);
+  }
+  
+  setFilteredPartnersData(partners: PartnerReadDto[]): void {
+    this.filteredPartnersDataSubject.next(partners);
   }
 
 }

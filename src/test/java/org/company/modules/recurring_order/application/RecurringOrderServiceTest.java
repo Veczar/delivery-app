@@ -61,7 +61,7 @@ class RecurringOrderServiceTest {
         ProductOrderDto productOrderDto = new ProductOrderDto();
         productOrderDto.setOrder(orderDto);
         ProductDto productDto = new ProductDto();
-        productDto.setPartner(new PartnerDto());
+        productDto.setOwner(new PartnerDto());
         productOrderDto.setProduct(productDto);
         productOrderDto.setQuantity(1);
         productOrderDto.setSubtotal(null);
@@ -69,7 +69,7 @@ class RecurringOrderServiceTest {
         orderDto.setDeliveryMan(null);
         orderDto.setCreationDate(new Date());
         orderDto.setCustomer(new UserDto());
-        orderDto.setPartner(productDto.getPartner());
+        orderDto.setPartner(productDto.getOwner());
         AddressDto addressDto = new AddressDto();
         orderDto.setAddressStart(addressDto);
         orderDto.setAddressEnd(addressDto);
