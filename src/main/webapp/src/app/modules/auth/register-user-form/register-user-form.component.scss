@@ -30,11 +30,13 @@ main {
 
 .waves-background {
   aspect-ratio: 16/9;
-  width: 100%;
+  // width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url(../../../../assets/layered-waves-haikei.svg);
-  background-attachment: fixed;
+  // margin-bottom: 100px;
+  // background-image: url(../../../../assets/layered-waves-haikei.svg);
+  background-image: url(../../../../assets/layered-waves-haikei1.svg);
+  // background-attachment:;
 }
 
 .exit-btn {

@@ -36,6 +36,7 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partnerDto.setOpenHour(partner.getOpenHour());
         partnerDto.setCloseHour(partner.getCloseHour());
         partnerDto.setWebsiteLink(partner.getWebsiteLink());
+        partnerDto.setExpectedWaitingTime(partner.getExpectedWaitingTime());
 
         partnerDto.setOwner(userAssembler.toDto(partner.getOwner()));
         partnerDto.setCategories(partner.getCategories()

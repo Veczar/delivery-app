@@ -3,21 +3,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { RegisterPartnerDto,RegisterResponseDto } from 'src/app/shared/model/api-models';
-import { ToastComponent } from 'src/app/shared/toast/toast-component/toast.component';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 
-
-function customNameValidator(control: FormControl) {
-  // Implement your custom validation logic here
-
-  const forbiddenName = 'admin'; // Example: Forbid the name 'admin'
-
-  if (control.value && control.value.toLowerCase() === forbiddenName) {
-    return { forbiddenName: true }; // Validation failed
-  }
-
-  return null; // Validation passed
-}
 
 @Component({
   selector: 'app-register-partner-form',
@@ -39,6 +26,11 @@ export class RegisterPartnerFormComponent implements OnInit {
     name: new FormControl(''),
     accountNumber: new FormControl(''),
     contactNumber: new FormControl(''),
+    description: new FormControl(''),
+    openHour: new FormControl(''),
+    closeHour: new FormControl(''),
+    websiteLink: new FormControl(''),
+    expectedWaitingTime: new FormControl(''),
     category: new FormControl(''),
     address: new FormGroup({
       city: new FormControl(''),
@@ -64,7 +56,7 @@ export class RegisterPartnerFormComponent implements OnInit {
     window.scrollTo(0, 0);
 
     this.partnerForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, customNameValidator, Validators.minLength(2),
+      firstName: ['', [Validators.required, Validators.minLength(2),
         Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)]],
       lastName: [
         '',
@@ -92,6 +84,11 @@ export class RegisterPartnerFormComponent implements OnInit {
         ]
       ],
       name: ['', [Validators.required, Validators.minLength(2)]],
+      description: ['', Validators.required],
+      openHour: ['', Validators.required],
+      closeHour: ['', Validators.required],
+      websiteLink: ['', Validators.required],
+      expectedWaitingTime: ['', Validators.required],
       accountNumber: [
         '',
         [
@@ -107,7 +104,8 @@ export class RegisterPartnerFormComponent implements OnInit {
           Validators.required,
           Validators.pattern(/^\d{9}$/),
         ]
-      ],category:['', [Validators.required]],
+      ],
+      category:['', [Validators.required]],
 
       address: this.formBuilder.group({
         city: ['', [Validators.required, Validators.minLength(2)]],
@@ -143,7 +141,8 @@ export class RegisterPartnerFormComponent implements OnInit {
         control.setValue(control.value);
       }
     });
-//     console.log(JSON.stringify(this.partnerForm.value, null, 2));
+
+    console.log(JSON.stringify(this.partnerForm.value, null, 2));
 
     if (this.partnerForm.invalid) {
       console.log('wrong form')

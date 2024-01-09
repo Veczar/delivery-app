@@ -26,7 +26,7 @@ public class Partner {
     private String openHour;  // HH:mm
     private String closeHour; // HH:mm
     private String websiteLink; // url
-    private Integer expectedDeliveryTime; //in minutes
+    private Integer expectedWaitingTime; //in minutes
 
     @OneToOne
     @JoinColumn(name = "owner_id")

@@ -5,7 +5,7 @@ export interface AddressDto {
     city?: string;
     id?: number;
     postalCode?: string;
-    street?: string;
+    street: string;
 }
 
 export interface AuthRequestDto {
@@ -93,10 +93,15 @@ export interface Pageable {
 export interface PartnerDto {
     accountNumber?: string;
     categories?: CategoryDto[];
+    closeHour?: string;
     contactNumber?: string;
+    description?: string;
+    expectedWaitingTime?: number;
     id?: number;
     name?: string;
+    openHour?: string;
     owner: UserDto;
+    websiteLink?: string;
 }
 
 export interface PartnerReviewDto {
@@ -115,9 +120,9 @@ export interface PartnerReviewReadDto {
 }
 
 export interface ProductDto {
-    id?: number;
     categories?: CategoryDto[];
     description?: string;
+    id?: number;
     name?: string;
     onSale?: boolean;
     owner?: PartnerDto;
@@ -133,9 +138,9 @@ export interface ProductOrderDto {
 }
 
 export interface ProductReadDto {
-    id: number;
     categories?: CategoryDto[];
     description?: string;
+    id: number;
     name?: string;
     onSale?: boolean;
     owner?: PartnerDto;
@@ -144,11 +149,11 @@ export interface ProductReadDto {
 }
 
 export interface RecurringOrderDto {
-    id?: number;
     addressEnd?: AddressDto;
     addressStart?: AddressDto;
     customer?: UserDto;
     frequency?: Frequency;
+    id?: number;
     product?: ProductDto;
     quantity?: number;
     startDate?: Date;
@@ -167,14 +172,20 @@ export interface RegisterDeliveryManDto {
 export interface RegisterPartnerDto {
     accountNumber?: string;
     address?: AddressDto;
-    category?: string;
+    categories?: CategoryDto[];
+    closeHour?: string;
     contactNumber?: string;
+    description?: string;
     email?: string;
+    expectedDeliveryTime?: number;
     firstName?: string;
     lastName?: string;
     name?: string;
+    openHour?: string;
+    owner?: UserDto;
     password?: string;
     telephoneNumber?: string;
+    websiteLink?: string;
 }
 
 export interface RegisterResponseDto {

@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PartnerDto {
-    private long id;
+    private Long id;
     private String name;
     private String description;
     private String accountNumber;
@@ -23,7 +23,7 @@ public class PartnerDto {
     private String openHour;  // HH:mm
     private String closeHour; // HH:mm
     private String websiteLink; // url
-    private Integer expectedDeliveryTime; //in minutes
+    private Integer expectedWaitingTime; //in minutes
     
     private UserDto owner;
     private Set<CategoryDto> categories;
