@@ -22,8 +22,6 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
     
     private final UserAssembler userAssembler;
     private final UserRepository userRepository;
-    private final CategoryAssembler categoryAssembler;
-    private final CategoryRepository categoryRepository;
 
     @Override
     public PartnerDto toDto(Partner partner) {
@@ -39,8 +37,8 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partnerDto.setExpectedWaitingTime(partner.getExpectedWaitingTime());
 
         partnerDto.setOwner(userAssembler.toDto(partner.getOwner()));
-        partnerDto.setCategories(partner.getCategories()
-                .stream().map(categoryAssembler::toDto).collect((Collectors.toSet())));
+        partnerDto.setPhotoPath(partner.getPhotoPath());
+        partnerDto.setType(partner.getType());
         return partnerDto;
     }
 
@@ -51,15 +49,13 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partner.setContactNumber(partnerDto.getContactNumber());
         
         UpdateUser(partnerDto, partner);
-        partner.setCategories(partnerDto.getCategories().stream().map(this::GetCategory).collect(Collectors.toSet()));
+
+        partner.setPhotoPath(partnerDto.getPhotoPath());
+        partner.setType(partnerDto.getType());
     }
-    
+
     private void UpdateUser(PartnerDto partnerDto, Partner partner) {
         User user = userRepository.findById(partnerDto.getOwner().getId()).orElseThrow(null);
         partner.setOwner(user);
-    }
-    private Category GetCategory(CategoryDto categoryDto){
-        Category result = categoryRepository.findById(categoryDto.getId()).orElseThrow(null);
-        return result;
     }
 }

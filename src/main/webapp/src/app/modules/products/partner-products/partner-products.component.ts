@@ -8,7 +8,6 @@ import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from '../../auth/auth.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 
-
 @Component({
   selector: 'app-partner-products',
   templateUrl: './partner-products.component.html',
@@ -62,11 +61,10 @@ export class PartnerProductsComponent implements OnInit {
         console.log(partner)
 
         const id: number = Number(localStorage.getItem('id') || 0);
-
-        if (partner.owner.id == id) {
+        if (partner.owner.id === id) {
           this.owner = true;
         }
-
+        
         this.http.get<PartnerReviewReadDto[]>(`http://localhost:8080/api/partners/reviews/partner/${partner.id}`).subscribe((reviews) => {
           this.reviewsCount = reviews.length;
 
@@ -119,8 +117,6 @@ export class PartnerProductsComponent implements OnInit {
   getTotal(): number {
     return this.shoppingCartService.getTotalPrice();
   }
-
-
 
   // ----------- navbar -----------------
   open(modal: any): void {

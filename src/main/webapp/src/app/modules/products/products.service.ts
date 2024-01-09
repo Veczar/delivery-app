@@ -24,8 +24,14 @@ export class ProductsService {
     return this.http.get<ProductDto>(`${this.apiUrl}/api/products/${id}`);
   }
 
-  addProduct(product: ProductDto): Observable<ProductDto> {
-    return this.http.post<ProductDto>(`${this.apiUrl}/api/products`, product);
+  addProduct(product: ProductDto,  photo: File| null ): Observable<ProductDto> {
+    const formData:FormData = new FormData();
+    if(photo != null)
+    {
+      formData.append('photo', photo);
+    }
+    formData.append('product', new Blob([JSON.stringify(product)], {type: "application/json"}));
+    return this.http.post<ProductDto>(`${this.apiUrl}/api/products`, formData);
   }
 
   updateProduct(product: ProductDto): Observable<ProductDto> {

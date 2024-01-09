@@ -1,7 +1,7 @@
 <div *ngIf="product">
 
   <div class="img rounded">
-    <img src="../../../../assets/product-placeholder.png" class="img-fluid rounded" alt="product">
+    <img src="http://localhost:8080/api/products/photo/{{this.product.photoPath}}" class="img-fluid rounded" alt="product">
   </div>
 
   <h5 class="mt-3">

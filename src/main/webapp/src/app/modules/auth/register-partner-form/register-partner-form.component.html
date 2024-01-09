@@ -2,9 +2,9 @@
   <main class="form-signin w-100 m-auto">
     <!-- <div class="form-signin w-100 regist-form margins rel"> -->
       <button class="btn btn-close exit-btn" [routerLink]="['/']"></button>
-  
+
       <h1 class="h3 fw-normal"><b>Partner Registration</b></h1>
-  
+
       <form
       [formGroup]="partnerForm"
       (ngSubmit)="onSubmit()"
@@ -31,9 +31,9 @@
             />
             <div class="invalid-feedback" *ngIf="submitted && f['firstName'].errors" >
               <p *ngIf="f['firstName'].errors">Name is required</p>
-            </div> 
+            </div>
           </div>
-      
+
           <div class="form-group col-md-6">
             <label for="lastName" class="form-label">Last name</label>
             <input
@@ -46,10 +46,10 @@
             />
             <div class="invalid-feedback" *ngIf="submitted && f['lastName'].errors">
               <p *ngIf="f['lastName'].errors">Last Name is required</p>
-            </div> 
+            </div>
           </div>
         </div>
-      
+
           <div class="form-group col-md-12">
             <label for="tel" class="form-label">Telephone number</label>
             <div class="input-group d-flex justify-content-center">
@@ -88,7 +88,7 @@
             />
             <div class="invalid-feedback" *ngIf="submitted && f['email'].errors">
               <p *ngIf="f['email'].errors">Provide valid email</p>
-            </div> 
+            </div>
             <div class="invalid-feedback" *ngIf="wrongEmail == true && !f['email'].errors">
               <p>Email alredy taken</p>
             </div>
@@ -106,12 +106,12 @@
             />
             <div class="invalid-feedback" *ngIf="submitted && f['password'].errors">
               <p *ngIf="f['password'].errors">Provide valid Password</p>
-            </div> 
+            </div>
           </div>
 
           <h3 class="h3 fw-normal mt-4">Address</h3>
 
-          <div formGroupName="address"> 
+          <div formGroupName="address">
             <div class="row">
               <div class="form-group col-md-12">
                 <label for="street" class="form-label">Street</label>
@@ -125,7 +125,7 @@
                 />
                 <div class="invalid-feedback" *ngIf="submitted && addressForm.get('street')?.errors">
                   <p *ngIf="addressForm.get('street')?.hasError('required')">Street is required</p>
-                </div> 
+                </div>
               </div>
 
               <div class="form-group col-md-6">
@@ -161,14 +161,14 @@
                 </div>
               </div>
 
-            </div> 
-          </div> 
+            </div>
+          </div>
         </div>
 
         <div class="col">
-          
+
           <h3 class="h3 fw-normal mt-4">Your business Information</h3>
-          
+
           <div class="form-group col-md-12">
             <label for="name" class="form-label">Partner Name</label>
             <input
@@ -177,11 +177,11 @@
               formControlName="name"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
-              [ngClass]="{ 'is-valid':submitted && !f['name'].errors }" 
+              [ngClass]="{ 'is-valid':submitted && !f['name'].errors }"
             />
             <div class="invalid-feedback" *ngIf="submitted && f['name'].errors" >
               <p>Name is required</p>
-            </div> 
+            </div>
           </div>
 
           <div class="form-group col-md-12">
@@ -191,12 +191,12 @@
             name="description"
             formControlName="description"
             class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['description'].errors, 
+            [ngClass]="{ 'is-invalid': submitted && f['description'].errors,
                         'is-valid': submitted && !f['description'].errors }"
             ></textarea>
             <div class="invalid-feedback" *ngIf="submitted && f['description'].errors" >
               <p>provide description</p>
-            </div> 
+            </div>
           </div>
 
           <div class="row">
@@ -210,11 +210,11 @@
                 formControlName="openHour"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['openHour'].errors }"
-                [ngClass]="{ 'is-valid': submitted && !f['openHour'].errors }" 
+                [ngClass]="{ 'is-valid': submitted && !f['openHour'].errors }"
               />
               <div class="invalid-feedback" *ngIf="submitted && f['openHour'].errors" >
                 <p>open Hour is required</p>
-              </div> 
+              </div>
             </div>
             <div class="form-group col-md-6">
               <label for="name" class="form-label">Close Hour</label>
@@ -225,11 +225,11 @@
                 formControlName="closeHour"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['closeHour'].errors }"
-                [ngClass]="{ 'is-valid':submitted && !f['closeHour'].errors }" 
+                [ngClass]="{ 'is-valid':submitted && !f['closeHour'].errors }"
               />
               <div class="invalid-feedback" *ngIf="submitted && f['closeHour'].errors" >
                 <p>Close Hour is required</p>
-              </div> 
+              </div>
             </div>
 
           </div>
@@ -242,11 +242,11 @@
               formControlName="websiteLink"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['websiteLink'].errors }"
-              [ngClass]="{ 'is-valid':submitted && !f['websiteLink'].errors }" 
+              [ngClass]="{ 'is-valid':submitted && !f['websiteLink'].errors }"
             />
             <div class="invalid-feedback" *ngIf="submitted && f['websiteLink'].errors" >
               <p>websiteLink is required</p>
-            </div> 
+            </div>
           </div>
 
           <div class="form-group col-md-12">
@@ -257,11 +257,11 @@
               formControlName="expectedWaitingTime"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['expectedWaitingTime'].errors }"
-              [ngClass]="{ 'is-valid':submitted && !f['expectedWaitingTime'].errors }" 
+              [ngClass]="{ 'is-valid':submitted && !f['expectedWaitingTime'].errors }"
             />
             <div class="invalid-feedback" *ngIf="submitted && f['expectedWaitingTime'].errors" >
               <p>Expected Waiting Time is required</p>
-            </div> 
+            </div>
           </div>
 
           <div class="form-group col-md-12">
@@ -273,14 +273,14 @@
               formControlName="accountNumber"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['accountNumber'].errors }"
-              [ngClass]="{ 'is-valid':submitted && !f['accountNumber'].errors }" 
+              [ngClass]="{ 'is-valid':submitted && !f['accountNumber'].errors }"
             />
             <div class="invalid-feedback" *ngIf="submitted && f['accountNumber'].errors" >
               <p *ngIf="f['accountNumber'].errors">Account number is required</p>
-            </div> 
+            </div>
           </div>
 
-          <div class="form-group col-md-12"> 
+          <div class="form-group col-md-12">
             <label for="name" class="form-label"> Contact Number</label>
             <div class="input-group">
               <div class="input-group-prepend">
@@ -291,11 +291,11 @@
 
               <div class="input-group-spacer"></div>
 
-              <input 
+              <input
                 maxlength="9"
-                type="text" 
+                type="text"
                 name="contactNumber"
-                class="form-control" 
+                class="form-control"
                 formControlName="contactNumber"
                 [ngClass]="{ 'is-invalid': submitted && f['contactNumber'].errors }"
                 [ngClass]="{ 'is-valid':submitted && !f['contactNumber'].errors }"
@@ -306,25 +306,63 @@
             </div>
           </div>
 
-          <div class="form-group col-md-12">
-            <label for="category" class="form-label"> Category</label>
-              <select class="form-select input" aria-label=".form-select-sm example"
-                formControlName="category" 
-                [ngClass]="{ 'is-invalid': submitted && f['category'].errors }"
-                [ngClass]="{ 'is-valid':submitted && !f['category'].errors }"
-                placeholder="">
+        <div class="form-group col-md-12">
+          <label for="type" class="form-label">Type</label>
+            <select class="form-select input" aria-label=".form-select-sm example"
+              formControlName="type"
+              [ngClass]="{ 'is-invalid': submitted && f['type'].errors }"
+              [ngClass]="{ 'is-valid':submitted && !f['type'].errors }"
+              placeholder="">
 
-                <option value="Sklep" >Shop (elektronika,kosmetyki,prezenty)</option>
-                <option value="Restauracja">Restauracja</option>
-                <option value="Kwiaciarnia">Kwiaciarnia</option>
-                <option value="Apteka">Apteka</option>
-                <option value="Sklep Spożywczy">Sklep Spożywczy</option>
-                <option value="Kawiarnia">Kawiarnia</option>
+              <option value="restaurant" >Restaurant</option>
+              <option value="pharmacy">Pharmacy</option>
+              <option value="grocery store">Grocery store</option>
+              <option value="pharmacy">Pharmacy</option>
+              <option value="florists">Florist's</option>
+              <option value="coffeehouse">Coffeehouse</option>
 
-              </select>
-              <div class="invalid-feedback" *ngIf="submitted && f['category'].errors">
-                <p *ngIf="f['category'].errors">Provide Category</p>
-              </div>
+          </select>
+          <div class="invalid-feedback" *ngIf="submitted && f['category'].errors">
+            <p *ngIf="f['category'].errors">Provide Category</p>
+          </div>
+      </div>
+
+        <div class="mb-3" id="inputPhotoDiv" >
+          <label class="form-label" for="inputPhoto">Logo</label>
+          <input type="file" accept=".png, .jpg, .jpeg"
+                 name="photo"
+                 formControlName="photo"
+                 class="form-control"
+                 id="inputPhoto"
+                 (change)="onFileSelected($event)"
+                 [ngClass]="{ 'is-invalid': (submitted && f['photo'].errors) || wrongPhoto}"
+                 [ngClass]="{ 'is-valid': submitted && !f['photo'].errors }">
+          <div class="invalid-feedback" *ngIf="wrongPhoto == true && !f['photo'].errors">
+            <p>Wrong photo</p>
+          </div>
+        </div>
+
+      <h3 class="h3 fw-normal">Address Information</h3>
+
+      <div formGroupName="address">
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="postalCode" class="form-label">Postal code</label>
+            <input
+              maxlength="6"
+              placeholder="00-000"
+              type="text"
+              name="postalCode"
+              formControlName="postalCode"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && addressForm.get('postalCode')?.errors }"
+              [ngClass]="{ 'is-valid':submitted && !addressForm.get('postalCode')?.errors }"
+              (input)="formatPostalCode($event)"
+            />
+            <div class="invalid-feedback" *ngIf="submitted && addressForm.get('postalCode')?.errors">
+              <p *ngIf="addressForm.get('postalCode')?.hasError('required')">Postal code is required</p>
+            </div>
           </div>
 
         </div>

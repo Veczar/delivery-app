@@ -17,6 +17,7 @@ export class AddProductFormComponent {
   product!: ProductDto;
   categories: CategoryDto[] = [];
   imageUrl: string | ArrayBuffer | null | undefined;
+  selectedFile: File | null = null;
 
   productForm: FormGroup = new FormGroup({
     name: new FormControl(''),
@@ -90,14 +91,14 @@ export class AddProductFormComponent {
   }
 
   onFileSelected(event: any): void {
-    const file = event.target.files[0];
+    this.selectedFile = event.target.files[0];
 
-    if (file) {
+    if (this.selectedFile) {
       const reader = new FileReader();
       reader.onload = (e) => {
         this.imageUrl = e.target?.result;
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(this.selectedFile);
     }
   }
 
@@ -126,7 +127,7 @@ export class AddProductFormComponent {
 
     // console.log(this.productForm.value);
 
-    this.productService.addProduct(this.productForm.value as ProductDto).subscribe((response: ProductDto) => {
+    this.productService.addProduct(this.productForm.value as ProductDto, this.selectedFile).subscribe((response: ProductDto) => {
       console.log('response:', response);
     });
   }

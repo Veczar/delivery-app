@@ -19,12 +19,20 @@ import { UserSettingsComponent } from './modules/user/user-settings/user-setting
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
 import { ProductsModule } from './modules/products/products.module';
 
+import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
     AppComponent,
     FrontPageComponent,
     ToastComponent,
+    ToastComponent,
+    MyDeliveriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +42,11 @@ import { ProductsModule } from './modules/products/products.module';
     ReactiveFormsModule,
     RouterModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
 
     UserModule,
     AuthModule,

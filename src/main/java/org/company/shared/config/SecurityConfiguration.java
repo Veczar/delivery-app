@@ -37,22 +37,29 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
-                                
+                                .requestMatchers(HttpMethod.GET, "/api/partners/photo/**").permitAll()
+
                                 .requestMatchers("api/delivery_mans/**").hasAuthority("ADMIN")
-                        
+
                                 .requestMatchers("api/addresses/**").hasAuthority("ADMIN")
                         
                                 .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
-                                
+                                .requestMatchers(HttpMethod.GET, "/api/products/photo/**").permitAll()
+
                                 .requestMatchers("api/categories/**").hasAnyAuthority("ADMIN", "PARTNER")
                         
                                 .requestMatchers("api/partners/reviews/**").hasAnyAuthority("ADMIN", "USER", "PARTNER", "COURIER")
-                        
-                                .requestMatchers("api/orders/**").hasAnyAuthority("ADMIN")
-                        
+
+                                .requestMatchers(HttpMethod.GET, "/api/orders/").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/orders/assigned/**").hasAnyAuthority("COURIER")
+                                .requestMatchers(HttpMethod.PUT, "/api/orders/make-done/**").hasAnyAuthority("COURIER")
+                                .requestMatchers(HttpMethod.POST, "/api/orders/**").hasAnyAuthority("USER", "ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/api/orders/**").hasAnyAuthority("PARTNER", "COURIER", "ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/orders/**").hasAnyAuthority( "ADMIN")
+
                                 .requestMatchers("api/product_order/**").hasAnyAuthority("ADMIN", "USER", "PARTNER")
                 )
                 .sessionManagement((session) -> session

@@ -13,11 +13,13 @@ import org.company.modules.role.domain.Role;
 import org.company.modules.role.domain.RoleRepository;
 import org.company.modules.user.domain.User;
 import org.company.modules.user.domain.UserRepository;
+import org.company.shared.photos.PhotoService;
+import org.company.shared.photos.PhotoType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.multipart.MultipartFile;
 import java.text.SimpleDateFormat;
 
 
@@ -37,6 +39,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final PhotoService photoService;
     private final SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     
     
@@ -102,18 +105,20 @@ public class AuthService {
                 .build();
         
         userRepository.save(user);
-        
         return RegisterResponseDto.builder().message("success").build();
     }
     
-    public RegisterResponseDto registerPartner(RegisterPartnerDto partnerDto) {
+    public RegisterResponseDto registerPartner(RegisterPartnerDto partnerDto, MultipartFile photo) {
         if (!isEmailAvailable(partnerDto.getEmail())) {
             return RegisterResponseDto.builder().message("email not available").build();
         }
+        if(!isPhotoFormatCorrect(photo))
+        {
+            return RegisterResponseDto.builder().message("photo do not have a suitable extension").build();
+        }
         Role role = roleRepository.findById(2L).orElse(null);
 
-//        Category category = categoryRepository.findByName(partnerDto.getCategories()).orElse(null);
-        
+
         // create user
         User user = User.builder()
                 .firstName(partnerDto.getFirstName())
@@ -129,9 +134,9 @@ public class AuthService {
         addressAssembler.toEntity(partnerDto.getAddress(), address);
         address.setUser(user);
         addressRepository.save(address);
-        
+
         user.getAddresses().add(address);
-        
+
         // create partner
         Partner partner = Partner.builder()
                 .name(partnerDto.getName())
@@ -142,12 +147,13 @@ public class AuthService {
                 .closeHour(partnerDto.getCloseHour())
                 .websiteLink(partnerDto.getWebsiteLink())
                 .expectedWaitingTime(partnerDto.getExpectedWaitingTime())
-//                .categories(Set.of(category))
                 .owner(user)
+                .photoPath( photoService.savePhoto(photo, PhotoType.partner))
+                .type(partnerDto.getType())
                 .build();
         
         partnerRepository.save(partner);
-        
+
         return RegisterResponseDto.builder().message("success").build();
     }
     
@@ -190,5 +196,14 @@ public class AuthService {
     private boolean isEmailAvailable(String providedEmail) {
         User user = userRepository.findByEmail(providedEmail).orElse(null);
         return user == null;
+    }
+    private boolean isPhotoFormatCorrect(MultipartFile photo) {
+        if(photo != null)
+        {
+            String name = photo.getOriginalFilename();
+            String extension = name.substring(name.lastIndexOf("."));
+            return extension.equals(".png") || extension.equals(".jpg") || extension.equals(".jpeg");
+        }
+        return false;
     }
 }

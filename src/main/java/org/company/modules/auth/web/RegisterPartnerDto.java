@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.company.modules.address.application.web.AddressDto;
+import org.company.modules.partner.domain.PartnerType;
+import org.company.shared.photos.PhotoType;
 import org.company.modules.category.application.web.CategoryDto;
 import org.company.modules.user.application.web.UserDto;
 
@@ -35,5 +37,5 @@ public class RegisterPartnerDto {
     
     private UserDto owner;
     private AddressDto address;
-    private Set<CategoryDto> categories;
+    private PartnerType type;
 }

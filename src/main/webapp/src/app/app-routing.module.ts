@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { authGuard } from './modules/auth/auth-guard';
+import { authGuard, authCurierGuard } from './modules/auth/auth-guard';
 import { LoginFormComponent } from './modules/auth/login-form/login-form.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { RegisterUserFormComponent } from './modules/auth/register-user-form/register-user-form.component';
@@ -11,6 +11,7 @@ import { RegisterPartnerFormComponent } from './modules/auth/register-partner-fo
 import { RegisterCourierFormComponent } from './modules/auth/register-courier-form/register-courier-form.component';
 import { CourierTableComponent } from './modules/admin-panel/courier-table/courier-table.component';
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
+import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
@@ -28,7 +29,8 @@ const routes: Routes = [
       { path: 'users', component: UserTableComponent },
       { path: 'couriers-table', component: CourierTableComponent },
     ]
-  }
+  },
+  {path: 'courier/my-deliveries', component: MyDeliveriesComponent, canActivate: [authCurierGuard]}
 ];
 
 @NgModule({

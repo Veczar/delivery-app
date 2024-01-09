@@ -46,6 +46,37 @@ export interface DeliveryManDto {
     user?: UserDto;
     workingArea?: string;
 }
+export interface OrderDto {
+    id?: number;
+    addressStart?: AddressDto;
+    addressEnd?: AddressDto;
+    customer?: UserDto;
+    partner?: PartnerDto;
+    deliveryMan?: DeliveryManDto;
+    totalPrice?: number;
+    tip?: number;
+    creationDate?: Date;
+    completionDate?: Date;
+    status?: Status;
+    distanceInKm?: number;
+}
+
+export interface OrderReadDto {
+    id?: number;
+    addressStart?: string;
+    addressEnd?: string;
+    customerFirstName?: string;
+    customerLastName?: string;
+    customerTelephoneNumber?: string;
+    partner?: string;
+    deliveryMan?: string;
+    totalPrice?: number;
+    tip?: number;
+    creationDate?: string;
+    completionDate?: string;
+    status?: string;
+    distanceInKm?: number;
+}
 
 export interface Iterable<T> {
 }
@@ -94,6 +125,7 @@ export interface PartnerDto {
     accountNumber?: string;
     categories?: CategoryDto[];
     closeHour?: string;
+    type?: Type;
     contactNumber?: string;
     description?: string;
     expectedWaitingTime?: number;
@@ -102,6 +134,7 @@ export interface PartnerDto {
     openHour?: string;
     owner: UserDto;
     websiteLink?: string;
+    photoPath?: string;
 }
 
 export interface PartnerReviewDto {
@@ -120,9 +153,9 @@ export interface PartnerReviewReadDto {
 }
 
 export interface ProductDto {
+    id: number;
     categories?: CategoryDto[];
     description?: string;
-    id?: number;
     name?: string;
     onSale?: boolean;
     owner?: PartnerDto;
@@ -174,6 +207,7 @@ export interface RegisterPartnerDto {
     address?: AddressDto;
     categories?: CategoryDto[];
     closeHour?: string;
+    type? : Type;
     contactNumber?: string;
     description?: string;
     email?: string;
@@ -279,4 +313,12 @@ export enum Status {
     inPreparation = "inPreparation",
     inDelivery = "inDelivery",
     readyForDelivery = "readyForDelivery",
+}
+export enum Type {
+    other = "other",
+    restaurant = "restaurant",
+    pharmacy = "pharmacy",
+    groceryStore = "groceryStore",
+    florists = "florists",
+    coffeehouse = "coffeehouse"
 }
