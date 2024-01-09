@@ -37,7 +37,8 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
-                                
+                                .requestMatchers(HttpMethod.GET, "/api/partners/photo/**").permitAll()
+
                                 .requestMatchers("api/delivery_mans/**").hasAuthority("ADMIN")
 
                                 .requestMatchers("api/addresses/**").hasAuthority("ADMIN")
@@ -46,7 +47,8 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
-                                
+                                .requestMatchers(HttpMethod.GET, "/api/products/photo/**").permitAll()
+
                                 .requestMatchers("api/categories/**").hasAnyAuthority("ADMIN", "PARTNER")
                         
                                 .requestMatchers("api/partners/reviews/**").hasAnyAuthority("ADMIN", "USER", "PARTNER", "COURIER")

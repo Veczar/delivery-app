@@ -1,8 +1,8 @@
 package org.company.shared.photos;
 
 import jakarta.annotation.PostConstruct;
-import org.company.modules.partner.application.web.PartnerDto;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,10 +42,10 @@ public class PhotoService{
         }
     }
 
-    public void removePhoto(String photoPath) {
+    public void removePhoto(PhotoType photoType, String photoPath) {
         try {
             String test = directoryPath + '\\' + photoPath;
-            Files.delete(Path.of(directoryPath + '\\' + photoPath));
+            Files.delete(Path.of(directoryPath + '\\' + photoType +  '\\' + photoPath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -53,13 +53,38 @@ public class PhotoService{
     public String  savePhoto(MultipartFile photo, PhotoType photoType) {
         String orgName = photo.getOriginalFilename();
         String extension = orgName.substring(orgName.lastIndexOf("."));
-        String photoPath  = photoType.toString() + '\\' + UUID.randomUUID().toString()+extension;
-        Path targetLocation = path.resolve(directoryPath+'\\'+photoPath);
+        String photoName  =  UUID.randomUUID().toString()+extension;
+        Path targetLocation = path.resolve(directoryPath+'\\'+photoType.toString() + '\\' + photoName);
             try {
                 Files.copy(photo.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        return photoPath;
+        return photoName;
+    }
+    public byte[] readPhoto(PhotoType photoType, String photoName)
+    {
+        Path targetLocation = path.resolve(directoryPath+'\\'+photoType+"\\"+photoName);
+        byte[] imageBytes;
+        try {
+            imageBytes = Files.readAllBytes(targetLocation);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return imageBytes;
+    }
+
+    public static String getMediaType(String path)
+    {
+        switch (path.substring(path.lastIndexOf(".")))
+        {
+            case ".jpg":
+                return MediaType.IMAGE_JPEG_VALUE;
+            case ".jpeg":
+                return MediaType.IMAGE_JPEG_VALUE;
+            case ".png":
+                return MediaType.IMAGE_PNG_VALUE;
+        }
+        throw new RuntimeException();
     }
 }

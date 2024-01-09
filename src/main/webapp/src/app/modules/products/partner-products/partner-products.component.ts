@@ -7,8 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from '../../auth/auth.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
-
-
+import { GlobalVariable } from  'src/app/shared/global';
 @Component({
   selector: 'app-partner-products',
   templateUrl: './partner-products.component.html',
@@ -61,11 +60,10 @@ export class PartnerProductsComponent implements OnInit {
         this.address = partner.owner.addresses[0];
 
         const id: number = Number(localStorage.getItem('id') || 0);
-
-        if (partner.owner.id == id) {
+        if (partner.owner.id === id) {
           this.owner = true;
         }
-
+        
         this.http.get<PartnerReviewReadDto[]>(`http://localhost:8080/api/partners/reviews/partner/${partner.id}`).subscribe((reviews) => {
           this.reviewsCount = reviews.length;
 
@@ -118,7 +116,9 @@ export class PartnerProductsComponent implements OnInit {
   getTotal(): number {
     return this.shoppingCartService.getTotalPrice();
   }
-
+  getPathToImages() : string {
+    return GlobalVariable.pathToImages;
+  }
 
 
   // ----------- navbar -----------------
