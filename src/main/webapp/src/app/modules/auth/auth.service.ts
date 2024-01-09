@@ -44,6 +44,7 @@ export class AuthService {
 
   setLoggedUser(responseObj: AuthResponseDto): void {
     // localStorage.clear();
+    localStorage.setItem('id', responseObj.id?.toString() || '');
     localStorage.setItem('authToken', responseObj.token || '');
     localStorage.setItem('role', responseObj.role || '');
     localStorage.setItem('expirationDate', responseObj.expirationDate || '');

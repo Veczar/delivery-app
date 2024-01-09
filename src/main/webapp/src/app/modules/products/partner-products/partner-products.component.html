@@ -72,7 +72,7 @@
   <div class="wrapper py-4">
     <div class="center">
       <div class="partner" *ngIf="partner">
-        <img src="../../../../assets/partner.jpg" class="rounded">
+        <img src="http://localhost:8080/api/partners/photo/{{this.partner.photoPath}}" class="rounded">
 
         <div class="partner-info-wrapper">
 
@@ -180,7 +180,7 @@
           <div class="row g-0">
             <div class="col-md-5 img rounded">
               <div *ngIf="product?.onSale" class="on-sale-indicator">On Sale!</div>
-              <img src="../../../../assets/product-placeholder.png" class="img-fluid rounded" alt="product">
+              <img src="http://localhost:8080/api/products/photo/{{product?.photoPath}}" class="img-fluid rounded" alt="product">
             </div>
             <div class="col-md-7">
               <div class="card-body">

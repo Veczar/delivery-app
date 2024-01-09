@@ -15,7 +15,6 @@ import { AddProductFormComponent } from './add-product-form/add-product-form.com
 import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
-
 @NgModule({
   declarations: [
     FilterPipe,
