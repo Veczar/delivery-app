@@ -84,7 +84,7 @@ export interface OrderReadDto {
     tip?: number;
     creationDate?: string;
     completionDate?: string;
-    status?: string;
+    status?: Status;
     distanceInKm?: number;
     rating?: number;
 }
