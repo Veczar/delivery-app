@@ -37,6 +37,9 @@ export class OrderService {
   setStatusWithId(id: number, status : Status): Observable<OrderReadDto> {
     return this.http.put<OrderReadDto>(`${this.apiUrl}/api/orders/set-status/`+id, status);
   }
+  assignDeliveryMan(id : number, deliverManId : number): Observable<OrderReadDto> {
+    return this.http.put<OrderReadDto>(`${this.apiUrl}/api/orders/assign/`+id, deliverManId);
+  }
   updateOrder(order: OrderDto): Observable<OrderDto> {
     return this.http.put<OrderDto>(`${this.apiUrl}/api/orders/${order.id}`, order);
   }

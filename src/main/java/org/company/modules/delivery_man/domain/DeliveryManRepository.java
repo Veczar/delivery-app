@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DeliveryManRepository extends JpaRepository<DeliveryMan,Long> {
+    DeliveryMan findByUser_Id(Long userId);
 }

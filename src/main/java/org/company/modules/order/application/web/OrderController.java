@@ -39,4 +39,8 @@ public class OrderController  extends GenericController<OrderDto, Long, OrderSer
     public List<OrderReadDto> getOrdersByPartnerUserId(@PathVariable Long id) {
         return service.getOrdersByPartnerUserId(id);
     }
+    @PutMapping("/assign/{id}")
+    public OrderReadDto assignToDeliveryMan(@PathVariable Long id, @RequestBody Long deliverManId ) {
+        return service.assignToDeliveryMan(id, deliverManId);
+    }
 }

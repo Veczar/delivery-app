@@ -17,6 +17,7 @@ import org.company.modules.user.application.UserAssembler;
 import org.company.modules.user.domain.User;
 import org.company.modules.user.domain.UserRepository;
 import org.company.shared.aplication.IAssembler;
+import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor;
 import org.springframework.stereotype.Component;
 import java.util.Date;
 
@@ -58,7 +59,8 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
     updateAddresses(orderDto,order);
     updateCustomer(orderDto, order);
     updatePartner(orderDto, order);
-    updateDeliveryMan(orderDto, order);
+    if(orderDto.getDeliveryMan() == null)order.setDeliveryMan(null);
+        else updateDeliveryMan(orderDto, order);
     order.setTotalPrice(orderDto.getTotalPrice());
     order.setTip(orderDto.getTip());
     order.setCreationDate(orderDto.getCreationDate());
@@ -79,9 +81,18 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
         orderReadDto.setCustomerTelephoneNumber(order.getCustomer().getTelephoneNumber());
         orderReadDto.setPartner(order.getPartner().getName());
         orderReadDto.setPartnerPhotoPath(order.getPartner().getPhotoPath());
-        orderReadDto.setDeliveryManId(order.getDeliveryMan().getUser().getId());
-        orderReadDto.setDeliveryManFirstName(order.getDeliveryMan().getUser().getFirstName());
-        orderReadDto.setDeliveryManLastName(order.getDeliveryMan().getUser().getLastName());
+        if(order.getDeliveryMan() == null)
+        {
+            orderReadDto.setDeliveryManId(null);
+            orderReadDto.setDeliveryManFirstName(null);
+            orderReadDto.setDeliveryManLastName(null);
+        }
+        else
+        {
+            orderReadDto.setDeliveryManId(order.getDeliveryMan().getUser().getId());
+            orderReadDto.setDeliveryManFirstName(order.getDeliveryMan().getUser().getFirstName());
+            orderReadDto.setDeliveryManLastName(order.getDeliveryMan().getUser().getLastName());
+        }
         orderReadDto.setTotalPrice(order.getTotalPrice());
         orderReadDto.setTip(order.getTip());
         orderReadDto.setCreationDate(order.getCreationDate().toString());
