@@ -60,10 +60,4 @@ export class FrontPageComponent {
   openSettings(modal: any) {
     this.modalService.open(modal);
   }
-
-  onToast() {
-    this.toastService.showInfo('info');
-    this.toastService.showSuccess('Yeah buddy!!!');
-    this.toastService.showError('error');
-  }
 }

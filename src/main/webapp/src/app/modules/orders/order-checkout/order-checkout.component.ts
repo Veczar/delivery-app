@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../../products/shopping-cart/shopping-cart.service';
-import { AddressDto, PartnerDto, ProductDto, UserDto } from 'src/app/shared/model/api-models';
+import { AddressDto, Order, OrderDto, PartnerDto, ProductDto, ProductOrderDto, UserDto } from 'src/app/shared/model/api-models';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../user/user.service';
 import { OrderService } from '../order.service';
+import { ToastService } from 'src/app/shared/toast/toast.service';
+import { Route, Router } from '@angular/router';
 
 
 @Component({
@@ -27,6 +29,8 @@ export class OrderCheckoutComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private orderService: OrderService,
+    private toastService: ToastService,
+    private router: Router,
   ) {}
 
 
@@ -40,9 +44,6 @@ export class OrderCheckoutComponent implements OnInit {
       this.submitted = true;
       this.addresses = user.addresses;
       this.customer = user;
-      // user.addresses?.forEach(address => {
-      //   this.addAddress();
-      // });
 
       this.checkoutForm.patchValue(user);
     })
@@ -158,12 +159,28 @@ export class OrderCheckoutComponent implements OnInit {
 
     console.log(JSON.stringify(this.orderForm.value, null, 2));
 
-    this.orderService.makeOrder(this.orderForm.value).subscribe(r => {
-      console.log(r)
-    });
-
-
-    
+    this.makeOrder(this.orderForm.value);
+    this.router.navigate(['/']);
+    this.toastService.showSuccess('Order completed, now wait for delivery')
+    this.shoppingCartService.clear();
   }
 
+  makeOrder(order: OrderDto) {
+    this.orderService.makeOrder(order).subscribe(order => {
+      console.log(order);
+
+      this.products.forEach((product) => {
+        const productOrder: ProductOrderDto = {
+          product: product.product,
+          order: order,
+          quantity: product.quantity,
+          subtotal: product.subtotal
+        }
+        this.orderService.makeProductOrder(productOrder).subscribe(r => {
+          console.log(r)
+        });
+      });
+      
+    });
+  }
 }

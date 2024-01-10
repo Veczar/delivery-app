@@ -32,4 +32,8 @@ export class ShoppingCartService {
     return this.products.reduce((sum, item) => sum + item.subtotal, 0);
   }
 
+  clear(): void {
+    this.products = [];
+  }
+
 }
