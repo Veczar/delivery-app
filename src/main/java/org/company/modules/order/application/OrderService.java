@@ -56,4 +56,11 @@ public class OrderService extends GenericService<Order, OrderDto, Long, OrderRep
         order.setRating(rating);
         return assembler.toReadDto(repository.save(order));
     }
+    public List<OrderReadDto> getOrdersByPartnerUserId(Long partnerUserId) {
+        List<OrderReadDto> list = repository.findByPartner_Owner_Id(partnerUserId)
+                .stream()
+                .map(assembler::toReadDto)
+                .collect(Collectors.toList());
+        return list;
+    }
 }
