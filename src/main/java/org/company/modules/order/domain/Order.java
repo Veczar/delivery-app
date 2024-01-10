@@ -55,4 +55,5 @@ public class Order {
     private Status status;
     
     private Double distanceInKm;
+    private Long rating;
 }

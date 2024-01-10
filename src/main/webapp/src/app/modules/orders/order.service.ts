@@ -18,12 +18,23 @@ export class OrderService {
   getOrdersAssignedToCourier(email: string): Observable<OrderReadDto[]> {
     return this.http.get<OrderReadDto[]>(`${this.apiUrl}/api/orders/assigned/`+email);
   }
-  updateOrder(order: OrderDto): Observable<OrderDto> {
-    return this.http.put<OrderDto>(`${this.apiUrl}/api/orders/${order.id}`, order);
+  getOrdersAssignedToUser(id: number): Observable<OrderReadDto[]> {
+    return this.http.get<OrderReadDto[]>(`${this.apiUrl}/api/orders/my-orders/`+id);
+  }
+  setRating(id?: number, rating?: number): Observable<OrderReadDto> {
+    // console.log(rating+"TAK"+id);
+    // console.log(`${this.apiUrl}/api/orders/rating/`+id);
+    const s = `${this.apiUrl}/api/orders/rating/`+id;
+    console.log(s);
+    return this.http.put<OrderReadDto>(s, rating);
   }
   setStatus(order: OrderReadDto): Observable<OrderReadDto> {
     return this.http.put<OrderReadDto>(`${this.apiUrl}/api/orders/make-done/${order.id}`, order.status);
   }
+  updateOrder(order: OrderDto): Observable<OrderDto> {
+    return this.http.put<OrderDto>(`${this.apiUrl}/api/orders/${order.id}`, order);
+  }
+
   deleteOrder(orderId: number): Observable<OrderDto> {
     return this.http.delete<OrderDto>(`${this.apiUrl}/api/orders/${orderId}`);
   }

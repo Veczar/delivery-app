@@ -50,6 +50,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.GET, "/api/products/photo/**").permitAll()
 
                                 .requestMatchers("api/categories/**").hasAnyAuthority("ADMIN", "PARTNER")
+                                .requestMatchers("api/categories").hasAnyAuthority("ADMIN", "PARTNER")
 
                                 .requestMatchers("api/partners/reviews/**").hasAnyAuthority("ADMIN", "USER", "PARTNER", "COURIER")
 

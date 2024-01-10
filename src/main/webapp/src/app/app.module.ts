@@ -19,6 +19,7 @@ import { FilterPipe } from './shared/filter.pipe';
 import { ToastComponent } from './shared/toast/toast-component/toast.component';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { UserSettingsComponent } from './modules/user/user-settings/user-settings.component';
+import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
 import { ProductsModule } from './modules/products/products.module';
 
@@ -34,7 +35,6 @@ import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-ch
   declarations: [
     AppComponent,
     FrontPageComponent,
-    ToastComponent,
     ToastComponent,
     MyDeliveriesComponent,
     OrderCheckoutComponent,
@@ -57,7 +57,8 @@ import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-ch
     UserModule,
     AuthModule,
     AdminPanelModule,
-    ProductsModule
+    ProductsModule,
+    OrdersViewModule
   ],
   providers: [
     {
