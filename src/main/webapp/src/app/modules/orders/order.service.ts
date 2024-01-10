@@ -28,4 +28,7 @@ export class OrderService {
     return this.http.delete<OrderDto>(`${this.apiUrl}/api/orders/${orderId}`);
   }
 
+  makeOrder(order: OrderDto): Observable<OrderDto> {
+    return this.http.post<OrderDto>(`${this.apiUrl}/api/orders`, order);
+  }
 }

@@ -11,7 +11,6 @@ import { RegisterPartnerFormComponent } from './modules/auth/register-partner-fo
 import { RegisterCourierFormComponent } from './modules/auth/register-courier-form/register-courier-form.component';
 import { PartnerViewComponent } from './modules/partner-view/partner-view.component';
 import { CityViewComponent } from './modules/partner-view/city-view/city-view.component';
-import { SearchViewComponent } from './modules/partner-view/search-view/search-view.component';
 import { CourierTableComponent } from './modules/admin-panel/courier-table/courier-table.component';
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
 import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
@@ -30,7 +29,6 @@ const routes: Routes = [
     component: PartnerViewComponent,
     children: [
       {path: ':city', component: CityViewComponent},
-      // {path: 'search/:city/:searchTerm', component: SearchViewComponent}
     ]
   },
   {

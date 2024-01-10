@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
 })
 export class CityViewComponent implements OnInit {
   filteredPartners: PartnerReadDto[] = [];
-  private filteredPartnersSubscription: Subscription | undefined;
   partners: PartnerReadDto[] = [];
   cityName: string = '';
 
@@ -28,7 +27,6 @@ export class CityViewComponent implements OnInit {
 
 
       if (this.cityName == '') {
-        console.log('dupa')
         this.partners = this.partnerService.getPartnersData();
       } 
       else {
@@ -39,9 +37,9 @@ export class CityViewComponent implements OnInit {
     })
   }
 
-  ngOnDestroy(): void {
-    if (this.filteredPartnersSubscription) {
-      this.filteredPartnersSubscription.unsubscribe();
-    }
-  }
+  // ngOnDestroy(): void {
+  //   if (this.filteredPartnersSubscription) {
+  //     this.filteredPartnersSubscription.unsubscribe();
+  //   }
+  // }
 }

@@ -1,8 +1,35 @@
-.container {
-  max-width: 960px;
-  min-height: 100vh;
+body {
+  padding-top: 60px;
 }
 
+.container {
+  max-width: 860px;
+  padding: 50px;
+  padding-top: 10px;
+  // margin-top: 50px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.waves-background {
+  aspect-ratio: 16/9;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../../../../assets/layered-waves-haikei1.svg);
+  background-position: 0 -50px;
+  background-color: #202020;
+}
+
+.exit-btn {
+  position: absolute;
+  right: 3%;
+  top: 4%;
+}
+
+.myradio {
+  height: 30px;
+  width: 30px;
+}
 
 
 // --------- footer -----------
@@ -15,8 +42,7 @@
   display: flex;
   justify-content: center;
 
-  padding: 40px 130px 0px 130px;
-  margin-top: 200px;
+  padding: 30px 130px 0px 130px;
 
   // background-color: #212529; // same as nav
   background-color: #202020;

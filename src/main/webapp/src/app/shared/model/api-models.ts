@@ -152,7 +152,7 @@ export interface ProductDto {
     onSale?: boolean;
     owner?: PartnerDto;
     photoPath?: string;
-    price?: number;
+    price: number;
 }
 
 export interface ProductOrderDto {
@@ -165,7 +165,7 @@ export interface ProductOrderDto {
 export interface ProductReadDto {
     categories?: CategoryDto[];
     description?: string;
-    id?: number;
+    id: number;
     name?: string;
     onSale?: boolean;
     owner?: PartnerDto;
