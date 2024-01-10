@@ -58,27 +58,27 @@
               </ng-container>
 
               <ng-container matColumnDef="addressStart">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>start adress</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Start adress</th>
                 <td mat-cell *matCellDef="let row">{{row.addressStart}}</td>
               </ng-container>
 
               <ng-container matColumnDef="addressEnd">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>destination</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Destination</th>
                 <td mat-cell *matCellDef="let row">{{row.addressEnd}}</td>
               </ng-container>
 
               <ng-container matColumnDef="firstName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>first name</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>First name</th>
                 <td mat-cell *matCellDef="let row">{{row.customerFirstName}}</td>
               </ng-container>
               
               <ng-container matColumnDef="lastName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>last name</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name</th>
                 <td mat-cell *matCellDef="let row">{{row.customerLastName}}</td>
               </ng-container>
         
               <ng-container matColumnDef="telephoneNumber">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>telephone number</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Telephone number</th>
                 <td mat-cell *matCellDef="let row">{{row.customerTelephoneNumber}}</td>
               </ng-container>
           
@@ -103,30 +103,34 @@
 
               <ng-container matColumnDef="distanceInKm">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Distance</th>
-                <td mat-cell *matCellDef="let row">{{row.distanceInKm}}</td>
+                <td mat-cell *matCellDef="let row">{{row.distanceInKm}}km</td>
               </ng-container>
 
               <ng-container matColumnDef="totalPrice">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Total price</th>
-                <td mat-cell *matCellDef="let row">{{row.totalPrice}}</td>
+                <td mat-cell *matCellDef="let row">{{row.totalPrice}}$</td>
               </ng-container>
 
               <ng-container matColumnDef="tip">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Tip</th>
-                <td mat-cell *matCellDef="let row">{{row.tip}}</td>
+                <td mat-cell *matCellDef="let row">{{row.tip}}$</td>
               </ng-container>
 
               <ng-container matColumnDef="rating">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tip</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
                 <td mat-cell *matCellDef="let row">{{row.rating}}</td>
               </ng-container>
 
               <ng-container matColumnDef="makeReadyForPickup">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-                <td mat-cell *matCellDef="let row" ><button type="button" class="btn btn-success m-1 m-1" (click)="makeReadyForDelivery(row.id)">Make ready for delivery</button></td>
+                <td mat-cell *matCellDef="let row" ><button type="button" class="btn btn-success m-1 m-1" (click)="setReadyForDelivery(row.id)">Set as ready for delivery</button></td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          
+              <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns;"
+              data-bs-toggle="modal" data-bs-target="#orderModal"
+          ></tr>
               <!-- Row shown when there is no matching data. -->
               <tr class="mat-row" *matNoDataRow>
                 <td class="alert alert-danger " colspan="12"  role="alert">

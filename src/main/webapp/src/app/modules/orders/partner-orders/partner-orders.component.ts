@@ -52,7 +52,7 @@ export class PartnerOrdersComponent {
           return oldFilterPredicate(data, filter.substring(0,filter.lastIndexOf(" "))) && data.status === filter.substring(filter.lastIndexOf(" ")+1);
          };
          this.dataSource.filter = this.filter + this.selectedStatus; 
-        console.log(this.dataSource);
+        console.log(orders);
       }
     );
   }
@@ -74,14 +74,14 @@ export class PartnerOrdersComponent {
     this.selectedStatus = Status.inDelivery;
     this.dataSource.filter = this.filter + " " + this.selectedStatus;
     this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
-    'deliveryManFirstName', 'deliveryManLastName', "creationDate", "totalPrice", "tip", "makeReadyForPickup"];
+    'deliveryManFirstName', 'deliveryManLastName', "creationDate", "totalPrice", "tip"];
   }
 
   showInPreparation() {
     this.selectedStatus = Status.inPreparation;
     this.dataSource.filter = this.filter+ " " + this.selectedStatus;
     this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
-    'deliveryManFirstName', 'deliveryManLastName', "creationDate", "totalPrice", "tip"];
+    'deliveryManFirstName', 'deliveryManLastName', "creationDate", "totalPrice", "tip", "makeReadyForPickup"];
   }
   
   showReadyForDelivery() {
@@ -95,34 +95,21 @@ export class PartnerOrdersComponent {
     this.selectedStatus = Status.done;
     this.dataSource.filter = this.filter + " " + this.selectedStatus;
     this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
-    'deliveryManFirstName', 'deliveryManLastName', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip",  "rating",];
+    'deliveryManFirstName', 'deliveryManLastName', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip",  "rating"];
   }
 
-  makeReadyForDelivery(id : Number) {
-    this.selectedStatus = Status.done;
-    this.dataSource.filter = this.filter + " " + this.selectedStatus;
-    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
-    'deliveryManFirstName', 'deliveryManLastName', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip"];
-  }
+  setReadyForDelivery(id : number) {
+  this.orderService.setStatusWithId(id, Status.readyForDelivery).subscribe()
+  {
+    this.toastService.showSuccess("Order was set as ready for delivery");
 
-  setStatusDone(): void {
-    Object.keys(this.orderForm.controls).forEach(key => {
-      const control = this.orderForm.get(key);
-      if (control) {
-        control.setValue(control.value);
-      }
-    });
+    this.showInPreparation();
+    //delay so database could make changes 
+    (async () => { 
+      await new Promise(f => setTimeout(f, 1000));
+      this.loadData();
+  })();
+  };
 
-    if (this.orderForm.invalid) {
-      console.log('wrong form');
-      return;
-    }
-      const order: OrderReadDto = this.orderForm.value;
-    
-      order.status = Status.done;
-      console.log(order);
-      this.orderService.setStatus(order).subscribe(r => {
-        this.toastService.show(`Order ${r.id} satus was set to ready for delivery`);
-      });
   }
 }

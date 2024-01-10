@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OrderDto, OrderReadDto } from 'src/app/shared/model/api-models';
+import { OrderDto, OrderReadDto, Status } from 'src/app/shared/model/api-models';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,9 @@ export class OrderService {
   }
   setStatus(order: OrderReadDto): Observable<OrderReadDto> {
     return this.http.put<OrderReadDto>(`${this.apiUrl}/api/orders/set-status/${order.id}`, order.status);
+  }
+  setStatusWithId(id: number, status : Status): Observable<OrderReadDto> {
+    return this.http.put<OrderReadDto>(`${this.apiUrl}/api/orders/set-status/`+id, status);
   }
   updateOrder(order: OrderDto): Observable<OrderDto> {
     return this.http.put<OrderDto>(`${this.apiUrl}/api/orders/${order.id}`, order);
