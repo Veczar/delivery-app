@@ -10,26 +10,30 @@ export class PartnerService {
 
   apiUrl: string = 'http://localhost:8080';
 
-  constructor(
-    private http: HttpClient,
-  ) { }
+  private searchTerm: string = '';
 
-  private searchTerm:string = '';
-  
-
-  private citySource:string ='';
-
-  private currenCity = new BehaviorSubject<string>(localStorage.getItem('userCity') || '');
+  // private currenCity = new BehaviorSubject<string>(localStorage.getItem('userCity') || '');
+  currenCity = new BehaviorSubject<string>('');
   currentCity = this.currenCity.asObservable();
 
-  private partnersData:PartnerReadDto[] = [];
+  private partnersData: PartnerReadDto[] = [];
+
+  partnersSubject: BehaviorSubject<PartnerReadDto[]> = new BehaviorSubject<PartnerReadDto[]>([]);
 
   private filteredPartnersDataSubject = new BehaviorSubject<PartnerReadDto[]>([]);
   public filteredPartnersData$ = this.filteredPartnersDataSubject.asObservable();
   
 
-  getPartners():Observable<PartnerReadDto[]> {
-    return this.http.get<PartnerReadDto[]>(`/api/partners/read`);
+  constructor(
+    private http: HttpClient,
+  ) { }
+
+  getPartnersObs(){
+    console.log('----- fetch from database obs -------');
+    this.http.get<PartnerReadDto[]>(`/api/partners/read`).subscribe(partners => {
+      this.partnersSubject.next(partners);
+      this.partnersData = partners;
+    });
   }
   
   setPartnersData(partners: PartnerReadDto[]): void {
@@ -46,12 +50,6 @@ export class PartnerService {
     return this.searchTerm;
   }
 
-  updateCity(city: string): void {
-    this.citySource = city;
-  }
-  getCity(): string {
-    return this.citySource;
-  }
   updateCurrentCity(city: string): void {
     this.currenCity.next(city);
     localStorage.setItem('userCity', city);

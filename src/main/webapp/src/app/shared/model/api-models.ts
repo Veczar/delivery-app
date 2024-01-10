@@ -5,7 +5,7 @@ export interface AddressDto {
     city?: string;
     id?: number;
     postalCode?: string;
-    street: string;
+    street?: string;
 }
 
 export interface AuthRequestDto {
@@ -45,37 +45,6 @@ export interface DeliveryManDto {
     rating?: number;
     user?: UserDto;
     workingArea?: string;
-}
-export interface OrderDto {
-    id?: number;
-    addressStart?: AddressDto;
-    addressEnd?: AddressDto;
-    customer?: UserDto;
-    partner?: PartnerDto;
-    deliveryMan?: DeliveryManDto;
-    totalPrice?: number;
-    tip?: number;
-    creationDate?: Date;
-    completionDate?: Date;
-    status?: Status;
-    distanceInKm?: number;
-}
-
-export interface OrderReadDto {
-    id?: number;
-    addressStart?: string;
-    addressEnd?: string;
-    customerFirstName?: string;
-    customerLastName?: string;
-    customerTelephoneNumber?: string;
-    partner?: string;
-    deliveryMan?: string;
-    totalPrice?: number;
-    tip?: number;
-    creationDate?: string;
-    completionDate?: string;
-    status?: string;
-    distanceInKm?: number;
 }
 
 export interface Iterable<T> {
@@ -140,9 +109,7 @@ export interface Pageable {
 
 export interface PartnerDto {
     accountNumber?: string;
-    categories?: CategoryDto[];
     closeHour?: string;
-    type?: Type;
     contactNumber?: string;
     description?: string;
     expectedWaitingTime?: number;
@@ -150,9 +117,9 @@ export interface PartnerDto {
     name?: string;
     openHour?: string;
     owner: UserDto;
-    websiteLink?: string;
     photoPath?: string;
     type?: PartnerType;
+    websiteLink?: string;
 }
 
 export interface PartnerReadDto {
@@ -230,13 +197,11 @@ export interface RegisterDeliveryManDto {
 export interface RegisterPartnerDto {
     accountNumber?: string;
     address?: AddressDto;
-    categories?: CategoryDto[];
     closeHour?: string;
-    type? : Type;
     contactNumber?: string;
     description?: string;
     email?: string;
-    expectedDeliveryTime?: number;
+    expectedWaitingTime?: number;
     firstName?: string;
     lastName?: string;
     name?: string;
@@ -244,6 +209,7 @@ export interface RegisterPartnerDto {
     owner?: UserDto;
     password?: string;
     telephoneNumber?: string;
+    type?: PartnerType;
     websiteLink?: string;
 }
 
