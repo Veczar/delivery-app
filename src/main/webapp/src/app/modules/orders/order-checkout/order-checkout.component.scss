@@ -1,0 +1,36 @@
+.container {
+  max-width: 960px;
+  min-height: 100vh;
+}
+
+
+
+// --------- footer -----------
+
+.nav-hover-underline li.nav-item a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+
+  padding: 40px 130px 0px 130px;
+  margin-top: 200px;
+
+  // background-color: #212529; // same as nav
+  background-color: #202020;
+  color: white;
+
+  footer {
+    width: 1500px;
+  }
+
+  h5 {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  ul>li>a {
+    color: white !important;
+  }
+}

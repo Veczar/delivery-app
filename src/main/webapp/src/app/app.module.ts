@@ -28,6 +28,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-checkout.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ToastComponent,
     ToastComponent,
     MyDeliveriesComponent,
+    OrderCheckoutComponent,
   ],
   imports: [
     PartnerModule,

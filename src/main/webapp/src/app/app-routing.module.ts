@@ -12,10 +12,10 @@ import { RegisterCourierFormComponent } from './modules/auth/register-courier-fo
 import { PartnerViewComponent } from './modules/partner-view/partner-view.component';
 import { CityViewComponent } from './modules/partner-view/city-view/city-view.component';
 import { SearchViewComponent } from './modules/partner-view/search-view/search-view.component';
-
 import { CourierTableComponent } from './modules/admin-panel/courier-table/courier-table.component';
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
 import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
+import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-checkout.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
@@ -23,6 +23,7 @@ const routes: Routes = [
   {path: 'register/user', component: RegisterUserFormComponent},
   {path: 'register/partner', component: RegisterPartnerFormComponent},
   {path: 'register/courier', component: RegisterCourierFormComponent},
+  {path: 'checkout', component: OrderCheckoutComponent},
   {path: 'partner/:partner', component: PartnerProductsComponent},
   {
     path: 'partners',
