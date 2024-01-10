@@ -1,8 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { PartnerReadDto } from 'src/app/shared/model/api-models';
 import { PartnerService } from '../partner.service';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-city-view',
@@ -16,6 +15,7 @@ export class CityViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private partnerService: PartnerService
   ) {}
 
@@ -27,7 +27,7 @@ export class CityViewComponent implements OnInit {
 
 
       if (this.cityName == '') {
-        this.partners = this.partnerService.getPartnersData();
+        this.router.navigate(['/partners']);
       } 
       else {
         this.partnerService.partnersSubject.subscribe(partners => {
