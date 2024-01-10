@@ -30,7 +30,7 @@ const routes: Routes = [
     component: PartnerViewComponent,
     children: [
       {path: ':city', component: CityViewComponent},
-      {path: 'search/:city/:searchTerm', component: SearchViewComponent}
+      // {path: 'search/:city/:searchTerm', component: SearchViewComponent}
     ]
   },
   {

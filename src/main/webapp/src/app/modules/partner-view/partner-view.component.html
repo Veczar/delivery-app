@@ -13,31 +13,27 @@
 
           <ul class="navbar-nav me-auto mb-2 mb-md-0 flex-center ">
             <!-- <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
-                </li> -->
-            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
+            </li> -->
+            <li class="nav-item me-2">
               <a class="nav-link active" [routerLink]="['/']">Contact</a>
             </li>
-            <li class="nav-item ml-5">
-              <button type="button" class="btn btn-outline-secondary me-2 border-adress flex-center" (click)="open(addressModal)">
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-secondary border-adress flex-center" (click)="open(addressModal)">
                 <i class="fa-solid fa-location-dot" ></i>
-
-                <div *ngIf="cityName" class="p-1">
+                <div *ngIf="cityName" class="p-1 ms-1">
                   {{cityName}}
                 </div>
-                
               </button>
             </li>
             <!-- <li class="nav-item">
-                  <button class="nav-link active" (click)="open(demoModal)">Adblock</button>
-                </li> -->
+              <button class="nav-link active" (click)="open(demoModal)">Adblock</button>
+            </li> -->
             <!-- <li *ngIf="getRole() === 'ADMIN'">
-                  <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
-                    <i class="bi bi-speedometer2"></i> Dashboard</button>
-                </li> -->
+              <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
+                <i class="bi bi-speedometer2"></i> Dashboard</button>
+            </li> -->
           </ul>
-
-          
 
 
           <div class="px-3"*ngIf="!(isUserLoggedIn())">
@@ -77,7 +73,7 @@
 
         <div class="text-input">
           <label for="search-input" class="Visual-hidden">
-            <input id="search-input"  [(ngModel)]="searchTerm" (keyup.enter)="search(searchTerm)"
+            <input id="search-input"  [(ngModel)]="searchTerm" (keyup)="search(searchTerm)"
               [ngModelOptions]="{standalone: true}" />
           </label>
         </div>
@@ -87,7 +83,6 @@
 
   <main class="main-color">
     
-
     <div class=" main-container pt-5">
       <div class="category-page_body">
         <div class="store-wall">
@@ -252,10 +247,8 @@
         (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-
       <label for="newAddress" class="form-label">New City:</label>
       <input type="text" class="form-control" id="newAddress" [(ngModel)]="newAddress">
-      
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-primary" (click)="changeAddress()">Save changes</button>
