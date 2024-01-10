@@ -24,3 +24,14 @@ export const authCurierGuard = () => {
     return false
   }
 }
+export const authPartnerGuard = () => {
+  const router = inject(Router);
+
+  if (localStorage.getItem('role') === 'PARTNER') {
+    return true;
+  }
+  else {
+    router.navigate(['/']);
+    return false
+  }
+}
