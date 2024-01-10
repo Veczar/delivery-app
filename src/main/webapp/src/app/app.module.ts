@@ -19,6 +19,7 @@ import { FilterPipe } from './shared/filter.pipe';
 import { ToastComponent } from './shared/toast/toast-component/toast.component';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { UserSettingsComponent } from './modules/user/user-settings/user-settings.component';
+import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
 import { ProductsModule } from './modules/products/products.module';
 
@@ -33,7 +34,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   declarations: [
     AppComponent,
     FrontPageComponent,
-    ToastComponent,
     ToastComponent,
     MyDeliveriesComponent,
   ],
@@ -55,7 +55,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     UserModule,
     AuthModule,
     AdminPanelModule,
-    ProductsModule
+    ProductsModule,
+    OrdersViewModule
   ],
   providers: [
     {

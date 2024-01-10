@@ -26,4 +26,5 @@ public class OrderSpecifications {
             return finalPredicate;
         };
     }
+
 }

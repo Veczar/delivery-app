@@ -65,6 +65,8 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
     order.setCompletionDate(orderDto.getCompletionDate());
     order.setStatus(orderDto.getStatus());
     order.setDistanceInKm(orderDto.getDistanceInKm());
+    order.setRating(orderDto.getRating());
+    order.setRating(orderDto.getRating());
     }
 
     public OrderReadDto toReadDto(Order order) {
@@ -76,6 +78,10 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
         orderReadDto.setCustomerLastName(order.getCustomer().getLastName());
         orderReadDto.setCustomerTelephoneNumber(order.getCustomer().getTelephoneNumber());
         orderReadDto.setPartner(order.getPartner().getName());
+        orderReadDto.setPartnerPhotoPath(order.getPartner().getPhotoPath());
+        orderReadDto.setDeliveryManId(order.getDeliveryMan().getUser().getId());
+        orderReadDto.setDeliveryManFirstName(order.getDeliveryMan().getUser().getFirstName());
+        orderReadDto.setDeliveryManLastName(order.getDeliveryMan().getUser().getLastName());
         orderReadDto.setTotalPrice(order.getTotalPrice());
         orderReadDto.setTip(order.getTip());
         orderReadDto.setCreationDate(order.getCreationDate().toString());
@@ -83,6 +89,7 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
         if(completionDate != null)orderReadDto.setCompletionDate(completionDate.toString());
         orderReadDto.setStatus(order.getStatus());
         orderReadDto.setDistanceInKm(order.getDistanceInKm());
+        orderReadDto.setRating(order.getRating());
         return orderReadDto;
     }
 

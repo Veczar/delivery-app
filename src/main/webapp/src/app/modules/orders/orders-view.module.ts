@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { OrdersViewComponent } from './orders-view/orders-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
+
 @NgModule({
   declarations: [
-    UserSettingsComponent
+    OrdersViewComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule,
-    OrdersViewModule
+    ReactiveFormsModule
   ],
   exports: [
-    UserSettingsComponent,
+    OrdersViewComponent,
   ]
 })
-export class UserModule { }
+export class OrdersViewModule { }

@@ -82,7 +82,6 @@ export class MyDeliveriesComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim();
     this.filter = filterValue;
-    const a = this.filter + this.selectedStatus;
     this.dataSource.filter = this.filter + " " +this.selectedStatus;
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();

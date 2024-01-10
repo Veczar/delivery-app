@@ -55,8 +55,11 @@
                 <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
               </button>
               <ul class="dropdown-menu dropdown-menu-dark dropdown-position ">
-                <li><a class="dropdown-item user-dropdown" (click)="openSettings(settingsModal)">Settings</a></li>
-                <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-position ">
+                  <li><a class="dropdown-item user-dropdown" (click)="open(settingsModal)">Settings</a></li>
+                  <li><a class="dropdown-item user-dropdown" (click)="open(ordersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Orders</a></li>
+                  <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
+                </ul>
               </ul> 
             </div>
           </div>
@@ -293,6 +296,16 @@
   </div>
 </ng-template>
 
+<ng-template #ordersModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Orders</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body p-4">
+    <app-orders-view></app-orders-view>
+  </div>
+</ng-template>
 
 <ng-template #detailsModal let-modal>
   <div class="modal-header">
