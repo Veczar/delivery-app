@@ -19,6 +19,9 @@ import org.company.modules.user.domain.UserRepository;
 import org.company.shared.aplication.IAssembler;
 import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor;
 import org.springframework.stereotype.Component;
+
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Component
@@ -95,9 +98,11 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
         }
         orderReadDto.setTotalPrice(order.getTotalPrice());
         orderReadDto.setTip(order.getTip());
-        orderReadDto.setCreationDate(order.getCreationDate().toString());
+        Date creationDate = order.getCreationDate();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        orderReadDto.setCreationDate(simpleDateFormat.format(creationDate));
         Date completionDate = order.getCompletionDate();
-        if(completionDate != null)orderReadDto.setCompletionDate(completionDate.toString());
+        if(completionDate != null)orderReadDto.setCompletionDate(simpleDateFormat.format(completionDate));
         orderReadDto.setStatus(order.getStatus());
         orderReadDto.setDistanceInKm(order.getDistanceInKm());
         orderReadDto.setRating(order.getRating());

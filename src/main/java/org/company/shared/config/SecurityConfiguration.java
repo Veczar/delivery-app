@@ -55,6 +55,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("api/partners/reviews/**").hasAnyAuthority("ADMIN", "USER", "PARTNER", "COURIER")
 
                                 .requestMatchers(HttpMethod.GET, "/api/orders/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/orders/rating/**").hasAnyAuthority("USER", "ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/orders/assign/**").hasAnyAuthority("COURIER", "PARTNER")
                                 .requestMatchers(HttpMethod.GET, "/api/orders/partner/**").hasAnyAuthority("PARTNER")
                                 .requestMatchers(HttpMethod.GET, "/api/orders/assigned/**").hasAnyAuthority("COURIER")
