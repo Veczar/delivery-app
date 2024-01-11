@@ -1,0 +1,251 @@
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Partners</h1>
+</div>
+
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="accountNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>AccountNumber</th>
+      <td mat-cell *matCellDef="let row"> {{row.accountNumber}} </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+    </ng-container> -->
+
+    <ng-container matColumnDef="contactNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact Number</th>
+        <td mat-cell *matCellDef="let row"> {{row.contactNumber}} </td>
+      </ng-container>
+
+    <ng-container matColumnDef="openHour">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Open Hour</th>
+      <td mat-cell *matCellDef="let row"> {{row.openHour}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="closeHour">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Close Hour</th>
+      <td mat-cell *matCellDef="let row"> {{row.closeHour}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+        <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="websiteLink">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Website Link</th>
+        <td mat-cell *matCellDef="let row"> {{row.websiteLink}} </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+        mat-row
+        (click)="click(row)"
+        [class.demo-row-is-clicked]=""
+        *matRowDef="let row; columns: displayedColumns;"
+        data-bs-toggle="modal" 
+        data-bs-target="#userModal"
+    ></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="alert alert-danger " colspan="6" role="alert">
+        No data matching the filter "{{input.value}}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="25"
+    aria-label="Select page of users"></mat-paginator>
+</div>
+
+
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">{{ editable ? 'Edit User' : 'User Details' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="partnerForm" class="row g-3 needs-validation">
+          <h5>ID: {{this.partnerForm.value.id}}</h5>
+
+          <div class="form-group col-md-6">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              name="name"
+              formControlName="name"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['name'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="submitted && f['name'].errors">
+              <p>Name is required</p>
+            </div> 
+          </div>
+      
+          <div class="form-group col-md-6">
+            <label for="accountNumber" class="form-label">Account Number</label>
+            <input
+              type="text"
+              name="accountNumber"
+              formControlName="accountNumber"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['accountNumber'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['accountNumber'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf=" submitted && f['accountNumber'].errors">
+              <p>Account Number is required</p>
+            </div> 
+          </div>
+      
+          <div class="form-group col-md-12">
+            <label for="description" class="form-label">Description</label>
+            <input
+              type="text"
+              name="description"
+              formControlName="description"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['description'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="submitted && f['description'].errors">
+              <p>Description is required</p>
+            </div> 
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="expectedWaitingTime" class="form-label">Expected Waiting Time</label>
+            <input
+              type="number"
+              name="expectedWaitingTime"
+              formControlName="expectedWaitingTime"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['expectedWaitingTime'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['expectedWaitingTime'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="submitted && f['expectedWaitingTime'].errors">
+              <p>Expected WaitingTime is required</p>
+            </div> 
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="contactNumber" class="form-label">Contact Number</label>
+            <input
+              type="text"
+              name="contactNumber"
+              formControlName="contactNumber"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['contactNumber'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['contactNumber'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="submitted && f['contactNumber'].errors">
+              <p>Contact Number is required</p>
+            </div> 
+          </div>
+      
+          <div class="form-group col-md-12">
+            <label for="openHour" class="form-label">Open Hour</label>
+            <input
+              type="text"
+              name="openHour"
+              formControlName="openHour"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['openHour'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['openHour'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="f['openHour'].errors">
+              <p>Open Hour is required</p>
+            </div>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="closeHour" class="form-label">Close Hour</label>
+            <input
+              type="text"
+              name="closeHour"
+              formControlName="closeHour"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['closeHour'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['closeHour'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="f['closeHour'].errors">
+              <p>Close Hour is required</p>
+            </div>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="websiteLink" class="form-label">Website Link</label>
+            <input
+              type="text"
+              name="websiteLink"
+              formControlName="websiteLink"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['websiteLink'].errors }"
+              [ngClass]="{ 'is-valid': submitted && !f['websiteLink'].errors }"
+            />
+            <div class="invalid-feedback" *ngIf="f['websiteLink'].errors">
+              <p>Website Link   `9`                                                                                                                                                  is required</p>
+            </div>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="type" class="form-label">Type</label>
+              <select class="form-select input" aria-label=".form-select-sm example"
+                formControlName="type"
+                [ngClass]="{ 'is-invalid': submitted && f['type'].errors }"
+                [ngClass]="{ 'is-valid':submitted && !f['type'].errors }"
+                >
+
+                <option value="restaurant">Restaurant</option>
+                <option value="pharmacy">Pharmacy</option>
+                <option value="grocery store">Grocery store</option>
+                <option value="pharmacy">Pharmacy</option>
+                <option value="florists">Florist's</option>
+                <option value="coffeehouse">Coffeehouse</option>
+
+            </select>
+            <div class="invalid-feedback" *ngIf="submitted && f['type'].errors">
+              <p>Provide Type</p>
+            </div>
+          </div>
+          
+
+          <div class="mb-3">
+            <button type="button" class="btn btn-primary me-2" (click)="toggleEditMode()">
+              {{ editable ? 'Save Changes' : 'Edit User' }}
+            </button>
+            <span> </span>
+            <button type="button" class="btn btn-danger" (click)="deletePartner()" data-bs-dismiss="modal">
+              Delete User
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
