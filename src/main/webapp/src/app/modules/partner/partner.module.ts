@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PartnerViewComponent } from './partner-view.component';
+import { PartnerViewComponent } from './partner-view/partner-view.component';
 import { CityViewComponent } from './city-view/city-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';

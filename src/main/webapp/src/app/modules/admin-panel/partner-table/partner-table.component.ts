@@ -4,7 +4,7 @@ import { ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { PartnerService } from '../../partner-view/partner.service';
+import { PartnerService } from '../../partner/partner.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 
@@ -82,7 +82,7 @@ export class PartnerTableComponent {
   }
 
   loadData(): void {
-    this.partnerService.getPartnersAll().subscribe(
+    this.partnerService.getPartners().subscribe(
       (partners: PartnerDto[]) => {
         this.dataSource = new MatTableDataSource<PartnerDto>(partners);
         this.dataSource.paginator = this.paginator;

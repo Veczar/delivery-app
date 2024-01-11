@@ -9,14 +9,14 @@ import { AdminDashboardComponent } from './modules/admin-panel/admin-dashboard/a
 import { UserTableComponent } from './modules/admin-panel/user-table/user-table.component';
 import { RegisterPartnerFormComponent } from './modules/auth/register-partner-form/register-partner-form.component';
 import { RegisterCourierFormComponent } from './modules/auth/register-courier-form/register-courier-form.component';
-import { PartnerViewComponent } from './modules/partner-view/partner-view.component';
-import { CityViewComponent } from './modules/partner-view/city-view/city-view.component';
 import { CourierTableComponent } from './modules/admin-panel/courier-table/courier-table.component';
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
 import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
 import { PartnerTableComponent } from './modules/admin-panel/partner-table/partner-table.component';
 import { PartnerOrdersComponent } from './modules/orders/partner-orders/partner-orders.component';
 import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-checkout.component';
+import { PartnerViewComponent } from './modules/partner/partner-view/partner-view.component';
+import { CityViewComponent } from './modules/partner/city-view/city-view.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},

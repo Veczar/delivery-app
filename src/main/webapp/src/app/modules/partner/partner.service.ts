@@ -37,6 +37,7 @@ export class PartnerService {
   updateSearchTerm(searchTerm: string): void {
     this.searchTerm = searchTerm;
   }
+  
   getSearchTerm(): string {
     return this.searchTerm;
   }
@@ -45,16 +46,24 @@ export class PartnerService {
     this.currenCity.next(city);
     localStorage.setItem('userCity', city);
   }
-  getPartnersAll():Observable<PartnerDto[]> {
-  return this.http.get<PartnerDto[]>(`/api/partners`);
+
+  getPartners():Observable<PartnerDto[]> {
+    return this.http.get<PartnerDto[]>(`/api/partners`);
   }
-  deletePartner(id: number): Observable<PartnerDto> {
-    return this.http.delete<PartnerDto>(`/api/partners/${id}`);
-  }
+
   getPartnerById(id: number): Observable<PartnerDto> {
     return this.http.get<PartnerDto>(`/api/partners/${id}`);
   }
+
+  getPartnerByName(name: string): Observable<PartnerDto> {
+    return this.http.get<PartnerDto>(`/api/partners/name/${name}`);
+  }
+  
   updatePartner(partner: PartnerDto): Observable<PartnerDto> {
     return this.http.put<PartnerDto>(`/api/partners/${partner.id}`, partner);
+  }
+
+  deletePartner(id: number): Observable<PartnerDto> {
+    return this.http.delete<PartnerDto>(`/api/partners/${id}`);
   }
 }

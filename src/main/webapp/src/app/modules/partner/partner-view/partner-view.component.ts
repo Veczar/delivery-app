@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { PartnerService } from './partner.service';
+import { PartnerService } from '../partner.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { PartnerReadDto, PartnerType } from 'src/app/shared/model/api-models';
 
@@ -23,7 +23,7 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
   flag: boolean = false;
   categoryActive: boolean = false;
   categoryActiveName: string | null = null;
-  categories!: string[];
+  categories: string[] = [];
 
   loggedUser = {
     firstName: '',
@@ -39,11 +39,6 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
     private cd: ChangeDetectorRef
   ) {
     this.updateAuthenticationState();
-    this.categories = Object.values(PartnerType).sort();
-    // change camel case to spaced normal case
-    this.categories = this.categories.map(category => {
-      return this.camelCaseToSpaceSeparated(category)
-    });
   }
 
   ngAfterViewInit() {
@@ -58,6 +53,15 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
 
     if (this.partnerService.getPartnersData().length === 0) {
       this.partnerService.getPartnersObs();
+    }
+
+    if (this.categories.length === 0) {
+      //todo: move this to service for efficiency so it doesnt run every time
+      this.categories = Object.values(PartnerType).sort();
+      // change camel case to spaced normal case
+      this.categories = this.categories.map(category => {
+        return this.camelCaseToSpaceSeparated(category)
+      });
     }
 
     this.partnerService.partnersDataSubject.subscribe(partners => {
@@ -147,7 +151,7 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
     // Join the array of words with spaces and convert each word to lowercase
     const spaceSeparatedString = wordsArray.join(' ').toLowerCase();
 
-    console.log(spaceSeparatedString)
+    // console.log(spaceSeparatedString)
     return spaceSeparatedString;
   }
 
