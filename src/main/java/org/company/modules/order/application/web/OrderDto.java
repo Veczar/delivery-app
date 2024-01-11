@@ -28,4 +28,5 @@ public class OrderDto {
     private Date completionDate;
     private Status status;
     private Double distanceInKm;
+    private Long rating;
 }

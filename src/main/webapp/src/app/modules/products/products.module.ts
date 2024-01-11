@@ -14,7 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AddProductFormComponent } from './add-product-form/add-product-form.component';
 import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-
+import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
 @NgModule({
   declarations: [
     FilterPipe,
@@ -36,6 +36,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     MatTooltipModule,
 
     UserModule,
+    OrdersViewModule
   ]
 })
 export class ProductsModule { }

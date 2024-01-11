@@ -30,6 +30,10 @@
               <button class="nav-link active color" [routerLink]="['/courier/my-deliveries']">
                 <i class="bi bi-backpack4"></i> My deliveries</button>
             </li>
+            <li *ngIf="getRole() === 'PARTNER'">
+              <button class="nav-link active color" [routerLink]="['/courier/partner-orders']">
+                <i class="bi bi-backpack4"></i> My orders</button>
+            </li>
             <li>
               <button class="btn btn-outline-primary" (click)="onToast()">Show toasts</button>
             </li>
@@ -53,14 +57,15 @@
           </div>
           <div *ngIf="isUserLoggedIn()">
             <div class="dropdown-center">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              <button class="btn btn-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
               </button>
               <ul class="dropdown-menu dropdown-menu-dark dropdown-position ">
-                <li><a class="dropdown-item user-dropdown" (click)="openSettings(settingsModal)">Settings</a></li>
+                <li><a class="dropdown-item user-dropdown" (click)="open(settingsModal)">Settings</a></li>
+                <li><a class="dropdown-item user-dropdown" (click)="open(ordersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Orders</a></li>
                 <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
-              </ul> 
+              </ul>
             </div>
           </div>
 
@@ -69,7 +74,7 @@
     </nav>
   </header>
 
-  <main >
+  <main>
 
     <div class="addr-search d-flex">
       <div class="form-group search-bar">
@@ -126,7 +131,7 @@
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
             </ul>
           </div>
-    
+
           <div class="col-6 col-md-2 mb-3">
             <h5>Section</h5>
             <ul class="nav flex-column nav-hover-underline">
@@ -137,7 +142,7 @@
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
             </ul>
           </div>
-    
+
           <div class="col-6 col-md-2 mb-3">
             <h5>Section</h5>
             <ul class="nav flex-column nav-hover-underline">
@@ -148,7 +153,7 @@
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
             </ul>
           </div>
-    
+
           <div class="col-md-5 offset-md-1 mb-3">
             <form>
               <h5>Subscribe to our newsletter</h5>
@@ -161,7 +166,7 @@
             </form>
           </div>
         </div>
-    
+
         <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
           <p class="p-0">© 2023-2024 Glovo Eats, Inc. All rights reserved.</p>
           <ul class="list-unstyled d-flex me-1">
@@ -207,5 +212,17 @@
   </div>
   <div class="modal-body p-4">
     <app-user-settings></app-user-settings>
+
+
   </div>
+</ng-template>
+  <ng-template #ordersModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Orders</h4>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+        (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body p-4">
+      <app-orders-view></app-orders-view>
+    </div>
 </ng-template>

@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
+import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
 @NgModule({
   declarations: [
     UserSettingsComponent
@@ -13,7 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OrdersViewModule
   ],
   exports: [
     UserSettingsComponent,
