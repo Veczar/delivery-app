@@ -26,6 +26,10 @@
               <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
                 <i class="bi bi-speedometer2"></i> Dashboard</button>
             </li>
+            <li *ngIf="getRole() === 'ADMIN'">
+              <button class="nav-link active color" [routerLink]="['/admin/coplaints']">
+                <i class="bi bi-card-heading"></i> Complaints</button>
+            </li>
             <li *ngIf="getRole() === 'COURIER'">
               <button class="nav-link active color" [routerLink]="['/courier/my-deliveries']">
                 <i class="bi bi-backpack4"></i> My deliveries</button>
@@ -61,6 +65,7 @@
               <ul class="dropdown-menu dropdown-menu-dark dropdown-position ">
                 <li><a class="dropdown-item user-dropdown" (click)="open(settingsModal)">Settings</a></li>
                 <li><a class="dropdown-item user-dropdown" (click)="open(ordersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Orders</a></li>
+                <li><a class="dropdown-item user-dropdown" (click)="open(complaintModal)" *ngIf="isUserLoggedIn() && getRole() !== 'ADMIN'">File a compalaint</a></li>
                 <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
               </ul>
             </div>
@@ -222,4 +227,15 @@
     <div class="modal-body p-4">
       <app-orders-view></app-orders-view>
     </div>
+</ng-template>
+
+<ng-template #complaintModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">File a complaint</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body p-4">
+    <app-complaint-form></app-complaint-form>
+  </div>
 </ng-template>
