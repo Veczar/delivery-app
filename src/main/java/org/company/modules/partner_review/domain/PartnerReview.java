@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.company.modules.partner.domain.Partner;
 import org.company.modules.user.domain.User;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -21,7 +20,7 @@ public class PartnerReview {
 
     @Column(name = "created_date")
     @Temporal(TemporalType.DATE)
-    private Date createdDate;
+    private String createdDate;
 
     @ManyToOne
     @JoinColumn(name = "reviewer_id")
