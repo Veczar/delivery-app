@@ -6,5 +6,5 @@ public enum PartnerType {
     pharmacy,
     groceryStore,
     florists,
-    coffeehouse
+    coffeeHouse
 }

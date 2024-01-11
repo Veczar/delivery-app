@@ -347,7 +347,7 @@ export enum PartnerType {
     pharmacy = "pharmacy",
     groceryStore = "groceryStore",
     florists = "florists",
-    coffeehouse = "coffeehouse",
+    coffeehouse = "coffeeHouse",
 }
 
 export enum Status {

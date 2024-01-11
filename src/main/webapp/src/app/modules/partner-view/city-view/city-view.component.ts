@@ -20,7 +20,6 @@ export class CityViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Use paramMap instead of params
     this.route.params.subscribe(params => {
       this.cityName = params['city'];
       this.partnerService.updateCurrentCity(this.cityName);
