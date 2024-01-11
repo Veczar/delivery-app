@@ -103,12 +103,8 @@ export class PartnerOrdersComponent {
   {
     this.toastService.showSuccess("Order was set as ready for delivery");
 
-    this.showInPreparation();
     //delay so database could make changes 
-    (async () => { 
-      await new Promise(f => setTimeout(f, 1000));
-      this.loadData();
-  })();
+    setTimeout(() => {this.loadData()},1000);
   };
 
   }
