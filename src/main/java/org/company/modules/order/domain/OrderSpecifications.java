@@ -2,7 +2,6 @@ package org.company.modules.order.domain;
 
 import jakarta.persistence.criteria.*;
 import org.company.modules.delivery_man.domain.DeliveryMan;
-import org.company.modules.user.domain.User;
 import org.springframework.data.jpa.domain.Specification;
 
 public class OrderSpecifications {
