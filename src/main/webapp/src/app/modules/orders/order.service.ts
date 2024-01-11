@@ -43,7 +43,5 @@ export class OrderService {
     return this.http.post<OrderDto>(`${this.apiUrl}/api/orders`, order);
   }
 
-  makeProductOrder(productOrder: ProductOrderDto) {
-    return this.http.post<OrderDto>(`${this.apiUrl}/api/product_order`, productOrder);
-  }
+
 }

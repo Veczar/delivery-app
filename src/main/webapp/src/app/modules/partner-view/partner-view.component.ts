@@ -52,9 +52,11 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.partnerService.getPartnersObs();
+    if (this.partnerService.getPartnersData().length === 0) {
+      this.partnerService.getPartnersObs();
+    }
 
-    this.partnerService.partnersSubject.subscribe(partners => {
+    this.partnerService.partnersDataSubject.subscribe(partners => {
       this.partners = partners;
     })
 

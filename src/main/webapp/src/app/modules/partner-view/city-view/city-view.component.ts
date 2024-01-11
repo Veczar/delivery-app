@@ -30,16 +30,11 @@ export class CityViewComponent implements OnInit {
         this.router.navigate(['/partners']);
       } 
       else {
-        this.partnerService.partnersSubject.subscribe(partners => {
+        this.partnerService.partnersDataSubject.subscribe(partners => {
           this.partners = partners.filter(partner => partner.address?.city == this.cityName);
         });
       }
     })
   }
 
-  // ngOnDestroy(): void {
-  //   if (this.filteredPartnersSubscription) {
-  //     this.filteredPartnersSubscription.unsubscribe();
-  //   }
-  // }
 }
