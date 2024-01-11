@@ -59,19 +59,19 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
 
     @Override
     public void toEntity(OrderDto orderDto, Order order) {
-    updateAddresses(orderDto,order);
-    updateCustomer(orderDto, order);
-    updatePartner(orderDto, order);
-    if(orderDto.getDeliveryMan() == null)order.setDeliveryMan(null);
-        else updateDeliveryMan(orderDto, order);
-    order.setTotalPrice(orderDto.getTotalPrice());
-    order.setTip(orderDto.getTip());
-    order.setCreationDate(orderDto.getCreationDate());
-    order.setCompletionDate(orderDto.getCompletionDate());
-    order.setStatus(orderDto.getStatus());
-    order.setDistanceInKm(orderDto.getDistanceInKm());
-    order.setRating(orderDto.getRating());
-    order.setRating(orderDto.getRating());
+        updateAddresses(orderDto,order);
+        updateCustomer(orderDto, order);
+        updatePartner(orderDto, order);
+        if(orderDto.getDeliveryMan() == null)order.setDeliveryMan(null);
+            else updateDeliveryMan(orderDto, order);
+        order.setTotalPrice(orderDto.getTotalPrice());
+        order.setTip(orderDto.getTip());
+        order.setCreationDate(orderDto.getCreationDate());
+        order.setCompletionDate(orderDto.getCompletionDate());
+        order.setStatus(orderDto.getStatus());
+        order.setDistanceInKm(orderDto.getDistanceInKm());
+        order.setRating(orderDto.getRating());
+        order.setRating(orderDto.getRating());
     }
 
     public OrderReadDto toReadDto(Order order) {

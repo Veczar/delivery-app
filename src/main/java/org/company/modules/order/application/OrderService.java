@@ -26,6 +26,7 @@ public class OrderService extends GenericService<Order, OrderDto, Long, OrderRep
         super(repository, assembler);
         this.deliveryManRepository = deliveryManRepository;
     }
+
     public List<OrderReadDto> getOrdersWithUserEmailForDeliveryMan(String email) {
         Specification<Order> spec = OrderSpecifications.filterOrdersByUserEmailAndStatus(email);
         List<OrderReadDto> list = repository.findAll(spec)

@@ -1,0 +1,89 @@
+body {
+  padding-top: 60px;
+}
+
+.container {
+  max-width: 860px;
+  padding: 50px;
+  padding-top: 10px;
+  // margin-top: 50px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.waves-background {
+  aspect-ratio: 16/9;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../../../../assets/layered-waves-haikei1.svg);
+  background-position: 0 -50px;
+  background-color: #202020;
+}
+
+.exit-btn {
+  position: absolute;
+  right: 3%;
+  top: 4%;
+}
+
+.myradio {
+  height: 30px;
+  width: 30px;
+}
+
+.small {
+  overflow-x: hidden;
+}
+
+.invalid-radio {
+  border: 1px solid red;
+  border-radius: 10px;
+}
+
+.form-check {
+  margin-top: 2px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+
+p {
+  margin-bottom: 0px;
+}
+
+// .radio-form {
+//   position: relative;
+// }
+
+// --------- footer -----------
+
+.nav-hover-underline li.nav-item a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+
+  padding: 30px 130px 0px 130px;
+
+  // background-color: #212529; // same as nav
+  background-color: #202020;
+  color: white;
+
+  footer {
+    width: 1500px;
+  }
+
+  h5 {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  ul>li>a {
+    color: white !important;
+  }
+}

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ProductDto } from 'src/app/shared/model/api-models';
 import { ShoppingCartService } from './shopping-cart.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
+import { ToastService } from 'src/app/shared/toast/toast.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,7 +14,12 @@ export class ShoppingCartComponent {
 
   products: {product: ProductDto, quantity: number, subtotal: number }[] = [];
 
-  constructor(private shoppingCartService: ShoppingCartService) {
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private authService: AuthService,
+    private toastService: ToastService,
+    private router: Router,
+  ) {
     this.products = shoppingCartService.getItems(); 
   }
 
@@ -19,7 +27,16 @@ export class ShoppingCartComponent {
     return this.shoppingCartService.getTotalPrice();
   }
 
-  removeItem(index: number) {
+  removeItem(index: number): void {
     this.shoppingCartService.removeProduct(index);
+  }
+
+  onCheckout(): void {
+    if (this.authService.isUserLogged()){
+      this.router.navigate(['/checkout']);
+    }
+    else {
+      this.toastService.showError('You need to be logged in!');
+    }
   }
 }

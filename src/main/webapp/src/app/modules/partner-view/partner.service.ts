@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { PartnerReadDto } from 'src/app/shared/model/api-models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PartnerDto, PartnerReadDto } from 'src/app/shared/model/api-models';
 
@@ -10,30 +12,35 @@ export class PartnerService {
 
   apiUrl: string = 'http://localhost:8080';
 
-  currenCity = new BehaviorSubject<string>('');
+  private searchTerm: string = '';
+
+  private currenCity = new BehaviorSubject<string>('');
   currentCity = this.currenCity.asObservable();
 
-  private partnersData: PartnerReadDto[] = [];
-
-  partnersSubject: BehaviorSubject<PartnerReadDto[]> = new BehaviorSubject<PartnerReadDto[]>([]);
+  partnersData: PartnerReadDto[] = [];
+  partnersDataSubject: BehaviorSubject<PartnerReadDto[]> = new BehaviorSubject<PartnerReadDto[]>([]);
 
   constructor(
     private http: HttpClient,
   ) { }
 
   getPartnersObs(){
-    // console.log('----- fetch from database obs -------');
+    console.log('----- fetch from database -----');
     this.http.get<PartnerReadDto[]>(`/api/partners/read`).subscribe(partners => {
-      this.partnersSubject.next(partners);
+      this.partnersDataSubject.next(partners);
       this.partnersData = partners;
     });
   }
-  
-  setPartnersData(partners: PartnerReadDto[]): void {
-    this.partnersData = partners;
-  }
+
   getPartnersData(): PartnerReadDto[] {
     return this.partnersData;
+  }
+
+  updateSearchTerm(searchTerm: string): void {
+    this.searchTerm = searchTerm;
+  }
+  getSearchTerm(): string {
+    return this.searchTerm;
   }
 
   updateCurrentCity(city: string): void {

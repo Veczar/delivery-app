@@ -6,7 +6,7 @@ import { ProductOrderDto } from 'src/app/shared/model/api-models';
 @Injectable({
   providedIn: 'root'
 })
-export class OrderProductService {
+export class ProductOrderService {
 
   apiUrl: string = "http://localhost:8080";
   
@@ -25,4 +25,7 @@ export class OrderProductService {
     return this.http.delete<ProductOrderDto>(`${this.apiUrl}/api/orders/${productOrder.product?.id}/${productOrder.order?.id}`);
   }
 
+  makeProductOrder(productOrder: ProductOrderDto): Observable<ProductOrderDto> {
+    return this.http.post<ProductOrderDto>(`${this.apiUrl}/api/product_order`, productOrder);
+  }
 }

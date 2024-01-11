@@ -22,29 +22,38 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @ManyToOne
     @JoinColumn(name = "address_start_id")
     private Address addressStart;
+    
     @ManyToOne
     @JoinColumn(name = "address_end_id")
     private Address addressEnd;
+    
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private User customer;
+    
     @ManyToOne
     @JoinColumn(name = "partner_id")
     private Partner partner;
+    
     @ManyToOne
     @JoinColumn(name = "courier_id")
     private DeliveryMan deliveryMan;
+    
     private Double totalPrice;
     private Double tip;
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date completionDate;
+    
     @Enumerated(EnumType.STRING)
     private Status status;
+    
     private Double distanceInKm;
     private Long rating;
 }

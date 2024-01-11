@@ -1,8 +1,8 @@
 package org.company.modules.order.domain;
 
 public enum Status {
-    done,
     inPreparation,
+    readyForDelivery,
     inDelivery,
-    readyForDelivery
+    done
 }

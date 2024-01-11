@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OrderDto, OrderReadDto, Status } from 'src/app/shared/model/api-models';
+import { OrderDto, OrderReadDto, ProductOrderDto, Status } from 'src/app/shared/model/api-models';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +47,10 @@ export class OrderService {
   deleteOrder(orderId: number): Observable<OrderDto> {
     return this.http.delete<OrderDto>(`${this.apiUrl}/api/orders/${orderId}`);
   }
+
+  makeOrder(order: OrderDto): Observable<OrderDto> {
+    return this.http.post<OrderDto>(`${this.apiUrl}/api/orders`, order);
+  }
+
 
 }

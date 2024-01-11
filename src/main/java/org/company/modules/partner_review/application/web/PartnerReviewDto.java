@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.company.modules.partner.application.web.PartnerDto;
 import org.company.modules.user.application.web.UserDto;
-import java.util.Date;
 
 
 @Getter
@@ -13,7 +12,7 @@ public class PartnerReviewDto {
     private Long id;
     private int gradeInStars;
     private String description;
-    private Date date;
+    private String date;
     private UserDto reviewer;
     private PartnerDto partner;
 }

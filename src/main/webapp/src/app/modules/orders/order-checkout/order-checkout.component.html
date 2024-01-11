@@ -1,0 +1,232 @@
+<body class="waves-background">
+  <div class="container bg-light">
+    <main>
+      <button class="btn btn-close exit-btn" [routerLink]="['/']"></button> 
+      <div class="pt-4 pb-3">
+        <h2>Checkout form</h2>
+        <!-- <p *ngIf="partner" class="lead">{{partner.name}}</p> -->
+      </div>
+
+      <!-- products -->
+      <div class="row g-5">
+        <div class="col-md-5 col-lg-4 order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex">
+              <h4 class="mb-0 me-2 text-primary">
+                <i class="bi bi-cart2"></i> 
+              </h4>
+              <span class="text-primary">Your cart</span>
+            </div>
+            <span class="badge bg-primary rounded-pill">{{getQty()}}</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-sm"
+                *ngFor="let product of products">
+              <div>
+                <h5 class="my-0">{{product.quantity}}x {{product.product.name}}</h5>
+                <small class="small">
+                  {{product.product.description}}
+                </small>
+              </div>
+              <span class="text-muted">{{product.subtotal}} $</span>
+            </li>
+            <li class="list-group-item p-1">
+              <div class="input-group no-margin">
+                <input type="number" class="form-control" placeholder="tip (optional)" id="tip" [(ngModel)]="tip">
+                <span class="input-group-text">$</span>
+              </div>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong>{{ (totalPrice + (tip ? tip : 0)) | number: '1.2-2'}} $</strong>
+            </li>
+          </ul>
+
+          <!-- <form class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Promo code">
+              <button type="submit" class="btn btn-secondary">Redeem</button>
+            </div>
+          </form> -->
+        </div>
+
+        <div class="col-md-7 col-lg-8">
+          <h4 class="mb-3">Delivery Address and personal info</h4>
+
+          <form 
+            [formGroup]="checkoutForm" 
+            class="row g-3 needs-validation" 
+            (ngSubmit)="onSubmit()"
+            >
+
+            <div class="form-group col-md-6">
+              <label for="firstName" class="form-label">First name</label>
+              <input
+                type="text"
+                name="name"
+                formControlName="firstName"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+                [ngClass]="{ 'is-valid': submitted && !f['firstName'].errors }"
+              />
+              <div class="invalid-feedback" *ngIf="submitted && f['firstName'].errors">
+                <p>Name is required</p>
+              </div> 
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="lastName" class="form-label">Last name</label>
+              <input
+                type="text"
+                name="lastName"
+                formControlName="lastName"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+                [ngClass]="{ 'is-valid': submitted && !f['lastName'].errors }"
+              />
+              <div class="invalid-feedback" *ngIf=" submitted && f['lastName'].errors">
+                <p>Last Name is required</p>
+              </div> 
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="tel" class="form-label">Telephone number</label>
+              <input
+                type="tel"
+                name="telephone"
+                formControlName="telephoneNumber"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['telephoneNumber'].errors }"
+                [ngClass]="{ 'is-valid': submitted && !f['telephoneNumber'].errors }"
+              />
+              <div class="invalid-feedback" *ngIf="submitted && f['telephoneNumber'].errors">
+                <p>Provide valid telephone Number</p>
+              </div> 
+            </div>
+
+            <div class="form-group col-md-12 mb-3">
+              <label for="email" class="form-label">E-mail</label>
+              <input
+                type="email"
+                name="email"
+                formControlName="email"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                [ngClass]="{ 'is-valid': submitted && !f['email'].errors }"
+              />
+              <div class="invalid-feedback" *ngIf="f['email'].errors">
+                <p>Provide valid email</p>
+              </div>
+            </div>
+
+            <h4 class="mb-1">Select address</h4>
+            <div 
+              class="form-check d-flex align-items-center radio-form" 
+              *ngFor="let address of addresses; let i = index"
+              [ngClass]="{ 'invalid-radio': submitted2 && checkoutForm.value.addressEnd == null}"
+              >
+              <input 
+                type="radio" 
+                class="btn-check" 
+                id="option{{i}}" 
+                autocomplete="off" 
+                formControlName="addressEnd" 
+                value="{{address.id}}"
+                >
+              <label class="btn btn-outline-success myradio" for="option{{i}}"></label>
+              <h5 class="mb-0 ms-3" >
+                {{address.street}} <br> 
+                <small class="text-muted">
+                  {{address.city}}, {{address.postalCode}}
+                </small> 
+              </h5>
+            </div>
+            <div class="text-danger mt-0" *ngIf="submitted2 && checkoutForm.value.addressEnd == null">
+              Select your address
+            </div>
+
+            <hr class="my-4">
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to payment</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+  </div>
+</body>
+
+  <!-- footer -->
+  <div class="container-fluid footer">
+    <footer class="py-5">
+      <div class="row">
+        <div class="col-6 col-md-2 mb-3">
+          <h5>Section</h5>
+          <ul class="nav flex-column nav-hover-underline">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-2 mb-3">
+          <h5>Section</h5>
+          <ul class="nav flex-column nav-hover-underline">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-2 mb-3">
+          <h5>Section</h5>
+          <ul class="nav flex-column nav-hover-underline">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-5 offset-md-1 mb-3">
+          <form>
+            <h5>Subscribe to our newsletter</h5>
+            <p class="ps-0">Monthly digest of what's new and exciting from us.</p>
+            <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+              <label for="newsletter1" class="visually-hidden">Email address</label>
+              <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+              <button class="btn btn-primary" type="button">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+        <p class="p-0">© 2023-2024 Glovo Eats, Inc. All rights reserved.</p>
+        <ul class="list-unstyled d-flex me-1">
+          <li class="ms-3"><a class="link-dark" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+              <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+            </svg>
+            </a></li>
+          <li class="ms-3"><a class="link-dark" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+              <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/>
+            </svg>
+          </a></li>
+          <li class="ms-3"><a class="link-dark" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+              <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+            </svg>
+          </a></li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+
+

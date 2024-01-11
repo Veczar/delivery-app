@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { PartnerService } from './partner.service';
-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
@@ -53,9 +52,11 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.partnerService.getPartnersObs();
+    if (this.partnerService.getPartnersData().length === 0) {
+      this.partnerService.getPartnersObs();
+    }
 
-    this.partnerService.partnersSubject.subscribe(partners => {
+    this.partnerService.partnersDataSubject.subscribe(partners => {
       this.partners = partners;
     })
 
