@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourierTableComponent } from './courier-table/courier-table.component';
 import { UserSettingsComponent } from '../user/user-settings/user-settings.component';
 import { UserModule } from '../user/user.module';
+import { PartnerTableComponent } from './partner-table/partner-table.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { UserModule } from '../user/user.module';
     AdminDashboardComponent,
     UserTableComponent,
     CourierTableComponent,
+    PartnerTableComponent,
   ],
   imports: [
     CommonModule,

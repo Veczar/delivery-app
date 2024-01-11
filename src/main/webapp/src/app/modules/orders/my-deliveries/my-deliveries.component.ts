@@ -19,7 +19,7 @@ export class MyDeliveriesComponent {
   orderForm!: FormGroup;
   selectedStatus: string = 'inDelivery';
   filter: string = '';
-  displayedColumns: string[] = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+  displayedColumns: string[] = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
   'partner', "creationDate", "totalPrice", "tip"];
 
   @ViewChild(MatPaginator)
@@ -67,7 +67,10 @@ export class MyDeliveriesComponent {
         this.dataSource.sort = this.sort;
         const oldFilterPredicate  = this.dataSource.filterPredicate;
         this.dataSource.filterPredicate = (data: OrderReadDto, filter: string) => {
-          return oldFilterPredicate(data, filter.substring(0,filter.lastIndexOf(" "))) && data.status === filter.substring(filter.lastIndexOf(" ")+1);
+          const filterValue = filter.substring(0,filter.lastIndexOf(" "));
+          const type = filter.substring(filter.lastIndexOf(" ")+1);
+          if(type == "null")return data.deliveryManId == null;
+          return oldFilterPredicate(data, filterValue) && data.status === type && data.deliveryManId != null;
          };
          this.dataSource.filter = this.filter + this.selectedStatus; 
         console.log(orders);
@@ -91,29 +94,48 @@ export class MyDeliveriesComponent {
   showInDelivery() {
     this.selectedStatus = "inDelivery";
     this.dataSource.filter = this.filter + " " + this.selectedStatus;
-    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
     'partner', "creationDate", "totalPrice", "tip"];
-  }
-
-  showReadyForDelivery() {
-    this.selectedStatus = "readyForDelivery";
-    this.dataSource.filter = this.filter+ " " + this.selectedStatus;
-    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
-    'partner', "creationDate", "distanceInKm", "totalPrice", "tip"];
-
   }
 
   showDone() {
     this.selectedStatus = "done";
     this.dataSource.filter = this.filter + " " + this.selectedStatus;
-    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
+    'partner', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip", "rating"];
+  }
+
+  showReadyForDelivery() {
+    this.selectedStatus =  Status.readyForDelivery;
+    this.dataSource.filter = this.filter + " " + this.selectedStatus;
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
     'partner', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip"];
   }
 
+  showAssignableOrders() {
+    this.selectedStatus =  "null";
+    this.dataSource.filter = this.filter + " " + this.selectedStatus;
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
+    'partner', "creationDate", "distanceInKm", "totalPrice", "tip", "assignDelivery"];
+  }
+
   click(order: OrderReadDto) {
-
     this.orderForm.patchValue(order);
+  }
 
+  assignDelivery(id : number)
+  {
+    this.orderService.assignDeliveryMan(id, Number(localStorage.getItem('id'))).subscribe()
+    {
+      this.toastService.showSuccess("Delivery man was assigned to order");
+  
+      //delay so database could make changes 
+      (async () => { 
+        await new Promise(f => setTimeout(f, 1000));
+        this.loadData();
+    })();
+    };
+  
   }
 
   setStatusDone(): void {
@@ -134,6 +156,11 @@ export class MyDeliveriesComponent {
       order.status = Status.done;
       console.log(order);
       this.orderService.setStatus(order).subscribe(r => {
+              //delay so database could make changes 
+      (async () => { 
+        await new Promise(f => setTimeout(f, 1000));
+        this.loadData();
+    })();
         this.toastService.show(`Order ${r.id} satus was set to done`);
         // console.log(r)
       });

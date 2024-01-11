@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PartnerReadDto } from 'src/app/shared/model/api-models';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { PartnerDto, PartnerReadDto } from 'src/app/shared/model/api-models';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +20,6 @@ export class PartnerService {
   partnersData: PartnerReadDto[] = [];
   partnersDataSubject: BehaviorSubject<PartnerReadDto[]> = new BehaviorSubject<PartnerReadDto[]>([]);
 
-  private filteredPartnersDataSubject = new BehaviorSubject<PartnerReadDto[]>([]);
-  public filteredPartnersData$ = this.filteredPartnersDataSubject.asObservable();
-  
-
   constructor(
     private http: HttpClient,
   ) { }
@@ -33,7 +31,7 @@ export class PartnerService {
       this.partnersData = partners;
     });
   }
-  
+
   getPartnersData(): PartnerReadDto[] {
     return this.partnersData;
   }
@@ -49,9 +47,16 @@ export class PartnerService {
     this.currenCity.next(city);
     localStorage.setItem('userCity', city);
   }
-  
-  setFilteredPartnersData(partners: PartnerReadDto[]): void {
-    this.filteredPartnersDataSubject.next(partners);
+  getPartnersAll():Observable<PartnerDto[]> {
+  return this.http.get<PartnerDto[]>(`/api/partners`);
   }
-
+  deletePartner(id: number): Observable<PartnerDto> {
+    return this.http.delete<PartnerDto>(`/api/partners/${id}`);
+  }
+  getPartnerById(id: number): Observable<PartnerDto> {
+    return this.http.get<PartnerDto>(`/api/partners/${id}`);
+  }
+  updatePartner(partner: PartnerDto): Observable<PartnerDto> {
+    return this.http.put<PartnerDto>(`/api/partners/${partner.id}`, partner);
+  }
 }

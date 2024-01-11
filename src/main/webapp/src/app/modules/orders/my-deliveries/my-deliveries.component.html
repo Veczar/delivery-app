@@ -15,16 +15,20 @@
           <div class="position-sticky pt-3 sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <button class="nav-link" (click)="showInDelivery()" active>
+                <button [ngClass]="{ 'active-tab':  this.selectedStatus === 'inDelivery' }" class="nav-link" (click)="showInDelivery()">
                   <i class="bi bi-backpack4"></i> In delivery assigned to me</button>
               </li>
               <li class="nav-item">
-                <button class="nav-link" (click)="showReadyForDelivery()" active>
+                <button class="nav-link" (click)="showReadyForDelivery()" [ngClass]="{ 'active-tab':  this.selectedStatus === 'readyForDelivery' }" active>
                   <i class="bi bi-bag"></i> Ready for pick up</button>
               </li>
               <li class="nav-item">
-                <button class="nav-link" (click)="showDone()">
+                <button class="nav-link" (click)="showDone()" [ngClass]="{ 'active-tab':  this.selectedStatus === 'done' }">
                   <i class="bi bi-bag-check"></i> Done</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" (click)="showAssignableOrders()" [ngClass]="{ 'active-tab':  this.selectedStatus === 'null' }">
+                  <i class="bi bi-bag-plus"></i> Assign delivery</button>
               </li>
             </ul>
           </div>
@@ -35,8 +39,9 @@
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">                  
             {{this.selectedStatus === "done" ? "Done" : '' }}
-            {{this.selectedStatus === "inDelivery" ? "In delivery assigned to me" : '' }}
+            {{this.selectedStatus === "inDelivery" ? "In delivery assigned to you" : '' }}
             {{this.selectedStatus === "readyForDelivery" ? "Ready for pick up" : "" }}
+            {{this.selectedStatus === "null" ? "Order without courier" : "" }}
           </h1>
             
           </div>
@@ -54,27 +59,22 @@
               </ng-container>
 
               <ng-container matColumnDef="addressStart">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>start adress</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Start adress</th>
                 <td mat-cell *matCellDef="let row">{{row.addressStart}}</td>
               </ng-container>
 
               <ng-container matColumnDef="addressEnd">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>destination</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Destination</th>
                 <td mat-cell *matCellDef="let row">{{row.addressEnd}}</td>
               </ng-container>
 
-              <ng-container matColumnDef="firstName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>first name</th>
-                <td mat-cell *matCellDef="let row">{{row.customerFirstName}}</td>
-              </ng-container>
-              
-              <ng-container matColumnDef="lastName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>last name</th>
-                <td mat-cell *matCellDef="let row">{{row.customerLastName}}</td>
+              <ng-container matColumnDef="customerName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer name</th>
+                <td mat-cell *matCellDef="let row">{{row.customerFirstName}} {{row.customerLastName}}</td>
               </ng-container>
         
               <ng-container matColumnDef="telephoneNumber">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>telephone number</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Telephone number</th>
                 <td mat-cell *matCellDef="let row">{{row.customerTelephoneNumber}}</td>
               </ng-container>
           
@@ -95,17 +95,27 @@
 
               <ng-container matColumnDef="distanceInKm">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Distance</th>
-                <td mat-cell *matCellDef="let row">{{row.distanceInKm}}</td>
+                <td mat-cell *matCellDef="let row">{{row.distanceInKm}}km</td>
               </ng-container>
 
               <ng-container matColumnDef="totalPrice">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Total price</th>
-                <td mat-cell *matCellDef="let row">{{row.totalPrice}}</td>
+                <td mat-cell *matCellDef="let row">{{row.totalPrice}}$</td>
               </ng-container>
 
               <ng-container matColumnDef="tip">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Tip</th>
-                <td mat-cell *matCellDef="let row">{{row.tip}}</td>
+                <td mat-cell *matCellDef="let row">{{row.tip}}$</td>
+              </ng-container>
+
+              <ng-container matColumnDef="rating">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
+                <td mat-cell *matCellDef="let row">{{row.rating}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="assignDelivery">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                <td mat-cell *matCellDef="let row" ><button type="button" class="btn btn-success m-1 m-1" (click)="assignDelivery(row.id)">Assign this order</button></td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr
@@ -118,11 +128,12 @@
           
               <!-- Row shown when there is no matching data. -->
               <tr class="mat-row" *matNoDataRow>
-                <td class="alert alert-danger " colspan="12"  role="alert">
+                <td class="alert alert-danger " colspan="13"  role="alert">
                   No order with status 
                   {{this.selectedStatus === "done" ? "\"done\"" : "" }} 
                   {{this.selectedStatus === "inDelivery" ? "\"in delivery\"" : ""}} 
-                  {{this.selectedStatus === "readyForDelivery" ? "\"ready for pickup\"" : "" }} 
+                  {{this.selectedStatus === "readyForDelivery" ? "\"ready for pickup\"" : "" }}
+                  {{this.selectedStatus === "null" ? "\"without courier\"" : "" }} 
                   matches the filter "{{input.value}}"
                 </td>
               </tr>
@@ -149,7 +160,7 @@
               Address end: {{this.orderForm.value.addressEnd}}</h6>
               
               <div class="mb-3">
-                <button type="button" class="btn btn-success me-2" (click)="setStatusDone()" data-bs-dismiss="modal">
+                <button type="button" class="btn btn-success me-2"   (click)="setStatusDone()" data-bs-dismiss="modal">
                   Set order as done
                 </button>
                 <span> </span>

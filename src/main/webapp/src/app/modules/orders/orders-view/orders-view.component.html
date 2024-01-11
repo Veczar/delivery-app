@@ -3,14 +3,14 @@
       <!-- card -->
       <div class="card mb-3">
         <div class="row g-0 ps-2 pe-2 pt-2">
-          <h3 class="text-center">
+          <h5 class="text-center">
             {{order?.status === 'inDelivery' ? 'In delivery' : ''}}
             {{order?.status === 'inPreparation' ? 'In preparation' : ''}}
             {{order?.status === 'readyForDelivery' ? 'Ready for delivery' : ''}}
             {{order?.status === 'done' ? 'Done' : ''}}
-          </h3>
-          <div class="col-md-12 img rounded">
-            <img src="http://localhost:8080/api/partners/photo/{{order?.partnerPhotoPath}}" class="img-fluid rounded" alt="product">
+          </h5>
+          <div class="col-md-12 img text-center rounded">
+            <img  src="http://localhost:8080/api/partners/photo/{{order?.partnerPhotoPath}}" class="img-fluid rounded" alt="product">
           </div>
           <div class="card-body">
             <hr class="mt-1 mb-1"/>
@@ -19,18 +19,15 @@
                 Address end: {{order?.addressEnd}}<br/>
                 Partner: {{order?.partner}}<br/>
                 Courier: {{order?.deliveryManFirstName}} {{order?.deliveryManLastName}}<br/>
-                Total price: {{order?.totalPrice}}<br/>
-                Tip: {{order?.totalPrice}}<br/>
-                Total price: {{order?.totalPrice}}<br/>
-                Tip: {{order?.tip}}<br/>
+                Total price: {{order?.totalPrice}}$<br/>
+                Tip: {{order?.totalPrice}}$<br/>
                 Creation date: {{order?.creationDate}}<br/>
                 Completion date: {{order?.completionDate}}<br/>
-                Distance from seller to customer: {{order?.distanceInKm}}<br/>
-                Products:
+                Distance from seller to customer: {{order?.distanceInKm}}km<br/>                
             </p>
             Products:<br/>
             <div class="col-md-12" *ngFor="let orderProduct of getProductsList(order?.id)">
-              {{orderProduct.quantity}} * {{orderProduct.product?.name}}
+              {{orderProduct.quantity}}x {{orderProduct.product?.name}}
             </div>
             <div *ngIf="order?.rating == null && order?.status === 'done'">
               <h5 class="text-center" >
@@ -45,9 +42,9 @@
                 </div> 
               </div>
               <div *ngIf="order?.rating != null && order?.status === 'done'">
-                <h5 class="text-center" >
+                <h6 class="text-center" >
                   You have rated this order to: {{order?.rating}}
-                  </h5>
+                  </h6>
               </div>
             </div>
           </div>
