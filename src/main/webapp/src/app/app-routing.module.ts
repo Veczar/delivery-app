@@ -15,6 +15,7 @@ import { CourierTableComponent } from './modules/admin-panel/courier-table/couri
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
 import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
 import { PartnerTableComponent } from './modules/admin-panel/partner-table/partner-table.component';
+import { PartnerOrdersComponent } from './modules/orders/partner-orders/partner-orders.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
