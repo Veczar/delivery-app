@@ -19,7 +19,7 @@ export class MyDeliveriesComponent {
   orderForm!: FormGroup;
   selectedStatus: string = 'inDelivery';
   filter: string = '';
-  displayedColumns: string[] = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+  displayedColumns: string[] = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
   'partner', "creationDate", "totalPrice", "tip"];
 
   @ViewChild(MatPaginator)
@@ -94,28 +94,28 @@ export class MyDeliveriesComponent {
   showInDelivery() {
     this.selectedStatus = "inDelivery";
     this.dataSource.filter = this.filter + " " + this.selectedStatus;
-    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
     'partner', "creationDate", "totalPrice", "tip"];
   }
 
   showDone() {
     this.selectedStatus = "done";
     this.dataSource.filter = this.filter + " " + this.selectedStatus;
-    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
     'partner', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip", "rating"];
   }
 
   showReadyForDelivery() {
     this.selectedStatus =  Status.readyForDelivery;
     this.dataSource.filter = this.filter + " " + this.selectedStatus;
-    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
     'partner', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip"];
   }
 
   showAssignableOrders() {
     this.selectedStatus =  "null";
     this.dataSource.filter = this.filter + " " + this.selectedStatus;
-    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
+    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
     'partner', "creationDate", "distanceInKm", "totalPrice", "tip", "assignDelivery"];
   }
 
