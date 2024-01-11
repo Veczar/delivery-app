@@ -159,6 +159,10 @@ ul > li:hover > button {
   }
 }
 
+.just-pointer:hover {
+  cursor: pointer;
+}
+
 .pointer {
   height: fit-content;
 }

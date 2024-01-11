@@ -80,7 +80,7 @@
         <div class="partner-info-wrapper">
 
           <div class="d-flex">
-            <h1>
+            <h1 (click)="open(detailsModal)" class="just-pointer">
               {{partner.name}}
             </h1>
             <h3 class="d-flex align-items-center pt-1">
@@ -91,7 +91,7 @@
               <button 
                 class="ownerOptions btn btn-outline-primary me-2"
                 matTooltip="Add new product to your business"
-                [matTooltipShowDelay]="300"
+                [matTooltipShowDelay]="200"
                 (click)="addProduct(addProductForm)"
                 >
                 <h5>
@@ -103,9 +103,8 @@
               <button 
                 class="ownerOptions btn btn-outline-primary"
                 matTooltip="Edit your business information"
-                [matTooltipShowDelay]="300"
+                [matTooltipShowDelay]="200"
                 >
-                <!-- todo: settings modal -->
                 <h5>
                   <i class="bi bi-pen-fill"></i>
                   Edit
@@ -130,6 +129,11 @@
             <i class="bi bi-clock"></i>
             <div class="info-col">
               <span class="text-success">Open</span> ⋅ {{partner.openHour}} - {{partner.closeHour}}
+            </div>
+
+            <i class="bi bi-truck"></i>
+            <div class="info-col">
+              Exp. delivery time <b>{{partner.expectedWaitingTime}}min</b> 
             </div>
 
             <div class="pointer d-flex" (click)="open(detailsModal)">
