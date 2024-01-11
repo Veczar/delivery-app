@@ -26,6 +26,7 @@ export class PartnerProductsComponent implements OnInit {
   rating: number = 0;
   owner: boolean = false;
   selectedProduct!: ProductReadDto;
+  palceholders!: number[];
 
   loggedUser = {
     firstName: '',
@@ -42,6 +43,7 @@ export class PartnerProductsComponent implements OnInit {
     private shoppingCartService: ShoppingCartService
   ) {
     this.updateAuthenticationState();
+    this.palceholders = Array(3).fill(1);
   }
 
   private updateAuthenticationState() {

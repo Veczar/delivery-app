@@ -27,6 +27,18 @@ export const authCurierGuard = () => {
   }
 }
 
+export const authPartnerGuard = () => {
+  const router = inject(Router);
+
+  if (localStorage.getItem('role') === 'PARTNER') {
+    return true;
+  }
+  else {
+    router.navigate(['/']);
+    return false
+  }
+}
+
 export const checkoutGuard = () => {
   const router = inject(Router);
   const shoppingCart = inject(ShoppingCartService);
