@@ -57,8 +57,8 @@ export class PartnerTableComponent {
       photoPath: [''],
       name: ['', [Validators.required, Validators.minLength(2)]],
       description: ['', Validators.required],
-      openHour: ['', Validators.required ],
-      closeHour: ['', Validators.required],
+      openHour: ['', [Validators.required, Validators.pattern(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/)]],
+      closeHour: ['', [Validators.required, Validators.pattern(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/)]],
       websiteLink: ['', Validators.required],
       expectedWaitingTime: ['', Validators.required],
       accountNumber: [

@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { PartnerReadDto } from 'src/app/shared/model/api-models';
-import { PartnerService } from '../partner.service';
+import { PartnerService } from '../../partner.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

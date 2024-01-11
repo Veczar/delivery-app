@@ -16,7 +16,7 @@ import { PartnerTableComponent } from './modules/admin-panel/partner-table/partn
 import { PartnerOrdersComponent } from './modules/orders/partner-orders/partner-orders.component';
 import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-checkout.component';
 import { PartnerViewComponent } from './modules/partner/partner-view/partner-view.component';
-import { CityViewComponent } from './modules/partner/city-view/city-view.component';
+import { CityViewComponent } from './modules/partner/partner-view/city-view/city-view.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},

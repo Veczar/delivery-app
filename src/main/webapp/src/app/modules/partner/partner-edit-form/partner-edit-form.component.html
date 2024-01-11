@@ -1,0 +1,159 @@
+<form [formGroup]="partnerForm" class="row g-3 needs-validation">
+  <h5>ID: {{this.partnerForm.value.id}}</h5>
+
+  <div class="form-group col-md-6">
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      name="name"
+      formControlName="name"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+      [ngClass]="{ 'is-valid': submitted && !f['name'].errors }"
+    />
+    <div class="invalid-feedback" *ngIf="submitted && f['name'].errors">
+      <p>Name is required</p>
+    </div> 
+  </div>
+
+  <div class="form-group col-md-6">
+    <label for="accountNumber" class="form-label">Account Number</label>
+    <input
+      type="text"
+      name="accountNumber"
+      formControlName="accountNumber"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['accountNumber'].errors }"
+      [ngClass]="{ 'is-valid': submitted && !f['accountNumber'].errors }"
+    />
+    <div class="invalid-feedback" *ngIf=" submitted && f['accountNumber'].errors">
+      <p>Account Number is required</p>
+    </div> 
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+    type="text"
+    name="description"
+    formControlName="description"
+    class="form-control"
+    [ngClass]="{ 'is-invalid': submitted && f['description'].errors,
+                'is-valid': submitted && !f['description'].errors }"
+    ></textarea>
+    <div class="invalid-feedback" *ngIf="submitted && f['description'].errors">
+      <p>Description is required</p>
+    </div> 
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="expectedWaitingTime" class="form-label">Expected Waiting Time (in minutes)</label>
+    <input
+      type="number"
+      name="expectedWaitingTime"
+      formControlName="expectedWaitingTime"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['expectedWaitingTime'].errors }"
+      [ngClass]="{ 'is-valid': submitted && !f['expectedWaitingTime'].errors }"
+    />
+    <div class="invalid-feedback" *ngIf="submitted && f['expectedWaitingTime'].errors">
+      <p>Expected WaitingTime is required</p>
+    </div> 
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="contactNumber" class="form-label">Contact Number</label>
+    <input
+      type="text"
+      name="contactNumber"
+      formControlName="contactNumber"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['contactNumber'].errors }"
+      [ngClass]="{ 'is-valid': submitted && !f['contactNumber'].errors }"
+    />
+    <div class="invalid-feedback" *ngIf="submitted && f['contactNumber'].errors">
+      <p>Contact Number is required</p>
+    </div> 
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="openHour" class="form-label">Open Hour</label>
+    <input
+      type="text"
+      name="openHour"
+      formControlName="openHour"
+      class="form-control"
+      placeholder="HH:mm"
+      [ngClass]="{ 'is-invalid': submitted && f['openHour'].errors }"
+      [ngClass]="{ 'is-valid': submitted && !f['openHour'].errors }"
+    />
+    <div class="invalid-feedback" *ngIf="f['openHour'].errors">
+      <p>Open Hour is required</p>
+    </div>
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="closeHour" class="form-label">Close Hour</label>
+    <input
+      type="text"
+      name="closeHour"
+      formControlName="closeHour"
+      class="form-control"
+      placeholder="HH:mm"
+      [ngClass]="{ 'is-invalid': submitted && f['closeHour'].errors }"
+      [ngClass]="{ 'is-valid': submitted && !f['closeHour'].errors }"
+    />
+    <div class="invalid-feedback" *ngIf="f['closeHour'].errors">
+      <p>Close Hour is required</p>
+    </div>
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="websiteLink" class="form-label">Website Link</label>
+    <input
+      type="text"
+      name="websiteLink"
+      formControlName="websiteLink"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['websiteLink'].errors }"
+      [ngClass]="{ 'is-valid': submitted && !f['websiteLink'].errors }"
+    />
+    <div class="invalid-feedback" *ngIf="f['websiteLink'].errors">
+      <p>Website Link is required</p>
+    </div>
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="type" class="form-label">Type</label>
+      <select class="form-select input" aria-label=".form-select-sm example"
+        formControlName="type"
+        [ngClass]="{ 'is-invalid': submitted && f['type'].errors }"
+        [ngClass]="{ 'is-valid':submitted && !f['type'].errors }"
+        >
+
+        <option value="restaurant">Restaurant</option>
+        <option value="pharmacy">Pharmacy</option>
+        <option value="grocery store">Grocery store</option>
+        <option value="pharmacy">Pharmacy</option>
+        <option value="florists">Florist's</option>
+        <option value="coffeehouse">Coffeehouse</option>
+
+    </select>
+    <div class="invalid-feedback" *ngIf="submitted && f['type'].errors">
+      <p>Provide Type</p>
+    </div>
+  </div>
+  
+
+  <div class="mb-3">
+    <button type="button" class="btn btn-primary me-2" (click)="toggleEditMode()">
+      {{ editable ? 'Save Changes' : 'Edit Partner' }}
+    </button>
+    <button *ngIf="editable" type="button" class="btn btn-secondary me-2" (click)="cancel()">
+      cancel
+    </button>
+    <!-- <button type="button" class="btn btn-danger" (click)="deletePartner()" data-bs-dismiss="modal">
+      Delete User
+    </button> -->
+  </div>
+</form>

@@ -83,7 +83,7 @@ export class PartnerProductsComponent implements OnInit {
       this.productService.getProductsFromPartner(partnerName).subscribe(products => {
         this.products = products;
         this.initCategories(products);
-      })
+      });
     })
   }
 
@@ -109,7 +109,7 @@ export class PartnerProductsComponent implements OnInit {
     this.searchText = '';
   }
 
-  addProduct(modal: any): void {
+  openModal(modal: any): void {
     this.modalService.open(modal);
   }
 
@@ -130,6 +130,19 @@ export class PartnerProductsComponent implements OnInit {
     window.open(fullUrl, '_blank');
   }
   
+  partnerChanged(): void {
+    this.partnerService.getPartnerById(this.partner.id as number).subscribe(partner => {
+      this.partner = partner;
+    });
+  }
+
+  productsChanged(): void {
+    this.productService.getProductsFromPartner(this.partner.name as string).subscribe(products => {
+      this.products = products;
+      this.initCategories(products);
+    });
+    this.modalService.dismissAll();
+  }
 
   // ----------- navbar -----------------
   open(modal: any): void {
