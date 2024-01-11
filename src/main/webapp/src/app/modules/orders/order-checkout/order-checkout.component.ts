@@ -42,7 +42,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.products = this.shoppingCartService.getItems();
-    // this.partner = this.products[0].product.owner;
+    this.partner = this.products[0].product.owner;
 
     this.initForm();
     this.userService.getUser(parseInt(localStorage.getItem('id') as string)).subscribe(user => {
