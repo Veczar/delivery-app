@@ -58,7 +58,11 @@ public class PartnerAssembler implements IAssembler<Partner, PartnerDto> {
         partner.setName(partnerDto.getName());
         partner.setAccountNumber(partnerDto.getAccountNumber());
         partner.setContactNumber(partnerDto.getContactNumber());
-        
+        partner.setDescription(partnerDto.getDescription());
+        partner.setOpenHour(partnerDto.getOpenHour());
+        partner.setCloseHour(partnerDto.getCloseHour());
+        partner.setWebsiteLink(partnerDto.getWebsiteLink());
+        partner.setExpectedWaitingTime(partnerDto.getExpectedWaitingTime());
         UpdateUser(partnerDto, partner);
 
         partner.setPhotoPath(partnerDto.getPhotoPath());
