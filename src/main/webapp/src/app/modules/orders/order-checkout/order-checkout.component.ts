@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../../products/shopping-cart/shopping-cart.service';
 import { AddressDto, OrderDto, PartnerDto, ProductDto, ProductOrderDto, Status, UserDto } from 'src/app/shared/model/api-models';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,16 +14,19 @@ import { ProductOrderService } from '../../product-order/product-order.service';
   templateUrl: './order-checkout.component.html',
   styleUrls: ['./order-checkout.component.scss']
 })
-export class OrderCheckoutComponent implements OnInit {
+export class OrderCheckoutComponent implements OnInit, AfterViewInit {
 
   products: {product: ProductDto, quantity: number, subtotal: number }[] = [];
 
   checkoutForm!: FormGroup;
   submitted: boolean = false;
+  submitted2: boolean = false;
   partner!: PartnerDto | undefined;
   addresses!: AddressDto[] | undefined;
   customer!: UserDto;
   orderForm!: FormGroup;
+  tip!: number;
+  totalPrice!: number;
 
   constructor(
     private shoppingCartService: ShoppingCartService,
@@ -33,12 +36,13 @@ export class OrderCheckoutComponent implements OnInit {
     private productOrderService: ProductOrderService,
     private toastService: ToastService,
     private router: Router,
+    private cd: ChangeDetectorRef
   ) {}
 
 
   ngOnInit(): void {
     this.products = this.shoppingCartService.getItems();
-    this.partner = this.products[0].product.owner;
+    // this.partner = this.products[0].product.owner;
 
     this.initForm();
     this.userService.getUser(parseInt(localStorage.getItem('id') as string)).subscribe(user => {
@@ -51,12 +55,17 @@ export class OrderCheckoutComponent implements OnInit {
     })
   }
 
+  ngAfterViewInit(): void {
+    this.totalPrice = this.shoppingCartService.getTotalPrice();
+    this.cd.detectChanges() //to resolve NG0100 error
+  }
+
   getTotal(): number {
     return this.shoppingCartService.getTotalPrice();
   }
 
   getQty() {
-    return this.shoppingCartService.getQuantity()
+    return this.shoppingCartService.getCartSize()
   }
 
   initForm(): void {
@@ -78,7 +87,6 @@ export class OrderCheckoutComponent implements OnInit {
           Validators.minLength(2),
           Validators.maxLength(20),
           Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)
-
         ]
       ],
       telephoneNumber: [
@@ -125,6 +133,8 @@ export class OrderCheckoutComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted2 = true;
+
     Object.keys(this.checkoutForm.controls).forEach(key => {
       const control = this.checkoutForm.get(key);
       if (control) {
@@ -133,12 +143,12 @@ export class OrderCheckoutComponent implements OnInit {
     });
 
     if (this.checkoutForm.invalid) {
-      console.log('wrong form')
+      console.log(this.checkoutForm.value)
+      console.log('wrong form');
       return;
     }
     // console.log(this.orderForm.value)
     // console.log(this.checkoutForm.value)
-    // console.log(this.orderForm)
     
     const form = this.orderForm.value;
 
@@ -150,7 +160,7 @@ export class OrderCheckoutComponent implements OnInit {
 
     form.customer.id = this.customer.id;
     form.deliveryMan.id = 1; //TODO: change this
-    form.tip = 0;
+    form.tip = this.tip;
     form.totalPrice = this.shoppingCartService.getTotalPrice();
 
     const partnerId = this.partner?.id;
@@ -159,7 +169,7 @@ export class OrderCheckoutComponent implements OnInit {
     form.status = Status.inPreparation;
     form.creationDate = new Date();
 
-    console.log(JSON.stringify(this.orderForm.value, null, 2));
+    // console.log(JSON.stringify(this.orderForm.value, null, 2));
 
     this.makeOrder(this.orderForm.value);
     this.router.navigate(['/']);

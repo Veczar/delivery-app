@@ -31,6 +31,33 @@ body {
   width: 30px;
 }
 
+.small {
+  overflow-x: hidden;
+}
+
+.invalid-radio {
+  border: 1px solid red;
+  border-radius: 10px;
+}
+
+.form-check {
+  margin-top: 2px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+
+p {
+  margin-bottom: 0px;
+}
+
+// .radio-form {
+//   position: relative;
+// }
 
 // --------- footer -----------
 

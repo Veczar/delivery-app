@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'register/user', component: RegisterUserFormComponent},
   {path: 'register/partner', component: RegisterPartnerFormComponent},
   {path: 'register/courier', component: RegisterCourierFormComponent},
-  {path: 'checkout', component: OrderCheckoutComponent, canActivate: [checkoutGuard]},
+  {path: 'checkout', component: OrderCheckoutComponent, canActivate: [checkoutGuard] },
   {path: 'partner/:partner', component: PartnerProductsComponent},
   {
     path: 'partners',

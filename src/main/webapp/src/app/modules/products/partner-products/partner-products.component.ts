@@ -58,7 +58,7 @@ export class PartnerProductsComponent implements OnInit {
       this.http.get<PartnerDto>(`http://localhost:8080/api/partners/name/${partnerName}`).subscribe((partner) => {
         this.partner = partner;
         this.address = partner.owner.addresses[0];
-        console.log(partner)
+        // console.log(partner)
 
         const id: number = Number(localStorage.getItem('id') || 0);
         if (partner.owner.id === id) {
@@ -122,6 +122,7 @@ export class PartnerProductsComponent implements OnInit {
     const externalUrl = this.partner.websiteLink || ''; // Replace with your external URL
     window.location.href = 'https://' + externalUrl;
   }
+  
 
   // ----------- navbar -----------------
   open(modal: any): void {

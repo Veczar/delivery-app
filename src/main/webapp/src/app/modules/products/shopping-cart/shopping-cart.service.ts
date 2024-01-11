@@ -24,7 +24,7 @@ export class ShoppingCartService {
     return this.products;
   }
 
-  getQuantity(): number {
+  getCartSize(): number {
     return this.products.reduce((sum, item) => sum + item.quantity, 0);
   }
 

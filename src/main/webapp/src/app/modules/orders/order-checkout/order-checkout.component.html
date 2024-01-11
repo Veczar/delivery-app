@@ -24,16 +24,22 @@
                 *ngFor="let product of products">
               <div>
                 <h5 class="my-0">{{product.quantity}}x {{product.product.name}}</h5>
-                <small>
+                <small class="small">
                   {{product.product.description}}
                 </small>
               </div>
               <span class="text-muted">{{product.subtotal}} $</span>
             </li>
+            <li class="list-group-item p-1">
+              <div class="input-group no-margin">
+                <input type="number" class="form-control" placeholder="tip (optional)" id="tip" [(ngModel)]="tip">
+                <span class="input-group-text">$</span>
+              </div>
+            </li>
 
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>{{getTotal() | number: '1.2-2'}} $</strong>
+              <strong>{{ (totalPrice + (tip ? tip : 0)) | number: '1.2-2'}} $</strong>
             </li>
           </ul>
 
@@ -114,8 +120,12 @@
               </div>
             </div>
 
-            <h4 class="mb-3">Select address</h4>
-            <div class="form-check d-flex align-items-center" *ngFor="let address of addresses; let i = index">
+            <h4 class="mb-1">Select address</h4>
+            <div 
+              class="form-check d-flex align-items-center radio-form" 
+              *ngFor="let address of addresses; let i = index"
+              [ngClass]="{ 'invalid-radio': submitted2 && checkoutForm.value.addressEnd == null}"
+              >
               <input 
                 type="radio" 
                 class="btn-check" 
@@ -123,15 +133,17 @@
                 autocomplete="off" 
                 formControlName="addressEnd" 
                 value="{{address.id}}"
-                checked
                 >
               <label class="btn btn-outline-success myradio" for="option{{i}}"></label>
-              <h5 class="mb-0 ms-3">
+              <h5 class="mb-0 ms-3" >
                 {{address.street}} <br> 
                 <small class="text-muted">
-                  {{address.city}},  {{address.postalCode}},
+                  {{address.city}}, {{address.postalCode}}
                 </small> 
               </h5>
+            </div>
+            <div class="text-danger mt-0" *ngIf="submitted2 && checkoutForm.value.addressEnd == null">
+              Select your address
             </div>
 
             <hr class="my-4">
