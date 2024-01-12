@@ -20,7 +20,7 @@
             </li>
             <li class="nav-item">
               <button type="button" class="btn btn-outline-secondary border-adress flex-center" (click)="open(addressModal)">
-                <i class="fa-solid fa-location-dot" ></i>
+                <i class="fa-solid fa-location-dot"></i>
                 <div *ngIf="cityName" class="p-1 ms-1">
                   {{cityName}}
                 </div>
@@ -95,43 +95,24 @@
                 </a>
               </div>
             </div>
+
             <div class="wall-element">
-              <h3 class="text-center">Filtry</h3>
+              <h3 class="text-center mb-1">Filters</h3>
               <div class="filter-section">
-                <ul class="">
-                  <li class="list-element" (click)="selectCategory('restaurant')" [ngClass]="{'active': categoryActiveName === 'restaurant'}"> 
+                <ul>
+                  <li
+                    *ngFor="let category of categories"
+                    class="list-element" 
+                    (click)="selectCategory(category)" 
+                    [ngClass]="{'active': categoryActiveName === category}">
                     <a>
-                      <i class="fa-solid fa-burger"></i>
-                      Restaurant
-                    </a>
-                  </li>
-                  <li class="list-element" (click)="selectCategory('pharmacy')" [ngClass]="{'active': categoryActiveName === 'pharmacy'}">
-                    <a>
-                      <i class="fa-solid fa-burger" ></i>
-                      Pharmacy
-                    </a>
-                  </li>
-                  <li class="list-element" (click)="selectCategory('groceryStore')" [ngClass]="{'active': categoryActiveName === 'groceryStore'}">
-                    <a>
-                      <i class="fa-solid fa-burger"></i>
-                      GroceryStore
-                    </a>
-                  </li>
-                  <li class="list-element" (click)="selectCategory('florists')" [ngClass]="{'active': categoryActiveName === 'florists'}">
-                    <a>
-                      <i class="fa-solid fa-burger"></i>
-                      Florists
-                    </a>
-                  </li>
-                  <li class="list-element" (click)="selectCategory('coffeehouse')" [ngClass]="{'active': categoryActiveName === 'coffeehouse'}">
-                    <a>
-                      <i class="fa-solid fa-burger"></i>
-                      Coffeehouse
+                      {{category}}
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
+
           </div>
         </div>
         
@@ -248,7 +229,7 @@
     </div>
     <div class="modal-body">
       <label for="newAddress" class="form-label">New City:</label>
-      <input type="text" class="form-control" id="newAddress" [(ngModel)]="newAddress">
+      <input type="text" class="form-control" id="newAddress" [(ngModel)]="newAddress" (keydown.enter)="changeAddress()">
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-primary" (click)="changeAddress()">Save changes</button>

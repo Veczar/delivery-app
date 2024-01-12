@@ -31,8 +31,11 @@ body {
   width: 30px;
 }
 
-.small {
-  overflow-x: hidden;
+.product-item {
+  max-width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .invalid-radio {

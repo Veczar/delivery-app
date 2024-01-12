@@ -4,8 +4,7 @@ import { PartnerService } from './partner.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { PartnerReadDto } from 'src/app/shared/model/api-models';
-
+import { PartnerReadDto, PartnerType } from 'src/app/shared/model/api-models';
 
 
 @Component({
@@ -13,7 +12,6 @@ import { PartnerReadDto } from 'src/app/shared/model/api-models';
   templateUrl: './partner-view.component.html',
   styleUrls: ['./partner-view.component.scss']
 })
-
 export class PartnerViewComponent implements OnInit, AfterViewInit {
 
   partners: PartnerReadDto[] = [];
@@ -25,6 +23,7 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
   flag: boolean = false;
   categoryActive: boolean = false;
   categoryActiveName: string | null = null;
+  categories!: string[];
 
   loggedUser = {
     firstName: '',
@@ -40,6 +39,11 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
     private cd: ChangeDetectorRef
   ) {
     this.updateAuthenticationState();
+    this.categories = Object.values(PartnerType).sort();
+    // change camel case to spaced normal case
+    this.categories = this.categories.map(category => {
+      return this.camelCaseToSpaceSeparated(category)
+    });
   }
 
   ngAfterViewInit() {
@@ -61,13 +65,13 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
     })
 
     this.router.events.subscribe(() => {
-      // Pobierz aktualny adres URL
       const currentUrl = this.router.url;
       // Sprawdź, czy aktualny adres URL zawiera '/partners'
       if (currentUrl === '/partners') {
-        // Wykonaj odpowiednie działania dla '/partners'
         this.flag = true;
-      } else {
+        this.cityName = '';
+      } 
+      else {
         this.flag = false;
       }
     });
@@ -134,6 +138,17 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
       this.categoryActive = true;
       this.partners = this.partnerService.getPartnersData().filter(partner => partner.partnerType == categoryName);
     }
+  }
+
+  camelCaseToSpaceSeparated(camelCaseString: string): string {
+    // Use regular expression to split camelCase into an array of words
+    const wordsArray = camelCaseString.split(/(?=[A-Z])/);
+
+    // Join the array of words with spaces and convert each word to lowercase
+    const spaceSeparatedString = wordsArray.join(' ').toLowerCase();
+
+    console.log(spaceSeparatedString)
+    return spaceSeparatedString;
   }
 
 

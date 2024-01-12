@@ -121,8 +121,11 @@ export class PartnerProductsComponent implements OnInit {
   }
 
   navigateToExternalUrl(): void {
-    const externalUrl = this.partner.websiteLink || ''; // Replace with your external URL
-    window.location.href = 'https://' + externalUrl;
+    const externalUrl = this.partner.websiteLink || '';
+    const fullUrl = 'https://' + externalUrl;
+  
+    // Open the external URL in a new window
+    window.open(fullUrl, '_blank');
   }
   
 
