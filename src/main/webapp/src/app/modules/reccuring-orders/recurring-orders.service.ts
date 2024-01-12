@@ -21,7 +21,7 @@ export class RecurringOrdersService {
   }
 
   makeRecurringOrder(recurringOrder: RecurringOrderDto): Observable<RecurringOrderDto> {
-    return this.http.post<RecurringOrderDto>(`${this.apiUrl}/${recurringOrder.id}`, recurringOrder);
+    return this.http.post<RecurringOrderDto>(`${this.apiUrl}`, recurringOrder);
   }
 
   updateRecurringOrder(recurringOrder: RecurringOrderDto): Observable<RecurringOrderDto> {

@@ -65,6 +65,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.DELETE, "/api/orders/**").hasAnyAuthority( "ADMIN")
 
                                 .requestMatchers("api/product_order/**").hasAnyAuthority("ADMIN", "USER", "PARTNER")
+                                .requestMatchers("api/recurring_orders/**").hasAnyAuthority("ADMIN", "USER", "PARTNER")
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

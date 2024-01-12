@@ -1,0 +1,2 @@
+ALTER TABLE p_recurring_orders
+DROP CONSTRAINT p_recurring_orders_frequency_check;

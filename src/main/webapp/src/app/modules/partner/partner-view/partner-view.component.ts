@@ -7,6 +7,12 @@ import { HttpClient } from '@angular/common/http';
 import { PartnerReadDto, PartnerType } from 'src/app/shared/model/api-models';
 
 
+interface Advertisement {
+  title: string,
+  description: string,
+  link: string
+}
+
 @Component({
   selector: 'app-partner-view',
   templateUrl: './partner-view.component.html',
@@ -24,6 +30,11 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
   categoryActive: boolean = false;
   categoryActiveName: string | null = null;
   categories: string[] = [];
+  ad: Advertisement = {
+    title: "Advertisement", 
+    description: "contact us to place your advertisement",
+    link: "www.example.com"
+  };
 
   loggedUser = {
     firstName: '',
@@ -153,6 +164,14 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
 
     // console.log(spaceSeparatedString)
     return spaceSeparatedString;
+  }
+
+  navigateToExternalUrl(): void {
+    const externalUrl = this.ad.link || '';
+    const fullUrl = 'https://' + externalUrl;
+  
+    // Open the external URL in a new window
+    window.open(fullUrl, '_blank');
   }
 
 

@@ -8,6 +8,7 @@ import { ToastService } from 'src/app/shared/toast/toast.service';
 import { Router } from '@angular/router';
 import { ProductOrderService } from '../../product-order/product-order.service';
 import { DatePipe } from '@angular/common';
+import { RecurringOrdersService } from '../../reccuring-orders/recurring-orders.service';
 
 
 @Component({
@@ -36,10 +37,11 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
 
   constructor(
     private shoppingCartService: ShoppingCartService,
+    private productOrderService: ProductOrderService,
+    private recurringOrdersService: RecurringOrdersService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private orderService: OrderService,
-    private productOrderService: ProductOrderService,
     private toastService: ToastService,
     private router: Router,
     private cd: ChangeDetectorRef,
@@ -67,9 +69,6 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     })
 
     this.frequencies = Object.values(Frequency);
-    this.frequencies = this.frequencies.map(category => {
-      return this.camelCaseToSpaceSeparated(category)
-    });
   }
 
   ngAfterViewInit(): void {
@@ -235,7 +234,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onRecurring() {
+  onSubmitRecurring() {
     this.recurringForm.markAllAsTouched();
     this.submitted2 = true;
     console.log(this.checkoutForm.value)
@@ -247,36 +246,32 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
       }
     });
 
-    // if (this.checkoutForm.invalid) {
-    //   console.log(this.checkoutForm.value)
-    //   console.log('wrong form');
-    //   return;
-    // }
+    if (this.checkoutForm.invalid) {
+      console.log(this.checkoutForm.value)
+      console.log('wrong form');
+      return;
+    }
     const form = this.recurringForm.value;
     
-    const startDate = this.recurringForm.value.startDate.setHours(12, 0, 0, 0);
-    const formattedDate = this.datePipe.transform(startDate, 'yyyy-MM-dd HH:mm');
+    const startDate = new Date(this.recurringForm.value.startDate).setHours(12, 0, 0, 0);
+    const formattedDate = this.datePipe.transform(startDate, 'yyyy-MM-ddTHH:mm');
     form.startDate = formattedDate;
 
-    form.addressEnd.id = this.checkoutForm.value.addressEnd as number;
+    form.addressEnd.id = Number(this.checkoutForm.value.addressEnd);
     form.addressStart.id = this.partner?.owner.addresses[0].id;
 
     form.quantity = this.products[0].quantity;
     form.customer.id = this.customer.id;
     form.product.id = this.products[0].product.id;
 
+    // console.log(this.recurringForm.value)
+    console.log(JSON.stringify(form, null, 2));
 
-    console.log(this.recurringForm.value)
-  }
-
-  camelCaseToSpaceSeparated(camelCaseString: string): string {
-    // Use regular expression to split camelCase into an array of words
-    const wordsArray = camelCaseString.split(/(?=[A-Z0-9])/);
-
-    // Join the array of words with spaces and convert each word to lowercase
-    const spaceSeparatedString = wordsArray.join(' ').toLowerCase();
-
-    // console.log(spaceSeparatedString)
-    return spaceSeparatedString;
+    this.recurringOrdersService.makeRecurringOrder(form).subscribe(response => {
+      console.log('success')
+    });
+    this.router.navigate(['/']);
+    this.toastService.showSuccess('Periodic order has been set')
+    this.shoppingCartService.clear();
   }
 }
