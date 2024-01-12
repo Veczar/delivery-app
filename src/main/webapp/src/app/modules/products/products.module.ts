@@ -15,6 +15,8 @@ import { AddProductFormComponent } from './add-product-form/add-product-form.com
 import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
+import { PartnerModule } from '../partner/partner.module';
+
 @NgModule({
   declarations: [
     FilterPipe,
@@ -34,6 +36,7 @@ import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
     MatInputModule, 
     MatButtonModule,
     MatTooltipModule,
+    PartnerModule,
 
     UserModule,
     OrdersViewModule

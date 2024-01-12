@@ -103,10 +103,9 @@ ul > li:hover > button {
 .wrapper {
   width: 100%;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  // background-color: beige;
   background-color: white;
 
-  overflow: auto;
+  // overflow: auto;
 }
 
 .center {
@@ -287,12 +286,14 @@ ul > li:hover > button {
 }
 
 .img {
-  background-color: #82898f;
+  background-color: #ffffff;
+  max-height: 120px !important;
 }
 
 img {
   object-fit: cover;
   height: 100%;
+  width: fit-content;
 }
 
 .on-sale-indicator {

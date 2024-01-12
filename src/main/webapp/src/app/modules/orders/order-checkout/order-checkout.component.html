@@ -36,6 +36,10 @@
                 <span class="input-group-text">$</span>
               </div>
             </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <!-- todo -->
+              <span>delivery fee</span> 2.5$ 
+            </li>
 
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
@@ -57,7 +61,6 @@
           <form 
             [formGroup]="checkoutForm" 
             class="row g-3 needs-validation" 
-            (ngSubmit)="onSubmit()"
             >
 
             <div class="form-group col-md-6">
@@ -120,18 +123,20 @@
               </div>
             </div>
 
-            <h4 class="mb-1">Select address</h4>
+            <!-- <h4 class="mb-1">Select address</h4> -->
+            <label for="addressEnd" class="form-label">Select address</label>
             <div 
               class="form-check d-flex align-items-center radio-form" 
               *ngFor="let address of addresses; let i = index"
               [ngClass]="{ 'invalid-radio': submitted2 && checkoutForm.value.addressEnd == null}"
               >
               <input 
-                type="radio" 
+                type="radio"
                 class="btn-check" 
                 id="option{{i}}" 
                 autocomplete="off" 
                 formControlName="addressEnd" 
+                name="addressEnd" 
                 value="{{address.id}}"
                 >
               <label class="btn btn-outline-success myradio" for="option{{i}}"></label>
@@ -143,12 +148,54 @@
               </h5>
             </div>
             <div class="text-danger mt-0" *ngIf="submitted2 && checkoutForm.value.addressEnd == null">
-              Select your address
+              Please select your address
             </div>
 
             <hr class="my-4">
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to payment</button>
+            <button *ngIf="!recurring" class="w-100 btn btn-primary btn-lg" (click)="onSubmit()">Continue to payment</button>
           </form>
+
+          <form 
+            [formGroup]="recurringForm" 
+            class="row g-3 needs-validation"
+            >
+
+            <div *ngIf="recurring" class="mt-3">
+              <!-- <h4 class="d-flex mb-3">Select sart Date</h4> -->
+              <label for="category" class="form-label">Select start date</label><br>
+              <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <!-- <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}"> -->
+                <input matInput [matDatepicker]="picker" formControlName="startDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="recurring" class="mt-3">
+              <div class="form-group col-md-12">
+                <label for="category" class="form-label">Select interval</label>
+                <select
+                class="form-select input"
+                name="frequency"
+                formControlName="frequency"
+                [ngClass]="{ 'is-invalid': submitted2 && f2['frequency'].errors }"
+                [ngClass]="{ 'is-valid': submitted2 && !f2['frequency'].errors }"
+                placeholder=""
+                >
+                <option *ngFor="let freq of frequencies" [value]="freq">{{ freq }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="submitted2 && f2['frequency'].errors">
+                  <p>Provide Category</p> 
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+            <button *ngIf="recurring" class="w-100 btn btn-primary btn-lg" (click)="onSubmitRecurring()">Plan order</button>
+          </form>
+
         </div>
       </div>
     </main>

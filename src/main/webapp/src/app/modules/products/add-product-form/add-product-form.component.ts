@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { CategoryDto, PartnerDto, ProductDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
@@ -14,6 +14,9 @@ export class AddProductFormComponent {
   @Input()
   partner!: PartnerDto;
 
+  @Output()
+  dataChangedEvent = new EventEmitter<void>();
+  
   product!: ProductDto;
   categories: CategoryDto[] = [];
   imageUrl: string | ArrayBuffer | null | undefined;
@@ -129,6 +132,7 @@ export class AddProductFormComponent {
 
     this.productService.addProduct(this.productForm.value as ProductDto, this.selectedFile).subscribe((response: ProductDto) => {
       console.log('response:', response);
+      this.dataChangedEvent.emit();
     });
   }
 

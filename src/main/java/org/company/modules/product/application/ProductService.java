@@ -8,7 +8,6 @@ import org.company.shared.aplication.GenericService;
 import org.company.shared.photos.PhotoService;
 import org.company.shared.photos.PhotoType;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -35,17 +34,16 @@ public class ProductService extends GenericService<Product, ProductDto, Long,  P
                 .stream().map(productAssembler::toReadDto).collect(Collectors.toList());
     }
 
-    @Transactional
-    public ProductDto saveItem(MultipartFile photo, ProductDto productDto)
-    {
+
+    public ProductDto saveItem(MultipartFile photo, ProductDto productDto) {
         productDto.setPhotoPath(photoService.savePhoto(photo, PhotoType.product));
         return super.saveItem(productDto);
     }
+    
     @Override
-    @Transactional
     public ProductDto removeItem(Long id) {
         ProductDto productDto = super.removeItem(id);
-        photoService.removePhoto(PhotoType.partner, productDto.getPhotoPath());
+        photoService.removePhoto(PhotoType.product, productDto.getPhotoPath());
         return productDto;
     }
 }

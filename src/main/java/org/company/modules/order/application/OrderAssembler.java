@@ -17,11 +17,9 @@ import org.company.modules.user.application.UserAssembler;
 import org.company.modules.user.domain.User;
 import org.company.modules.user.domain.UserRepository;
 import org.company.shared.aplication.IAssembler;
-import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Component
@@ -62,8 +60,12 @@ public class OrderAssembler implements IAssembler<Order, OrderDto> {
         updateAddresses(orderDto,order);
         updateCustomer(orderDto, order);
         updatePartner(orderDto, order);
-        if(orderDto.getDeliveryMan() == null)order.setDeliveryMan(null);
-            else updateDeliveryMan(orderDto, order);
+        if(orderDto.getDeliveryMan() == null){
+            order.setDeliveryMan(null);
+        }
+        else {
+            updateDeliveryMan(orderDto, order);
+        }
         order.setTotalPrice(orderDto.getTotalPrice());
         order.setTip(orderDto.getTip());
         order.setCreationDate(orderDto.getCreationDate());

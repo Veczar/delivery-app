@@ -20,7 +20,7 @@ export class ShoppingCartService {
     }
   }
 
-  getItems(): { quantity: number, product: ProductDto, subtotal: number }[] {
+  getItems(): { product: ProductDto, quantity: number, subtotal: number }[] {
     return this.products;
   }
 

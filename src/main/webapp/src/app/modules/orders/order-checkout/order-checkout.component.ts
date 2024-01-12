@@ -1,12 +1,14 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../../products/shopping-cart/shopping-cart.service';
-import { AddressDto, OrderDto, PartnerDto, ProductDto, ProductOrderDto, Status, UserDto } from 'src/app/shared/model/api-models';
+import { AddressDto, Frequency, OrderDto, PartnerDto, ProductDto, ProductOrderDto, Status, UserDto } from 'src/app/shared/model/api-models';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../user/user.service';
 import { OrderService } from '../order.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { Router } from '@angular/router';
 import { ProductOrderService } from '../../product-order/product-order.service';
+import { DatePipe } from '@angular/common';
+import { RecurringOrdersService } from '../../reccuring-orders/recurring-orders.service';
 
 
 @Component({
@@ -19,32 +21,44 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
   products: {product: ProductDto, quantity: number, subtotal: number }[] = [];
 
   checkoutForm!: FormGroup;
+  orderForm!: FormGroup;
+  recurringForm!: FormGroup;
   submitted: boolean = false;
   submitted2: boolean = false;
+  recurring: boolean = false;
   partner!: PartnerDto | undefined;
   addresses!: AddressDto[] | undefined;
   customer!: UserDto;
-  orderForm!: FormGroup;
   tip!: number;
-  totalPrice!: number;
+  totalPrice!: number; // sum of subtotals and tip and delivery fee
+  startDate: any;
+  frequencies: string[] = [];
+  selctedFreq!: string;
 
   constructor(
     private shoppingCartService: ShoppingCartService,
+    private productOrderService: ProductOrderService,
+    private recurringOrdersService: RecurringOrdersService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private orderService: OrderService,
-    private productOrderService: ProductOrderService,
     private toastService: ToastService,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private datePipe: DatePipe
   ) {}
 
 
   ngOnInit(): void {
+    if (this.router.url === '/checkout/recurring') {
+      console.log(this.router.url)
+      this.recurring = true;
+    }
+    this.initForm();
+
     this.products = this.shoppingCartService.getItems();
     this.partner = this.products[0].product.owner;
 
-    this.initForm();
     this.userService.getUser(parseInt(localStorage.getItem('id') as string)).subscribe(user => {
       console.log(user);
       this.submitted = true;
@@ -53,10 +67,12 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
 
       this.checkoutForm.patchValue(user);
     })
+
+    this.frequencies = Object.values(Frequency);
   }
 
   ngAfterViewInit(): void {
-    this.totalPrice = this.shoppingCartService.getTotalPrice();
+    this.totalPrice = this.shoppingCartService.getTotalPrice() + 2.50; //+ delivery fee
     this.cd.detectChanges() //to resolve NG0100 error
   }
 
@@ -107,7 +123,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
         ]
       ],
       addressEnd: [ null, Validators.required],
-    })
+    });
 
     this.orderForm = this.formBuilder.group({
       addressStart: [null, Validators.required],
@@ -125,15 +141,38 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
       totalPrice: [null, Validators.required],
       status: [null, Validators.required],
       creationDate: [null, Validators.required],
-    })
+    });
+
+    this.recurringForm = this.formBuilder.group({
+      addressStart: this.formBuilder.group({
+        id: [null, Validators.required],
+      }),       
+      addressEnd: this.formBuilder.group({
+        id: [null, Validators.required],
+      }),      
+      quantity: [ null, Validators.required],
+      frequency: [ null, Validators.required],
+      startDate: [ null, Validators.required],
+      customer: this.formBuilder.group({
+        id: [null, Validators.required],
+      }),      
+      product: this.formBuilder.group({
+        id: [null, Validators.required],
+      }),    
+    });
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.checkoutForm.controls;
   }
 
+  get f2(): { [key: string]: AbstractControl } {
+    return this.recurringForm.controls;
+  }
+
   onSubmit() {
     this.submitted2 = true;
+    console.log(this.checkoutForm.value)
 
     Object.keys(this.checkoutForm.controls).forEach(key => {
       const control = this.checkoutForm.get(key);
@@ -159,9 +198,9 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     form.addressStart = {id: addrStartId};
 
     form.customer.id = this.customer.id;
-    form.deliveryMan.id = 1; //TODO: change this
+    form.deliveryMan = null;
     form.tip = this.tip;
-    form.totalPrice = this.shoppingCartService.getTotalPrice();
+    form.totalPrice = this.totalPrice; //TODO: calculate this maybe
 
     const partnerId = this.partner?.id;
     form.partner = {id: partnerId};
@@ -193,5 +232,46 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
         });
       });
     });
+  }
+
+  onSubmitRecurring() {
+    this.recurringForm.markAllAsTouched();
+    this.submitted2 = true;
+    console.log(this.checkoutForm.value)
+
+    Object.keys(this.checkoutForm.controls).forEach(key => {
+      const control = this.checkoutForm.get(key);
+      if (control) {
+        control.setValue(control.value);
+      }
+    });
+
+    if (this.checkoutForm.invalid) {
+      console.log(this.checkoutForm.value)
+      console.log('wrong form');
+      return;
+    }
+    const form = this.recurringForm.value;
+    
+    const startDate = new Date(this.recurringForm.value.startDate).setHours(12, 0, 0, 0);
+    const formattedDate = this.datePipe.transform(startDate, 'yyyy-MM-ddTHH:mm');
+    form.startDate = formattedDate;
+
+    form.addressEnd.id = Number(this.checkoutForm.value.addressEnd);
+    form.addressStart.id = this.partner?.owner.addresses[0].id;
+
+    form.quantity = this.products[0].quantity;
+    form.customer.id = this.customer.id;
+    form.product.id = this.products[0].product.id;
+
+    // console.log(this.recurringForm.value)
+    console.log(JSON.stringify(form, null, 2));
+
+    this.recurringOrdersService.makeRecurringOrder(form).subscribe(response => {
+      console.log('success')
+    });
+    this.router.navigate(['/']);
+    this.toastService.showSuccess('Periodic order has been set')
+    this.shoppingCartService.clear();
   }
 }

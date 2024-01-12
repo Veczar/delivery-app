@@ -54,13 +54,11 @@
                 aria-expanded="false">
                 <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
               </button>
-              <ul class="dropdown-menu dropdown-menu-dark dropdown-position ">
                 <ul class="dropdown-menu dropdown-menu-dark dropdown-position ">
                   <li><a class="dropdown-item user-dropdown" (click)="open(settingsModal)">Settings</a></li>
                   <li><a class="dropdown-item user-dropdown" (click)="open(ordersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Orders</a></li>
                   <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
                 </ul>
-              </ul> 
             </div>
           </div>
 
@@ -92,7 +90,7 @@
                 class="ownerOptions btn btn-outline-primary me-2"
                 matTooltip="Add new product to your business"
                 [matTooltipShowDelay]="200"
-                (click)="addProduct(addProductForm)"
+                (click)="openModal(addProductForm)"
                 >
                 <h5>
                   <i class="bi bi-plus-lg"></i>
@@ -104,6 +102,7 @@
                 class="ownerOptions btn btn-outline-primary"
                 matTooltip="Edit your business information"
                 [matTooltipShowDelay]="200"
+                (click)="openModal(editPartner)"
                 >
                 <h5>
                   <i class="bi bi-pen-fill"></i>
@@ -391,7 +390,18 @@
       (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body p-4">
-    <app-add-product-form [partner]="partner"></app-add-product-form>
+    <app-add-product-form [partner]="partner" (dataChangedEvent)="productsChanged()"></app-add-product-form>
+  </div>
+</ng-template>
+
+<ng-template #editPartner let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit partner info</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body p-4">
+    <app-partner-edit-form [partner]="partner" (dataChangedEvent)="partnerChanged()"></app-partner-edit-form>
   </div>
 </ng-template>
 
@@ -402,7 +412,7 @@
       (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body p-3">
-    <app-product [productId]="selectedProduct.id" [modal]="modal"></app-product>
+    <app-product [productId]="selectedProduct.id" [modal]="modal" [owner]="owner"></app-product>
   </div>
 </ng-template>
 

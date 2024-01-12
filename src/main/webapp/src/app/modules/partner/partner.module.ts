@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PartnerViewComponent } from './partner-view.component';
+import { PartnerViewComponent } from './partner-view/partner-view.component';
 import { CityViewComponent } from './city-view/city-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,13 +12,15 @@ import { AdminPanelModule } from '../admin-panel/admin-panel.module';
 import { AuthModule } from '../auth/auth.module';
 import { UserModule } from '../user/user.module';
 import { FilterPipe } from 'src/app/shared/filter.pipe';
+import { PartnerEditFormComponent } from './partner-edit-form/partner-edit-form.component';
 
 
 @NgModule({
   declarations: [
     PartnerViewComponent,
     CityViewComponent,
-    FilterPipe
+    FilterPipe,
+    PartnerEditFormComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,9 @@ import { FilterPipe } from 'src/app/shared/filter.pipe';
     UserModule,
     AuthModule,
     AdminPanelModule
+  ],
+  exports:[
+    PartnerEditFormComponent
   ]
 })
 export class PartnerModule { }

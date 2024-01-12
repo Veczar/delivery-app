@@ -42,6 +42,13 @@ p {
   margin-bottom: 0rem;
 }
 
+
+// --------- footer -----------
+
+.nav-hover-underline li.nav-item a:hover {
+  text-decoration: underline;
+}
+
 .footer {
   display: flex;
   justify-content: center;

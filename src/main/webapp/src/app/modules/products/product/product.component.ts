@@ -3,6 +3,7 @@ import { ProductDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
+import { AuthService } from '../../auth/auth.service';
 
 
 @Component({
@@ -14,18 +15,21 @@ export class ProductComponent implements OnInit {
 
   @Input()
   productId!: number;
+  @Input()
+  owner!: boolean;
+  @Input()
+  modal!: any; //for the exit event when adding to cart
 
   product!: ProductDto;
   quantity: number = 1;
   subtotal: number = 0;
+  
 
-  @Input()
-  modal!: any; //for the exit event when adding to cart
 
   constructor(
     private productService: ProductsService,
     private shoppingCartService: ShoppingCartService,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -57,8 +61,8 @@ export class ProductComponent implements OnInit {
   }
 
   // for partner mode
-  // deleteProduct():void {
-  //   console.log(this.productId);
-  //   // this.productService.deleteProduct(this.productId);
-  // }
+  deleteProduct():void {
+    console.log(this.productId);
+    this.productService.deleteProduct(this.productId).subscribe();
+  }
 }

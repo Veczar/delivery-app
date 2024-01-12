@@ -43,11 +43,11 @@ public class SecurityConfiguration {
 
                                 .requestMatchers("api/addresses/**").hasAuthority("ADMIN")
 
+                                .requestMatchers(HttpMethod.GET, "/api/products/photo/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasAnyAuthority("PARTNER", "ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/api/products/photo/**").permitAll()
 
                                 .requestMatchers("api/categories/**").hasAnyAuthority("ADMIN", "PARTNER")
                                 .requestMatchers("api/categories").hasAnyAuthority("ADMIN", "PARTNER")
@@ -65,6 +65,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.DELETE, "/api/orders/**").hasAnyAuthority( "ADMIN")
 
                                 .requestMatchers("api/product_order/**").hasAnyAuthority("ADMIN", "USER", "PARTNER")
+                                .requestMatchers("api/recurring_orders/**").hasAnyAuthority("ADMIN", "USER", "PARTNER")
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

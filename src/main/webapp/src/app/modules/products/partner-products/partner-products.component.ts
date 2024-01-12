@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from '../../auth/auth.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
+import { PartnerService } from '../../partner/partner.service';
 
 @Component({
   selector: 'app-partner-products',
@@ -40,7 +41,8 @@ export class PartnerProductsComponent implements OnInit {
     private toastService: ToastService,
     private productService: ProductsService,
     private route: ActivatedRoute,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private partnerService: PartnerService
   ) {
     this.updateAuthenticationState();
     this.palceholders = Array(3).fill(1);
@@ -56,8 +58,8 @@ export class PartnerProductsComponent implements OnInit {
     this.route.params.subscribe(params => {
       const partnerName = params['partner'];
       // console.log('name: ', partnerName);
-      //TODO: use partner service nad review service when its ready
-      this.http.get<PartnerDto>(`http://localhost:8080/api/partners/name/${partnerName}`).subscribe((partner) => {
+
+      this.partnerService.getPartnerByName(partnerName).subscribe((partner) => {
         this.partner = partner;
         this.address = partner.owner.addresses[0];
         // console.log(partner)
@@ -81,7 +83,7 @@ export class PartnerProductsComponent implements OnInit {
       this.productService.getProductsFromPartner(partnerName).subscribe(products => {
         this.products = products;
         this.initCategories(products);
-      })
+      });
     })
   }
 
@@ -107,7 +109,7 @@ export class PartnerProductsComponent implements OnInit {
     this.searchText = '';
   }
 
-  addProduct(modal: any): void {
+  openModal(modal: any): void {
     this.modalService.open(modal);
   }
 
@@ -128,6 +130,19 @@ export class PartnerProductsComponent implements OnInit {
     window.open(fullUrl, '_blank');
   }
   
+  partnerChanged(): void {
+    this.partnerService.getPartnerById(this.partner.id as number).subscribe(partner => {
+      this.partner = partner;
+    });
+  }
+
+  productsChanged(): void {
+    this.productService.getProductsFromPartner(this.partner.name as string).subscribe(products => {
+      this.products = products;
+      this.initCategories(products);
+    });
+    this.modalService.dismissAll();
+  }
 
   // ----------- navbar -----------------
   open(modal: any): void {
