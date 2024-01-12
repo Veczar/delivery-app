@@ -26,10 +26,6 @@
               <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
                 <i class="bi bi-speedometer2"></i> Dashboard</button>
             </li>
-            <li *ngIf="getRole() === 'ADMIN'">
-              <button class="nav-link active color" [routerLink]="['/admin/coplaints']">
-                <i class="bi bi-card-heading"></i> Complaints</button>
-            </li>
             <li *ngIf="getRole() === 'COURIER'">
               <button class="nav-link active color" [routerLink]="['/courier/my-deliveries']">
                 <i class="bi bi-backpack4"></i> My deliveries</button>
@@ -156,16 +152,12 @@
             </ul>
           </div>
 
-          <div class="col-md-5 offset-md-1 mb-3">
-            <form>
-              <h5>Subscribe to our newsletter</h5>
-              <p class="ps-0">Monthly digest of what's new and exciting from us.</p>
+          <div class="col-md-5 offset-md-1 mb-3" *ngIf="isUserLoggedIn() && getRole() !== 'ADMIN'">
+              <h5>Send a ticket</h5>
+              <p class="ps-0">Having trouble accessing account? Your order wasn't delivered. File a coplaint! </p>
               <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                <label for="newsletter1" class="visually-hidden">Email address</label>
-                <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                <button class="btn btn-primary" type="button">Subscribe</button>
+                <button class="btn btn-secondary" type="button" (click)="open(complaintModal)" >Send a complaint</button>
               </div>
-            </form>
           </div>
         </div>
 
