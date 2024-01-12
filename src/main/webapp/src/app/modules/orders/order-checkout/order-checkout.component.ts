@@ -7,6 +7,7 @@ import { OrderService } from '../order.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { Router } from '@angular/router';
 import { ProductOrderService } from '../../product-order/product-order.service';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -21,12 +22,14 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
   checkoutForm!: FormGroup;
   submitted: boolean = false;
   submitted2: boolean = false;
+  recurring: boolean = false;
   partner!: PartnerDto | undefined;
   addresses!: AddressDto[] | undefined;
   customer!: UserDto;
   orderForm!: FormGroup;
   tip!: number;
   totalPrice!: number; // sum of subtotals and tip and delivery fee
+  startDate: any;
 
   constructor(
     private shoppingCartService: ShoppingCartService,
@@ -36,11 +39,17 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     private productOrderService: ProductOrderService,
     private toastService: ToastService,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private datePipe: DatePipe
   ) {}
 
 
   ngOnInit(): void {
+    if (this.router.url === '/checkout/recurring') {
+      console.log(this.router.url)
+      this.recurring = true;
+    }
+
     this.products = this.shoppingCartService.getItems();
     this.partner = this.products[0].product.owner;
 
@@ -194,5 +203,12 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
         });
       });
     });
+  }
+
+  onRecurring() {
+    this.startDate = new Date(this.startDate)
+    const formattedDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd HH:mm');
+
+    console.log(formattedDate);
   }
 }

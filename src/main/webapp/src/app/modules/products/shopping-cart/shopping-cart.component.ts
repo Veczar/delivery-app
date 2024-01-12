@@ -27,6 +27,10 @@ export class ShoppingCartComponent {
     return this.shoppingCartService.getTotalPrice();
   }
 
+  getCartSize(): number {
+    return this.shoppingCartService.getCartSize();
+  }
+
   removeItem(index: number): void {
     this.shoppingCartService.removeProduct(index);
   }
@@ -34,6 +38,15 @@ export class ShoppingCartComponent {
   onCheckout(): void {
     if (this.authService.isUserLogged()){
       this.router.navigate(['/checkout']);
+    }
+    else {
+      this.toastService.showError('You need to be logged in!');
+    }
+  }
+
+  onRecurring(): void {
+    if (this.authService.isUserLogged()){
+      this.router.navigate(['/checkout/recurring']);
     }
     else {
       this.toastService.showError('You need to be logged in!');

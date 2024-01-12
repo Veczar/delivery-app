@@ -57,7 +57,6 @@
           <form 
             [formGroup]="checkoutForm" 
             class="row g-3 needs-validation" 
-            (ngSubmit)="onSubmit()"
             >
 
             <div class="form-group col-md-6">
@@ -127,7 +126,7 @@
               [ngClass]="{ 'invalid-radio': submitted2 && checkoutForm.value.addressEnd == null}"
               >
               <input 
-                type="radio" 
+                type="radio"
                 class="btn-check" 
                 id="option{{i}}" 
                 autocomplete="off" 
@@ -143,11 +142,43 @@
               </h5>
             </div>
             <div class="text-danger mt-0" *ngIf="submitted2 && checkoutForm.value.addressEnd == null">
-              Select your address
+              Please select your address
             </div>
 
+            <div *ngIf="recurring" class="mt-3">
+              <h4 class="d-flex mb-3">Select sart Date</h4>
+              <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}">
+                <mat-hint>yyyy-MM-dd</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="recurring" class="mt-3">
+              <div class="form-group col-md-12">
+                <label for="category" class="form-label">Select interval</label>
+                <select
+                class="form-select input"
+                formControlName="categories"
+                [ngClass]="{ 'is-invalid': submitted && f['categories'].errors }"
+                [ngClass]="{ 'is-valid':submitted && !f['categories'].errors }"
+                placeholder="">
+                
+                <option disabled>Select a category</option>
+                <!-- <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option> -->
+              </select>
+              <div class="invalid-feedback" *ngIf="submitted && f['categories'].errors">
+                <p>Provide Category</p>
+              </div>
+            </div>
+
+            </div>
+            
             <hr class="my-4">
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to payment</button>
+            <button *ngIf="!recurring" class="w-100 btn btn-primary btn-lg" (click)="onSubmit()">Continue to payment</button>
+            <button *ngIf="recurring" class="w-100 btn btn-primary btn-lg" (click)="onRecurring()">Plan order</button>
           </form>
         </div>
       </div>

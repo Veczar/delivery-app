@@ -9,11 +9,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { OrderCheckoutComponent } from './order-checkout/order-checkout.component';
 
 @NgModule({
   declarations: [
     OrdersViewComponent,
     PartnerOrdersComponent,
+    OrderCheckoutComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +29,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatDatepickerModule, 
+    MatNativeDateModule
   ],
   exports: [
     OrdersViewComponent,

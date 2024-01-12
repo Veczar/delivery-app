@@ -25,6 +25,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
 import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-checkout.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,6 @@ import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-ch
     FrontPageComponent,
     ToastComponent,
     MyDeliveriesComponent,
-    OrderCheckoutComponent,
   ],
   imports: [
     PartnerModule,
@@ -66,6 +66,7 @@ import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-ch
       useClass: ErrorInterceptor,
       multi: true,
     },
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })

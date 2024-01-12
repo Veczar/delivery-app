@@ -9,8 +9,6 @@ import org.company.modules.product.domain.Product;
 import org.company.modules.product.domain.ProductRepository;
 import org.company.modules.recurring_order.application.web.RecurringOrderDto;
 import org.company.modules.recurring_order.domain.RecurringOrder;
-import org.company.modules.role.application.RoleAssembler;
-import org.company.modules.role.domain.RoleRepository;
 import org.company.modules.user.application.UserAssembler;
 import org.company.modules.user.domain.User;
 import org.company.modules.user.domain.UserRepository;
@@ -53,7 +51,7 @@ public class RecurringOrderAssembler implements IAssembler<RecurringOrder, Recur
         Address addressStart = addressRepository.findById(recurringOrderDto.getAddressStart().getId()).orElseThrow(null);
         recurringOrder.setAddressStart(addressStart);
         Address addressEnd = addressRepository.findById(recurringOrderDto.getAddressEnd().getId()).orElseThrow(null);
-        recurringOrder.setAddressEnd(addressStart);
+        recurringOrder.setAddressEnd(addressEnd);
     }
 
     private void updateProduct( RecurringOrderDto recurringOrderDto, RecurringOrder recurringOrder) {
