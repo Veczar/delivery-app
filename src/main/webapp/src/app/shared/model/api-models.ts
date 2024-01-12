@@ -46,48 +46,6 @@ export interface DeliveryManDto {
     user?: UserDto;
     workingArea?: string;
 }
-export interface OrderDto {
-    id?: number;
-    addressStart?: AddressDto;
-    addressEnd?: AddressDto;
-    customer?: UserDto;
-    partner?: PartnerDto;
-    deliveryMan?: DeliveryManDto;
-    totalPrice?: number;
-    tip?: number;
-    creationDate?: Date;
-    completionDate?: Date;
-    status?: Status;
-    distanceInKm?: number;
-}
-
-export interface OrderDto {
-    product?: ProductDto;
-    order?: OrderDto;
-    quantity?: number;
-    subtotal?: number;
-}
-
-export interface OrderReadDto {
-    id?: number;
-    addressStart?: string;
-    addressEnd?: string;
-    customerFirstName?: string;
-    customerLastName?: string;
-    customerTelephoneNumber?: string;
-    partner?: string;
-    partnerPhotoPath?: string;
-    deliveryManId?: number;
-    deliveryManFirstName?: string;
-    deliveryManLastName?: string;
-    totalPrice?: number;
-    tip?: number;
-    creationDate?: string;
-    completionDate?: string;
-    status?: Status;
-    distanceInKm?: number;
-    rating?: number;
-}
 
 export interface Iterable<T> {
 }
@@ -111,6 +69,7 @@ export interface OrderDto {
     distanceInKm?: number;
     id?: number;
     partner?: PartnerDto;
+    rating?: number;
     status?: Status;
     tip?: number;
     totalPrice?: number;
@@ -124,9 +83,14 @@ export interface OrderReadDto {
     customerFirstName?: string;
     customerLastName?: string;
     customerTelephoneNumber?: string;
+    deliveryManFirstName?: string;
+    deliveryManId?: number;
+    deliveryManLastName?: string;
     distanceInKm?: number;
     id?: number;
     partner?: string;
+    partnerPhotoPath?: string;
+    rating?: number;
     status?: Status;
     tip?: number;
     totalPrice?: number;
@@ -172,18 +136,21 @@ export interface PartnerReadDto {
 }
 
 export interface PartnerReviewDto {
-    date?: Date;
+    date?: string;
     description?: string;
     gradeInStars?: number;
     id?: number;
     partner?: PartnerDto;
-    reviewer?: UserDto;
+    reviewer: UserDto;
 }
 
 export interface PartnerReviewReadDto {
+    date?: string;
+    description?: string;
     gradeInStars?: number;
-    id?: number;
+    id: number;
     partnerId?: number;
+    reviewer: UserDto;
 }
 
 export interface ProductDto {
@@ -305,7 +272,7 @@ export interface UserDto {
     addresses: AddressDto[];
     email?: string;
     firstName?: string;
-    id?: number;
+    id: number;
     lastName?: string;
     role?: RoleDto;
     telephoneNumber?: string;
@@ -347,12 +314,12 @@ export enum PartnerType {
     pharmacy = "pharmacy",
     groceryStore = "groceryStore",
     florists = "florists",
-    coffeehouse = "coffeeHouse",
+    coffeeHouse = "coffeeHouse",
 }
 
 export enum Status {
-    done = "done",
     inPreparation = "inPreparation",
-    inDelivery = "inDelivery",
     readyForDelivery = "readyForDelivery",
+    inDelivery = "inDelivery",
+    done = "done",
 }
