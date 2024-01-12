@@ -11,12 +11,19 @@ import org.company.shared.aplication.GenericService;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
 public class ComplaintService extends GenericService<Complaint, ComplaintDto, Long, ComplaintRepository, ComplaintAssembler> {
     public ComplaintService(ComplaintRepository repository, ComplaintAssembler assembler) {
         super(repository, assembler);
+    }
+    @Override
+    public ComplaintDto saveItem(ComplaintDto complaintDto)
+    {
+        complaintDto.setCreationDate(new Date());
+    return  super.saveItem(complaintDto);
     }
     public List<ComplaintReadDto> getComplaintsRead() {
         List<ComplaintReadDto> list = repository.findAll()

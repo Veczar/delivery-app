@@ -41,7 +41,7 @@
         [ngClass]="{ 'is-invalid': submitted && f['methodOfContact'].errors }"
         [ngClass]="{ 'is-valid':submitted && !f['methodOfContact'].errors }"
         >
-        <option value="call">Call with admin</option>
+        <option value="phone">Call with admin</option>
         <option value="email">e-mail communication</option>
     </select>
     <div class="invalid-feedback" *ngIf="submitted && f['methodOfContact'].errors">

@@ -25,8 +25,9 @@ public class Complaint {
     @Enumerated(EnumType.STRING)
     private ContactMethod methodOfContact;
     @Column(name = "creation_date")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     @OneToOne
-    @Column(name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 }

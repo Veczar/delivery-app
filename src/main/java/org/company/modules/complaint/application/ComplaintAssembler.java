@@ -25,6 +25,7 @@ public class ComplaintAssembler implements IAssembler<Complaint, ComplaintDto> {
         complaintDto.setTitle(complaint.getTitle());
         complaintDto.setDescription(complaint.getDescription());
         complaintDto.setMethodOfContact(complaint.getMethodOfContact());
+        complaintDto.setCreationDate(complaint.getCreationDate());
         complaintDto.setUser(userAssembler.toDto(complaint.getUser()));
         return complaintDto;
     }
@@ -39,6 +40,7 @@ public class ComplaintAssembler implements IAssembler<Complaint, ComplaintDto> {
         complainReadDto.setUserLastName(complaint.getUser().getLastName());
         complainReadDto.setUserEmail(complaint.getUser().getEmail());
         complainReadDto.setUserTelephoneNumber(complaint.getUser().getTelephoneNumber());
+        complainReadDto.setCreationDate(complaint.getCreationDate());
         return complainReadDto;
     }
 
@@ -48,11 +50,12 @@ public class ComplaintAssembler implements IAssembler<Complaint, ComplaintDto> {
         complaint.setTitle(complaintDto.getTitle());
         complaint.setDescription(complaintDto.getDescription());
         complaint.setMethodOfContact(complaintDto.getMethodOfContact());
+        complaint.setCreationDate(complaintDto.getCreationDate());
         updateUser(complaintDto, complaint);
     }
     private void updateUser(ComplaintDto complaintDto, Complaint complaint)
     {
-        User user = userRepository.findById(complaintDto.getId()).orElse(null);
+        User user = userRepository.findById(complaintDto.getUser().getId()).orElse(null);
         complaint.setUser(user);
     }
 }

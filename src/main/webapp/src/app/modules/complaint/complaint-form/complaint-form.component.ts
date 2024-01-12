@@ -33,7 +33,6 @@ export class ComplaintFormComponent {
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(60),
-          Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ ]+$/)
         ]],
       description: [
         '',
@@ -41,9 +40,9 @@ export class ComplaintFormComponent {
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(300),
-          Validators.pattern(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ ]+$/)
         ]],
         methodOfContact:['', [Validators.required]],
+        user:  this.formBuilder.group({})
     });
   }
 
@@ -62,7 +61,9 @@ export class ComplaintFormComponent {
       return;
     }
 
-    this.complaintService.addProduct(this.complaintForm.value as ComplaintDto).subscribe(
+    const complaintDto = this.complaintForm.value as ComplaintDto;
+    complaintDto.user.id = Number(localStorage.getItem('id'));
+    this.complaintService.addComplaint(complaintDto).subscribe(
       (response: ComplaintDto) => {
         console.log('response:', response);
 

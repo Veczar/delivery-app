@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.company.modules.complaint.web.ContactMethod;
 import org.company.modules.user.application.web.UserDto;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,5 +18,6 @@ public class ComplaintDto {
     private String description;
     private String title;
     private ContactMethod methodOfContact;
+    private Date creationDate;
     private UserDto user;
 }

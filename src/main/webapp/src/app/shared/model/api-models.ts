@@ -350,6 +350,26 @@ export enum NullHandling {
     NULLS_LAST = "NULLS_LAST",
 }
 
+export interface ComplaintDto {
+    id : number;
+    title : string;
+    description : string;
+    methodOfContact :ContactMethod;
+    user : UserDto;
+}
+
+export interface ComplaintReadDto {
+    id : number;
+    description : string;
+    title : string;
+    methodOfContact : ContactMethod;
+    userFirstName : string;
+    userLastName : string;
+    ususerEmail : string;
+    userTelephoneNumber : string;
+    creationDate: Date;
+}
+
 export enum PartnerType {
     other = "other",
     restaurant = "restaurant",
