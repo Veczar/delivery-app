@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class PartnerReviewService extends GenericService<PartnerReview, PartnerReviewDto, Long, PartnerReviewRepository,PartnerReviewAssebler> {
-    public PartnerReviewService(PartnerReviewRepository repository, PartnerReviewAssebler assembler) {
+public class PartnerReviewService extends GenericService<PartnerReview, PartnerReviewDto, Long, PartnerReviewRepository, PartnerReviewAssembler> {
+    public PartnerReviewService(PartnerReviewRepository repository, PartnerReviewAssembler assembler) {
         super(repository, assembler);
     }
     
