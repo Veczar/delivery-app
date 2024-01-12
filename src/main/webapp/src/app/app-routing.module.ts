@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'register/partner', component: RegisterPartnerFormComponent},
   {path: 'register/courier', component: RegisterCourierFormComponent},
   {path: 'checkout', component: OrderCheckoutComponent, canActivate: [checkoutGuard] },
-  {path: 'checkout/recurring', component: OrderCheckoutComponent, },
+  {path: 'checkout/recurring', component: OrderCheckoutComponent, canActivate: [checkoutGuard]},
   {path: 'partner/:partner', component: PartnerProductsComponent},
   {
     path: 'partners',
