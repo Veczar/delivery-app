@@ -8,7 +8,6 @@ import org.company.shared.aplication.GenericService;
 import org.company.shared.photos.PhotoService;
 import org.company.shared.photos.PhotoType;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

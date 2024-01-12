@@ -286,12 +286,14 @@ ul > li:hover > button {
 }
 
 .img {
-  background-color: #82898f;
+  background-color: #ffffff;
+  max-height: 120px !important;
 }
 
 img {
   object-fit: cover;
   height: 100%;
+  width: fit-content;
 }
 
 .on-sale-indicator {

@@ -58,7 +58,7 @@ export class PartnerProductsComponent implements OnInit {
     this.route.params.subscribe(params => {
       const partnerName = params['partner'];
       // console.log('name: ', partnerName);
-      //TODO: use partner service nad review service when its ready
+
       this.partnerService.getPartnerByName(partnerName).subscribe((partner) => {
         this.partner = partner;
         this.address = partner.owner.addresses[0];

@@ -26,7 +26,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
   customer!: UserDto;
   orderForm!: FormGroup;
   tip!: number;
-  totalPrice!: number;
+  totalPrice!: number; // sum of subtotals and tip and delivery fee
 
   constructor(
     private shoppingCartService: ShoppingCartService,
@@ -56,7 +56,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.totalPrice = this.shoppingCartService.getTotalPrice();
+    this.totalPrice = this.shoppingCartService.getTotalPrice() + 2.50; //+ delivery fee
     this.cd.detectChanges() //to resolve NG0100 error
   }
 
@@ -134,6 +134,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
     this.submitted2 = true;
+    console.log(this.checkoutForm.value)
 
     Object.keys(this.checkoutForm.controls).forEach(key => {
       const control = this.checkoutForm.get(key);
@@ -159,9 +160,9 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     form.addressStart = {id: addrStartId};
 
     form.customer.id = this.customer.id;
-    form.deliveryMan.id = 1; //TODO: change this
+    form.deliveryMan = null;
     form.tip = this.tip;
-    form.totalPrice = this.shoppingCartService.getTotalPrice();
+    form.totalPrice = this.totalPrice; //TODO: calculate this maybe
 
     const partnerId = this.partner?.id;
     form.partner = {id: partnerId};
