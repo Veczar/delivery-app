@@ -22,7 +22,7 @@ export class PartnerReviewComponent implements OnInit{
   isUserLogged: boolean = false;
   selectedStar: number = 0;
   submitted = false;
-  
+
   reviewForm!: FormGroup;
   userId: number | undefined;
 
@@ -34,34 +34,31 @@ export class PartnerReviewComponent implements OnInit{
     private datePipe: DatePipe
   ) {}
 
-    initForm(): void {
-      this.reviewForm = this.formBuilder.group({
-        id: [''],
-        description: ['', [Validators.required, Validators.maxLength(255)]],
-        gradeInStars: ['', [Validators.required, Validators.pattern(/^[1-5]$/)]],
-        date: [null],
-        partner: this.formBuilder.group({
-          id: [null],
-        }),
-        reviewer: this.formBuilder.group({
-          id: [null],
-        }),
-      });
-    }
+  initForm(): void {
+    this.reviewForm = this.formBuilder.group({
+      id: [''],
+      description: ['', [Validators.required, Validators.maxLength(255)]],
+      gradeInStars: ['', [Validators.required, Validators.pattern(/^[1-5]$/)]],
+      date: [null],
+      partner: this.formBuilder.group({
+        id: [null],
+      }),
+      reviewer: this.formBuilder.group({
+        id: [null],
+      }),
+    });
+  }
 
   ngOnInit():void{
-      
-      this.isUserLoggedIn().subscribe((isLoggedIn: boolean) => {
-        this.isUserLogged = isLoggedIn;
-        if(this.isUserLogged){
-          this.userId = Number(localStorage.getItem('id'));
-        }
-      });
+    this.isUserLoggedIn().subscribe((isLoggedIn: boolean) => {
+      this.isUserLogged = isLoggedIn;
+      if(this.isUserLogged){
+        this.userId = Number(localStorage.getItem('id'));
+      }
+    });
 
-      this.initForm();
-
-      console.log(this.reviews);
-      console.log(this.isUserLogged);
+    this.initForm();
+    // console.log(this.reviews);
   }
 
   isUserLoggedIn(): Observable<boolean> {
@@ -72,6 +69,7 @@ export class PartnerReviewComponent implements OnInit{
     this.modalService.dismissAll();
     this.modalService.open(modal);
   }
+
   selectStar(star: number): void {
     this.reviewForm.get('gradeInStars')?.setValue(star);
     this.selectedStar = star;
@@ -97,7 +95,7 @@ export class PartnerReviewComponent implements OnInit{
 
       const partnerId = this.partner.id;
       this.reviewForm.get('partner.id')?.setValue(partnerId);
-  
+
       const currentDate = new Date();
       const formattedDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
 
@@ -114,21 +112,18 @@ export class PartnerReviewComponent implements OnInit{
       function refreshPage() {
         location.reload();
       }
-
-      //refreshPage();
-    }else {
+    }
+    else {
       console.log(this.reviewForm.value)
       console.log('wrong form');
       return;
     }
-      
   }
+
   deleteReview(reviewId: number): void {
     this.reviewService.deleteReview(reviewId).subscribe(() => {
       // Odśwież listę recenzji po usunięciu
       this.reviews = this.reviews.filter(review => review.id !== reviewId);
     });
   }
-
-  
 }

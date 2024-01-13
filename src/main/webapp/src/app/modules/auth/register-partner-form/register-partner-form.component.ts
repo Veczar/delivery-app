@@ -156,6 +156,11 @@ export class RegisterPartnerFormComponent implements OnInit {
     const contactNumber = `${this.partnerForm.value.contactNumber}`;
     const telephoneNumber = `${this.partnerForm.value.telephoneNumber}`;
 
+    if (this.partnerForm.invalid) {
+      console.log('wrong form')
+      return;
+    }
+
     Object.keys(this.partnerForm.controls).forEach(key => {
       if(key != "photo")
       {
@@ -169,10 +174,7 @@ export class RegisterPartnerFormComponent implements OnInit {
 
     console.log(JSON.stringify(this.partnerForm.value, null, 2));
 
-    if (this.partnerForm.invalid) {
-      console.log('wrong form')
-      return;
-    }
+
 
     const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
     const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
@@ -182,25 +184,24 @@ export class RegisterPartnerFormComponent implements OnInit {
       telephoneNumber: combinedTelephoneNumber,
     });
 
-      console.log(JSON.stringify(this.partnerForm.value, null, 2));
-      console.log(this.partnerForm)
+    console.log(JSON.stringify(this.partnerForm.value, null, 2));
+    console.log(this.partnerForm)
 
-
-     //console.log(JSON.stringify(this.partnerForm.value, null, 2));
-     //console.log(this.partnerForm)
+    //console.log(JSON.stringify(this.partnerForm.value, null, 2));
+    //console.log(this.partnerForm)
 
     this.authService.registerPartner(this.partnerForm.value as RegisterPartnerDto, this.selectedFile).subscribe(
       (response: RegisterResponseDto) => {
         console.log('response:', response);
 
         if (response.message == 'success') {
-          const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
-          const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
+          // const combinedContactNumber = `${ this.removeAfterSpace(this.partnerForm.value.conpref)} ${this.partnerForm.value.contactNumber}`;
+          // const combinedTelephoneNumber = `${this.removeAfterSpace(this.partnerForm.value.numpref)} ${this.partnerForm.value.telephoneNumber}`;
 
-          this.partnerForm.patchValue({
-            contactNumber: combinedContactNumber,
-            telephoneNumber: combinedTelephoneNumber,
-          });
+          // this.partnerForm.patchValue({
+          //   contactNumber: combinedContactNumber,
+          //   telephoneNumber: combinedTelephoneNumber,
+          // });
           this.toastService.showSuccess('Account created, now log in');
           this.router.navigate(['']);
         }
@@ -208,11 +209,15 @@ export class RegisterPartnerFormComponent implements OnInit {
           if(response.message == 'email not available')
           {
             this.wrongEmail = true;
-          }else
-          if(response.message == 'photo do not have a suitable extension')
+            this.partnerForm.patchValue({
+              contactNumber: contactNumber,
+              telephoneNumber: telephoneNumber,
+            });
+          }
+          else if(response.message == 'photo do not have a suitable extension')
           {
-              this.wrongPhoto = true;
-              console.log('wrong photo');
+            this.wrongPhoto = true;
+            console.log('wrong photo');
           }
         }
         // console.log('wrong email?: ', this.wrongEmail)
@@ -230,6 +235,7 @@ export class RegisterPartnerFormComponent implements OnInit {
   get addressForm(): FormGroup {
     return this.partnerForm.get('address') as FormGroup;
   }
+
   formatPostalCode(event: any): void {
 
     const cleanedValue = event.target.value.replace(/-/g, '');
