@@ -18,7 +18,6 @@ import { FilterPipe } from './filter.pipe';
 import { PartnerProductsComponent } from './partner-products/partner-products.component';
 import { ProductComponent } from './product/product.component';
 
-
 @NgModule({
   declarations: [
     FilterPipe,
@@ -41,7 +40,7 @@ import { ProductComponent } from './product/product.component';
     UserModule,
     OrdersViewModule,
     NavbarModule,
-    PartnerModule
+    PartnerModule,
   ],
 })
 export class ProductsModule { }
