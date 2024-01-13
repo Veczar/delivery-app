@@ -15,7 +15,12 @@ public class PartnerReviewController extends GenericController<PartnerReviewDto,
     public PartnerReviewController(PartnerReviewService service) {
         super(service);
     }
-    
+
+    @GetMapping("/read")
+    public List<PartnerReviewReadDto> getReadReviews(){
+        return service.getReadReviews();
+    }
+
     @GetMapping("/partner/{partnerId}")
     public List<PartnerReviewReadDto> getReadReviewsForPartner(@PathVariable Long partnerId) {
         return service.getReadReviewsForPartner(partnerId);

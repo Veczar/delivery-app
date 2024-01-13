@@ -15,6 +15,7 @@ import { UserModule } from '../user/user.module';
 import { PartnerTableComponent } from './partner-table/partner-table.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AddressTableComponent } from './address-table/address-table.component';
+import { PartnerReviewTableComponent } from './partner-review-table/partner-review-table.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { AddressTableComponent } from './address-table/address-table.component';
     PartnerTableComponent,
     AdminTableComponent,
     AddressTableComponent,
+    PartnerReviewTableComponent,
   ],
   imports: [
     CommonModule,

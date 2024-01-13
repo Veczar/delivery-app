@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -28,31 +28,13 @@ export class AddressTableComponent {
   sort!: MatSort;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private toastService: ToastService,
     private http: HttpClient,
   ) {
     this.loadData();
-    this.initForm();
+    
   }
 
-  initForm(): void {
-    this.addressForm = this.formBuilder.group({
-      id: [''],
-      city: ['', [Validators.required, Validators.minLength(2)]],
-      postalCode: [
-        '',
-        [
-          Validators.required,Validators.minLength(6),Validators.maxLength(6),
-          Validators.pattern(/^\d{2}-\d{3}$/) // Format kodu pocztowego XX-XXX
-        ]
-      ],
-      street: ['', [Validators.required, Validators.minLength(2)]
-      ],
-    });
-
-    this.addressForm.disable();
-  }
+  
 
   loadData(): void {
     

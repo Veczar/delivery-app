@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PartnerReviewDto } from 'src/app/shared/model/api-models';
+import { PartnerReviewDto, PartnerReviewReadDto } from 'src/app/shared/model/api-models';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,8 @@ export class PartnerReviewService {
   }
   deleteReview(id:number) {
     return this.http.delete(`http://localhost:8080/api/partners/reviews/${id}`);
+  }
+  getReviews(): Observable<PartnerReviewReadDto[]> {
+    return this.http.get<PartnerReviewReadDto[]>(`http://localhost:8080/api/partners/reviews`);
   }
 }
