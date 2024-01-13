@@ -1,10 +1,4 @@
 
-// html,
-// body {
-//   // height: 100vh;
-//   // height: 100%;
-// }
-
 body {
   display: flex;
   align-items: center;
@@ -63,32 +57,3 @@ h1 {
   left: 0%;
 }
 
-
-// --------- footer -----------
-
-.nav-hover-underline li.nav-item a:hover {
-  text-decoration: underline;
-}
-
-.footer {
-  display: flex;
-  justify-content: center;
-  padding: 100px 130px 0px 130px;
-
-
-  // background-color: #212529; // same as nav
-  background-color: #202020;
-  color: white;
-
-  footer {
-    width: 1500px;
-  }
-
-  h5 {
-    color: rgba(255, 255, 255, 0.72);
-  }
-
-  ul>li>a {
-    color: white !important;
-  }
-}
