@@ -46,6 +46,48 @@ export interface DeliveryManDto {
     user?: UserDto;
     workingArea?: string;
 }
+export interface OrderDto {
+    id?: number;
+    addressStart?: AddressDto;
+    addressEnd?: AddressDto;
+    customer?: UserDto;
+    partner?: PartnerDto;
+    deliveryMan?: DeliveryManDto;
+    totalPrice?: number;
+    tip?: number;
+    creationDate?: Date;
+    completionDate?: Date;
+    status?: Status;
+    distanceInKm?: number;
+}
+
+export interface OrderDto {
+    product?: ProductDto;
+    order?: OrderDto;
+    quantity?: number;
+    subtotal?: number;
+}
+
+export interface OrderReadDto {
+    id?: number;
+    addressStart?: string;
+    addressEnd?: string;
+    customerFirstName?: string;
+    customerLastName?: string;
+    customerTelephoneNumber?: string;
+    partner?: string;
+    partnerPhotoPath?: string;
+    deliveryManId?: number;
+    deliveryManFirstName?: string;
+    deliveryManLastName?: string;
+    totalPrice?: number;
+    tip?: number;
+    creationDate?: string;
+    completionDate?: string;
+    status?: Status;
+    distanceInKm?: number;
+    rating?: number;
+}
 
 export interface Iterable<T> {
 }
@@ -309,6 +351,26 @@ export enum NullHandling {
     NULLS_LAST = "NULLS_LAST",
 }
 
+export interface ComplaintDto {
+    id : number;
+    title : string;
+    description : string;
+    methodOfContact :ContactMethod;
+    user : UserDto;
+}
+
+export interface ComplaintReadDto {
+    id : number;
+    description : string;
+    title : string;
+    methodOfContact : ContactMethod;
+    userFirstName : string;
+    userLastName : string;
+    ususerEmail : string;
+    userTelephoneNumber : string;
+    creationDate: Date;
+}
+
 export enum PartnerType {
     other = "other",
     restaurant = "restaurant",
@@ -323,4 +385,9 @@ export enum Status {
     readyForDelivery = "readyForDelivery",
     inDelivery = "inDelivery",
     done = "done",
+}
+
+export enum ContactMethod {
+    phone = "phone",
+    email = "email",
 }

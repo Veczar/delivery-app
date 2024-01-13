@@ -8,6 +8,7 @@ import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from '../../auth/auth.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 import { PartnerService } from '../../partner/partner.service';
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-partner-products',
@@ -43,7 +44,8 @@ export class PartnerProductsComponent implements OnInit {
     private productService: ProductsService,
     private route: ActivatedRoute,
     private shoppingCartService: ShoppingCartService,
-    private partnerService: PartnerService
+    private partnerService: PartnerService,
+    public sanitizer: DomSanitizer
   ) {
     this.updateAuthenticationState();
     this.palceholders = Array(3).fill(1);
