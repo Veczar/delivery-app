@@ -25,6 +25,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
+import { NavbarModule } from './shared/navbar/navbar.module';
+import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
 import { FooterModule } from './shared/footer/footer.module';
 
 @NgModule({
@@ -68,6 +70,8 @@ import { FooterModule } from './shared/footer/footer.module';
     AdminPanelModule,
     ProductsModule,
     OrdersViewModule,
+    ComplaintModule,
+    RecurringOrdersModule
     ComplaintModule,
     PartnerModule,
     NavbarModule

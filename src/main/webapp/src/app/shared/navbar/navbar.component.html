@@ -73,6 +73,7 @@
               <li><a class="dropdown-item user-dropdown" (click)="open(settingsModal)">Settings</a></li>
               <li><a class="dropdown-item user-dropdown" (click)="open(ordersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Orders</a></li>
               <li><a class="dropdown-item user-dropdown" (click)="open(complaintModal)" *ngIf="isUserLoggedIn() && getRole() !== 'ADMIN'">File a compalaint</a></li>
+              <li><a class="dropdown-item user-dropdown" (click)="open(ordersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Orders</a></li>
               <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
             </ul>
           </div>
@@ -145,6 +146,18 @@
   <div class="modal-body p-4">
     <app-complaint-form></app-complaint-form>
   </div>
+</ng-template>
+
+<ng-template #recurringOrdersModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Periodic orders</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body p-4">
+    <app-recurring-orders></app-recurring-orders>
+  </div>
+  
 </ng-template>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" id="offcanvasShoppingCart" aria-labelledby="offcanvasExampleLabel">

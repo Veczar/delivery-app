@@ -8,7 +8,7 @@ import { ComplaintModule } from 'src/app/modules/complaint/complaint.module';
 import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
 import { ShoppingCartComponent } from 'src/app/shared/navbar/shopping-cart/shopping-cart.component';
 import { UserModule } from 'src/app/modules/user/user.module';
-
+import { RecurringOrdersModule } from 'src/app/modules/reccuring-orders/reccuring-orders.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { UserModule } from 'src/app/modules/user/user.module';
     UserModule,
     FormsModule,
     ComplaintModule,
+    RecurringOrdersModule,
   ],
   exports: [
     NavbarComponent

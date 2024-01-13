@@ -1,47 +1,4 @@
 <body>
-  <header data-bs-theme="dark">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-
-        <a class="navbar-brand" [routerLink]="['/']">Glovo Eats</a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse " id="navbarCollapse">
-
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" [routerLink]="['/partner', 'McDonald']">Contact-McDonald</a>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link active" (click)="open(demoModal)">Adblock</button>
-            </li>
-            <li *ngIf="getRole() === 'ADMIN'">
-              <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
-                <i class="bi bi-speedometer2"></i> Dashboard</button>
-            </li>
-            <li *ngIf="getRole() === 'COURIER'">
-              <button class="nav-link active color" [routerLink]="['/courier/my-deliveries']">
-                <i class="bi bi-backpack4"></i> My deliveries</button>
-            </li>
-            <li *ngIf="getRole() === 'PARTNER'">
-              <button class="nav-link active color" [routerLink]="['/courier/partner-orders']">
-                <i class="bi bi-backpack4"></i> My orders</button>
-            </li>
-          </ul>
-          <!-- <form class="middle-search" role="search">
-              <div class="input-group">
-                <span class="input-group-text"><span class="material-icons">search</span></span>
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              </div>
-              <button class="btn btn-outline-secondary" (click)="open(demoModal)">search</button>
-            </form> -->
 
   <app-navbar></app-navbar>
 
