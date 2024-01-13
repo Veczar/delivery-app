@@ -15,7 +15,14 @@ import { UserSettingsComponent } from '../user/user-settings/user-settings.compo
 import { UserModule } from '../user/user.module';
 import { PartnerTableComponent } from './partner-table/partner-table.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
+import { AddressTableComponent } from './address-table/address-table.component';
+import { PartnerReviewTableComponent } from './partner-review-table/partner-review-table.component';
+import { CategoriesTableComponent } from './categories-table/categories-table.component';
+import { ProductTableComponent } from './product-table/product-table.component';
+import { OrderTableComponent } from './order-table/order-table.component';
+import { ReccuringOrdersTableComponent } from './reccuring-orders-table/reccuring-orders-table.component';
 import { ComplaintTableComponent } from './complaint-table/complaint-table.component';
+
 
 
 @NgModule({
@@ -26,6 +33,12 @@ import { ComplaintTableComponent } from './complaint-table/complaint-table.compo
     CourierTableComponent,
     PartnerTableComponent,
     AdminTableComponent,
+    AddressTableComponent,
+    PartnerReviewTableComponent,
+    CategoriesTableComponent,
+    ProductTableComponent,
+    OrderTableComponent,
+    ReccuringOrdersTableComponent,
     ComplaintTableComponent,
   ],
   imports: [

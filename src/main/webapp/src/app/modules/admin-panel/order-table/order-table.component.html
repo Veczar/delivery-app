@@ -1,0 +1,101 @@
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Orders</h1>
+</div>
+
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="addressStart">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Address Start </th>
+      <td mat-cell *matCellDef="let row"> {{row.addressStart.city}} {{row.addressStart.street}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="addressEnd">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Address End </th>
+        <td mat-cell *matCellDef="let row"> {{row.addressEnd.city}} {{row.addressEnd.street}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="creationDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
+        <td mat-cell *matCellDef="let row"> {{row.creationDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="completionDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Completion Date </th>
+        <td mat-cell *matCellDef="let row">
+             {{row.completionDate | date:'yyyy-MM-dd HH:mm:ss'}} 
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="customer">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Id </th>
+        <td mat-cell *matCellDef="let row"> {{row.customer.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deliveryMan">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Courier Id </th>
+        <td mat-cell *matCellDef="let row"> {{row.deliveryMan.id}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="distanceInKm">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Distance </th>
+        <td mat-cell *matCellDef="let row"> {{row.distanceInKm}}km </td>
+      </ng-container>
+
+      <ng-container matColumnDef="partner">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> RartnerId </th>
+        <td mat-cell *matCellDef="let row"> {{row.partner.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rating">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
+        <td mat-cell *matCellDef="let row"> {{row.rating}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tip">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tip </th>
+        <td mat-cell *matCellDef="let row"> {{row.tip}}$ </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalPrice">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Price </th>
+        <td mat-cell *matCellDef="let row"> {{row.totalPrice}}$ </td>
+      </ng-container>
+    <!-- Name Column -->
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+        mat-row
+        [class.demo-row-is-clicked]=""
+        *matRowDef="let row; columns: displayedColumns;"
+    ></tr>
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="alert alert-danger " colspan="6" role="alert">
+        No data matching the filter "{{input.value}}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="25"
+    aria-label="Select page of users"></mat-paginator>
+</div>

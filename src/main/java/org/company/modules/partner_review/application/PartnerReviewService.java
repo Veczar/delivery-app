@@ -1,5 +1,6 @@
 package org.company.modules.partner_review.application;
 
+import org.company.modules.partner_review.application.web.PartnerReviewController;
 import org.company.modules.partner_review.application.web.PartnerReviewDto;
 import org.company.modules.partner_review.application.web.PartnerReviewReadDto;
 import org.company.modules.partner_review.domain.PartnerReview;
@@ -16,7 +17,10 @@ public class PartnerReviewService extends GenericService<PartnerReview, PartnerR
     public PartnerReviewService(PartnerReviewRepository repository, PartnerReviewAssembler assembler) {
         super(repository, assembler);
     }
-    
+
+    public List<PartnerReviewReadDto> getReadReviews(){
+        return repository.findAll().stream().map(assembler::toReadDto).collect(Collectors.toList());
+    }
     public List<PartnerReviewReadDto> getReadReviewsForPartner(Long partnerId) {
         return repository.findByPartnerId(partnerId)
                 .stream().map(assembler::toReadDto).collect(Collectors.toList());
