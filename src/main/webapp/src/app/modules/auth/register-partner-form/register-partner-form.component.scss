@@ -6,10 +6,6 @@ body {
   padding-bottom: 100px;
 }
 
-// body {
-//   display: flex;
-// }
-
 main {
   background-color: whitesmoke;
   border-radius: 20px;
@@ -47,15 +43,6 @@ p {
 .form-label {
   margin-top: 10px;
 }
-// .waves-background {
-//   aspect-ratio: 16/9;
-//   height: 100%;
-//   width: 100%;
-//   background-size: cover;
-//   background-repeat: no-repeat;
-//   background-image: url(../../../../assets/layered-waves-haikei.svg);
-//   background-attachment: fixed;
-// }
 
 .waves-background {
   // aspect-ratio: 18/7;
@@ -103,6 +90,13 @@ h1 {
 form {
   margin-left: 10px;
 }
+
+// --------- footer -----------
+
+.nav-hover-underline li.nav-item a:hover {
+  text-decoration: underline;
+}
+
 
 .footer {
   display: flex;

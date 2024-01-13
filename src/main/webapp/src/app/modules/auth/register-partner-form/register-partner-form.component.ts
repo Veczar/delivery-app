@@ -165,7 +165,7 @@ export class RegisterPartnerFormComponent implements OnInit {
         }
       }
     });
-//     console.log(JSON.stringify(this.partnerForm.value, null, 2));
+    // console.log(JSON.stringify(this.partnerForm.value, null, 2));
 
     console.log(JSON.stringify(this.partnerForm.value, null, 2));
 
