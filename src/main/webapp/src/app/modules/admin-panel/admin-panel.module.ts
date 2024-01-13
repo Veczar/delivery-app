@@ -17,6 +17,7 @@ import { AdminTableComponent } from './admin-table/admin-table.component';
 import { AddressTableComponent } from './address-table/address-table.component';
 import { PartnerReviewTableComponent } from './partner-review-table/partner-review-table.component';
 import { CategoriesTableComponent } from './categories-table/categories-table.component';
+import { ProductTableComponent } from './product-table/product-table.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { CategoriesTableComponent } from './categories-table/categories-table.co
     AddressTableComponent,
     PartnerReviewTableComponent,
     CategoriesTableComponent,
+    ProductTableComponent,
   ],
   imports: [
     CommonModule,

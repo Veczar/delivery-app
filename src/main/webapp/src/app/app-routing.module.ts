@@ -21,6 +21,7 @@ import { AdminTableComponent } from './modules/admin-panel/admin-table/admin-tab
 import { AddressTableComponent } from './modules/admin-panel/address-table/address-table.component';
 import { PartnerReviewTableComponent } from './modules/admin-panel/partner-review-table/partner-review-table.component';
 import { CategoriesTableComponent } from './modules/admin-panel/categories-table/categories-table.component';
+import { ProductTableComponent } from './modules/admin-panel/product-table/product-table.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
@@ -51,6 +52,7 @@ const routes: Routes = [
       { path: 'address-table', component:AddressTableComponent},
       { path: 'partner-review-table', component: PartnerReviewTableComponent},
       { path: 'categories-table', component: CategoriesTableComponent},
+      { path: 'product-table', component: ProductTableComponent},
     ]
   },
   {path: 'courier/my-deliveries', component: MyDeliveriesComponent, canActivate: [authCurierGuard]},
