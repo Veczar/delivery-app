@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AddressDto, PartnerDto, PartnerReviewDto, PartnerReviewReadDto, ProductReadDto } from 'src/app/shared/model/api-models';
+import { AddressDto, PartnerDto, PartnerReviewReadDto, ProductReadDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -147,7 +147,6 @@ export class PartnerProductsComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  // ----------- navbar -----------------
   open(modal: any): void {
     this.modalService.open(modal);
   }
@@ -156,21 +155,9 @@ export class PartnerProductsComponent implements OnInit {
     return this.authService.isUserLogged();
   }
 
-  logOut(): void {
-    this.authService.logOut();
-    // this.updateAuthenticationState();
-    this.toastService.showInfo('logged out');
-    this.owner = false;
-  }
   getUrl(address : AddressDto)
   {
     return "https://www.google.com/maps/embed/v1/place?key=AIzaSyB3bDebZmDc4DQ0_M03XB14ZA7QnSaIgCM&q="+address.city+","+address.street;
   }
-  getRole(): string {
-    return localStorage.getItem('role') || '';
-  }
 
-  openSettings(modal: any): void {
-    this.modalService.open(modal);
-  }
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RecurringOrdersComponent } from './recurring-orders/recurring-orders.component';
 
 
-
 @NgModule({
   declarations: [
     RecurringOrdersComponent

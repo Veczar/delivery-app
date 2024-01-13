@@ -22,8 +22,6 @@ export class ProductComponent implements OnInit {
   product!: ProductDto;
   quantity: number = 1;
   subtotal: number = 0;
-  
-
 
   constructor(
     private productService: ProductsService,

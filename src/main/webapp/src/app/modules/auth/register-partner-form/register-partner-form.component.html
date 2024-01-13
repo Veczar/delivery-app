@@ -341,18 +341,16 @@
               <select class="form-select input" aria-label=".form-select-sm example"
                 formControlName="type"
                 [ngClass]="{ 'is-invalid': submitted && f['type'].errors }"
-                [ngClass]="{ 'is-valid':submitted && !f['type'].errors }"
+                [ngClass]="{ 'is-valid': submitted && !f['type'].errors }"
                 >
-
                 <option value="restaurant">Restaurant</option>
                 <option value="pharmacy">Pharmacy</option>
-                <option value="grocery store">Grocery store</option>
+                <option value="groceryStore">Grocery store</option>
                 <option value="pharmacy">Pharmacy</option>
                 <option value="florists">Florist's</option>
-                <option value="coffeehouse">Coffeehouse</option>
-
+                <option value="coffeeHouse">Coffeehouse</option>
             </select>
-            <div class="invalid-feedback" *ngIf="submitted && f['category'].errors">
+            <div class="invalid-feedback" *ngIf="submitted && f['type'].errors">
               <p>Provide Category</p>
             </div>
           </div>
