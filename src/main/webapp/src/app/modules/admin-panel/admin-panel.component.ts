@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
+import { RouteService } from 'src/app/shared/route.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -10,6 +12,8 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./admin-panel.component.scss']
 })
 export class AdminPanelComponent {
+
+  currentRoute: string = '';
 
   loggedUser = {
     firstName: '',
@@ -21,6 +25,8 @@ export class AdminPanelComponent {
     public authService: AuthService,
     public http: HttpClient,
     public toastService: ToastService,
+    public router: Router,
+    private routeService: RouteService,
   ) {
     this.updateAuthenticationState();
   }
@@ -29,6 +35,10 @@ export class AdminPanelComponent {
     if (this.isUserLoggedIn()) {
       this.loggedUser = this.authService.getLoggedUser();
     }
+
+    this.routeService.getCurrentRoute().subscribe((route) => {
+      this.currentRoute = route;
+    });
   }
 
   public open(modal: any): void {
@@ -42,6 +52,10 @@ export class AdminPanelComponent {
   logOut(): void {
     this.authService.logOut();
     this.updateAuthenticationState();
+    console.log(this.currentRoute)
+    if (this.currentRoute.startsWith('/admin')) {
+      this.router.navigate(['/']);
+    }
     this.toastService.showInfo('logged out');
   }
 

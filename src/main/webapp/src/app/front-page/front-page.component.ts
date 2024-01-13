@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../modules/auth/auth.service';
 import { ToastService } from '../shared/toast/toast.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AdsService } from '../shared/ADBlockerDetector';
 
 @Component({
   selector: 'app-front-page',

@@ -50,3 +50,26 @@ nav {
   background-color: whitesmoke;
   background-color: lightgray;
 }
+
+
+// adblock
+
+.arrow {
+  position: fixed;
+  top: 0px;
+  right: 220px;
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 60px solid #ff0000; /* Adjust the color of the arrow as needed */
+}
+
+.arrow-bottom {
+  width: 20px;
+  height: 100px;
+  background-color: #ff0000;
+  position: fixed;
+  top: 50px;
+  right: 240px;
+}

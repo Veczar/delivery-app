@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/modules/auth/auth.service';
 import { PartnerService } from 'src/app/modules/partner/partner.service';
 import { ShoppingCartService } from 'src/app/shared/navbar/shopping-cart/shopping-cart.service';
+import { AdsService } from '../ADBlockerDetector';
 import { RouteService } from '../route.service';
 import { ToastService } from '../toast/toast.service';
 
@@ -17,6 +18,7 @@ export class NavbarComponent implements OnInit {
   cityName: string = '';
   currentRoute: string = '';
   newAddress: string = '';
+  adblockDected: boolean = true;
 
   loggedUser = {
     firstName: '',
@@ -25,25 +27,38 @@ export class NavbarComponent implements OnInit {
 
   @Output()
   dataChangedEvent = new EventEmitter<string>();
-
+  
+  @ViewChild('demoModal') 
+  demoModal: any;
 
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute,
     public authService: AuthService,
     public http: HttpClient,
     public toastService: ToastService,
     private routeService: RouteService,
     private partnerService: PartnerService,
     private shoppingCartService: ShoppingCartService,
+    public abdlockerDetector: AdsService
   ) { }
 
   ngOnInit(): void {
     this.updateAuthenticationState();
     this.partnerService.getCurrentCity().subscribe(city => {
       this.cityName = city;
-    })
+    });
+
+    this.abdlockerDetector.checkAdsBlocked((adsBlocked: boolean) => {
+      console.log('Ads are blocked: ' + adsBlocked);
+      if (adsBlocked) this.modalService.open(this.demoModal);
+    });
+  }
+
+  closeModal() {
+    const modal = document.getElementById('exampleModal');
+    console.log(modal)
+    if (modal != null)  modal.style.display = 'none';
   }
 
   private updateAuthenticationState() {
