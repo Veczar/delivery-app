@@ -17,7 +17,7 @@ import { AddProductFormComponent } from './add-product-form/add-product-form.com
 import { FilterPipe } from './filter.pipe';
 import { PartnerProductsComponent } from './partner-products/partner-products.component';
 import { ProductComponent } from './product/product.component';
-
+import { FooterModule } from 'src/app/shared/footer/footer.module';
 @NgModule({
   declarations: [
     FilterPipe,
@@ -41,6 +41,7 @@ import { ProductComponent } from './product/product.component';
     OrdersViewModule,
     NavbarModule,
     PartnerModule,
+    FooterModule,
   ],
 })
 export class ProductsModule { }

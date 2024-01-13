@@ -12,6 +12,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { OrderCheckoutComponent } from './order-checkout/order-checkout.component';
+import { FooterModule } from 'src/app/shared/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { OrderCheckoutComponent } from './order-checkout/order-checkout.componen
     MatSortModule,
     MatPaginatorModule,
     MatDatepickerModule, 
-    MatNativeDateModule
+    MatNativeDateModule,
+    FooterModule,
   ],
   exports: [
     OrdersViewComponent,

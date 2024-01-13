@@ -15,7 +15,7 @@ import { FilterPipe } from 'src/app/shared/filter.pipe';
 import { PartnerEditFormComponent } from './partner-edit-form/partner-edit-form.component';
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 import { NavbarModule } from 'src/app/shared/navbar/navbar.module';
-
+import { FooterModule } from 'src/app/shared/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { NavbarModule } from 'src/app/shared/navbar/navbar.module';
     UserModule,
     AuthModule,
     AdminPanelModule,
-    NavbarModule
+    NavbarModule,
+    FooterModule
   ],
   exports: [
     PartnerEditFormComponent

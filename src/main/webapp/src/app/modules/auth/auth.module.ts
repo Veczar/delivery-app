@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterUserFormComponent } from './register-user-form/register-user-form.component';
 import { RegisterPartnerFormComponent } from './register-partner-form/register-partner-form.component';
 import { RegisterCourierFormComponent } from './register-courier-form/register-courier-form.component';
+import { FooterModule } from 'src/app/shared/footer/footer.module';
 @NgModule({
   declarations: [
     LoginFormComponent,
@@ -19,7 +20,8 @@ import { RegisterCourierFormComponent } from './register-courier-form/register-c
     RouterModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FooterModule
   ]
 })
 export class AuthModule { }

@@ -27,6 +27,7 @@ import { AuthInterceptor } from './shared/interceptors/auth-interceptor.service'
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { ToastComponent } from './shared/toast/toast-component/toast.component';
+import { FooterModule } from './shared/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { ToastComponent } from './shared/toast/toast-component/toast.component';
     OrdersViewModule,
     ComplaintModule,
     PartnerModule,
-    NavbarModule
+    NavbarModule,
+    FooterModule
   ],
 })
 export class AppModule { }
