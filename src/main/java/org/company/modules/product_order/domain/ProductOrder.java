@@ -6,9 +6,10 @@ import lombok.Setter;
 import org.company.modules.order.domain.Order;
 import org.company.modules.product.domain.Product;
 
-@Entity
 @Getter
 @Setter
+@Entity
+@Table(name = "p_product_order")
 public class ProductOrder {
     @EmbeddedId
     private ProductOrderPk id;
@@ -20,6 +21,7 @@ public class ProductOrder {
     @MapsId("orderId")
     @JoinColumn(name = "order_id")
     private Order order;
+    
     private int quantity;
-    private Double subtotal;//TODO: think it over if this is necessary
+    private Double subtotal;
 }

@@ -3,15 +3,11 @@ package org.company.modules.category.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.company.modules.partner.domain.Partner;
-import org.company.modules.product.domain.Product;
-
-import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "p_category")
+@Table(name = "s_category")
 public class Category{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
