@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component,OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { PartnerReadDto } from 'src/app/shared/model/api-models';
 import { PartnerService } from '../partner.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,12 +17,12 @@ export class CityViewComponent implements OnInit  {
     private route: ActivatedRoute,
     private router: Router,
     private partnerService: PartnerService,
-    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.cityName = params['city'];
+      this.partnerService.setCurrentCity(this.cityName);
      
       if (this.cityName == '') {
         this.router.navigate(['/partners']);

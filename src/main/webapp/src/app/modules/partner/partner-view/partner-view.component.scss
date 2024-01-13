@@ -55,9 +55,9 @@
 
 .store-wall {
   height: 100%;
-  max-height: none;
-  flex: 0 0 190px;
+  // flex: 0 0 190px;
   overflow-y: auto;
+  width: 200px;
   position: sticky;
   margin-right: 10px;
 }

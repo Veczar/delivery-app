@@ -17,31 +17,32 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
 import { PartnerReviewModule } from '../partner-review/partner-review.module';
 import { PartnerModule } from '../partner/partner.module';
+import { NavbarComponent } from "../../shared/navbar/navbar.component";
 
 @NgModule({
-  declarations: [
-    FilterPipe,
-    PartnerProductsComponent,
-    AddProductFormComponent,
-    ProductComponent,
-    ShoppingCartComponent
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    BrowserModule,
-    RouterModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatTooltipModule,
-    PartnerModule,
-
-    PartnerReviewModule,
-    UserModule,
-    OrdersViewModule
-  ]
+    declarations: [
+        FilterPipe,
+        PartnerProductsComponent,
+        AddProductFormComponent,
+        ProductComponent,
+        ShoppingCartComponent
+    ],
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        BrowserModule,
+        RouterModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatTooltipModule,
+        PartnerModule,
+        PartnerReviewModule,
+        UserModule,
+        OrdersViewModule,
+        NavbarComponent
+    ]
 })
 export class ProductsModule { }

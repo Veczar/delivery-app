@@ -4,77 +4,76 @@
 
 
 <div *ngFor="let review of reviews" class="card mb-3">
-    <div class="card-body">
-      <div class="d-flex align-items-center mb-2">
-        <!-- Ikona użytkownika (załóżmy, że masz ścieżkę do awatara w opinii) -->
-        <!-- <img src="" alt="Użytkownik" class="mr-2" style="width: 30px; height: 30px; border-radius: 50%;"> -->
-        <span class="me-2">
-            <i class="fa-solid fa-user "></i>
-        </span>
+  <div class="card-body">
+    <div class="d-flex align-items-center mb-2">
+      <!-- Ikona użytkownika (załóżmy, że masz ścieżkę do awatara w opinii) -->
+      <!-- <img src="" alt="Użytkownik" class="mr-2" style="width: 30px; height: 30px; border-radius: 50%;"> -->
+      <span class="me-2">
+          <i class="fa-solid fa-user "></i>
+      </span>
 
-        <!-- Imię i nazwisko użytkownika -->
-        <span class="font-weight-bold me-2">{{ review.reviewer.firstName }} {{ review.reviewer.lastName }}</span>
-        <!-- Data opinii -->
-        <span class="text-muted me-2">{{ review.date }}</span>
-      </div>
-  
+      <!-- Imię i nazwisko użytkownika -->
+      <span class="font-weight-bold me-2">{{ review.reviewer.firstName }} {{ review.reviewer.lastName }}</span>
+      <!-- Data opinii -->
+      <span class="text-muted me-2">{{ review.date }}</span>
+    </div>
+
+      <!-- Ilość gwiazdek -->
+    <i class="fa-solid fa-star text-warning"></i> {{ review.gradeInStars }} stars
+
+    <h5 class="card-text mt-2">
+      <!-- Treść opinii -->
+      {{ review.description }}
+    </h5>
+
+    <!-- Dodaj guzik i ngIf dla użytkownika zalogowanego -->
       
-        <!-- Ilość gwiazdek -->
-        <i class="fa-solid fa-star text-warning"></i> {{ review.gradeInStars }} stars
-  
-      <h5 class="card-text mt-2">
-        <!-- Treść opinii -->
-        {{ review.description }}
-      </h5>
-
-      <!-- Dodaj guzik i ngIf dla użytkownika zalogowanego -->
-        
-      <button *ngIf="isUserLogged && userId === review.reviewer?.id" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" (click)="deleteReview(review.id)">
-        <i class="fa-solid fa-times"></i> Delete
-      </button>
-        <!-- Dodaj guzik i ngIf dla użytkownika niezalogowanego -->
-        <a *ngIf="!isUserLogged" routerLink="/rejestracja">Log in to add new review</a>
-    </div>
+    <button *ngIf="isUserLogged && userId === review.reviewer?.id" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" (click)="deleteReview(review.id)">
+      <i class="fa-solid fa-times"></i> Delete
+    </button>
+      <!-- Dodaj guzik i ngIf dla użytkownika niezalogowanego -->
+    <a *ngIf="!isUserLogged" routerLink="/rejestracja">Log in to add new review</a>
   </div>
+</div>
 
 
-  <ng-template #reviewCreate let-modal>
-    <div class="modal-header">
-      <h2 class="modal-title" id="modal-create-review-title">Add new review for {{ partner.name }}</h2>
-      <button type="button" class="btn-close me-2" data-bs-dismiss="modal" aria-label="Close"
-        (click)="modal.dismiss('Cross click')"></button>
-    </div>
-    
-    <div class="modal-body p-4">
-      <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
-        <!-- Pole opisu -->
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <textarea id="description" formControlName="description" class="form-control"></textarea>
-          <div *ngIf="reviewForm.get('description')?.invalid && reviewForm.get('description')?.touched"
-            class="text-danger">
-            Description is required and cannot exceed 255 characters.
-          </div>
-        </div>
+<ng-template #reviewCreate let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-create-review-title">Add new review for {{ partner.name }}</h2>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
   
-        <!-- Pole oceny w gwiazdkach -->
-        <div class="mb-3">
-          <label class="form-label me-4">Grade in Stars</label>
-          
-          <div *ngFor="let star of [1, 2, 3, 4, 5]" class="star-rating" (click)="selectStar(star)">
-            <input type="radio" id="star{{star}}" name="gradeInStars" [value]="star" formControlName="gradeInStars" class="form-check-input visually-hidden">
-            <label for="star{{star}}" class="form-check-label" [class.selected]="star <= selectedStar">
-              <i class="fa-solid fa-star px-2"></i>
-            </label>
-          </div>
-          
-          <div *ngIf="reviewForm.get('gradeInStars')?.invalid && reviewForm.get('gradeInStars')?.touched" class="text-danger">
-            Grade in stars is required.
-          </div>
+  <div class="modal-body p-4">
+    <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
+      <!-- Pole opisu -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+        <div *ngIf="reviewForm.get('description')?.invalid && reviewForm.get('description')?.touched"
+          class="text-danger">
+          Description is required and cannot exceed 255 characters.
         </div>
-  
-        <!-- Przycisk dodawania opinii -->
-        <button type="submit" class="btn btn-primary">Submit review</button>
-      </form>
-    </div>
-  </ng-template>
+      </div>
+
+      <!-- Pole oceny w gwiazdkach -->
+      <div class="mb-3">
+        <label class="form-label me-4">Grade in Stars</label>
+        
+        <div *ngFor="let star of [1, 2, 3, 4, 5]" class="star-rating" (click)="selectStar(star)">
+          <input type="radio" id="star{{star}}" name="gradeInStars" [value]="star" formControlName="gradeInStars" class="form-check-input visually-hidden">
+          <label for="star{{star}}" class="form-check-label" [class.selected]="star <= selectedStar">
+            <i class="fa-solid fa-star px-2"></i>
+          </label>
+        </div>
+        
+        <div *ngIf="reviewForm.get('gradeInStars')?.invalid && reviewForm.get('gradeInStars')?.touched" class="text-danger">
+          Grade in stars is required.
+        </div>
+      </div>
+
+      <!-- Przycisk dodawania opinii -->
+      <button type="submit" class="btn btn-primary">Submit review</button>
+    </form>
+  </div>
+</ng-template>

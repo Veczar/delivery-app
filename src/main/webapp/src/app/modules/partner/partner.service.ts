@@ -30,6 +30,14 @@ export class PartnerService {
     });
   }
 
+  getCurrentCity() {
+    return this.currentCity;
+  }
+
+  setCurrentCity(city: string) {
+    this.currenCity.next(city);
+  }
+
   getPartnersData(): PartnerReadDto[] {
     return this.partnersData;
   }

@@ -13,6 +13,7 @@ import { AuthModule } from '../auth/auth.module';
 import { UserModule } from '../user/user.module';
 import { FilterPipe } from 'src/app/shared/filter.pipe';
 import { PartnerEditFormComponent } from './partner-edit-form/partner-edit-form.component';
+import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { PartnerEditFormComponent } from './partner-edit-form/partner-edit-form.
     PartnerViewComponent,
     CityViewComponent,
     FilterPipe,
-    PartnerEditFormComponent
+    PartnerEditFormComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +34,8 @@ import { PartnerEditFormComponent } from './partner-edit-form/partner-edit-form.
     BrowserAnimationsModule,
     UserModule,
     AuthModule,
-    AdminPanelModule
+    AdminPanelModule,
+    NavbarComponent
   ],
   exports:[
     PartnerEditFormComponent

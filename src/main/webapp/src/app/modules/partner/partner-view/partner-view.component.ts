@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { PartnerService } from '../partner.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -80,7 +80,7 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
       // Sprawdź, czy aktualny adres URL zawiera '/partners'
       if (currentUrl === '/partners') {
         this.flag = true;
-        this.cityName = '';
+        this.partnerService.setCurrentCity('');
       }
       else {
         this.flag = false;
@@ -88,9 +88,9 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
     });
   }
 
-  changeAddress(): void {
-    this.cityName = this.newAddress;
-    this.router.navigate(['/partners/', this.newAddress]);
+  changeAddress(newAddress: string): void {
+    this.cityName = newAddress;
+    this.router.navigate(['/partners/', this.cityName]);
 
     // Zamknij modal po zapisie
     this.modalService.dismissAll();
