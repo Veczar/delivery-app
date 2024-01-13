@@ -23,6 +23,7 @@ import { PartnerReviewTableComponent } from './modules/admin-panel/partner-revie
 import { CategoriesTableComponent } from './modules/admin-panel/categories-table/categories-table.component';
 import { ProductTableComponent } from './modules/admin-panel/product-table/product-table.component';
 import { OrderTableComponent } from './modules/admin-panel/order-table/order-table.component';
+import { ReccuringOrdersTableComponent } from './modules/admin-panel/reccuring-orders-table/reccuring-orders-table.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
@@ -54,7 +55,8 @@ const routes: Routes = [
       { path: 'partner-review-table', component: PartnerReviewTableComponent},
       { path: 'categories-table', component: CategoriesTableComponent},
       { path: 'product-table', component: ProductTableComponent},
-      { path: 'order-table', component: OrderTableComponent}
+      { path: 'order-table', component: OrderTableComponent},
+      { path: 'recurring-orders-table', component: ReccuringOrdersTableComponent},
     ]
   },
   {path: 'courier/my-deliveries', component: MyDeliveriesComponent, canActivate: [authCurierGuard]},
