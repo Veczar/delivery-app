@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { PartnerService } from '../partner.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -30,8 +30,9 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
   categoryActive: boolean = false;
   categoryActiveName: string | null = null;
   categories: string[] = [];
+
   ad: Advertisement = {
-    title: "Advertisement", 
+    title: "Advertisement",
     description: "contact us to place your advertisement",
     link: "www.example.com"
   };
@@ -56,7 +57,6 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
     this.partnerService.currentCity.subscribe(city => {
       this.cityName = city;
     });
-
     this.cd.detectChanges() //to resolve NG0100 error
   }
 
@@ -69,10 +69,6 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
     if (this.categories.length === 0) {
       //todo: move this to service for efficiency so it doesnt run every time
       this.categories = Object.values(PartnerType).sort();
-      // change camel case to spaced normal case
-      this.categories = this.categories.map(category => {
-        return this.camelCaseToSpaceSeparated(category)
-      });
     }
 
     this.partnerService.partnersDataSubject.subscribe(partners => {
@@ -84,18 +80,17 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
       // Sprawdź, czy aktualny adres URL zawiera '/partners'
       if (currentUrl === '/partners') {
         this.flag = true;
-        this.cityName = '';
-      } 
+        this.partnerService.setCurrentCity('');
+      }
       else {
         this.flag = false;
       }
     });
   }
 
-  changeAddress(): void {
-    this.cityName = this.newAddress;
-    this.partnerService.updateCurrentCity(this.newAddress);
-    this.router.navigate(['/partners/', this.newAddress]);
+  changeAddress(newAddress: string): void {
+    this.cityName = newAddress;
+    this.router.navigate(['/partners/', this.cityName]);
 
     // Zamknij modal po zapisie
     this.modalService.dismissAll();
@@ -103,7 +98,6 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
 
   goToAllPartners(): void {
     this.router.navigate(['/partners']);
-    this.partnerService.updateCurrentCity('');
     this.partners = this.partnerService.getPartnersData();
     this.categoryActiveName = '';
   }
@@ -123,11 +117,11 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
 
       if (this.flag) {
         this.filterPartners(searchTerm);
-      } 
+      }
       else {
         console.error('Unable to determine city.');
       }
-    } 
+    }
   }
 
   private filterPartners(searchTerm: string): void {
@@ -147,7 +141,7 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
       this.categoryActiveName = null;
       this.categoryActive = false;
       this.partners = this.partnerService.getPartnersData();
-    } 
+    }
     else {
       this.categoryActiveName = categoryName; // Ustaw aktywną kategorię
       this.categoryActive = true;
@@ -155,21 +149,10 @@ export class PartnerViewComponent implements OnInit, AfterViewInit {
     }
   }
 
-  camelCaseToSpaceSeparated(camelCaseString: string): string {
-    // Use regular expression to split camelCase into an array of words
-    const wordsArray = camelCaseString.split(/(?=[A-Z])/);
-
-    // Join the array of words with spaces and convert each word to lowercase
-    const spaceSeparatedString = wordsArray.join(' ').toLowerCase();
-
-    // console.log(spaceSeparatedString)
-    return spaceSeparatedString;
-  }
-
   navigateToExternalUrl(): void {
     const externalUrl = this.ad.link || '';
     const fullUrl = 'https://' + externalUrl;
-  
+
     // Open the external URL in a new window
     window.open(fullUrl, '_blank');
   }

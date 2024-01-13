@@ -20,37 +20,6 @@ p {
 }
 
 
-// --------- navbar -----------
-
-.color:hover {
-  color: rgb(33, 102, 193) !important;
-}
-
-ul>li>a,
-ul>li>button {
-  transition: color 0.1s ease-in-out;
-}
-
-ul>li:hover>a,
-ul>li:hover>button {
-  color: #82898f;
-}
-
-.user-dropdown {
-  color: white !important;
-  cursor: pointer;
-}
-
-.dropdown-toggle {
-  height: 39px;
-}
-
-nav {
-  // height: 56px;
-  height: 65px;
-}
-
-
 // --------- middle search bar -----------
 
 $focus-ring-opacity: 0%;

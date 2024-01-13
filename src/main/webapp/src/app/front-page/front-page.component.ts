@@ -1,9 +1,9 @@
-import { BootstrapOptions, Component } from '@angular/core';
-import { NgbModal, NgbToast, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../modules/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { ToastService } from '../shared/toast/toast.service';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../modules/auth/auth.service';
+import { ToastService } from '../shared/toast/toast.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-front-page',
@@ -11,27 +11,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./front-page.component.scss']
 })
 export class FrontPageComponent {
+
   cityName: string = '';
 
-  loggedUser = {
-    firstName: '',
-    lastName: ''
-  }
-
   constructor(
-    private modalService: NgbModal,
     private router: Router,
     public authService: AuthService,
     public http: HttpClient,
     public toastService: ToastService,
-  ) {
-    this.updateAuthenticationState();
-  }
+    public modalService: NgbModal,
+  ) {}
 
-  private updateAuthenticationState() {
-    if (this.isUserLoggedIn()) {
-      this.loggedUser = this.authService.getLoggedUser();
-    }
+  onSearch() {
+    console.log(this.cityName);
+    this.router.navigate(['/partners/', this.cityName]);
   }
 
   public open(modal: any): void {
@@ -42,22 +35,8 @@ export class FrontPageComponent {
     return this.authService.isUserLogged();
   }
 
-  logOut(): void {
-    this.authService.logOut();
-    this.updateAuthenticationState();
-    this.toastService.showInfo('logged out');
-  }
-
   getRole(): string {
     return localStorage.getItem('role') || '';
   }
-
-  onSearch() {
-    console.log(this.cityName);
-    this.router.navigate(['/partners/', this.cityName]);
-  }
-
-  openSettings(modal: any) {
-    this.modalService.open(modal);
-  }
+  
 }

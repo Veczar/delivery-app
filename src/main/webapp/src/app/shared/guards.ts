@@ -1,6 +1,6 @@
 import { inject } from "@angular/core";
 import { Router } from "@angular/router";
-import { ShoppingCartService } from "../modules/products/shopping-cart/shopping-cart.service";
+import { ShoppingCartService } from "./navbar/shopping-cart/shopping-cart.service";
 import { ToastService } from "./toast/toast.service";
 
 export const authGuard = () => {

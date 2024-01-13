@@ -1,13 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PartnerDto, UserDto } from 'src/app/shared/model/api-models';
-import { PartnerReviewReadDto } from 'src/app/shared/model/api-models';
-import { PartnerReviewDto } from 'src/app/shared/model/api-models';
-import { AuthService } from '../../auth/auth.service';
-import { Observable, of } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PartnerReviewService } from '../partner-review.service';
 import { DatePipe } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, of } from 'rxjs';
+import { PartnerDto, PartnerReviewReadDto } from 'src/app/shared/model/api-models';
+import { AuthService } from '../../auth/auth.service';
+import { PartnerReviewService } from '../partner-review.service';
 
 @Component({
   selector: 'app-partner-review',
@@ -25,8 +23,6 @@ export class PartnerReviewComponent implements OnInit{
   selectedStar: number = 0;
   submitted = false;
   
-
-
   reviewForm!: FormGroup;
   userId: number | undefined;
 

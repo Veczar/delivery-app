@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from '../../auth/auth.service';
-import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
+import { ShoppingCartService } from '../../../shared/navbar/shopping-cart/shopping-cart.service';
 import { PartnerService } from '../../partner/partner.service';
 import { DomSanitizer } from "@angular/platform-browser";
 

@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ShoppingCartService } from '../../products/shopping-cart/shopping-cart.service';
+import { ShoppingCartService } from '../../../shared/navbar/shopping-cart/shopping-cart.service';
 import { AddressDto, Frequency, OrderDto, PartnerDto, ProductDto, ProductOrderDto, Status, UserDto } from 'src/app/shared/model/api-models';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../user/user.service';
@@ -30,7 +30,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
   addresses!: AddressDto[] | undefined;
   customer!: UserDto;
   tip!: number;
-  deliveryFee!: number;
+  deliveryFee: number = 0;
   totalPrice!: number;
   startDate: any;
   frequencies: string[] = [];
@@ -106,7 +106,8 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
         }
       });
     });
-}
+  }
+
   onChangeAdrees(addressDto :AddressDto)
   {
     const origins = this.partner?.owner.addresses[0].city +","+ this.partner?.owner.addresses[0].street;
@@ -315,6 +316,5 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     this.toastService.showSuccess('Periodic order has been set')
     this.shoppingCartService.clear();
   }
-
 
 }

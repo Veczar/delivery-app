@@ -30,6 +30,14 @@ export class PartnerService {
     });
   }
 
+  getCurrentCity() {
+    return this.currentCity;
+  }
+
+  setCurrentCity(city: string) {
+    this.currenCity.next(city);
+  }
+
   getPartnersData(): PartnerReadDto[] {
     return this.partnersData;
   }
@@ -40,11 +48,6 @@ export class PartnerService {
   
   getSearchTerm(): string {
     return this.searchTerm;
-  }
-
-  updateCurrentCity(city: string): void {
-    this.currenCity.next(city);
-    localStorage.setItem('userCity', city);
   }
 
   getPartners():Observable<PartnerDto[]> {

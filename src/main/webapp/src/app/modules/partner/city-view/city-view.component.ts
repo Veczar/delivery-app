@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { PartnerReadDto } from 'src/app/shared/model/api-models';
 import { PartnerService } from '../partner.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './city-view.component.html',
   styleUrls: ['./city-view.component.scss']
 })
-export class CityViewComponent implements OnInit {
+export class CityViewComponent implements OnInit  {
   filteredPartners: PartnerReadDto[] = [];
   partners: PartnerReadDto[] = [];
   cityName: string = '';
@@ -16,15 +16,14 @@ export class CityViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private partnerService: PartnerService
+    private partnerService: PartnerService,
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.cityName = params['city'];
-      this.partnerService.updateCurrentCity(this.cityName);
-
-
+      this.partnerService.setCurrentCity(this.cityName);
+     
       if (this.cityName == '') {
         this.router.navigate(['/partners']);
       } 
@@ -35,5 +34,4 @@ export class CityViewComponent implements OnInit {
       }
     })
   }
-
 }

@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PartnerDto } from 'src/app/shared/model/api-models';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { PartnerService } from '../partner.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-partner-edit-form',
   templateUrl: './partner-edit-form.component.html',
-  styleUrls: ['./partner-edit-form.component.scss']
+  styleUrls: ['./partner-edit-form.component.scss'],
 })
 export class PartnerEditFormComponent implements OnInit{
 

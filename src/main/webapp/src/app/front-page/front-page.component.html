@@ -1,76 +1,6 @@
 <body>
-  <header data-bs-theme="dark">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
 
-        <a class="navbar-brand" [routerLink]="['/']">Glovo Eats</a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse " id="navbarCollapse">
-
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" [routerLink]="['/partner', 'McDonald']">Contact-McDonald</a>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link active" (click)="open(demoModal)">Adblock</button>
-            </li>
-            <li *ngIf="getRole() === 'ADMIN'">
-              <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
-                <i class="bi bi-speedometer2"></i> Dashboard</button>
-            </li>
-            <li *ngIf="getRole() === 'COURIER'">
-              <button class="nav-link active color" [routerLink]="['/courier/my-deliveries']">
-                <i class="bi bi-backpack4"></i> My deliveries</button>
-            </li>
-            <li *ngIf="getRole() === 'PARTNER'">
-              <button class="nav-link active color" [routerLink]="['/courier/partner-orders']">
-                <i class="bi bi-backpack4"></i> My orders</button>
-            </li>
-          </ul>
-          <!-- <form class="middle-search" role="search">
-              <div class="input-group">
-                <span class="input-group-text"><span class="material-icons">search</span></span>
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              </div>
-              <button class="btn btn-outline-secondary" (click)="open(demoModal)">search</button>
-            </form> -->
-
-          <div *ngIf="!(isUserLoggedIn())">
-            <button class="btn btn-outline-primary me-2" type="submit"
-              [routerLink]="['/register/user']">Register</button>
-            <button class="btn btn-outline-success" type="submit" [routerLink]="['/auth']">Log in</button>
-          </div>
-
-          <div *ngIf="isUserLoggedIn() && getRole() !== 'USER'" class="nav-item text-white me-2 badge text-bg-primary">
-            {{ getRole() }}
-          </div>
-          <div *ngIf="isUserLoggedIn()">
-            <div class="dropdown-center">
-              <button class="btn btn-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
-              </button>
-              <ul class="dropdown-menu dropdown-menu-dark dropdown-position ">
-                <li><a class="dropdown-item user-dropdown" (click)="open(settingsModal)">Settings</a></li>
-                <li><a class="dropdown-item user-dropdown" (click)="open(ordersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Orders</a></li>
-                <li><a class="dropdown-item user-dropdown" (click)="open(complaintModal)" *ngIf="isUserLoggedIn() && getRole() !== 'ADMIN'">File a compalaint</a></li>
-                <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </nav>
-  </header>
+  <app-navbar></app-navbar>
 
   <main>
 
@@ -87,33 +17,33 @@
       </div>
     </div>
 
-  <div class="wrapper">
-    <div class="container marketing waves-background">
+    <div class="wrapper">
+      <div class="container marketing waves-background">
 
-      <div class="row align-items-center">
-        <div class="col text-center">
-          <a [routerLink]="['register/courier']">
-            <img src="../../assets/courier.jpg" height="350" class="rounded mb-3">
-          </a>
-          <h2 class="fw-normal">Get paid as a courier</h2>
-          <p >Join the thrill of being a culinary hero with us – where you're not just a courier, but
-          an ambassador, delivering smiles and savor to doorsteps across the city!</p>
-          <p><a class="btn btn-outline-primary" [routerLink]="['register/courier']">Apply now</a></p>
+        <div class="row align-items-center">
+          <div class="col text-center">
+            <a [routerLink]="['register/courier']">
+              <img src="../../assets/courier.jpg" height="350" class="rounded mb-3">
+            </a>
+            <h2 class="fw-normal">Get paid as a courier</h2>
+            <p >Join the thrill of being a culinary hero with us – where you're not just a courier, but
+            an ambassador, delivering smiles and savor to doorsteps across the city!</p>
+            <p><a class="btn btn-outline-primary" [routerLink]="['register/courier']">Apply now</a></p>
+          </div>
+
+          <div class="col text-center">
+            <a [routerLink]="['register/partner']">
+              <img src="../../assets/partner.jpg" height="350" class="rounded mb-3">
+            </a>
+            <h2 class="fw-normal">Become partner</h2>
+            <p >You provide a menu, we provide a delivery service for your business.
+              Rock your business like never before!</p>
+            <p><a class="btn btn-outline-primary" [routerLink]="['register/partner']">Apply now</a></p>
+          </div>
         </div>
 
-        <div class="col text-center">
-          <a [routerLink]="['register/partner']">
-            <img src="../../assets/partner.jpg" height="350" class="rounded mb-3">
-          </a>
-          <h2 class="fw-normal">Become partner</h2>
-          <p >You provide a menu, we provide a delivery service for your business.
-            Rock your business like never before!</p>
-          <p><a class="btn btn-outline-primary" [routerLink]="['register/partner']">Apply now</a></p>
-        </div>
-      </div>
-
-    </div><!-- /.container -->
-  </div>
+      </div><!-- /.container -->
+    </div>
 
     <!-- footer -->
     <div class="container-fluid footer">

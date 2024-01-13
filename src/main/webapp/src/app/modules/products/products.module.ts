@@ -1,22 +1,23 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FilterPipe } from './filter.pipe';
-import { PartnerProductsComponent } from './partner-products/partner-products.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
-import { UserModule } from '../user/user.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { AddProductFormComponent } from './add-product-form/add-product-form.component';
-import { ProductComponent } from './product/product.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
+import { NavbarModule } from 'src/app/shared/navbar/navbar.module';
 import { PartnerReviewModule } from '../partner-review/partner-review.module';
 import { PartnerModule } from '../partner/partner.module';
+import { UserModule } from '../user/user.module';
+import { AddProductFormComponent } from './add-product-form/add-product-form.component';
+import { FilterPipe } from './filter.pipe';
+import { PartnerProductsComponent } from './partner-products/partner-products.component';
+import { ProductComponent } from './product/product.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +25,6 @@ import { PartnerModule } from '../partner/partner.module';
     PartnerProductsComponent,
     AddProductFormComponent,
     ProductComponent,
-    ShoppingCartComponent
   ],
   imports: [
     CommonModule,
@@ -37,11 +37,11 @@ import { PartnerModule } from '../partner/partner.module';
     MatInputModule,
     MatButtonModule,
     MatTooltipModule,
-    PartnerModule,
-
     PartnerReviewModule,
     UserModule,
-    OrdersViewModule
-  ]
+    OrdersViewModule,
+    NavbarModule,
+    PartnerModule
+  ],
 })
 export class ProductsModule { }

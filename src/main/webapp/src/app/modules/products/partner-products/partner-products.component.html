@@ -1,71 +1,6 @@
 <body>
 
-  <header data-bs-theme="dark">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-
-        <a class="navbar-brand" [routerLink]="['/']">Glovo Eats</a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse " id="navbarCollapse">
-
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" [routerLink]="['/', 'McDonald']">Contact</a>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link active">Adblock</button>
-            </li>
-            <li *ngIf="getRole() === 'ADMIN'">
-              <button class="nav-link active color" [routerLink]="['/admin/dashboard']">
-                <i class="bi bi-speedometer2"></i> Dashboard</button>
-            </li>
-          </ul>
-
-          <a class="btn cart-btn me-3" data-bs-toggle="offcanvas" href="#offcanvasShoppingCart"
-            role="button" aria-controls="offcanvasShoppingCart" *ngIf="getTotal() > 0">
-            <h6 class="mb-0 d-flex align-items-center">
-              <h4 class="mb-0 me-2">
-                <i class="bi bi-cart2"></i>
-              </h4>
-              See your order <span class="me-4"></span> {{getTotal() | number: '1.2-2'}} $
-            </h6>
-          </a>
-
-          <div *ngIf="!(isUserLoggedIn())">
-            <button class="btn btn-outline-primary me-2" type="submit"
-              [routerLink]="['/register/user']">Register</button>
-            <button class="btn btn-outline-success" type="submit" [routerLink]="['/auth']">Log in</button>
-          </div>
-
-          <div *ngIf="isUserLoggedIn() && getRole() !== 'USER'" class="nav-item text-white me-2 badge text-bg-primary">
-            {{ getRole() }}
-          </div>
-          <div *ngIf="isUserLoggedIn()">
-            <div class="dropdown-center">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <i class="bi bi-person me-2"></i> {{ loggedUser.firstName }} {{ loggedUser.lastName }}
-              </button>
-                <ul class="dropdown-menu dropdown-menu-dark dropdown-position ">
-                  <li><a class="dropdown-item user-dropdown" (click)="open(settingsModal)">Settings</a></li>
-                  <li><a class="dropdown-item user-dropdown" (click)="open(ordersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Orders</a></li>
-                  <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
-                </ul>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </nav>
-  </header>
+  <app-navbar></app-navbar>
 
 <main>
 
@@ -316,28 +251,6 @@
   </div>
 </body>
 
-<ng-template #settingsModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Account Info</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-      (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body p-4">
-    <app-user-settings></app-user-settings>
-  </div>
-</ng-template>
-
-<ng-template #ordersModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Orders</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-      (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body p-4">
-    <app-orders-view></app-orders-view>
-  </div>
-</ng-template>
-
 <ng-template #detailsModal let-modal>
   <div class="modal-header">
     <h2 class="modal-title" id="modal-basic-title">{{partner.name}}</h2>
@@ -347,8 +260,7 @@
   <div class="modal-body p-4">
 
     <div class="modal-map rounded mb-3">
-      <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyB3bDebZmDc4DQ0_M03XB14ZA7QnSaIgCM
-      &q={{address.city}},{{address.street}}")'
+      <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyB3bDebZmDc4DQ0_M03XB14ZA7QnSaIgCM&q={{address.city}},{{address.street}}")'
         width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
@@ -427,7 +339,3 @@
     <app-product [productId]="selectedProduct.id" [modal]="modal" [owner]="owner"></app-product>
   </div>
 </ng-template>
-
-<div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" id="offcanvasShoppingCart" aria-labelledby="offcanvasExampleLabel">
-  <app-shopping-cart></app-shopping-cart>
-</div>
