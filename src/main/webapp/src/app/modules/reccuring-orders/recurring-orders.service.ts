@@ -16,6 +16,10 @@ export class RecurringOrdersService {
     return this.http.get<RecurringOrderDto[]>(`${this.apiUrl}`);
   }
 
+  getRecurringOrdersAssignedToUser(id : number): Observable<RecurringOrderDto[]> {
+    return this.http.get<RecurringOrderDto[]>(`${this.apiUrl}/owning/` + id);
+  }
+
   getRecurringOrder(id: number): Observable<RecurringOrderDto> {
     return this.http.get<RecurringOrderDto>(`${this.apiUrl}/${id}`);
   }
@@ -28,7 +32,7 @@ export class RecurringOrdersService {
     return this.http.put<RecurringOrderDto>(`${this.apiUrl}/${recurringOrder.id}`, recurringOrder);
   }
 
-  deleteRecurringOrder(id: number): Observable<RecurringOrderDto> {
+  deleteRecurringOrder(id?: number): Observable<RecurringOrderDto> {
     return this.http.delete<RecurringOrderDto>(`${this.apiUrl}/${id}`);
   }
 }

@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-12" *ngFor="let recurringOrder of recurringOrderDtoList">
+        <div class="card mb-3">
+            <div class="row g-0 ps-2 pe-2 pt-2">
+                <div class="col-md-12 img text-center rounded">
+                    <img  src="http://localhost:8080/api/products/photo/{{recurringOrder.product?.photoPath}}" class="img-fluid rounded" alt="product">
+                </div>
+                <div class="card-body md-6">
+                    <hr class="mt-1 mb-1"/>
+                    <p class="mt-1 mb-1">
+                        Start address: {{recurringOrder.addressStart?.city}}, {{recurringOrder.addressStart?.street}}<br/>
+                        End address: {{recurringOrder.addressEnd?.city}}, {{recurringOrder.addressEnd?.street}}<br/>
+                        Product: {{recurringOrder.product?.name}}<br/>
+                        Quantity: {{recurringOrder.quantity}}<br/>
+                        Frequency: 
+                        {{recurringOrder.frequency === "everyDay"? "every day" : ""}}
+                        {{recurringOrder.frequency === "every2Days"? "every 2 days" : ""}}
+                        {{recurringOrder.frequency === "every3Days"? "every 3 days" : ""}}
+                        {{recurringOrder.frequency === "every4Days"? "every 4 days" : ""}}
+                        {{recurringOrder.frequency === "every5Days"? "every 5 days" : ""}}
+                        {{recurringOrder.frequency === "every6Days"? "every 6 days" : ""}}
+                        {{recurringOrder.frequency === "everyWeek"? "every week" : ""}}
+                        {{recurringOrder.frequency === "every2Weeks"? "every 2 weeks" : ""}}
+                        {{recurringOrder.frequency === "every3Weeks"? "every 3 weeks" : ""}}
+                        {{recurringOrder.frequency === "every4Weeks"? "every 4 weeks" : ""}}
+                        <br/>
+                        Start date: {{convertDate(recurringOrder.startDate)}}<br/>
+                    </p>
+                </div>
+                <div class="card-body md-6 text-center">
+                        <button type="button" class="btn btn-outline-dark ms-1" (click)="delete(recurringOrder)">Delete periodic order</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

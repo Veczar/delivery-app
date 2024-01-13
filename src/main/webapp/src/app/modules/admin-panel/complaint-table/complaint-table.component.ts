@@ -44,6 +44,7 @@ export class ComplaintTableComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+  
   convertDate(timeStamp : number) :  String 
   {
     const date = new Date(timeStamp);

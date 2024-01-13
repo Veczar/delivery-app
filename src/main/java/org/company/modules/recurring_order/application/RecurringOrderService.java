@@ -15,6 +15,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.Duration;
 import java.util.Calendar;
@@ -22,6 +23,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ScheduledFuture;
+import java.util.stream.Collectors;
 
 @Service
 public class RecurringOrderService extends GenericService<RecurringOrder, RecurringOrderDto, Long, RecurringOrderRepository, RecurringOrderAssembler > {
@@ -129,6 +131,14 @@ public class RecurringOrderService extends GenericService<RecurringOrder, Recurr
             hashMap.put(id, scheduledFuture);
         }
         return recurringOrderDto;
+    }
+    public List<RecurringOrderDto> getRecurringOrderAssignedToUser(@PathVariable Long id)
+    {
+        List<RecurringOrderDto> recurringOrderDtoList = repository.findByCustomer_Id(id)
+                .stream()
+                .map(assembler::toDto)
+                .collect(Collectors.toList());
+        return recurringOrderDtoList;
     }
     @AllArgsConstructor
     static class OrderStarter implements Runnable

@@ -28,7 +28,7 @@ export class ShoppingCartComponent {
   }
 
   getCartSize(): number {
-    return this.shoppingCartService.getCartSize();
+    return this.shoppingCartService.getItems().length;
   }
 
   removeItem(index: number): void {

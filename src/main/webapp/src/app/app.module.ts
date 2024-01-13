@@ -1,18 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { DatePipe } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FrontPageComponent } from './front-page/front-page.component';
@@ -25,8 +18,13 @@ import { ProductsModule } from './modules/products/products.module';
 import { UserModule } from './modules/user/user.module';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor.service';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
-import { NavbarModule } from './shared/navbar/navbar.module';
 import { ToastComponent } from './shared/toast/toast-component/toast.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { DatePipe } from '@angular/common';
 import { FooterModule } from './shared/footer/footer.module';
 
 @NgModule({
@@ -72,8 +70,7 @@ import { FooterModule } from './shared/footer/footer.module';
     OrdersViewModule,
     ComplaintModule,
     PartnerModule,
-    NavbarModule,
-    FooterModule
+    NavbarModule
   ],
 })
 export class AppModule { }

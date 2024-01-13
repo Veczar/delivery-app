@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RecurringOrdersComponent } from './recurring-orders/recurring-orders.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    RecurringOrdersComponent
+  ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    RecurringOrdersComponent
   ]
 })
-export class ReccuringOrdersModule { }
+export class RecurringOrdersModule { }
