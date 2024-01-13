@@ -14,6 +14,7 @@ import { CourierTableComponent } from './courier-table/courier-table.component';
 import { UserModule } from '../user/user.module';
 import { PartnerTableComponent } from './partner-table/partner-table.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
+import { AddressTableComponent } from './address-table/address-table.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { AdminTableComponent } from './admin-table/admin-table.component';
     CourierTableComponent,
     PartnerTableComponent,
     AdminTableComponent,
+    AddressTableComponent,
   ],
   imports: [
     CommonModule,

@@ -18,6 +18,7 @@ import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-ch
 import { PartnerViewComponent } from './modules/partner/partner-view/partner-view.component';
 import { CityViewComponent } from './modules/partner/city-view/city-view.component';
 import { AdminTableComponent } from './modules/admin-panel/admin-table/admin-table.component';
+import { AddressTableComponent } from './modules/admin-panel/address-table/address-table.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
@@ -44,7 +45,8 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent},
       { path: 'users', component: UserTableComponent },
       { path: 'couriers-table', component: CourierTableComponent },
-      { path: 'admins-table', component:AdminTableComponent}
+      { path: 'admins-table', component:AdminTableComponent},
+      { path: 'address-table', component:AddressTableComponent},
     ]
   },
   {path: 'courier/my-deliveries', component: MyDeliveriesComponent, canActivate: [authCurierGuard]},
