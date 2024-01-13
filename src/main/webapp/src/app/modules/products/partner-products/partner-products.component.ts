@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AddressDto, PartnerDto, PartnerReviewReadDto, ProductReadDto } from 'src/app/shared/model/api-models';
+import { AddressDto, PartnerDto, PartnerReviewDto, PartnerReviewReadDto, ProductReadDto } from 'src/app/shared/model/api-models';
 import { ProductsService } from '../products.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -27,6 +27,7 @@ export class PartnerProductsComponent implements OnInit {
   rating: number = 0;
   owner: boolean = false;
   selectedProduct!: ProductReadDto;
+  reviews: PartnerReviewReadDto[] = [];
   palceholders!: number[];
 
   loggedUser = {
@@ -68,10 +69,10 @@ export class PartnerProductsComponent implements OnInit {
         if (partner.owner.id === id) {
           this.owner = true;
         }
-        
+
         this.http.get<PartnerReviewReadDto[]>(`http://localhost:8080/api/partners/reviews/partner/${partner.id}`).subscribe((reviews) => {
           this.reviewsCount = reviews.length;
-
+          this.reviews = reviews;
           // calculate rating
           if (this.reviewsCount > 0) {
             const totalRating = reviews.reduce((sum, review) => sum + (review.gradeInStars || 0), 0);
@@ -125,11 +126,11 @@ export class PartnerProductsComponent implements OnInit {
   navigateToExternalUrl(): void {
     const externalUrl = this.partner.websiteLink || '';
     const fullUrl = 'https://' + externalUrl;
-  
+
     // Open the external URL in a new window
     window.open(fullUrl, '_blank');
   }
-  
+
   partnerChanged(): void {
     this.partnerService.getPartnerById(this.partner.id as number).subscribe(partner => {
       this.partner = partner;

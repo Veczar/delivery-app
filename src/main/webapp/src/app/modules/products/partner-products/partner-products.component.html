@@ -29,11 +29,11 @@
             </li>
           </ul>
 
-          <a class="btn cart-btn me-3" data-bs-toggle="offcanvas" href="#offcanvasShoppingCart" 
+          <a class="btn cart-btn me-3" data-bs-toggle="offcanvas" href="#offcanvasShoppingCart"
             role="button" aria-controls="offcanvasShoppingCart" *ngIf="getTotal() > 0">
             <h6 class="mb-0 d-flex align-items-center">
               <h4 class="mb-0 me-2">
-                <i class="bi bi-cart2"></i> 
+                <i class="bi bi-cart2"></i>
               </h4>
               See your order <span class="me-4"></span> {{getTotal() | number: '1.2-2'}} $
             </h6>
@@ -86,7 +86,7 @@
             </h3>
 
             <div class="d-flex align-items-center" *ngIf="owner">
-              <button 
+              <button
                 class="ownerOptions btn btn-outline-primary me-2"
                 matTooltip="Add new product to your business"
                 [matTooltipShowDelay]="200"
@@ -97,8 +97,8 @@
                   Add product
                 </h5>
               </button>
-            
-              <button 
+
+              <button
                 class="ownerOptions btn btn-outline-primary"
                 matTooltip="Edit your business information"
                 [matTooltipShowDelay]="200"
@@ -112,7 +112,7 @@
             </div>
           </div>
 
-          <div class="mb-3">
+          <div class="mb-3" (click)="open(reviewModal)">
             <i class="bi bi-star-fill text-warning"></i>
             {{rating | number: '1.1-1'}}/5
             <a class="pointer">({{reviewsCount}}) reviews</a>
@@ -132,7 +132,7 @@
 
             <i class="bi bi-truck"></i>
             <div class="info-col">
-              Exp. delivery time <b>{{partner.expectedWaitingTime}}min</b> 
+              Exp. delivery time <b>{{partner.expectedWaitingTime}}min</b>
             </div>
 
             <div class="pointer d-flex" (click)="open(detailsModal)">
@@ -154,7 +154,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- main Content -->
   <div class="restaurant-container ">
 
@@ -178,7 +178,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-md-4" *ngFor="let product of products | filter: searchText;" (click)="openProductModal(productModal, product)">
         <!-- card -->
@@ -256,7 +256,7 @@
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
           </ul>
         </div>
-  
+
         <div class="col-6 col-md-2 mb-3">
           <h5>Section</h5>
           <ul class="nav flex-column nav-hover-underline">
@@ -267,7 +267,7 @@
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
           </ul>
         </div>
-  
+
         <div class="col-6 col-md-2 mb-3">
           <h5>Section</h5>
           <ul class="nav flex-column nav-hover-underline">
@@ -278,7 +278,7 @@
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
           </ul>
         </div>
-  
+
         <div class="col-md-5 offset-md-1 mb-3">
           <form>
             <h5>Subscribe to our newsletter</h5>
@@ -291,7 +291,7 @@
           </form>
         </div>
       </div>
-  
+
       <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
         <p class="p-0">© 2023-2024 Glovo Eats, Inc. All rights reserved.</p>
         <ul class="list-unstyled d-flex me-1">
@@ -347,13 +347,13 @@
   <div class="modal-body p-4">
 
     <div class="modal-map rounded mb-3">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1280.4060469671758!2d19.942898308060435!3d50.07108061860747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165b04a4a0d5bf%3A0x41a815e1860a19eb!2sPolitechnika%20Krakowska%20im.%20Tadeusza%20Ko%C5%9Bciuszki!5e0!3m2!1spl!2spl!4v1704559356190!5m2!1spl!2spl" 
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1280.4060469671758!2d19.942898308060435!3d50.07108061860747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165b04a4a0d5bf%3A0x41a815e1860a19eb!2sPolitechnika%20Krakowska%20im.%20Tadeusza%20Ko%C5%9Bciuszki!5e0!3m2!1spl!2spl!4v1704559356190!5m2!1spl!2spl"
         width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>    
+      </iframe>
     </div>
 
     <p>{{partner.description}}</p>
-    
+
     <h3>Address</h3>
     <div class="info-col">
       <i class="bi bi-geo-alt-fill me-1"></i>
@@ -374,12 +374,23 @@
       <a (click)="navigateToExternalUrl()">{{partner.websiteLink}}</a>
       </div>
     </div>
-    
+
     <h3>Contact number</h3>
     <div class="info-col">
       <i class="bi bi-telephone-fill me-1"></i>
       {{partner.contactNumber}}
     </div>
+  </div>
+</ng-template>
+
+<ng-template #reviewModal let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-basic-title">{{partner.name}} reviews</h2>
+    <button type="button" class="btn-close me-2" data-bs-dismiss="modal" aria-label="Close"
+    (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body p-4">
+    <app-partner-review [partner]="partner" [reviews]="reviews"></app-partner-review>
   </div>
 </ng-template>
 
@@ -408,7 +419,7 @@
 <ng-template #productModal let-modal>
   <div class="modal-header">
     <h3 class="modal-title" id="modal-basic-title">{{selectedProduct.name}}</h3>
-    <button type="button" class="btn-close" 
+    <button type="button" class="btn-close"
       (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body p-3">

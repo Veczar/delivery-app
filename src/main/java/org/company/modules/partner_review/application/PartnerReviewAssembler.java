@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class PartnerReviewAssebler implements IAssembler<PartnerReview, PartnerReviewDto> {
+public class PartnerReviewAssembler implements IAssembler<PartnerReview, PartnerReviewDto> {
     private final UserAssembler userAssembler;
     private final UserRepository userRepository;
     private final PartnerAssembler partnerAssembler;
@@ -38,6 +38,9 @@ public class PartnerReviewAssebler implements IAssembler<PartnerReview, PartnerR
         partnerReviewReadDto.setId(partnerReview.getId());
         partnerReviewReadDto.setGradeInStars(partnerReview.getGrade_in_stars());
         partnerReviewReadDto.setPartnerId(partnerReview.getPartner().getId());
+        partnerReviewReadDto.setDescription(partnerReview.getDescription());
+        partnerReviewReadDto.setDate(partnerReview.getCreatedDate());
+        partnerReviewReadDto.setReviewer(userAssembler.toDto(partnerReview.getUser()));
         return partnerReviewReadDto;
     }
 

@@ -72,7 +72,7 @@ export class AuthService {
     this.loggedUser.lastName = lastName;
     return this.loggedUser;
   }
-  
+
   getDecodedAccessToken(token: string): any {
     try {
       return jwtDecode(token);
@@ -82,7 +82,7 @@ export class AuthService {
   }
   getLoggedUserEmail() {
     const token = localStorage.getItem('authToken') || '';
-    
+
     const tokenInfo = this.getDecodedAccessToken(token); // decode token
     const email = tokenInfo.sub; // get token expiration dateTime
     console.log("email::"+email);
@@ -97,6 +97,7 @@ export class AuthService {
     }
     return true; // Token expiration information not found
   }
+
 
   logOut(): void {
     localStorage.clear();

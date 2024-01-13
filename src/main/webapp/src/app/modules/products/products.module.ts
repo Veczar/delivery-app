@@ -15,6 +15,7 @@ import { AddProductFormComponent } from './add-product-form/add-product-form.com
 import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
+import { PartnerReviewModule } from '../partner-review/partner-review.module';
 import { PartnerModule } from '../partner/partner.module';
 
 @NgModule({
@@ -32,12 +33,13 @@ import { PartnerModule } from '../partner/partner.module';
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-    MatFormFieldModule, 
-    MatInputModule, 
+    MatFormFieldModule,
+    MatInputModule,
     MatButtonModule,
     MatTooltipModule,
     PartnerModule,
 
+    PartnerReviewModule,
     UserModule,
     OrdersViewModule
   ]
