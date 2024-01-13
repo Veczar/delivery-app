@@ -68,6 +68,9 @@ body {
 .sidebar .nav-link {
     font-weight: 500;
     color: #333;
+    // background-color: red;
+    display: flex;
+    align-items: center;
 }
 
 .sidebar .nav-link .feather {
@@ -105,6 +108,18 @@ body {
     padding: .75rem 1rem;
 }
 
+.font-weight {
+    font-weight: 500;
+}
+
+i {
+    margin-right: 5px;
+}
+
+h5 {
+    margin-bottom: 0px;
+    margin-top: 4px;
+}
 
 ul > li > button {
     transition: none; /* No transition */

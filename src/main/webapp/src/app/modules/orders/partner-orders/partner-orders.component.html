@@ -13,22 +13,22 @@
       <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
           <div class="position-sticky pt-3 sidebar-sticky">
-            <ul class="nav flex-column">
+            <ul class="nav flex-column mt-2">
               <li class="nav-item">
                 <button class="nav-link" (click)="showInPreparation()">
-                  <i class="bi bi-bag-check"></i> Orders that need to be prepared</button>
+                  <h6><i class="bi bi-bag"></i> In preparation</h6> </button>
               </li>
               <li class="nav-item">
                 <button class="nav-link" (click)="showReadyForDelivery()" active>
-                  <i class="bi bi-bag"></i> Ready for pick up</button>
+                  <h6><i class="bi bi-bag-check"></i> Ready for pick up</h6></button>
               </li>
               <li class="nav-item">
                 <button class="nav-link" (click)="showInDelivery()" active>
-                  <i class="bi bi-backpack4"></i> In delivery</button>
+                  <h6><i class="bi bi-truck"></i> In delivery</h6></button>
               </li>
               <li class="nav-item">
                 <button class="nav-link" (click)="showDone()">
-                  <i class="bi bi-bag-check"></i> Done</button>
+                  <h6><i class="bi bi-check2-square"></i> Done</h6></button>
               </li>
             </ul>
           </div>
