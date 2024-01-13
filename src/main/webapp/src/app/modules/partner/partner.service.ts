@@ -42,11 +42,6 @@ export class PartnerService {
     return this.searchTerm;
   }
 
-  updateCurrentCity(city: string): void {
-    this.currenCity.next(city);
-    localStorage.setItem('userCity', city);
-  }
-
   getPartners():Observable<PartnerDto[]> {
     return this.http.get<PartnerDto[]>(`/api/partners`);
   }

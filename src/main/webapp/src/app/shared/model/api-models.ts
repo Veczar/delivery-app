@@ -133,6 +133,7 @@ export interface PartnerReadDto {
     name?: string;
     partnerType?: PartnerType;
     photoPath?: string;
+    expectedWaitingTime?: number;
 }
 
 export interface PartnerReviewDto {
