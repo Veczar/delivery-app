@@ -20,6 +20,7 @@ import { CityViewComponent } from './modules/partner/city-view/city-view.compone
 import { AdminTableComponent } from './modules/admin-panel/admin-table/admin-table.component';
 import { AddressTableComponent } from './modules/admin-panel/address-table/address-table.component';
 import { PartnerReviewTableComponent } from './modules/admin-panel/partner-review-table/partner-review-table.component';
+import { CategoriesTableComponent } from './modules/admin-panel/categories-table/categories-table.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
@@ -48,7 +49,8 @@ const routes: Routes = [
       { path: 'couriers-table', component: CourierTableComponent },
       { path: 'admins-table', component:AdminTableComponent},
       { path: 'address-table', component:AddressTableComponent},
-      { path: 'partner-review-table', component: PartnerReviewTableComponent}
+      { path: 'partner-review-table', component: PartnerReviewTableComponent},
+      { path: 'categories-table', component: CategoriesTableComponent},
     ]
   },
   {path: 'courier/my-deliveries', component: MyDeliveriesComponent, canActivate: [authCurierGuard]},
