@@ -38,7 +38,7 @@
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <!-- todo -->
-              <span>delivery fee</span> 2.5$ 
+              <span>delivery fee</span> {{deliveryFee}}
             </li>
 
             <li class="list-group-item d-flex justify-content-between">
@@ -131,6 +131,7 @@
               [ngClass]="{ 'invalid-radio': submitted2 && checkoutForm.value.addressEnd == null}"
               >
               <input 
+                (click)="onChangeAdrees(address)"
                 type="radio"
                 class="btn-check" 
                 id="option{{i}}" 
