@@ -162,7 +162,10 @@ export class PartnerProductsComponent implements OnInit {
     this.toastService.showInfo('logged out');
     this.owner = false;
   }
-
+  getUrl(address : AddressDto)
+  {
+    return "https://www.google.com/maps/embed/v1/place?key=AIzaSyB3bDebZmDc4DQ0_M03XB14ZA7QnSaIgCM&q="+address.city+","+address.street;
+  }
   getRole(): string {
     return localStorage.getItem('role') || '';
   }

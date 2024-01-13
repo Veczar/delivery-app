@@ -32,13 +32,13 @@
             </li>
             <li class="list-group-item p-1">
               <div class="input-group no-margin">
-                <input type="number" class="form-control" placeholder="tip (optional)" id="tip" [(ngModel)]="tip">
+                <input type="number" class="form-control" min=0 placeholder="tip (optional)" id="tip" [(ngModel)]="tip">
                 <span class="input-group-text">$</span>
               </div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <!-- todo -->
-              <span>delivery fee</span> {{deliveryFee}}
+              <span>delivery fee</span> {{deliveryFee}} $
             </li>
 
             <li class="list-group-item d-flex justify-content-between">

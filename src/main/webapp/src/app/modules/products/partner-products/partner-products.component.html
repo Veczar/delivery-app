@@ -260,7 +260,7 @@
   <div class="modal-body p-4">
 
     <div class="modal-map rounded mb-3">
-      <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyB3bDebZmDc4DQ0_M03XB14ZA7QnSaIgCM&q={{address.city}},{{address.street}}")'
+      <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(getUrl(address))'
         width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
@@ -339,3 +339,7 @@
     <app-product [productId]="selectedProduct.id" [modal]="modal" [owner]="owner"></app-product>
   </div>
 </ng-template>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" id="offcanvasShoppingCart" aria-labelledby="offcanvasExampleLabel">
+  <app-shopping-cart></app-shopping-cart>
+</div>

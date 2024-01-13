@@ -115,8 +115,8 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     this.getDistance(origins, destination).then(
       (response) => {
         var distanceMatrixResponse = response as google.maps.DistanceMatrixResponse;
-        this.deliveryFee = distanceMatrixResponse.rows[0].elements[0].distance.value * 0.0002;
-        this.totalPrice = Math.ceil((this.shoppingCartService.getTotalPrice() + this.deliveryFee)*100)/100;
+        this.deliveryFee = Math.ceil((distanceMatrixResponse.rows[0].elements[0].distance.value * 0.0002)*100)/100;
+        this.totalPrice = this.shoppingCartService.getTotalPrice() + this.deliveryFee
         this.cd.detectChanges();
       }
     ).catch(
@@ -179,7 +179,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
       deliveryMan: this.formBuilder.group({
         id: [null, Validators.required],
       }),
-      tip: [null, Validators.required],
+      tip: ["", Validators.required, Validators.min(0)],
       totalPrice: [null, Validators.required],
       status: [null, Validators.required],
       creationDate: [null, Validators.required],
