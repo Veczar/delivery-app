@@ -1,0 +1,1 @@
+ALTER TABLE p_courier DROP COLUMN rating

@@ -20,7 +20,7 @@ export class CourierTableComponent {
   submitted: boolean = false;
 
     accountNumber?: string;
-   displayedColumns: string[] = ['id', 'rating', 'user', 'workingArea', 'accountNumber'];
+   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'userEmail', 'workingArea', 'accountNumber'];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
