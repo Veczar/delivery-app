@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductDto } from 'src/app/shared/model/api-models';
-import { ProductsService } from '../products.service';
-import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
-import { AuthService } from '../../auth/auth.service';
+import { ShoppingCartService } from '../../../shared/navbar/shopping-cart/shopping-cart.service';
+import { ProductsService } from '../products.service';
 
 
 @Component({

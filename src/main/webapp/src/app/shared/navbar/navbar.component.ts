@@ -1,29 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AuthService } from 'src/app/modules/auth/auth.service';
-import { OrdersViewModule } from "../../modules/orders/orders-view.module";
-import { UserModule } from "../../modules/user/user.module";
+import { PartnerService } from 'src/app/modules/partner/partner.service';
+import { ShoppingCartService } from 'src/app/shared/navbar/shopping-cart/shopping-cart.service';
 import { RouteService } from '../route.service';
 import { ToastService } from '../toast/toast.service';
-import { PartnerService } from 'src/app/modules/partner/partner.service';
 
 @Component({
-    standalone: true,
-    selector: 'app-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.scss'],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        OrdersViewModule,
-        UserModule,
-        FormsModule
-    ]
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
   cityName: string = '';
@@ -48,6 +36,7 @@ export class NavbarComponent implements OnInit {
     public toastService: ToastService,
     private routeService: RouteService,
     private partnerService: PartnerService,
+    private shoppingCartService: ShoppingCartService,
   ) { }
 
   ngOnInit(): void {
@@ -102,5 +91,9 @@ export class NavbarComponent implements OnInit {
     // this.cityName = this.newAddress;
     this.partnerService.setCurrentCity(this.newAddress);
     this.dataChangedEvent.emit(this.newAddress)
+  }
+
+  getTotal(): number {
+    return this.shoppingCartService.getTotalPrice();
   }
 }

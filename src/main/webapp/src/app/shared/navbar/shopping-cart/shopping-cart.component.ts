@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { ProductDto } from 'src/app/shared/model/api-models';
 import { ShoppingCartService } from './shopping-cart.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../../modules/auth/auth.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent {
 

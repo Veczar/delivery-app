@@ -251,28 +251,6 @@
   </div>
 </body>
 
-<ng-template #settingsModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Account Info</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-      (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body p-4">
-    <app-user-settings></app-user-settings>
-  </div>
-</ng-template>
-
-<ng-template #ordersModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Orders</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-      (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body p-4">
-    <app-orders-view></app-orders-view>
-  </div>
-</ng-template>
-
 <ng-template #detailsModal let-modal>
   <div class="modal-header">
     <h2 class="modal-title" id="modal-basic-title">{{partner.name}}</h2>
@@ -282,8 +260,7 @@
   <div class="modal-body p-4">
 
     <div class="modal-map rounded mb-3">
-      <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyB3bDebZmDc4DQ0_M03XB14ZA7QnSaIgCM
-      &q={{address.city}},{{address.street}}")'
+      <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyB3bDebZmDc4DQ0_M03XB14ZA7QnSaIgCM&q={{address.city}},{{address.street}}")'
         width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
@@ -362,7 +339,3 @@
     <app-product [productId]="selectedProduct.id" [modal]="modal" [owner]="owner"></app-product>
   </div>
 </ng-template>
-
-<div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" id="offcanvasShoppingCart" aria-labelledby="offcanvasExampleLabel">
-  <app-shopping-cart></app-shopping-cart>
-</div>
