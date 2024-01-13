@@ -19,10 +19,6 @@ import { CityViewComponent } from './modules/partner/city-view/city-view.compone
 import { AdminTableComponent } from './modules/admin-panel/admin-table/admin-table.component';
 import { PartnerOrdersComponent } from 'src/app/modules/orders/partner-orders/partner-orders.component';
 import { ComplaintTableComponent } from 'src/app/modules/admin-panel/complaint-table/complaint-table.component';
-
-import { PartnerOrdersComponent } from 'src/app/modules/orders/partner-orders/partner-orders.component';
-import { ComplaintTableComponent } from 'src/app/modules/admin-panel/complaint-table/complaint-table.component';
-
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
   {path: 'auth', component: LoginFormComponent},
@@ -48,7 +44,7 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent},
       { path: 'users', component: UserTableComponent },
       { path: 'couriers-table', component: CourierTableComponent },
-      { path: 'admins-table', component:AdminTableComponent}
+      { path: 'admins-table', component:AdminTableComponent},
       { path: 'complaints', component: ComplaintTableComponent },
       { path: 'admins-table', component:AdminTableComponent},
       { path: 'complaints', component: ComplaintTableComponent },
