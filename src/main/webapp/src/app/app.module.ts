@@ -26,6 +26,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
 import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-checkout.component';
 import { DatePipe } from '@angular/common';
+import { ComplaintModule } from 'src/app/modules/complaint/complaint.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { DatePipe } from '@angular/common';
     AuthModule,
     AdminPanelModule,
     ProductsModule,
-    OrdersViewModule
+    OrdersViewModule,
+    ComplaintModule
   ],
   providers: [
     {
