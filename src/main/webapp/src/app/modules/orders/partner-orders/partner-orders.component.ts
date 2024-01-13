@@ -17,7 +17,7 @@ import { AuthService } from '../../auth/auth.service';
 export class PartnerOrdersComponent {
   dataSource!: MatTableDataSource<OrderReadDto>;
   orderForm!: FormGroup;
-  selectedStatus: string = Status.inDelivery;
+  selectedStatus: string = Status.inPreparation;
   filter: string = '';
   displayedColumns: string[] = ["id", 'addressStart', 'addressEnd', 'firstName', 'lastName', 'telephoneNumber', 
   'deliveryManFirstName', 'deliveryManLastName', "creationDate", "totalPrice", "tip", "makeReadyForPickup"];

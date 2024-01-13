@@ -42,7 +42,7 @@ public class OrderService extends GenericService<Order, OrderDto, Long, OrderRep
         if(order != null)
         {
             order.setStatus(status);
-            order.setCompletionDate(new Date());
+            if(status == Status.done)order.setCompletionDate(new Date());
             orderReadDto = assembler.toReadDto(repository.save(order));
         }
         return orderReadDto;
@@ -71,11 +71,11 @@ public class OrderService extends GenericService<Order, OrderDto, Long, OrderRep
         return list;
     }
 
-    @GetMapping("/assign/{id}")
     public OrderReadDto assignToDeliveryMan(Long id, Long userId) {
         Order order = repository.findById(id).orElse(null);
         DeliveryMan deliveryMan =  deliveryManRepository.findByUser_Id(userId);
         order.setDeliveryMan(deliveryMan);
+        order.setStatus(Status.inDelivery);
         return assembler.toReadDto(repository.save(order));
     }
 }

@@ -32,7 +32,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("api/auth/**").permitAll()
 
                                 .requestMatchers("api/users/**").hasAnyAuthority("ADMIN", "USER", "PARTNER", "COURIER") //user only for himself - will check elsewhere
-
+                                .requestMatchers("api/partners/reviews/**").hasAnyAuthority("ADMIN", "USER", "PARTNER", "COURIER")
                                 .requestMatchers(HttpMethod.GET, "/api/partners/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/partners/**").hasAnyAuthority("PARTNER", "ADMIN")
@@ -52,7 +52,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("api/categories/**").hasAnyAuthority("ADMIN", "PARTNER")
                                 .requestMatchers("api/categories").hasAnyAuthority("ADMIN", "PARTNER")
 
-                                .requestMatchers("api/partners/reviews/**").hasAnyAuthority("ADMIN", "USER", "PARTNER", "COURIER")
+
 
                                 .requestMatchers(HttpMethod.GET, "/api/orders/**").permitAll()
                                 .requestMatchers(HttpMethod.PUT, "/api/orders/rating/**").hasAnyAuthority("USER", "ADMIN")

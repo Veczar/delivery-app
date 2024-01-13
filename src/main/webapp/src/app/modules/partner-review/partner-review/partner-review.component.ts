@@ -69,7 +69,6 @@ export class PartnerReviewComponent implements OnInit{
     this.modalService.dismissAll();
     this.modalService.open(modal);
   }
-
   selectStar(star: number): void {
     this.reviewForm.get('gradeInStars')?.setValue(star);
     this.selectedStar = star;
@@ -112,8 +111,9 @@ export class PartnerReviewComponent implements OnInit{
       function refreshPage() {
         location.reload();
       }
-    }
-    else {
+
+    refreshPage();
+    }else {
       console.log(this.reviewForm.value)
       console.log('wrong form');
       return;
@@ -124,6 +124,10 @@ export class PartnerReviewComponent implements OnInit{
     this.reviewService.deleteReview(reviewId).subscribe(() => {
       // Odśwież listę recenzji po usunięciu
       this.reviews = this.reviews.filter(review => review.id !== reviewId);
+      function refreshPage() {
+        location.reload();
+      }
+      refreshPage();
     });
   }
 }

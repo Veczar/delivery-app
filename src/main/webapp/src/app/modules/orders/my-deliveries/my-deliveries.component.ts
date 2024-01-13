@@ -69,7 +69,7 @@ export class MyDeliveriesComponent {
         this.dataSource.filterPredicate = (data: OrderReadDto, filter: string) => {
           const filterValue = filter.substring(0,filter.lastIndexOf(" "));
           const type = filter.substring(filter.lastIndexOf(" ")+1);
-          if(type == "null")return data.deliveryManId == null;
+          if(type == "null")return data.deliveryManId == null && data.status === Status.readyForDelivery;
           return oldFilterPredicate(data, filterValue) && data.status === type && data.deliveryManId != null;
          };
          this.dataSource.filter = this.filter + this.selectedStatus; 
@@ -103,13 +103,6 @@ export class MyDeliveriesComponent {
     this.dataSource.filter = this.filter + " " + this.selectedStatus;
     this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
     'partner', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip", "rating"];
-  }
-
-  showReadyForDelivery() {
-    this.selectedStatus =  Status.readyForDelivery;
-    this.dataSource.filter = this.filter + " " + this.selectedStatus;
-    this.displayedColumns = ["id", 'addressStart', 'addressEnd', 'customerName', 'telephoneNumber', 
-    'partner', "creationDate", "completionDate", "distanceInKm", "totalPrice", "tip"];
   }
 
   showAssignableOrders() {

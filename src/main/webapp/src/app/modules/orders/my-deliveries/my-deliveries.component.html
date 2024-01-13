@@ -19,10 +19,6 @@
                   <i class="bi bi-backpack4"></i> In delivery assigned to me</button>
               </li>
               <li class="nav-item">
-                <button class="nav-link" (click)="showReadyForDelivery()" [ngClass]="{ 'active-tab':  this.selectedStatus === 'readyForDelivery' }" active>
-                  <i class="bi bi-bag"></i> Ready for pick up</button>
-              </li>
-              <li class="nav-item">
                 <button class="nav-link" (click)="showDone()" [ngClass]="{ 'active-tab':  this.selectedStatus === 'done' }">
                   <i class="bi bi-bag-check"></i> Done</button>
               </li>
