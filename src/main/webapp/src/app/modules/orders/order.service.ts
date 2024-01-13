@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OrderDto, OrderReadDto, ProductOrderDto, Status } from 'src/app/shared/model/api-models';
+import { OrderDto, OrderReadDto, ProductOrderDto, Status, AddressDto } from 'src/app/shared/model/api-models';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +51,4 @@ export class OrderService {
   makeOrder(order: OrderDto): Observable<OrderDto> {
     return this.http.post<OrderDto>(`${this.apiUrl}/api/orders`, order);
   }
-
-
 }

@@ -11,6 +11,7 @@ import { UserTableComponent } from './user-table/user-table.component';
 import { AdminPanelComponent } from './admin-panel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourierTableComponent } from './courier-table/courier-table.component';
+import { UserSettingsComponent } from '../user/user-settings/user-settings.component';
 import { UserModule } from '../user/user.module';
 import { PartnerTableComponent } from './partner-table/partner-table.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
@@ -20,6 +21,8 @@ import { CategoriesTableComponent } from './categories-table/categories-table.co
 import { ProductTableComponent } from './product-table/product-table.component';
 import { OrderTableComponent } from './order-table/order-table.component';
 import { ReccuringOrdersTableComponent } from './reccuring-orders-table/reccuring-orders-table.component';
+import { ComplaintTableComponent } from './complaint-table/complaint-table.component';
+
 
 
 @NgModule({
@@ -36,6 +39,7 @@ import { ReccuringOrdersTableComponent } from './reccuring-orders-table/reccurin
     ProductTableComponent,
     OrderTableComponent,
     ReccuringOrdersTableComponent,
+    ComplaintTableComponent,
   ],
   imports: [
     CommonModule,

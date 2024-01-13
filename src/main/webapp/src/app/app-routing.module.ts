@@ -13,7 +13,6 @@ import { CourierTableComponent } from './modules/admin-panel/courier-table/couri
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
 import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
 import { PartnerTableComponent } from './modules/admin-panel/partner-table/partner-table.component';
-import { PartnerOrdersComponent } from './modules/orders/partner-orders/partner-orders.component';
 import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-checkout.component';
 import { PartnerViewComponent } from './modules/partner/partner-view/partner-view.component';
 import { CityViewComponent } from './modules/partner/city-view/city-view.component';
@@ -24,6 +23,8 @@ import { CategoriesTableComponent } from './modules/admin-panel/categories-table
 import { ProductTableComponent } from './modules/admin-panel/product-table/product-table.component';
 import { OrderTableComponent } from './modules/admin-panel/order-table/order-table.component';
 import { ReccuringOrdersTableComponent } from './modules/admin-panel/reccuring-orders-table/reccuring-orders-table.component';
+import { PartnerOrdersComponent } from 'src/app/modules/orders/partner-orders/partner-orders.component';
+import { ComplaintTableComponent } from 'src/app/modules/admin-panel/complaint-table/complaint-table.component';
 
 const routes: Routes = [
   {path: '', component: FrontPageComponent, pathMatch: 'full'},
@@ -57,6 +58,9 @@ const routes: Routes = [
       { path: 'product-table', component: ProductTableComponent},
       { path: 'order-table', component: OrderTableComponent},
       { path: 'recurring-orders-table', component: ReccuringOrdersTableComponent},
+      { path: 'complaints', component: ComplaintTableComponent },
+      { path: 'admins-table', component:AdminTableComponent},
+      { path: 'complaints', component: ComplaintTableComponent },
     ]
   },
   {path: 'courier/my-deliveries', component: MyDeliveriesComponent, canActivate: [authCurierGuard]},

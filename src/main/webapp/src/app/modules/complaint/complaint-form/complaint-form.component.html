@@ -1,0 +1,56 @@
+<form 
+  [formGroup]="complaintForm" 
+  class="row g-3 needs-validation" 
+  (keydown.enter)="$event.preventDefault()" 
+  (ngSubmit)="sendComplaint()"
+  >
+  <div class="form-group col-md-12">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      name="title"
+      formControlName="title"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['title'].errors }"
+      [ngClass]="{ 'is-valid':submitted && !f['title'].errors }"
+    />
+    <div class="invalid-feedback" *ngIf="submitted && f['title'].errors" >
+      <p>Title is requeired</p>
+    </div>
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="description" class="form-label">Title</label>
+    <textarea
+      type="text"
+      name="description"
+      formControlName="description"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
+      [ngClass]="{ 'is-valid':submitted && !f['description'].errors }"
+    ></textarea>
+    <div class="invalid-feedback" *ngIf="submitted && f['description'].errors" >
+      <p>Descitpion is required</p>
+    </div>
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="methodOfContact" class="form-label">How you would like us to contact you and back</label>
+      <select class="form-select input" aria-label=".form-select-sm example"
+        formControlName="methodOfContact"
+        [ngClass]="{ 'is-invalid': submitted && f['methodOfContact'].errors }"
+        [ngClass]="{ 'is-valid':submitted && !f['methodOfContact'].errors }"
+        >
+        <option value="phone">Call with admin</option>
+        <option value="email">e-mail communication</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="submitted && f['methodOfContact'].errors">
+      <p>Method of contact is requeired</p>
+    </div>
+  </div>
+  <div class="mb-3">
+    <button type="button" class="btn btn-primary me-2" (click)="sendComplaint()">
+      Send complaint
+    </button>
+  </div>
+</form>
