@@ -53,7 +53,6 @@ export class CourierTableComponent {
     this.courierForm = this.formBuilder.group({
       id: [''],
       user: [''],
-      rating: ['',[Validators.required, Validators.min(0),Validators.max(5)]],
       workingArea: ['', [Validators.required, Validators.minLength(2)]],
       accountNumber: [
         '',

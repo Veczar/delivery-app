@@ -16,7 +16,7 @@
             <ul class="nav flex-column">
               <li class="nav-item">
                 <button class="nav-link" (click)="showInPreparation()">
-                  <i class="bi bi-bag-check"></i> Orders that need to be prepared</button>
+                  <i class="bi bi-bag-check"></i> Orders in preparation </button>
               </li>
               <li class="nav-item">
                 <button class="nav-link" (click)="showReadyForDelivery()" active>
@@ -37,7 +37,8 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">                  
+            <h1 class="h2">
+              {{this.selectedStatus === "inPreparation" ? "Order that are being prepared" : '' }}                  
               {{this.selectedStatus === "done" ? "Done" : '' }}
               {{this.selectedStatus === "inDelivery" ? "In delivery assigned to me" : '' }}
               {{this.selectedStatus === "readyForDelivery" ? "Ready for pick up" : "" }}

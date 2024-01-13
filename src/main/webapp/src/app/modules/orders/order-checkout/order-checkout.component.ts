@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../../../shared/navbar/shopping-cart/shopping-cart.service';
-import { AddressDto, Frequency, OrderDto, PartnerDto, ProductDto, ProductOrderDto, Status, UserDto } from 'src/app/shared/model/api-models';
+import { AddressDto, Frequency, OrderDto, PartnerDto, ProductDto, ProductOrderDto, RecurringOrderDto, Status, UserDto } from 'src/app/shared/model/api-models';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../user/user.service';
 import { OrderService } from '../order.service';
@@ -35,6 +35,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
   startDate: any;
   frequencies: string[] = [];
   selctedFreq!: string;
+  distance : number = 0;
 
   constructor(
     private shoppingCartService: ShoppingCartService,
@@ -115,8 +116,10 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     this.getDistance(origins, destination).then(
       (response) => {
         var distanceMatrixResponse = response as google.maps.DistanceMatrixResponse;
-        this.deliveryFee = Math.ceil((distanceMatrixResponse.rows[0].elements[0].distance.value * 0.0002)*100)/100;
+        var dist = distanceMatrixResponse.rows[0].elements[0].distance.value;
+        this.deliveryFee = Math.ceil((dist * 0.0002)*100)/100;
         this.totalPrice = this.shoppingCartService.getTotalPrice() + this.deliveryFee
+        this.distance = dist/1000;
         this.cd.detectChanges();
       }
     ).catch(
@@ -251,8 +254,10 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     form.creationDate = new Date();
 
     // console.log(JSON.stringify(this.orderForm.value, null, 2));
-
-    this.makeOrder(this.orderForm.value);
+    var tmp  = this.orderForm.value as OrderDto;
+    tmp.totalPrice = this.totalPrice;
+    tmp.distanceInKm = this.distance;
+    this.makeOrder(tmp);
     this.router.navigate(['/']);
     this.toastService.showSuccess('Order completed, now wait for delivery')
     this.shoppingCartService.clear();
@@ -308,7 +313,6 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
 
     // console.log(this.recurringForm.value)
     console.log(JSON.stringify(form, null, 2));
-
     this.recurringOrdersService.makeRecurringOrder(form).subscribe(response => {
       console.log('success')
     });

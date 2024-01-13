@@ -115,7 +115,7 @@ export class PartnerReviewComponent implements OnInit{
         location.reload();
       }
 
-      //refreshPage();
+    refreshPage();
     }else {
       console.log(this.reviewForm.value)
       console.log('wrong form');
@@ -127,6 +127,10 @@ export class PartnerReviewComponent implements OnInit{
     this.reviewService.deleteReview(reviewId).subscribe(() => {
       // Odśwież listę recenzji po usunięciu
       this.reviews = this.reviews.filter(review => review.id !== reviewId);
+      function refreshPage() {
+        location.reload();
+      }
+      refreshPage();
     });
   }
 

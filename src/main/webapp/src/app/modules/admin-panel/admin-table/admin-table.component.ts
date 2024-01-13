@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../user/user.service';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 
 
@@ -75,10 +75,34 @@ export class AdminTableComponent {
           Validators.maxLength(30),
         ]
       ],
-      role: []
+      role: [],
+      addresses: this.formBuilder.array([this.createAddressFormGroup()])
     });
 
     this.userForm.disable();
+  }
+
+  createAddressFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      id: [''],
+      city: ['', [Validators.required, Validators.minLength(2)]],
+      street: ['', [Validators.required, Validators.minLength(2)]],
+      postalCode: [
+        '',
+        [
+          Validators.required,Validators.minLength(6),Validators.maxLength(6),
+          Validators.pattern(/^\d{2}-\d{3}$/) // Format kodu pocztowego XX-XXX
+        ]
+      ],
+    });
+  }
+
+  get addresses(): FormArray {
+    return this.userForm.get('addresses') as FormArray;
+  }
+
+  addAddress(): void {
+    this.addresses.push(this.createAddressFormGroup());
   }
 
   loadData(): void {
@@ -99,6 +123,10 @@ export class AdminTableComponent {
 
   click(user: UserDto) {
     this.submitted = false;
+    this.addresses.clear();
+    user.addresses?.forEach(address => {
+      this.addAddress();
+    });
     this.userForm.patchValue(user);
     this.userForm.get('role')?.setValue(user.role?.id);
   }
