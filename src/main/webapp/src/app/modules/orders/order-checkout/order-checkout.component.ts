@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { ProductOrderService } from '../../product-order/product-order.service';
 import { DatePipe } from '@angular/common';
 import { RecurringOrdersService } from '../../reccuring-orders/recurring-orders.service';
-
+import {} from 'googlemaps'; 
 
 @Component({
   selector: 'app-order-checkout',
@@ -30,7 +30,8 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
   addresses!: AddressDto[] | undefined;
   customer!: UserDto;
   tip!: number;
-  totalPrice!: number; // sum of subtotals and tip and delivery fee
+  deliveryFee!: number;
+  totalPrice!: number;
   startDate: any;
   frequencies: string[] = [];
   selctedFreq!: string;
@@ -68,11 +69,12 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
       this.checkoutForm.patchValue(user);
     })
 
+
     this.frequencies = Object.values(Frequency);
   }
 
   ngAfterViewInit(): void {
-    this.totalPrice = this.shoppingCartService.getTotalPrice() + 2.50; //+ delivery fee
+    this.totalPrice = this.shoppingCartService.getTotalPrice() + this.deliveryFee;
     this.cd.detectChanges() //to resolve NG0100 error
   }
 
@@ -82,6 +84,45 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
 
   getQty() {
     return this.shoppingCartService.getCartSize()
+  }
+
+  getDistance(origin: string, destination: string) {
+    const matrix = new google.maps.DistanceMatrixService();
+    return new Promise((resolve, reject)=>{
+      matrix.getDistanceMatrix({
+          origins: [origin],
+          destinations: [destination],
+          travelMode: google.maps.TravelMode.DRIVING,
+      },
+      function(response : google.maps.DistanceMatrixResponse, status) {
+        if (status === 'OK'){
+          console.log("Async Work Complete");          
+          resolve(response)
+        } else {
+
+          console.log("Async Work reject");
+          console.log(response);
+          reject(response);
+        }
+      });
+    });
+}
+  onChangeAdrees(addressDto :AddressDto)
+  {
+    const origins = this.partner?.owner.addresses[0].city +","+ this.partner?.owner.addresses[0].street;
+    const destination = addressDto.city +","+ addressDto.street;
+    this.getDistance(origins, destination).then(
+      (response) => {
+        var distanceMatrixResponse = response as google.maps.DistanceMatrixResponse;
+        this.deliveryFee = distanceMatrixResponse.rows[0].elements[0].distance.value * 0.0002;
+        this.totalPrice = Math.ceil((this.shoppingCartService.getTotalPrice() + this.deliveryFee)*100)/100;
+        this.cd.detectChanges();
+      }
+    ).catch(
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   initForm(): void {
@@ -200,7 +241,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     form.customer.id = this.customer.id;
     form.deliveryMan = null;
     form.tip = this.tip;
-    form.totalPrice = this.totalPrice; //TODO: calculate this maybe
+    form.totalPrice = this.totalPrice;
 
     const partnerId = this.partner?.id;
     form.partner = {id: partnerId};
@@ -274,4 +315,6 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     this.toastService.showSuccess('Periodic order has been set')
     this.shoppingCartService.clear();
   }
+
+
 }

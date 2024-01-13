@@ -323,3 +323,29 @@ export enum Status {
     inDelivery = "inDelivery",
     done = "done",
 }
+export interface GoogleMapsResponse {
+    destination_addresses: string[];
+    origin_addresses: string[];
+    rows: Row[];
+    status: string;
+  }
+  
+  interface Row {
+    elements: Element[];
+  }
+  
+  interface Element {
+    distance: Distance;
+    duration: Duration;
+    status: string;
+  }
+  
+  interface Distance {
+    text: string;
+    value: number;
+  }
+  
+  interface Duration {
+    text: string;
+    value: number;
+  }

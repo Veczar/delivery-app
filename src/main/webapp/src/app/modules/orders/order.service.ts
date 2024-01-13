@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OrderDto, OrderReadDto, ProductOrderDto, Status } from 'src/app/shared/model/api-models';
+import { OrderDto, OrderReadDto, ProductOrderDto, Status, GoogleMapsResponse, AddressDto } from 'src/app/shared/model/api-models';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +50,15 @@ export class OrderService {
 
   makeOrder(order: OrderDto): Observable<OrderDto> {
     return this.http.post<OrderDto>(`${this.apiUrl}/api/orders`, order);
+  }
+  getDistance(addressStart?: AddressDto, addressEnd?: AddressDto) : Observable<any>
+  {
+    const apiKey= "AIzaSyB3bDebZmDc4DQ0_M03XB14ZA7QnSaIgCM";
+    const origins = addressStart?.city +","+ addressStart?.street;
+    const destinatons = addressEnd?.city +","+ addressEnd?.street;
+    console.log(`https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${destinatons}&origins=${origins}&key=${apiKey}`);
+    return this.http.get<GoogleMapsResponse>("https://maps.googleapis.com/maps/api/distancematrix/json?destinations=New%20York%20City%2C%20NY&origins=Washington%2C%20DC&units=imperial&key=AIzaSyB3bDebZmDc4DQ0_M03XB14ZA7QnSaIgCM");
+
   }
 
 
