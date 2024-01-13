@@ -4,19 +4,20 @@
 		<span></span>
 		<button type="button" class="btn-close me-1" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">
-		<h2 class="offcanvas-title" id="offcanvasExampleLabel">Your order</h2>
+  <div class="offcanvas-body pt-0">
+		<h2 class="offcanvas-title" id="offcanvasExampleLabel">Cart</h2>
     <div class="mb-5">
-      Those are items you added to your cart, if your are ready to finish the order click 'Checkout'.
+      Those are items you added to your cart, if your are ready to finish the order click 'Checkout'. <br>
+      <small>You can also make periodic order if you select one item.</small>
     </div>
     <div *ngFor="let product of products; let i = index" class="mb-3">
-			<h4 class="d-flex ">
-				<div class="pt-1 d-flex justify-content-between w-100">
+			<h4 class="d-flex">
+				<div class="pt-1 d-flex justify-content-between cart-item w-100">
 					{{product.quantity}}x {{product.product.name}}
-					<div>
-						{{product.subtotal | number: '1.2-2'}} $
-					</div>
 				</div>
+        <div class="d-flex align-items-center ms-1">
+          {{product.subtotal | number: '1.2-2'}} $
+        </div>
 				<button class="btn btn-outline-secondary ms-2" (click)="removeItem(i)">
 					<i class="bi bi-trash3"></i>
 				</button>
