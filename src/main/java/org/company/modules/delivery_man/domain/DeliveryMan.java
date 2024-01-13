@@ -19,7 +19,6 @@ public class DeliveryMan {
     private long id;
 
     private String workingArea;
-    private int rating;
     private String accountNumber;
     @OneToOne
     @JoinColumn(name = "user_id")

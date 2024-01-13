@@ -178,7 +178,6 @@ public class AuthService {
         // create delivery man
         DeliveryMan deliveryMan = DeliveryMan.builder()
                 .workingArea(deliveryManDto.getWorkingArea())
-                .rating(0)
                 .accountNumber(deliveryManDto.getAccountNumber())
                 .user(user)
                 .build();

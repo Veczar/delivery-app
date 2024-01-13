@@ -19,7 +19,6 @@ public class DeliveryManAssembler implements IAssembler<DeliveryMan, DeliveryMan
     public DeliveryManDto toDto(DeliveryMan deliveryMan) {
         DeliveryManDto deliveryManDto = new DeliveryManDto();
         deliveryManDto.setId(deliveryMan.getId());
-        deliveryManDto.setRating(deliveryMan.getRating());
         deliveryManDto.setWorkingArea(deliveryMan.getWorkingArea());
         deliveryManDto.setAccountNumber(deliveryMan.getAccountNumber());
         deliveryManDto.setUser(userAssembler.toDto(deliveryMan.getUser()));
@@ -30,7 +29,6 @@ public class DeliveryManAssembler implements IAssembler<DeliveryMan, DeliveryMan
     @Override
     public void toEntity(DeliveryManDto deliveryManDto, DeliveryMan deliveryMan) {
         deliveryMan.setWorkingArea(deliveryManDto.getWorkingArea());
-        deliveryMan.setRating(deliveryManDto.getRating());
         deliveryMan.setAccountNumber(deliveryManDto.getAccountNumber());
         updateUser(deliveryManDto,deliveryMan);
     }

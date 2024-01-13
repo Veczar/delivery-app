@@ -42,7 +42,6 @@ export interface CategoryDto {
 export interface DeliveryManDto {
     accountNumber?: string;
     id?: number;
-    rating?: number;
     user?: UserDto;
     workingArea?: string;
 }
