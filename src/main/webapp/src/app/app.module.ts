@@ -28,6 +28,7 @@ import { DatePipe } from '@angular/common';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { OrdersViewModule } from 'src/app/modules/orders/orders-view.module';
 import { FooterModule } from './shared/footer/footer.module';
+import { RecurringOrdersModule } from './modules/reccuring-orders/reccuring-orders.module';
 
 @NgModule({
   declarations: [
@@ -71,10 +72,11 @@ import { FooterModule } from './shared/footer/footer.module';
     ProductsModule,
     OrdersViewModule,
     ComplaintModule,
-    RecurringOrdersModule
+    RecurringOrdersModule,
     ComplaintModule,
     PartnerModule,
-    NavbarModule
+    FooterModule,
+    NavbarModule,
   ],
 })
 export class AppModule { }

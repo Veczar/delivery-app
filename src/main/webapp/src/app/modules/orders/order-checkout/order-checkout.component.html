@@ -43,7 +43,7 @@
 
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>{{ (totalPrice + (tip ? tip : 0)) | number: '1.2-2'}} $</strong>
+              <strong>{{ (totalPrice + (tip > 0 ? tip : 0)) | number: '1.2-2'}} $</strong>
             </li>
           </ul>
 

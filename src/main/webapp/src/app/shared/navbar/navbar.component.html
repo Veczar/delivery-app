@@ -73,7 +73,7 @@
               <li><a class="dropdown-item user-dropdown" (click)="open(settingsModal)">Settings</a></li>
               <li><a class="dropdown-item user-dropdown" (click)="open(ordersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Orders</a></li>
               <li><a class="dropdown-item user-dropdown" (click)="open(complaintModal)" *ngIf="isUserLoggedIn() && getRole() !== 'ADMIN'">File a compalaint</a></li>
-              <li><a class="dropdown-item user-dropdown" (click)="open(ordersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Orders</a></li>
+              <li><a class="dropdown-item user-dropdown" (click)="open(recurringOrdersModal)" *ngIf="isUserLoggedIn() && getRole() === 'USER'">Periodic orders</a></li>
               <li><a class="dropdown-item user-dropdown" (click)="logOut()">Log Out</a></li>
             </ul>
           </div>

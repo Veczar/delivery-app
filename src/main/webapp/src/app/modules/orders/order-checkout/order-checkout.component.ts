@@ -179,7 +179,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
       deliveryMan: this.formBuilder.group({
         id: [null, Validators.required],
       }),
-      tip: ["", Validators.required, Validators.min(0)],
+      tip: ["", Validators.min(0)],
       totalPrice: [null, Validators.required],
       status: [null, Validators.required],
       creationDate: [null, Validators.required],
@@ -241,7 +241,7 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
 
     form.customer.id = this.customer.id;
     form.deliveryMan = null;
-    form.tip = this.tip;
+    form.tip = this.tip > 0 ? this.tip : 0;
     form.totalPrice = this.totalPrice;
 
     const partnerId = this.partner?.id;
