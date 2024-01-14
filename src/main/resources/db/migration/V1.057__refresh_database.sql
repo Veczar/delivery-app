@@ -90,8 +90,8 @@ CREATE TABLE public.p_courier (
 	working_area varchar NULL,
 	user_id int4 NULL,
 	account_number varchar(26) NULL,
-	CONSTRAINT p_delivery_man_pkey PRIMARY KEY (id),
-	CONSTRAINT p_delivery_man_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.p_user(id)
+	CONSTRAINT p_courier_pkey PRIMARY KEY (id),
+	CONSTRAINT p_courier_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.p_user(id)
 );
 
 
@@ -219,7 +219,7 @@ CREATE TABLE public.p_order (
 	CONSTRAINT address_end_fid FOREIGN KEY (address_end_id) REFERENCES public.p_address(id),
 	CONSTRAINT address_start_fid FOREIGN KEY (address_start_id) REFERENCES public.p_address(id),
 	CONSTRAINT customer_fid FOREIGN KEY (customer_id) REFERENCES public.p_user(id),
-	CONSTRAINT delivery_man_fid FOREIGN KEY (courier_id) REFERENCES public.p_courier(id),
+	CONSTRAINT courier_fid FOREIGN KEY (courier_id) REFERENCES public.p_courier(id),
 	CONSTRAINT partner_fid FOREIGN KEY (partner_id) REFERENCES public.p_partner(id)
 );
 
@@ -253,20 +253,20 @@ INSERT INTO s_role(id, name) VALUES
 -- set up categories
 
 INSERT INTO public.s_category (description,name) VALUES
-	 ('napoje','napoje'),
-	 ('','kawa'),
-	 ('','kwiaty'),
-	 ('leki bez recepty','leki'),
-	 ('','pizza'),
-	 ('','kebab'),
-	 ('jedzeniie na wynos','burger'),
-	 ('dania wegetariańskie','wege'),
-	 ('jedzenie z azji','azjatyckie'),
-	 ('wiadomo najlepsze','polskie'),
-	 ('jedzenie włoskie','włoskie'),
-	 ('','hinduskie'),
-	 ('','meksykańskie'),
-	 ('','spaghetti'),
-	 ('','spożywcze'),
-	 ('','chemia'),
-	 ('','meble');
+    ('drinks', 'drinks'),
+    ('', 'coffee'),
+    ('all types of flowers', 'flowers'),
+    ('over-the-counter medicines', 'medicines'),
+    ('', 'pizza'),
+    ('', 'kebab'),
+    ('', 'burger'),
+    ('vegetarian dishes', 'vegetarian'),
+    ('Asian cuisine', 'Asian'),
+    ('the best', 'Polish'),
+    ('Italian food', 'Italian'),
+    ('a lot of curry', 'Indian'),
+    ('', 'Mexican'),
+    ('', 'spaghetti'),
+    ('', 'groceries'),
+    ('', 'chemicals'),
+    ('', 'furniture');
