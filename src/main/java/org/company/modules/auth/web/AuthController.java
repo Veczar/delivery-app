@@ -32,8 +32,8 @@ public class AuthController {
     }
 
     @PostMapping("/register/partner")
-                public ResponseEntity<RegisterResponseDto> registerPartner(@RequestPart("photo") MultipartFile photo,
-                                                                           @RequestPart(name = "partner") RegisterPartnerDto registerDeliveryManDto) {
+    public ResponseEntity<RegisterResponseDto> registerPartner(@RequestPart("photo") MultipartFile photo,
+                                                               @RequestPart(name = "partner") RegisterPartnerDto registerDeliveryManDto) {
         return ResponseEntity.ok(authService.registerPartner(registerDeliveryManDto, photo));
     }
 
