@@ -153,8 +153,8 @@
                     <mapEnum>asEnum</mapEnum>
                     <nonConstEnums>true</nonConstEnums>
                     <optionalProperties>all</optionalProperties>
-                    <sortDeclarations>true</sortDeclarations>
-                    <sortTypeDeclarations>true</sortTypeDeclarations>
+<!--                    <sortDeclarations>true</sortDeclarations>-->
+<!--                    <sortTypeDeclarations>true</sortTypeDeclarations>-->
                     <customTypeMappings>
                         <mapping>java.lang.Class:any</mapping>
                     </customTypeMappings>

@@ -16,6 +16,7 @@ public class AddressAssembler implements IAssembler<Address, AddressDto> {
         addressDto.setCity(address.getCity());
         addressDto.setStreet(address.getStreet());
         addressDto.setPostalCode(address.getPostalCode());
+        addressDto.setUserId(address.getUser().getId());
         return addressDto;
     }
     

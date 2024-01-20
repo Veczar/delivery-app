@@ -62,8 +62,9 @@ export class ComplaintFormComponent {
       return;
     }
 
-    const complaintDto = this.complaintForm.value as ComplaintDto;
+    const complaintDto = this.complaintForm.value;
     complaintDto.user.id = Number(localStorage.getItem('id'));
+    console.log(complaintDto);
     this.complaintService.addComplaint(complaintDto).subscribe(
       (response: ComplaintDto) => {
         console.log('response:', response);

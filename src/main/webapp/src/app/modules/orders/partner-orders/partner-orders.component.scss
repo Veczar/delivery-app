@@ -169,7 +169,8 @@ header {
 .alert-danger {
     border: none;
 }
+
 .active-tab
 {
-    color: $primary-color;
+    color: $primary-color !important;
 }

@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getProduct(this.productId).subscribe(product => {
       this.product = product;
-      this.subtotal = product.price;
+      this.subtotal = product.price as number;
     })
   }
 

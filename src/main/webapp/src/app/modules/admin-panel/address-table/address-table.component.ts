@@ -19,8 +19,7 @@ export class AddressTableComponent {
   editable = false;
   submitted: boolean = false;
 
-  displayedColumns: string[] = ['id', 'city',  'street','postalCode'];
-
+  displayedColumns: string[] = ['id', 'city',  'street','postalCode', 'userId'];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -31,10 +30,7 @@ export class AddressTableComponent {
     private http: HttpClient,
   ) {
     this.loadData();
-    
   }
-
-  
 
   loadData(): void {
     
@@ -49,7 +45,7 @@ export class AddressTableComponent {
   }
 
   getAddresses(): Observable<AddressDto[]> {
-    return this.http.get<UserDto[]>(`http://localhost:8080/api/addresses`);
+    return this.http.get<AddressDto[]>(`http://localhost:8080/api/addresses`);
   }
 
   applyFilter(event: Event) {

@@ -1,10 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { OrderDto, ProductDto } from 'src/app/shared/model/api-models';
-import { ProductsService } from '../../products/products.service';
+import { OrderDto } from 'src/app/shared/model/api-models';
 import { OrderService } from '../../orders/order.service';
 
 @Component({
@@ -17,7 +15,7 @@ export class OrderTableComponent {
   editable = false;
   submitted: boolean = false;
 
-  displayedColumns: string[] = ['id', 'addressStart',  'addressEnd','creationDate','completionDate','customer','deliveryMan'
+  displayedColumns: string[] = ['id', 'addressStart',  'addressEnd','creationDate','completionDate','customer','courier'
         ,'distanceInKm','partner','rating','status','tip','totalPrice'];
   
   @ViewChild(MatPaginator)
@@ -26,11 +24,9 @@ export class OrderTableComponent {
   sort!: MatSort;
 
   constructor(
-    private http: HttpClient,
     private orderService: OrderService,
   ) {
     this.loadData();
-    
   }
 
   loadData(): void {

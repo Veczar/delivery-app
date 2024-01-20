@@ -1,15 +1,15 @@
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ShoppingCartService } from '../../../shared/navbar/shopping-cart/shopping-cart.service';
-import { AddressDto, Frequency, OrderDto, PartnerDto, ProductDto, ProductOrderDto, RecurringOrderDto, Status, UserDto } from 'src/app/shared/model/api-models';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { } from 'googlemaps';
+import { AddressDto, Frequency, OrderDto, PartnerDto, ProductDto, ProductOrderDto, Status, UserDto } from 'src/app/shared/model/api-models';
+import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ShoppingCartService } from '../../../shared/navbar/shopping-cart/shopping-cart.service';
+import { ProductOrderService } from '../../product-order/product-order.service';
+import { RecurringOrdersService } from '../../reccuring-orders/recurring-orders.service';
 import { UserService } from '../../user/user.service';
 import { OrderService } from '../order.service';
-import { ToastService } from 'src/app/shared/toast/toast.service';
-import { Router } from '@angular/router';
-import { ProductOrderService } from '../../product-order/product-order.service';
-import { DatePipe } from '@angular/common';
-import { RecurringOrdersService } from '../../reccuring-orders/recurring-orders.service';
-import {} from 'googlemaps'; 
 
 @Component({
   selector: 'app-order-checkout',
@@ -26,8 +26,8 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
   submitted: boolean = false;
   submitted2: boolean = false;
   recurring: boolean = false;
-  partner!: PartnerDto | undefined;
-  addresses!: AddressDto[] | undefined;
+  partner!: PartnerDto ;
+  addresses!: AddressDto[];
   customer!: UserDto;
   tip!: number;
   deliveryFee: number = 0;
@@ -59,12 +59,12 @@ export class OrderCheckoutComponent implements OnInit, AfterViewInit {
     this.initForm();
 
     this.products = this.shoppingCartService.getItems();
-    this.partner = this.products[0].product.owner;
+    this.partner = this.products[0].product.owner as PartnerDto;
 
     this.userService.getUser(parseInt(localStorage.getItem('id') as string)).subscribe(user => {
       console.log(user);
       this.submitted = true;
-      this.addresses = user.addresses;
+      this.addresses = user.addresses as AddressDto[];
       this.customer = user;
 
       this.checkoutForm.patchValue(user);

@@ -28,7 +28,8 @@
 
     <!-- Dodaj guzik i ngIf dla użytkownika zalogowanego -->
       
-    <button *ngIf="isUserLogged && userId === review.reviewer?.id" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" (click)="deleteReview(review.id)">
+    <button *ngIf="isUserLogged && userId === review.reviewer?.id" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" 
+      (click)="deleteReview(review.id)">
       <i class="fa-solid fa-times"></i> Delete
     </button>
       <!-- Dodaj guzik i ngIf dla użytkownika niezalogowanego -->

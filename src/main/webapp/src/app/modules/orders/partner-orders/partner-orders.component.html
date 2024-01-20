@@ -15,19 +15,19 @@
           <div class="position-sticky pt-3 sidebar-sticky">
             <ul class="nav flex-column mt-2">
               <li class="nav-item">
-                <button class="nav-link" (click)="showInPreparation()">
+                <button class="nav-link" (click)="showInPreparation()" [ngClass]="{ 'active-tab': this.selectedStatus == 'inPreparation' }">
                   <h6><i class="bi bi-bag"></i> Orders in preparation</h6> </button>
               </li>
               <li class="nav-item">
-                <button class="nav-link" (click)="showReadyForDelivery()" active>
+                <button class="nav-link" (click)="showReadyForDelivery()" [ngClass]="{ 'active-tab': this.selectedStatus == 'readyForDelivery' }">
                   <h6><i class="bi bi-bag-check"></i> Ready for pick up</h6></button>
               </li>
               <li class="nav-item">
-                <button class="nav-link" (click)="showInDelivery()" active>
+                <button class="nav-link" (click)="showInDelivery()" [ngClass]="{ 'active-tab': this.selectedStatus == 'inDelivery' }">
                   <h6><i class="bi bi-truck"></i> In delivery</h6></button>
               </li>
               <li class="nav-item">
-                <button class="nav-link" (click)="showDone()">
+                <button class="nav-link" (click)="showDone()" [ngClass]="{ 'active-tab': this.selectedStatus == 'done' }">
                   <h6><i class="bi bi-check2-square"></i> Done</h6></button>
               </li>
             </ul>

@@ -29,9 +29,7 @@ export class PartnerOrdersComponent {
 
   constructor(
     private orderService: OrderService,
-    private formBuilder: FormBuilder,
     private toastService: ToastService,
-    private authService: AuthService
   ) {
     this.loadData();
   }

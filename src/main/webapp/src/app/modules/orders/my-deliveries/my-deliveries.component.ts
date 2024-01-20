@@ -8,6 +8,7 @@ import { OrderService } from '../order.service';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from '../../auth/auth.service';
+
 @Component({
   selector: 'app-my-deliveries',
   templateUrl: './my-deliveries.component.html',
@@ -34,8 +35,7 @@ export class MyDeliveriesComponent {
     private authService: AuthService
   ) {
     this.loadData();
-    this.initForm();
-        
+    this.initForm();     
   }
   
   ngAfterViewInit(): void {
@@ -56,7 +56,6 @@ export class MyDeliveriesComponent {
       addressStart: [''],
       addressEnd: ['']
     });
-    
   }
 
   loadData(): void {
@@ -69,10 +68,14 @@ export class MyDeliveriesComponent {
         this.dataSource.filterPredicate = (data: OrderReadDto, filter: string) => {
           const filterValue = filter.substring(0,filter.lastIndexOf(" "));
           const type = filter.substring(filter.lastIndexOf(" ")+1);
-          if(type == "null")return data.deliveryManId == null && data.status === Status.readyForDelivery;
+
+          if (type == "null") {
+            return data.deliveryManId == null && data.status === Status.readyForDelivery;
+          }
+          
           return oldFilterPredicate(data, filterValue) && data.status === type && data.deliveryManId != null;
-         };
-         this.dataSource.filter = this.filter + this.selectedStatus; 
+        };
+        this.dataSource.filter = this.filter + this.selectedStatus; 
         console.log(orders);
       }
     );

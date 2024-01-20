@@ -69,7 +69,8 @@ public class SecurityConfiguration {
                                 .requestMatchers("api/recurring_orders/owning/**").hasAnyAuthority("ADMIN", "USER")
                                 .requestMatchers("api/recurring_orders/**").hasAnyAuthority("ADMIN", "USER", "PARTNER")
                                 .requestMatchers(HttpMethod.DELETE,"api/recurring_orders/**").hasAnyAuthority("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.POST,"/api/complaints/**").hasAnyAuthority("USER", "ADMIN")
+                        
+                                .requestMatchers(HttpMethod.POST,"/api/complaints/**").hasAnyAuthority("USER", "ADMIN", "PARTNER", "COURIER")
                                 .requestMatchers("/api/complaints/**").hasAnyAuthority("ADMIN")
                 )
                 .sessionManagement((session) -> session
