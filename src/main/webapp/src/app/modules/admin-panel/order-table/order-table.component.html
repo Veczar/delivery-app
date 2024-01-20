@@ -24,62 +24,61 @@
     </ng-container>
 
     <ng-container matColumnDef="addressEnd">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Address End </th>
-        <td mat-cell *matCellDef="let row"> {{row.addressEnd.city}} {{row.addressEnd.street}} </td>
-      </ng-container>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Address End </th>
+      <td mat-cell *matCellDef="let row"> {{row.addressEnd.city}} {{row.addressEnd.street}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="creationDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
-        <td mat-cell *matCellDef="let row"> {{row.creationDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-      </ng-container>
+    <ng-container matColumnDef="creationDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
+      <td mat-cell *matCellDef="let row"> {{row.creationDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+    </ng-container>
 
+    <ng-container matColumnDef="completionDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Completion Date </th>
+      <td mat-cell *matCellDef="let row">
+            {{row.completionDate | date:'yyyy-MM-dd HH:mm:ss'}} 
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="completionDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Completion Date </th>
-        <td mat-cell *matCellDef="let row">
-             {{row.completionDate | date:'yyyy-MM-dd HH:mm:ss'}} 
-        </td>
-      </ng-container>
+    <ng-container matColumnDef="customer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Id </th>
+      <td mat-cell *matCellDef="let row"> {{row.customer.id}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="customer">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Id </th>
-        <td mat-cell *matCellDef="let row"> {{row.customer.id}} </td>
-      </ng-container>
+    <ng-container matColumnDef="courier">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Courier Id </th>
+      <td mat-cell *matCellDef="let row"> {{row.deliveryMan?.id}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="distanceInKm">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Distance </th>
+      <td mat-cell *matCellDef="let row"> {{row.distanceInKm}}km </td>
+    </ng-container>
 
-      <ng-container matColumnDef="courier">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Courier Id </th>
-        <td mat-cell *matCellDef="let row"> {{row.deliveryMan?.id}} </td>
-      </ng-container>
-      
-      <ng-container matColumnDef="distanceInKm">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Distance </th>
-        <td mat-cell *matCellDef="let row"> {{row.distanceInKm}}km </td>
-      </ng-container>
+    <ng-container matColumnDef="partner">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Partner Id </th>
+      <td mat-cell *matCellDef="let row"> {{row.partner.id}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="partner">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Partner Id </th>
-        <td mat-cell *matCellDef="let row"> {{row.partner.id}} </td>
-      </ng-container>
+    <ng-container matColumnDef="rating">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
+      <td mat-cell *matCellDef="let row"> {{row.rating}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="rating">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
-        <td mat-cell *matCellDef="let row"> {{row.rating}} </td>
-      </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-        <td mat-cell *matCellDef="let row"> {{row.status}} </td>
-      </ng-container>
+    <ng-container matColumnDef="tip">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tip </th>
+      <td mat-cell *matCellDef="let row"> {{row.tip}}$ </td>
+    </ng-container>
 
-      <ng-container matColumnDef="tip">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tip </th>
-        <td mat-cell *matCellDef="let row"> {{row.tip}}$ </td>
-      </ng-container>
-
-      <ng-container matColumnDef="totalPrice">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Price </th>
-        <td mat-cell *matCellDef="let row"> {{row.totalPrice}}$ </td>
-      </ng-container>
+    <ng-container matColumnDef="totalPrice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Price </th>
+      <td mat-cell *matCellDef="let row"> {{row.totalPrice}}$ </td>
+    </ng-container>
     <!-- Name Column -->
     
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

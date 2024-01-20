@@ -7,6 +7,7 @@ export interface AddressDto {
     city?: string;
     postalCode?: string;
     userId: number;
+    userRole: string;
 }
 
 export interface AuthRequestDto {

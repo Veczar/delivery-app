@@ -19,7 +19,7 @@ export class AddressTableComponent {
   editable = false;
   submitted: boolean = false;
 
-  displayedColumns: string[] = ['id', 'city',  'street','postalCode', 'userId'];
+  displayedColumns: string[] = ['id', 'city',  'street','postalCode', 'userId', 'userRole'];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

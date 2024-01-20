@@ -12,4 +12,5 @@ public class AddressDto {
     private String city;
     private String postalCode;
     private Long userId;
+    private String userRole;
 }
