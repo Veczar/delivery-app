@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../modules/auth/auth.service';
-import { ToastService } from '../shared/toast/toast.service';
+import { AuthService } from '../../modules/auth/auth.service';
+import { ToastService } from '../toast/toast.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AdsService } from '../shared/ADBlockerDetector';
+import { AdsService } from '../ADBlockerDetector';
 
 @Component({
   selector: 'app-front-page',

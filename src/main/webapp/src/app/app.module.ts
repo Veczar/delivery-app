@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FrontPageComponent } from './front-page/front-page.component';
+import { FrontPageComponent } from './shared/front-page/front-page.component';
 import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ComplaintModule } from './modules/complaint/complaint.module';
