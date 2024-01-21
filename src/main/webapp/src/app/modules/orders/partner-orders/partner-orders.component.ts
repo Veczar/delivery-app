@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
-import { OrderReadDto, Status } from 'src/app/shared/model/api-models';
-import { ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { OrderService } from '../order.service';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OrderReadDto, Status } from 'src/app/shared/model/api-models';
 import { ToastService } from 'src/app/shared/toast/toast.service';
-import { AuthService } from '../../auth/auth.service';
+import { OrderService } from '../order.service';
 
 @Component({
   selector: 'app-partner-orders',
@@ -97,13 +95,16 @@ export class PartnerOrdersComponent {
   }
 
   setReadyForDelivery(id : number) {
-  this.orderService.setStatusWithId(id, Status.readyForDelivery).subscribe()
-  {
-    this.toastService.showSuccess("Order was set as ready for delivery");
+    this.orderService.setStatusWithId(id, Status.readyForDelivery).subscribe()
+    {
+      this.toastService.showSuccess("Order was set as ready for delivery");
 
-    //delay so database could make changes 
-    setTimeout(() => {this.loadData()},1000);
-  };
-
+      //delay so database could make changes 
+      setTimeout(() => {this.loadData()},1000);
+    };
+  }
+  
+  getRole(): string {
+    return localStorage.getItem('role') || '';
   }
 }

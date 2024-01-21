@@ -161,4 +161,8 @@ export class MyDeliveriesComponent {
         // console.log(r)
       });
   }
+
+  getRole(): string {
+    return localStorage.getItem('role') || '';
+  }
 }

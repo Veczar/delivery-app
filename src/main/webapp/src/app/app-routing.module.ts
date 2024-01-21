@@ -11,7 +11,7 @@ import { RegisterPartnerFormComponent } from './modules/auth/register-partner-fo
 import { RegisterCourierFormComponent } from './modules/auth/register-courier-form/register-courier-form.component';
 import { CourierTableComponent } from './modules/admin-panel/courier-table/courier-table.component';
 import { PartnerProductsComponent } from './modules/products/partner-products/partner-products.component';
-import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
+import { MyDeliveriesComponent } from './modules/orders/courier-orders/my-deliveries.component';
 import { PartnerTableComponent } from './modules/admin-panel/partner-table/partner-table.component';
 import { OrderCheckoutComponent } from './modules/orders/order-checkout/order-checkout.component';
 import { PartnerViewComponent } from './modules/partner/partner-view/partner-view.component';

@@ -12,7 +12,7 @@ import { FrontPageComponent } from './front-page/front-page.component';
 import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ComplaintModule } from './modules/complaint/complaint.module';
-import { MyDeliveriesComponent } from './modules/orders/my-deliveries/my-deliveries.component';
+import { MyDeliveriesComponent } from './modules/orders/courier-orders/my-deliveries.component';
 import { PartnerModule } from './modules/partner/partner.module';
 import { ProductsModule } from './modules/products/products.module';
 import { UserModule } from './modules/user/user.module';
