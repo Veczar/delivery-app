@@ -8,7 +8,7 @@ albo szybciej: <br>
 
  i usuwacie proces ktory go uzywa <br>
 
-## co zainstalować: 
+## technologie: 
 - DBeaver <br>
 https://dbeaver.io/download/
 
