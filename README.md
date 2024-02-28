@@ -1,62 +1,84 @@
-# delivery_app
- jesli port 8080 jest zajety to ta komenda: <br>
- ```netstat -ano | findstr :8080``` <br>
- ```taskkill /F /PID <pid>``` <br>
+# Volg Delivery
 
-albo szybciej: <br>
-```Get-NetTCPConnection -LocalPort 8080 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }```
+## About
+This is a project for Programming Engineering college course, which was implemented by a three-person team consisting 
+of [Rafał Ciołek](https://github.com/Rafa13io), [Jakub Drałus](https://github.com/JakubDralus) and [Filip Jędrzejek](https://github.com/Veczar). 
+The aim of the project is to deepen the knowledge about software development, understand business requirements and 
+acquire deep technological skills. 
 
- i usuwacie proces ktory go uzywa <br>
+## Abstract
 
-## technologie: 
-- DBeaver <br>
-https://dbeaver.io/download/
+Volg Delivery is an online delivery application that allows users to order various transportation products and services in a convenient way.
+(like Uber Eats or Glovo) The main goal of our application is to provide the ability to order and register products for sale and transport services 
+to a wider audience. Issued transport orders will be delivered by couriers whose are working for the Volg Delivery. 
+The transport itself will take place within an area no larger than one city. On this platform everyone who has a business 
+that is selling products can be registered and be a partner (e.g. grocery stores, restaurants, pharmacies).
 
-- postgreSQL <br>
-[https://www.postgresql.org/download/](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+## Main Product Freatures
 
-- postman <br>
-https://www.postman.com/downloads/
+- **User Registration**
+Allows new users to register an account.
+Requires basic information such as name, surname, email address, etc.
 
-- Java JDK 19
+- **Partner Registration**
+It allows companies to add an account through which they can sell their products with delivery option.
+Requires basic information such as name, address, contact telephone number, etc.
 
+- **Courier Registration**
+Enables users to collaborate with the application owner by delivering products to the given address.
+And earning some money in the process.
 
-front:
-- node.js 18.17
-- angular 16.0.0
-- npm 10.2.3
-- bootstrap 5.2.3 
+- **Orders and Deliveries**
+Allows users to place orders for products.
+Integration with couriers who deliver orders to the user address.
 
-commands i used to create webapp:
-- ```npm install -g @angular/cli@16.0.0```
-- ```ng new webapp --no-standalone --routing```
-- ```cd webapp```
-- ```ng add @ng-bootstrap/ng-bootstrap```
-- ```npm install bootstrap-icons```
-  
-angular part: <br>
+- **Ratings and Reviews**
+It gives users the ability to rate and review vendors and products.
+It uses a star system as a rating representation.
+
+[//]: # (```bash)
+[//]: # (Get-NetTCPConnection -LocalPort 8080 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force })
+[//]: # (```)
+
+## Technologies
+frontend
+- Angular 16.0.0
+- Bootstrap 5.2.3
+- Angular Material
+- TypeScript
+- node 18.17
+
+backend
+- Java 19
+- Spring Boot 3.4
+- Spring Security 6
+- PostgreSQL
+
+## Tools
+- DBeaver https://dbeaver.io/download/
+- PostgreSQL [https://www.postgresql.org/download/](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+- Postman https://www.postman.com/downloads/
+- IntelliJ IDEA
+- VS Code
+
+## References
+
+angular
+- https://angular.io/docs
 - https://kinsta.com/knowledgebase/install-angular/#how-to-install-angular-on-windows
 
-<br>
-
 bootstrap:
+- docs: https://getbootstrap.com/docs/5.2/getting-started/introduction/
 - [www.freecodecamp.org](https://www.freecodecamp.org/news/how-to-add-bootstrap-css-framework-to-an-angular-application/)
 - https://www.techiediaries.com/angular-bootstrap/
 - https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap
 
-for using bootstrap: <br>
-https://getbootstrap.com/docs/5.2/getting-started/introduction/
-
-icons: https://fonts.google.com/icons
-
 nice backgrounds: https://app.haikei.app/
 
-security docs:
-https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/builders/HttpSecurity.html#httpBasic(org.springframework.security.config.Customizer)
-
-spring security: <br>
-https://www.youtube.com/watch?v=KxqlJblhzfI <br>
-https://github.com/ali-bouali/spring-boot-3-jwt-security/tree/main
+Spring Security:
+- https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/builders/HttpSecurity.html
+- https://www.youtube.com/watch?v=KxqlJblhzfI
+- https://github.com/ali-bouali/spring-boot-3-jwt-security/tree/main
 
 frontend auth: 
 https://www.youtube.com/watch?v=PhzxED19FVA
