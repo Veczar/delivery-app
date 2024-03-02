@@ -1,9 +1,9 @@
 # Volg Delivery
 
-This is a project for Programming Engineering college course, which was implemented by a three-person team consisting 
-of [Rafał Ciołek](https://github.com/Rafa13io), [Jakub Drałus](https://github.com/JakubDralus) and [Filip Jędrzejek](https://github.com/Veczar). 
-The aim of the project is to deepen the knowledge about software development, understand business requirements and 
-acquire deep technological skills. 
+This is a project for Programming Engineering college course, which was implemented by a three-person team consisting of
+[@Rafa13io](https://github.com/Rafa13io), [@JakubDralus](https://github.com/JakubDralus) and [@Veczar](https://github.com/Veczar).
+The aim of the project is to deepen the knowledge of software development, understand business requirements, planning resources and 
+acquire more technological skills in web applications development. 
 
 ## Project Description
 
