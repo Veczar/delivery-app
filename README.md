@@ -1,12 +1,11 @@
 # Volg Delivery
 
-## About
 This is a project for Programming Engineering college course, which was implemented by a three-person team consisting 
 of [Rafał Ciołek](https://github.com/Rafa13io), [Jakub Drałus](https://github.com/JakubDralus) and [Filip Jędrzejek](https://github.com/Veczar). 
 The aim of the project is to deepen the knowledge about software development, understand business requirements and 
 acquire deep technological skills. 
 
-## Abstract
+## Project Description
 
 Volg Delivery is an online delivery application that allows users to order various transportation products and services in a convenient way.
 (like Uber Eats or Glovo) The main goal of our application is to provide the ability to order and register products for sale and transport services 
