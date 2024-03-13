@@ -26,28 +26,28 @@ that is selling products can be registered and be a partner (e.g. grocery stores
 Couple of screenshots of the website.
 
 ### Home page
-![img.png](img.png)
+![image](https://github.com/JakubDralus/delivery-app/assets/129612952/4e1e38b8-e917-4e81-abe2-c51c20fbd167)
 
 ### Sign in page
-![img_1.png](img_1.png)
+![image](https://github.com/JakubDralus/delivery-app/assets/129612952/e58279db-139e-46f9-81e5-fe1621ca22d6)
 
 ### Settings
-![img_2.png](img_2.png)
+![image](https://github.com/JakubDralus/delivery-app/assets/129612952/a9f0af80-8133-423e-b640-e8e2f114bca8)
 
 ### Reporting a complaint
-![img_3.png](img_3.png)
+![image](https://github.com/JakubDralus/delivery-app/assets/129612952/93c03b39-2398-4f23-a397-8eb7bc9f6142)
 
 ### Partners view
-![img_4.png](img_4.png)
+![image](https://github.com/JakubDralus/delivery-app/assets/129612952/6a79b0c6-6ffd-4927-b820-37fcb629e6a9)
 
 ### Example offers and partner details
-![img_5.png](img_5.png)
+![image](https://github.com/JakubDralus/delivery-app/assets/129612952/28f35b45-26a5-4ff7-b46e-a010baf23fc6)
 
 ### Checkout form
-![img_6.png](img_6.png)
+![image](https://github.com/JakubDralus/delivery-app/assets/129612952/62aa3046-db81-49fe-9294-9ef383985b38)
 
 ### Admin panel 
-![img_7.png](img_7.png)
+![image](https://github.com/JakubDralus/delivery-app/assets/129612952/288fdc18-d1a7-4b0c-9b94-4b1446e5698f)
 
 
 ## Main Product Freatures
