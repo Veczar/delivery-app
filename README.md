@@ -1,12 +1,20 @@
 # Volg Delivery
 
-## About
 This is a project for Programming Engineering college course, which was implemented by a three-person team consisting 
 of [Rafał Ciołek](https://github.com/Rafa13io), [Jakub Drałus](https://github.com/JakubDralus) and [Filip Jędrzejek](https://github.com/Veczar). 
 The aim of the project is to deepen the knowledge about software development, understand business requirements and 
 acquire deep technological skills. 
 
-## Abstract
+## Table of Contents
+
+1. [About](#about)
+2. [Website](#website)
+3. [Main Product Features](#main-product-freatures)
+4. [Technologies](#technologies)
+5. [Tools](#tools)
+6. [References](#references)
+
+## About
 
 Volg Delivery is an online delivery application that allows users to order various transportation products and services in a convenient way.
 (like Uber Eats or Glovo) The main goal of our application is to provide the ability to order and register products for sale and transport services 
@@ -14,27 +22,60 @@ to a wider audience. Issued transport orders will be delivered by couriers whose
 The transport itself will take place within an area no larger than one city. On this platform everyone who has a business 
 that is selling products can be registered and be a partner (e.g. grocery stores, restaurants, pharmacies).
 
+## Website
+Couple of screenshots of the website.
+
+### Home page
+![img.png](img.png)
+
+### Sign in page
+![img_1.png](img_1.png)
+
+### Settings
+![img_2.png](img_2.png)
+
+### Reporting a complaint
+![img_3.png](img_3.png)
+
+### Partners view
+![img_4.png](img_4.png)
+
+### Example offers and partner details
+![img_5.png](img_5.png)
+
+### Checkout form
+![img_6.png](img_6.png)
+
+### Admin panel 
+![img_7.png](img_7.png)
+
+
 ## Main Product Freatures
 
-- **User Registration**
-Allows new users to register an account.
-Requires basic information such as name, surname, email address, etc.
+- **User Account**
+  - Allows new users to register and manage their account.
+  - Browse content by city, name or category of products.
+  - Make orders from home.
+  - Set up periodic orders.
 
-- **Partner Registration**
-It allows companies to add an account through which they can sell their products with delivery option.
-Requires basic information such as name, address, contact telephone number, etc.
+- **Partner Account**
+  - It allows companies to add an account through which they can sell their products with delivery option.
+  - Manage their product on the site (adding, deleting).
+  - Manage the delivery process by informing couriers which orders are ready to be picked up.
 
-- **Courier Registration**
-Enables users to collaborate with the application owner by delivering products to the given address.
-And earning some money in the process.
+- **Courier Account**
+  - Enables users to collaborate with the application owner by delivering products to the given address.
+  - Earn money from every delivery he makes.
+  - Manage the delivery status flow.
 
 - **Orders and Deliveries**
-Allows users to place orders for products.
-Integration with couriers who deliver orders to the user address.
+  - Allows users to place orders for products.
+  - Integration with couriers who deliver orders to the user address.
+  - Giving users access to the delivery status information.
 
 - **Ratings and Reviews**
-It gives users the ability to rate and review vendors and products.
-It uses a star system as a rating representation.
+  - It gives users the ability to rate and review vendors and products using star rating system.
+  - Give users an option to report a bug or bad order.
 
 [//]: # (```bash)
 [//]: # (Get-NetTCPConnection -LocalPort 8080 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force })
